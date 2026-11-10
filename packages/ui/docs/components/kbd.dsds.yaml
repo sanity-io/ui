@@ -1,0 +1,59 @@
+kind: component
+id: kbd
+name: KBD
+description: Presents a single keyboard shortcut.
+metadata:
+  tags: [keyboard, key, shortcut, inline, kbD, kbd, hotkey, press]
+  status:
+    status: experimental
+    note: Exported from @sanity/ui 5.0.0-alpha.16, marked @alpha in the source. Its API can change without notice.
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "Inline key references in documentation or help text (for example, 'Press ⌘ to save')."
+      - level: should
+        statement: Building custom keyboard shortcut displays where Hotkeys is too opinionated.
+      - level: should
+        statement: Annotating UI elements with individual key labels.
+      - level: should-not
+        statement: For full keyboard shortcuts with multiple keys. Use Hotkeys instead.
+        alternatives:
+          - to: hotkeys
+      - level: should-not
+        statement: As a decorative badge or status indicator. Use Badge instead.
+        alternatives:
+          - to: badge
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: 'Use standard key symbols where they exist: ⌘ not Cmd, ⌥ not Alt, ⇧ not Shift on Mac.'
+      - level: should
+        statement: Keep content to a single character or short label (Esc, Tab, F1).
+      - level: should
+        statement: Pair with surrounding Text to provide context for what the key does.
+      - level: must-not
+        statement: Don't place long strings inside KBD — it is designed for single keys only.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "Putting a full shortcut string like 'Ctrl+Shift+S' in a single KBD. Instead: Use Hotkeys to render multi-key shortcuts."
+alternatives:
+  - to: hotkeys
+  - to: badge
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=33099-3768
+    rel: design
+    role: Figma component (v5)
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

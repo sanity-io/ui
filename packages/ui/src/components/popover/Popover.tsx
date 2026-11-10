@@ -16,10 +16,11 @@ import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type PopoverProps, popoverProps} from './popover.props'
 
-const popoverClassName = suffixClassName('sui-PopoverContent')
+const popoverClassName = suffixClassName('sui-Popover')
 
 function PopoverRoot<T extends ElementType = 'div'>({
   placement = 'bottom',
+  fullBleed = false,
   ...props
 }: PopoverProps<T> &
   Omit<ComponentPropsWithRef<T>, keyof PopoverProps<T>> & {
@@ -34,10 +35,9 @@ function PopoverRoot<T extends ElementType = 'div'>({
     anchorName,
     content,
     portal,
-    portalElement,
     triggerProps: forwardedTriggerProps,
     ...rest
-  } = getProps({placement, ...props}, popoverProps)
+  } = getProps({placement, fullBleed, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
   const Component = as || 'div'
@@ -66,7 +66,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
           <Component
             className={clsx(
               popoverClassName,
-              'sui-px2 sui-py1 sui-radius3 sui-position-fixed sui-shadow2',
+              'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
               className,
             )}
             style={{
@@ -84,7 +84,6 @@ function PopoverRoot<T extends ElementType = 'div'>({
         </Activity>,
         isClient,
         portal,
-        portalElement,
       )}
     </>
   )

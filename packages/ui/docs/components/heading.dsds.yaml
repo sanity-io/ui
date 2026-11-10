@@ -1,0 +1,233 @@
+kind: component
+id: heading
+name: Heading
+description: Displays heading text to create logical hierarchy and page structure.
+metadata:
+  tags: [typography, heading, title, hierarchy, semantic, h1, h2, h3, h4, h5, h6, section]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To establish the semantic structure of a page (page title, section header, subsection).
+      - level: should
+        statement: To group text and elements into logical, navigable sections.
+      - level: should-not
+        statement: For visual emphasis or decorative purposes (stat values, hero numbers, big quotes). Use Text with size 3+ instead.
+        alternatives:
+          - to: text
+      - level: should-not
+        statement: To emphasize text inside a paragraph. Use Text with weight='bold'.
+        alternatives:
+          - to: text
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use Heading for body copy and non-structural typographic emphasis. Use Text instead.
+        alternatives:
+          - to: text
+      - level: should-not
+        statement: Don't use Heading to label a TextInput, Select or other input. Use a label element linked with htmlFor instead.
+        alternatives:
+          - to: text
+            note: Visible label text for a form field, set with as='label'.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: semantics#heading-as-explicit
+            rel: same-as
+      - refs:
+          - to: semantics#heading-level-from-outline
+            rel: same-as
+      - refs:
+          - to: semantics#one-h1-per-page
+            rel: same-as
+      - refs:
+          - to: semantics#heading-levels-sequential
+            rel: same-as
+      - id: heading-no-icons
+        level: should-not
+        statement: A Heading carries no icon — not a leading glyph, not a trailing one, and not an Icon composed beside the heading text. A heading is found by its level and its position in the outline, not by decoration. When a section genuinely needs a symbol, place it on an adjacent element that has its own accessible name rather than inside the Heading.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        refines:
+          - to: shared-foundations#no-emojis
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: heading-is-semantic-not-decorative
+        level: must-not
+        statement: Don't use Heading for visual differentiation alone — use Text with weight or size instead. Every Heading instance should introduce or label a distinct content section, not just make text appear large, bold, or visually prominent.
+        example:
+          title: How to satisfy this
+          description: Read the heading text in context and confirm it functions as a title or label for the content that follows. Check that removing the heading would leave a section without a navigable label in the page outline.
+        alternatives:
+          - to: text
+        checkedBy: manual
+      - id: heading-no-emojis
+        level: must-not
+        statement: Never use an emoji as a start-aligned icon on a Heading, and never place an emoji anywhere in heading text. In the leading position an emoji reads as an icon but carries none of Icon's sizing, alignment, or accessible-name behaviour, and assistive technology announces its CLDR name as part of the heading — corrupting the outline that heading levels exist to provide.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        refines:
+          - to: shared-foundations#no-emojis
+        $extensions:
+          io.jev:
+            type: boolean
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Set `as` on every Heading to `h1` through `h6`. `as` is required, and the level comes from the page outline. Use `size` for the visual size.
+      - level: must-not
+        statement: Don't pass a `level` prop to Heading. It has none. Use `as` for the level.
+      - level: must-not
+        statement: Don't pass `weight` or `muted` to Heading. It has neither. Use Text for other weights or muted text.
+      - level: must-not
+        statement: "Heading only accepts heading elements for `as`: `h1` through `h6`. Passing `as='p'`, `as='div'`, or any non-heading element causes a TypeScript error. For styled non-heading text, use `Text` with `size` and `weight`."
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - level: should
+        statement: Keep headings to one sentence.
+      - level: should
+        statement: Headings should describe the content of the section they introduce.
+      - level: should-not
+        statement: Do not end headings with a period unless the heading is a question.
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: '**Zoom and reflow.** Headings must stay legible at 400% zoom / 320px viewport width (WCAG 1.4.10 AA). Long headings should wrap, not clip. When using `truncate`, verify the clipped text still makes sense. Spacing tokens use `rem` and scale with user font-size settings (WCAG 1.4.12 AA).'
+alternatives:
+  - to: text
+    note: Body copy and UI text, not semantic headings
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/heading/Heading.tsx
+imports:
+  - platform: react
+    code: import { Heading } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: CSS font-size property.
+    values:
+      - id: '0'
+        description: Smallest. UI chrome headings — toolbars, sidebars, compact panels.
+      - id: '1'
+        description: Small. Content sub-section titles.
+      - id: '2'
+        description: Medium (default). Standard section headings.
+      - id: '3'
+        description: Large. Document titles in high-density layouts.
+      - id: '4'
+        description: Extra large. Document titles in moderate-density layouts.
+      - id: '5'
+        description: Largest size. Document titles in low-density layouts.
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic text color.
+    values:
+      - id: neutral
+        description: Default. No semantic meaning.
+      - id: suggest
+        description: Suggestions or informational content. Pair with InfoOutlineIcon.
+      - id: positive
+        description: Success, published, healthy. Pair with CheckmarkIcon.
+      - id: caution
+        description: Needs attention. Pair with WarningOutlineIcon.
+      - id: critical
+        description: Error, failed, rejected. Pair with ErrorOutlineIcon.
+  - traitType: variant
+    kind: boolean
+    id: trim
+    description: Removes extra whitespace above and below the text box for precise alignment with icons or badges.
+  - traitType: variant
+    kind: enum
+    id: align
+    description: CSS text-align property.
+    values:
+      - id: left
+        description: Default. Titles, section headings, group headings.
+      - id: center
+        description: Rare. Empty-state titles.
+      - id: right
+        description: Rarely appropriate in UI.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Heading now defaults to `<h2>` (v3 defaulted to `<div>`) — always set `as` explicitly. `textOverflow` is replaced by `truncate` — both `"ellipsis"` and `"clip"` map to `truncate={1}`. `accent` is removed — use `tone` instead. `trim` and margin props are new.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:heading --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        Heading in the new system has a different approach to semantic levels and new typography props.
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet as opposed to `styled-components`.
+        - v3 Heading defaulted to rendering a `<div>`. In v5, `as` is required. Omitting it is a type error.
+        - `textOverflow` replaced by `truncate`. For single-line truncation, use `truncate={1}`. For multi-line, use `truncate={2}` or higher.
+        - `accent` removed. Use `tone` or a parent with a semantic tone.
+        - `trim` added to remove leading/trailing whitespace from the text box for precise alignment.
+        - Margin props added. Heading now accepts `margin`, `marginX`, `marginY`, and per-side margin props.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `accent` | — | Removed. No accent color prop in the new version. |
+        | `weight` | — | Removed. Heading is bold by default. Use `Text` for other weights. |
+        | `muted` | — | Removed. Use `Text` with `muted` for secondary text. |
+        | `textOverflow="ellipsis"` | `truncate={1}` | The codemod maps both `"ellipsis"` and `"clip"` to `truncate={1}`. |
+        | — | `trim` | New. Applies `text-box-trim` to remove whitespace above and below the text box. |
+        | — | `truncate` | New. Limit to N lines. Replaces `textOverflow` and adds multi-line clamping. |
+        | — | `margin*` | New. Heading accepts margin props directly (0–9, `'auto'`). |
+
+        ### Breaking changes
+
+        - `as` is required. v3 defaulted to `<div>`, and v5 has no default. A `<Heading>` without `as` fails to compile.
+        - `textOverflow` prop removed. `<Heading textOverflow="ellipsis">` does nothing. Use `<Heading truncate={1}>`.
+        - `accent` prop removed. `<Heading accent>` does nothing. Use `tone=”suggest”` or a parent element with a semantic tone for colored headings.
+        - `weight` and `muted` removed. Heading is bold by default. Use `Text` for other weights or muted text.
+        - `styled-components` no longer used. Custom styled-components extensions like `styled(Heading)` will not work.
+
+        ### Codemod
+
+        A codemod is available to make the changes above less painful. Run the command below with the path to the file or directory you want to migrate. Pass a space-delimited list for multiple paths.
+
+        ```
+        pnpx @sanity/ui-codemod latest:heading --paths <paths> --toPackage @sanity/ui
+        ```
+
+        Some components may need manual review. When a component cannot be migrated or has unclear changes, the codemod adds a “UI-POC-CODEMOD TODO” comment.

@@ -1,0 +1,284 @@
+kind: component
+id: button
+name: Button
+description: Used to trigger an action — like submitting a form, starting a dialog, or running a command.
+metadata:
+  tags:
+    - action
+    - form
+    - interactive
+    - trigger
+    - button
+    - submit
+    - primary
+    - secondary
+    - tertiary
+    - CTA
+    - loading
+    - destructive
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "To trigger an action within the app (for example, 'Publish', 'Delete', 'Save')."
+      - level: should
+        statement: To submit data in a form context. Use type='submit' via the native HTML attribute.
+      - level: should-not
+        statement: To send the user to a new URL within a line of text or paragraph. Use Link instead. Users of assistive technology expect buttons to perform actions and links to navigate.
+        alternatives:
+          - to: link
+      - level: should-not
+        statement: 'As nav items within a sidebar or menu. Use List.ButtonItem instead.'
+        alternatives:
+          - to: list-button-item
+      - level: should-not
+        statement: To switch views on a screen. Use Tab instead. The Tab component has ARIA attributes that make keyboard navigation accessible.
+        alternatives:
+          - to: tabs
+      - level: should-not
+        statement: To toggle a boolean form value (on/off). Use Switch or Checkbox instead.
+        alternatives:
+          - to: switch
+          - to: checkbox
+      - id: buttons-only-display-icon-text
+        level: must-not
+        statement: For buttons that only display an icon with no text label. Use IconButton instead.
+        alternatives:
+          - to: icon-button
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use Button for navigation (changing URL). Use Link instead.
+        alternatives:
+          - to: link
+      - level: should-not
+        statement: Don't use Button for binary form toggles that take effect immediately. Use Switch instead.
+        alternatives:
+          - to: switch
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: button-icon-only-accessible-name
+        level: must
+        statement: "An icon-only Button (icon with no `text` prop) needs an `aria-label`. Describe the action, not the icon: 'Add item', not 'Plus'."
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        refines:
+          - to: shared-foundations#icon-only-control-needs-name
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must
+        statement: '**`as` prop and keyboard behavior.** When `as="a"`, the element activates with Enter only — Space does not trigger links. Don''t use `as` for elements whose behavioral contract Button does not fulfill.'
+        tags: [accessibility]
+      - level: must
+        statement: "**Focus ring.** A visible focus ring appears on keyboard focus. Don't suppress it without providing a high-contrast alternative."
+        tags: [accessibility]
+      - refs:
+          - to: content-guidelines#name-the-action
+            rel: same-as
+      - level: should
+        statement: Ensure buttons have a logical tab order in the document flow (left to right, top to bottom).
+      - level: should
+        statement: Limit the number of level='primary' buttons on the screen. Display one primary action per logical section.
+      - level: should
+        statement: Set iconEnd to ChevronDownIcon when a Button opens a Popover.
+      - level: should
+        statement: Bias toward text labels in buttons to aid comprehension.
+      - level: should
+        statement: Use iconStart in Button for visual emphasis. Only when it doesn't hurt scannability. Keep icon/text button pairing to one button per group.
+      - level: must-not
+        statement: '**Disabled strategy.** Never place a tooltip on a disabled button. Button uses HTML `disabled`, which removes it from the tab order, so keyboard users cannot reach the tooltip. When users need to find a disabled control, use `aria-disabled="true"` instead to keep it focusable while blocking action (WCAG 2.1.1 A).'
+        tags: [accessibility]
+        refines:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+      - level: must-not
+        statement: Don't use Button without a text label. Button relies on the text label to describe its purpose. Use IconButton in cases where the icon is the only visual indicator.
+      - level: must-not
+        statement: Don't disable buttons as a blocking function for incomplete form fields. People may not know what caused the button to be disabled. Allow submission and show feedback instead.
+      - level: must-not
+        statement: Don't hide buttons that represent critical actions. Primary actions must be visible at all times.
+      - level: must-not
+        statement: 'Don''t use `tone="critical"` without an icon, such as `iconStart={ErrorOutlineIcon}`.'
+        tags: [accessibility]
+        refines:
+          - to: shared-foundations#tone-paired-with-second-channel
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Do not use `mode` in Button—it's not a valid prop. `level` is the equivalent v5 prop. Refer to the `level` prop for what values it accepts.
+      - level: must-not
+        statement: Do not use `primary` for the `tone` prop. `primary` is now a value in v5's `level` prop.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - id: most-buttons-tertiary
+        level: should
+        statement: Most buttons should be level='tertiary'. The default, primary, is only for a section's single most important action.
+      - level: should
+        statement: Use text='Label' to set the button label. Children text nodes also work but text prop is the primary API. Do not set both text and children — both render, the text first and the children after it.
+      - level: should
+        statement: Pass `ref` straight to Button when you need the rendered element — to move focus to it, or to anchor a Popover to its trigger. It reaches the underlying element; there is no wrapper to add and no forwardRef to wait for.
+      - level: must-not
+        statement: Button does not accept Box layout props. Props like `flexShrink`, `flexGrow`, `width`, `margin`, and `padding` are not valid on Button and cause a TypeScript error. Wrap Button in Box to control layout.
+      - id: button-not-hand-written-native
+        level: must-not
+        statement: Interactive controls use the Button component rather than a hand-written native `<button>`; standard DOM attributes and handlers pass through Button.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must-not
+        statement: Do not use Button for navigation to a new page or URL — use Link instead.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: shared-foundations#aria-disabled-keeps-focus
+            rel: same-as
+      - refs:
+          - to: shared-foundations#aria-pressed-toggle
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+  - kind: definitions
+    for: all
+    title: Content
+    items:
+      - term: Be concise
+        definition: Button labels should be short and clear. Use simple, direct language.
+      - term: Start with verbs
+        definition: "Labels should describe the action taken (for example, 'Publish', 'Edit', 'Upload'). For extra clarity, add the subject of the action (for example, 'Upload image')."
+uses:
+  - to: icons
+    note: Button's iconStart and iconEnd props accept icon components from @sanity/icons.
+alternatives:
+  - to: icon-button
+  - to: link
+  - to: list-button-item
+  - to: switch
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32075-2332
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/button/Button.tsx
+imports:
+  - platform: react
+    code: |-
+      import { Button } from '@sanity/ui'
+
+      <Button text="Publish" />
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Button's standard state (default). Represents that a button is clickable.
+  - traitType: state
+    kind: boolean
+    id: hovered
+    description: Visual cue that the cursor is resting over the button.
+  - traitType: state
+    kind: boolean
+    id: pressed
+    description: Visual cue that the button is being pressed.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Visual cue that the button is keyboard-focused.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: >-
+      Blocks the user from using the button. Removed from the tab order via HTML
+      disabled. Use only when performing the action could be harmful, or while
+      loading={true}. Let people know why it's disabled and how to fix it with
+      visible text or a status message next to the button.
+  - traitType: state
+    kind: boolean
+    id: loading
+    description: >-
+      Shows the action is in progress. The button is also disabled while
+      loading. Use only for processes consistently longer than 200ms. For
+      processes over three seconds, show a confirmation message when the action completes.
+  - traitType: variant
+    kind: enum
+    id: level
+    description: Controls the visual weight of the button. Tertiary covers most actions, then secondary, with primary least used.
+    values:
+      - id: tertiary
+        description: No background, low visual weight. For rare or background actions (forgot password, close/dismiss in a dialog).
+      - id: secondary
+        description: Outlined/bordered look. For common but not the most critical actions (cancel in dialogs, save as draft).
+      - id: primary
+        description: Default value. Solid background, full visual weight. The most critical action in a workflow (publish, log in).
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic color of the button.
+    values:
+      - id: neutral
+        description: Neutral gray for general actions within the product.
+      - id: critical
+        description: Red for destructive or unsafe actions. Pair with iconStart={ErrorOutlineIcon} to show meaning to people with color vision differences.
+  - traitType: variant
+    kind: enum
+    id: type
+    description: The native HTML type attribute passes through to the underlying <button> element.
+    values:
+      - id: button
+        description: Standard button (default). For all actions outside of a form context.
+      - id: submit
+        description: Submits form data.
+      - id: reset
+        description: Resets form data.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Composite prop setting padding and gap together.
+    values:
+      - id: regular
+        description: Gap 2 and padding 2. Default spacing.
+      - id: loose
+        description: Gap 3 and padding 3. For spacious contexts.
+  - traitType: variant
+    kind: boolean
+    id: fullwidth
+    description: Sets CSS width to 100% to fill the container.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        Button's prop API has changed. The `mode` prop is replaced by `level` with new values, icon props are renamed, the `selected` prop is removed, and tone values are reduced. `styled-components` is no longer used, so custom extensions like `styled(Button)` will not work.

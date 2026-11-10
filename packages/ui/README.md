@@ -2,6 +2,16 @@
 
 The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
 
+## Documentation
+
+The documentation ships in this package:
+
+- `llms.txt` lists every document. Start there.
+- `docs/` holds the documents. Each one is a DSDS file, written as YAML.
+- `skills/` holds the agent skills for building with Sanity UI 5.
+
+Read them from `node_modules/@sanity/ui/`.
+
 ## What's different from v3
 
 - **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.

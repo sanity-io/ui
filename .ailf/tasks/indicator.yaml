@@ -1,0 +1,88 @@
+- id: sanity-ui-v5-indicator-label-sets-accessible-name
+  mode: literacy
+  title: 'Indicator — label sets its accessible name; omit it only when adjacent text already conveys the status'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+        path: ui/components/indicator
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+          perspective: rqgKNUCe1
+        reason: "Indicator's label prop sets its accessible name (aria-label); without it the dot is aria-hidden and conveys nothing to screen readers, unless adjacent visible text already states the status"
+  prompt:
+    text: |
+      I'm rendering `<Indicator tone="positive" />` next to an avatar to show a user is online, with no other text nearby. Is that accessible on its own? Fix it if not.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected example adding a descriptive `label` such as "Online" to the Indicator
+        - The label names the status, not the colour or shape (not "Green dot")
+        - Keeps `tone="positive"` on the Indicator
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example passes `label` directly on Indicator (not a separate aria-label or wrapping element)
+        - Indicator is imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains-any
+      value: [' label=', '<Indicator label=']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-indicator-tone-union-no-success-or-warning
+  mode: literacy
+  title: 'Indicator — tone is neutral, positive, suggest, caution or critical; success and warning are type errors'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+        path: ui/components/indicator
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+          perspective: rqgKNUCe1
+        reason: "Indicator's valid tone values are 'neutral', 'positive', 'suggest', 'caution', 'critical'; 'default', 'success' and 'warning' are not in the tone union and are a TypeScript error; label sets the accessible name when the dot is the only signal"
+  prompt:
+    text: |
+      I'm adding sync status dots to a sidebar with `@sanity/ui`. TypeScript rejects this:
+
+      ```tsx
+      const toneFor = {synced: 'success', stale: 'warning', idle: 'default'} as const
+
+      <Indicator tone={toneFor[status]} />
+      ```
+
+      Each dot sits on its own next to an avatar, with no status text nearby. Fix the tone mapping and anything else that's wrong.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Maps synced to positive, stale to caution, and idle to neutral
+        - Because the dot is the only signal, adds a `label` to each Indicator describing the status (for example "Synced")
+        - Provides the corrected mapping and JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Every tone value used is one of neutral, positive, suggest, caution or critical
+        - The Indicator receives a `label` prop with a status description
+        - Indicator is imported from '@sanity/ui'
+        - The code is syntactically valid TypeScript/JSX
+    - type: contains-any
+      value: ["'positive'", '"positive"']
+    - type: contains-any
+      value: ["'caution'", '"caution"']
+    - type: contains
+      value: 'label='
+  baseline:
+    enabled: true
+    rubric: full

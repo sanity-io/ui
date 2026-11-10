@@ -1,0 +1,110 @@
+kind: component
+id: skip-to-content
+name: SkipToContent
+description: An accessibility helper that lets keyboard and screen-reader users skip past navigation to the main content.
+metadata:
+  tags: [accessibility, skip-link, keyboard, navigation, WCAG, skip-to-content, bypass]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: On every page that contains repeated navigation (header, sidebar) before the main content. WCAG 2.4.1 (A) requires a way to bypass blocks of content.
+      - level: should
+        statement: As the first focusable element in the document so the first Tab press lands on it.
+      - level: should-not
+        statement: On single-page apps with no repeated navigation block — the skip link adds noise without value.
+      - level: should-not
+        statement: "For non-main destinations (for example, 'Skip to footer'). Use a regular Link for other jump targets."
+        alternatives:
+          - to: link
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use SkipToContent for visible navigation links. Use Link instead — SkipToContent is a specialized hidden skip-link that uses Link internally.
+        alternatives:
+          - to: link
+      - level: should-not
+        statement: Don't use SkipToContent for custom skip-link patterns. Use VisuallyHidden with `visibleOnFocus` instead.
+        alternatives:
+          - to: visually-hidden
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Place SkipToContent as the first child of body so it's the first thing Tab reaches.
+      - level: must
+        statement: Point href at a focusable element. The target (typically main) should have tabIndex={-1}.
+      - level: must-not
+        statement: "Don't hide SkipToContent with display: none or aria-hidden — the clip-rect technique keeps it focusable."
+      - level: must-not
+        statement: Don't link to a non-focusable element — focus stays at the top and the skip link fails its purpose.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: The target element must have tabIndex={-1} for focus to move correctly on activation.
+      - level: must-not
+        statement: 'Do not hide with display: none — this breaks keyboard accessibility.'
+      - level: must-not
+        statement: 'Linking to a non-focusable element as the href target. Instead: Add tabIndex={-1} to the target element (for example, the main element) so focus moves correctly.'
+      - level: must-not
+        statement: 'Using `hash` instead of `href` on SkipToContent (for example, `<SkipToContent hash="#main" />`). `hash` is not a prop, so passing it is a TypeScript error. Use `<SkipToContent href="#main" label="Skip to content" />`. The `sanity-ui/no-skip-to-content-hash` ESLint rule autofixes `hash` to `href`.'
+      - level: must-not
+        statement: 'Omitting the leading ''#'' from href (for example, `href="main"` instead of `href="#main"`). `href` is passed straight through to the underlying anchor — without the ''#'' it compiles fine but links to a relative URL instead of jumping to the same-page fragment. This produces no build error, so it must be checked explicitly.'
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - level: should
+        statement: '**"Skip to content"** or **"Skip to main content"** is the convention.'
+      - level: should
+        statement: '**No trailing period.**'
+
+alternatives:
+  - to: link
+    note: The anchor primitive rendered inside SkipToContent
+  - to: visually-hidden
+    note: The hiding primitive SkipToContent composes; use `<VisuallyHidden visibleOnFocus>` directly for other skip-link patterns
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/skip-to-content/SkipToContent.tsx
+imports:
+  - platform: react
+    code: import { SkipToContent } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: hidden
+    description: Clipped to 1×1 pixel, removed from layout. Default state, invisible to sighted users.
+  - traitType: state
+    kind: boolean
+    id: revealed
+    description: Unclipped, positioned at top-left with high z-index. Shown when the link receives :focus-visible.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        There was no SkipToContent in v3 — teams hand-rolled the pattern with a `<Box>` and a `position: absolute` reveal trick. The new component bundles VisuallyHidden + Link with the right focus behavior.
+
+        | v3 pattern | New prop | Notes |
+        |---|---|---|
+        | `<Box className="skip-link">...</Box>` (custom) | `<SkipToContent href="#main" label="Skip to content" />` | Drop in as the first body child |

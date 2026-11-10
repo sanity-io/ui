@@ -95,7 +95,7 @@ defineCrossFileTest(
   `
     import {RootAvatar} from './Component.styled'
 
-    export function RootAvatar() {
+    export function Component() {
       return <RootAvatar initials="AB" />
     }
   `,

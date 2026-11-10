@@ -1,0 +1,322 @@
+kind: sanity.foundation
+id: typography-guidelines
+name: Typography guidelines
+description: Rules and conventions for applying Sanity UI's type scale, components, hierarchy, and reading mechanics across product interfaces.
+metadata:
+  tags:
+    - concept
+    - typography
+    - type scale
+    - hierarchy
+    - readability
+    - heading
+    - text
+    - label
+    - code
+    - weight
+    - alignment
+    - Heading
+    - Text
+    - Code
+    - FontWeight
+    - line height
+    - measure
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    title: Principles
+    items:
+      - level: should
+        statement: Proportional. Hierarchy comes from the ratio between steps, not from raw pixel values. The scale sets the proportions. You choose a step; the rendered size follows.
+      - level: should
+        statement: Restrained. Most pages need three or four roles, not eight. Fewer sizes and fewer weights make hierarchy clearer. Reach for weight and space before adding a new size.
+      - level: should
+        statement: Meaning before look. A heading's level marks structure; its size sets appearance. Keep the two apart, and the outline stays correct at any size.
+      - level: should
+        statement: Conventional. Start alignment, sentence case, and a small weight set follow patterns readers already know. Vary only with a clear reason.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: semantics#heading-level-from-outline
+            rel: same-as
+      - refs:
+          - to: semantics#heading-levels-sequential
+            rel: same-as
+      - level: should
+        statement: Build hierarchy with size and weight before adding color. Design the ranking in grayscale first, then add color as reinforcement.
+      - level: should-not
+        statement: Don't use all-caps for body text or long strings. It harms legibility and breaks rhythm.
+      - level: should-not
+        statement: Don't center body copy. It removes the consistent return edge the eye depends on.
+      - id: no-truncate-body-copy
+        level: must-not
+        statement: Don't truncate paragraph text. Clipping changes meaning. Reserve `truncate` for metadata and support labels.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must-not
+        statement: Don't use icons in place of text for complex or critical content. An icon with no text equivalent is invisible to screen readers.
+      - id: don-emoji-text-screen-readers
+        level: must-not
+        statement: Don't use emoji in UI text. Screen readers announce emoji descriptions verbatim, which breaks reading flow. Emoji also render differently across platforms and break typographic consistency.
+  - kind: guidelines
+    for: all
+    title: Applying type in practice
+    items:
+      - level: should
+        statement: 'Focus on visual and semantic hierarchy: use size, weight, and lightness to direct attention effectively, so the structure helps people understand what to focus on.'
+      - level: should-not
+        statement: 'Let the content speak for itself: avoid type treatments such as accent colors, extreme sizes, dead-center alignment, or all caps to drive engagement or attention.'
+      - level: should-not
+        statement: 'Truncation is not a substitute for concise writing: truncating text harms comprehension, and succinct copywriting is always a better solution than hiding text.'
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Never add letter spacing to lowercase text; it breaks word recognition.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          Type does two jobs at once. It carries words, and it ranks them before anyone reads. The typography system gives designers and developers a shared scale and a set of components for building ordered interfaces.
+  - kind: section
+    for: all
+    freeform:
+      - title: Fundamentals
+        body: |-
+          These describe how reading works. The rules in this document follow from them.
+
+          **Letters are recognized, not word shapes.** Legibility and readability solve different problems. Legibility asks if letters are distinct. Readability asks if the text flows.
+
+          **The eye jumps and pauses.** Reading moves in saccades (jumps) and fixations (pauses), with a return sweep at each line end. Erratic spacing or a missing left edge breaks that rhythm and slows reading.
+
+          **Measure governs readability.** Line length controls whether the eye finds the next line. Long lines lose the return sweep. Short lines break rhythm. The workable range spans roughly 45–75 characters.
+
+          **Vertical rhythm aids scanning.** Even line spacing makes a text block feel like a system. It gives the eye a steady cadence.
+
+          **Type ranks content before it is read.** Size, weight, and spacing assign rank at a glance. Hierarchy is the first thing type conveys.
+
+          **Hierarchy lives in lightness, not hue.** Size, weight, and space rank content for every viewer. Hierarchy built on color alone fails in grayscale and for people with low vision.
+  - kind: section
+    for: all
+    freeform:
+      - title: Components
+        body: |-
+          **Heading** renders `h1`–`h6` elements. Use it for page titles, section headings, and inspector headers. Always set the heading level with `as`.
+
+          **Text** renders inline elements. Use it for body copy, captions, labels, and all support text.
+
+          **Form labels** use `Text` with `as="label"`, which renders as a native `<label>`. Use it for the label in a form field.
+
+          **Code** renders inline or block code. Use it for code samples, identifiers, and inline tokens. `Code` does not accept an `align` prop — it inherits block flow.
+      - title: Choosing between Heading and Text
+        body: |-
+          - Use `Heading` when the text names a section of the page outline.
+          - Use `Text` for body copy and for UI text that is not a heading.
+          - Use `Text` with `as="label"` for the visible name of a TextInput, Select or other input.
+          - A dense panel text element that does not belong in the outline is `Text 1`, not `Heading 0`.
+  - kind: section
+    for: all
+    freeform:
+      - title: Typefaces
+        body: |-
+          **Inter** is the primary typeface. All content, UI controls, and inputs use it. Sanity UI enables these font features:
+
+          | Feature | Code | Purpose |
+          | --- | --- | --- |
+          | Disambiguation | `ss02` | Renders 0, I, l, and ß in distinct alternate forms. |
+          | Discretionary ligatures | `dlig` | Joins common letter pairs (ff, fi, ft, tt, and others) for smoother reading. |
+          | Tabular numbers | `tnum` | Fixed-width numerals. Use only inside tables. |
+
+          **Code** uses the operating system's default monospace:
+
+          | OS | Typeface |
+          | --- | --- |
+          | macOS | SF Mono |
+          | Windows | Consolas / Courier New |
+          | Ubuntu / GNOME | Ubuntu Mono |
+          | Fedora / Debian | DejaVu Sans Mono |
+  - kind: section
+    for: all
+    freeform:
+      - title: Type hierarchy
+        body: |-
+          Map each role to a component, size, and weight. Most pages use three or four of these. The table is the available set, not a checklist — fewer roles means clearer hierarchy.
+
+          | Role | Component | Size | Weight |
+          | --- | --- | --- | --- |
+          | Page title | `Heading` | `3` | bold |
+          | Section title | `Heading` | `2` | bold |
+          | Sidebar / inspector title | `Heading` | `1` | semibold |
+          | Dense panel title | `Heading` | `0` | semibold |
+          | Categorize or contextualize a title | `Eyebrow` | Size relative to Heading | semibold |
+          | Body copy | `Text` | `2` | regular |
+          | UI text elements (buttons, menus, tabs) | `Text` | `1` | medium |
+          | Captions, metadata | `Text` | `0` | medium |
+          | Form labels | `Text` with `as="label"` | `1` | none |
+
+          Form labels set with `Text` use `size={1}`, which renders at {body-1}.
+
+          Captions and metadata use `Text 0`. Reach for `Text 1` only when the caption sits next to body copy and must hold its own.
+  - kind: section
+    for: all
+    freeform:
+      - title: Scale
+        body: The scale is a set of proportions, not hand-set sizes. Choose a step; the rendered size and line height come from its token. The default theme exposes no single clean modular ratio across the steps. Design with the steps, not one multiplier.
+      - title: Heading scale
+        body: |-
+          Sizes `0` through `5`. Each size's line height comes with its token.
+
+          | Size | Token | Common use |
+          | --- | --- | --- |
+          | `0` | {heading-0} | UI chrome — toolbars, sidebars, dense panels |
+          | `1` | {heading-1} | Sub-section titles |
+          | `2` **(default)** | {heading-2} | Standard section headings |
+          | `3` | {heading-3} | Document titles in high-density layouts |
+          | `4` | {heading-4} | Document titles in medium-density layouts |
+          | `5` | {heading-5} | Document titles in low-density layouts |
+      - title: Text scale
+        body: |-
+          Sizes `0` through `4`. Sizes `3` and `4` serve display purposes only — hero and empty-state text, not product chrome. Each size's line height comes with its token.
+
+          | Size | Token | Common use |
+          | --- | --- | --- |
+          | `0` | {body-0} | Fine print, metadata |
+          | `1` | {body-1} | UI labels, buttons, menu items, tabs |
+          | `2` **(default)** | {body-2} | Body copy |
+          | `3` | {body-3} | Display body — intros and lead paragraphs |
+          | `4` | {body-4} | Display body — hero and empty-state text |
+      - title: Eyebrow and Code scale
+        body: '`Code` runs sizes `0` through `4`, defaulting to `2`: {code-0}, {code-1}, {code-2}, {code-3} and {code-4}. `Eyebrow` runs sizes `0` through `4`: {label-0}, {label-1}, {label-2}, {label-3} and {label-4}.'
+  - kind: section
+    for: all
+    freeform:
+      - title: Measure
+        body: 'Constrain body text to roughly 45–75 characters per line. Start with `max-inline-size: 66ch`. The `ch` unit approximates character count from the `0` glyph width, so treat 66ch as a target. Check that the rendered line lands in the 45–75 range, above all for `Code` or when the font changes. Outside this range, the return sweep fails and reading slows. Measure delivers more readability gain than any other single factor.'
+      - title: Line height
+        body: |-
+          Body text needs ample line height: 1.5×. This also gives the layout headroom for the WCAG 1.4.12 text-spacing override, where users force 1.5× line height (see Accessibility). Headings and eyebrows use a tighter 1.25× at every size. Longer lines need more leading.
+
+          | Tokens | Components | Line height |
+          | --- | --- | --- |
+          | `body-0`–`body-4` | `Text` 0–4 | 1.5× |
+          | `code-0`–`code-4` | `Code` 0–4 | 1.5× |
+          | `heading-0`–`heading-5` | `Heading` 0–5 | 1.25× |
+          | `label-0`–`label-4` | `Eyebrow` 0–4 | 1.25× |
+
+          The values come from `tokens/dtcg/json/typography.tokens.json`.
+      - title: Alignment
+        body: |-
+          Start-align body text by default. Left-aligned text in left-to-right scripts gives the eye a consistent return edge and supports readers with dyslexia.
+
+          Center alignment works for short, standalone strings — empty-state headings and modal titles. Center body copy never.
+
+          End alignment suits numeric content. Numerals align on the right edge, so columns of figures compare at a glance. Use it for numbers in tables.
+
+          Justified text creates uneven word spacing. It breaks the consistent return edge the eye depends on. Avoid it in interfaces.
+
+          Alignment applies to `Heading`, `Text`, and `Eyebrow`. `Code` has no `align` prop.
+  - kind: section
+    for: all
+    freeform:
+      - title: Weight
+        body: |-
+          Weight creates emphasis. Many weights at one level cancel the effect. `FontWeight` holds four values. What each weight is for is in the Font weight entry's table (`font-weight`).
+
+  - kind: section
+    for: all
+    freeform:
+      - title: Typographic conventions
+        body: |-
+          Typography owns how letters and numerals are rendered — small caps, figure style, letter spacing, line breaks. The Content guidelines own which words, casing, and numerals get written. When both touch a string, content decides the characters; typography decides the look.
+
+          **Acronyms and abbreviations.** Whether to use an acronym, and how to capitalize it, is a content decision. The Content guidelines keep short forms like CSV, JSON, and URL in their own casing. For rendering: the default Sanity UI type stack does not expose small caps. Set acronyms in full uppercase with a little letter spacing, which keeps the rhythm. A font with small-cap OpenType features reads better in spaced small caps. Confirm support with the frontend team first.
+
+          **Figures.** Use lining figures (titling numerals) everywhere by default. The Sanity UI default stack does not ship oldstyle figures. If the active font exposes oldstyle (text) figures, use them in body copy. Keep lining figures for tables and all-caps strings, where column alignment matters. This rule is about numeral style. Whether to write a numeral or spell a number out is a content decision. The Content guidelines call for figures over words in counts ("Delete 3 items").
+
+          **Letter spacing.** Add a little letter spacing to the all-caps strings and acronyms that remain. Use them with restraint — see the Don'ts below and the Content guidelines. Add letter spacing to lowercase text never. It breaks word recognition.
+
+          **Numbers and units.** Join a number and its unit with a non-breaking space (`&nbsp;`). This stops the value and unit from splitting across lines: `10 MB`, not `10<br>MB`. This matches the Content guidelines' file-size example ("Try a file under 10 MB").
+
+          Sentence-level format — sentence case, one space between sentences, the Oxford comma — lives in the Content guidelines. This doc defers to it for casing.
+  - kind: section
+    for: all
+    freeform:
+      - title: Vertical rhythm and the trim prop
+        body: |-
+          A line of text carries space above and below its glyphs that the glyphs themselves don't use — the font's built-in ascender and descender space. That space is what makes multi-line text comfortable to read, but it also makes a text component's box taller than what the eye reads as "the text." Compare that against padding, a `gap`, or a border, and the visible space ends up larger than the spacing scale value says — a `gap` of `3` ({space-3}) next to an untrimmed `Heading` can read closer to {space-4} once the font's leading is added on top.
+
+          `trim` removes that mismatch. Set `trim` on `Heading`, `Text`, `Eyebrow`, or `Code` to collapse the invisible leading above and below the text, so the rendered box hugs the visible glyphs instead of the font's full line-height. The correction is sized per step — larger sizes carry more leading, so they get a larger adjustment:
+
+          | Component | Size | Trim adjustment |
+          | :---- | :---- | :---- |
+          | `Heading` | `0` | −4px |
+          | `Heading` | `1` | −5px |
+          | `Heading` | `2` | −6px |
+          | `Heading` | `3` | −7px |
+          | `Heading` | `4` | −8px |
+          | `Heading` | `5` | −10px |
+          | `Text` / `Code` | `0` | −4px |
+          | `Text` / `Code` | `1` | −5px |
+          | `Text` / `Code` | `2` | −6px |
+          | `Text` / `Code` | `3` | −7px |
+          | `Text` / `Code` | `4` | −8px |
+          | `Eyebrow` | `0` | −2px |
+          | `Eyebrow` | `1` | −2.5px |
+          | `Eyebrow` | `2` | −3px |
+          | `Eyebrow` | `3` | −3.5px |
+          | `Eyebrow` | `4` | −4px |
+          | `Eyebrow` | `5` | −4.5px |
+
+          `Eyebrow` trim values were added in 5.0.0-alpha.20.
+
+          `trim` defaults to off. Turn it on deliberately, not as a habit.
+
+          **When to use it.** Reach for `trim` whenever a text element's spacing needs to line up exactly with something else: a `Heading` or `Text` sitting directly against a Card's padding, a short title or label next to an icon or avatar sharing a baseline or center line, or any place a `gap` value from the spacing scale needs to be the true visual distance to a neighbor.
+
+          **When not to use it.** Leave `trim` off for running text — paragraphs, multi-line body copy, anything meant to read normally. The leading `trim` removes is the same leading that keeps multi-line text comfortable. Default to no `trim`, and reach for it only when a specific alignment problem shows up. See Spacing → Vertical rhythm for how this interacts with the spacing scale.
+
+          **Trim and truncate together.** Setting both `trim` and `truncate` on the same `Heading`, `Text`, or `Eyebrow` works, but the component changes shape to do it — the truncation logic moves to an inner wrapping element, while the outer element carries the trim adjustment. Expect an additional wrapping element in the rendered DOM when both props are set together that isn't there when only one is.
+      - title: Truncation
+        body: '`Heading`, `Text`, and `Eyebrow` accept a `truncate` prop that limits text to a set line count. `truncate={1}` clips to one line with an ellipsis; higher values clamp to that many lines. Use it for metadata and support labels. Use it as a last resort — succinct copy is always better than hidden text. Never apply it to critical actions or nav items.'
+  - kind: section
+    for: all
+    freeform:
+      - title: Related
+        body: |-
+          - **Content guidelines** — casing, acronym use, numerals as words vs. figures, sentence-level format.
+          - **Color guidelines** — contrast, grayscale hierarchy, semantic tone.
+          - **Spacing guidelines** — the spacing scale and vertical rhythm.
+          - **Accessibility** — resize, reflow, text-spacing overrides, contrast, full code.
+  - kind: section
+    for: all
+    freeform:
+      - title: Checklist
+        body: |-
+          Before finalizing any text treatment:
+
+          - [ ] Every size comes from the scale?
+          - [ ] Hierarchy uses the fewest sizes, leaning on weight and space first?
+          - [ ] Body measure within 45–75 characters?
+          - [ ] Line height set for this size and measure, aligned to the spacing rhythm?
+          - [ ] Body copy start-aligned?
+          - [ ] Heading levels match the page outline, not the visual size?
+          - [ ] Acronyms checked against the Content guidelines, then rendered in uppercase or letter-spaced?
+          - [ ] Hierarchy holds in grayscale?
+          - [ ] Every text/background pair meets WCAG 2.2 AA contrast, in light and dark (see the Accessibility guidelines)?
+          - [ ] Text resizes to 200% and reflows to 320px (see Accessibility)?
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to apply Sanity UI's type scale and components correctly, enforce heading structure, and uphold readability and accessibility conventions in any interface that renders text.

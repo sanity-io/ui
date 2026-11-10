@@ -1,0 +1,220 @@
+kind: component
+id: icon-button
+name: IconButton
+description: Triggers an action using an icon as the primary communicator.
+metadata:
+  tags: [action, button, icon, icon-only, interactive, toolbar, destructive, loading]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: must
+        statement: For icon-only buttons
+      - level: should
+        statement: In toolbars where space is limited.
+      - level: should
+        statement: In button groups with many actions where labels would clutter the layout.
+      - level: should
+        statement: As action triggers in list rows — such as edit, delete, or more options.
+      - level: should-not
+        statement: When users may not know the icon. Use Button with iconStart and text instead.
+        alternatives:
+          - to: button
+      - level: must-not
+        statement: In dialogs or confirmation prompts. Use Button with a visible label.
+        alternatives:
+          - to: button
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: aria-label-required
+        level: must
+        statement: "Every IconButton needs an `aria-label`. It is the button's only accessible name. Describe the action, not the icon: 'Delete document', not 'Trash'."
+        example:
+          title: How to satisfy this
+          description: Pass aria-label directly on the IconButton element. Describe the action — use 'Delete document', not 'Trash'.
+        checks:
+          - href: eslint:sanity-ui/require-icon-button-aria-label
+            role: lint-rule
+            note: eslint rule
+        checkedBy: automated
+        refines:
+          - to: content-guidelines#name-the-action
+          - to: shared-foundations#icon-only-control-needs-name
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - id: tooltip-paired
+        level: should
+        statement: Pair each IconButton with a Tooltip so its label is visible on hover and keyboard focus.
+        example:
+          title: How to satisfy this
+          description: Wrap IconButton with Tooltip and set the tooltip content to match the aria-label.
+        checkedBy: manual
+      - id: no-tooltip-on-disabled
+        refs:
+          - to: tooltip#no-tooltip-on-disabled
+            rel: same-as
+        example:
+          title: How to satisfy this
+          description: Remove or skip rendering the Tooltip when the button is disabled. Add a nearby status message or info icon to explain why the action is blocked.
+        checkedBy: manual
+        refines:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+      - id: no-icon-button-in-dialogs
+        level: must-not
+        statement: Don't use IconButton in dialogs or decision prompts — use Button with a visible label instead.
+        example:
+          title: How to satisfy this
+          description: Use Button with text prop for confirm and cancel actions in dialogs.
+        checkedBy: manual
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: '`icon` and `aria-label` are both required. Omitting either causes a TypeScript error.'
+      - level: must
+        statement: "Use tone='critical' for destructive actions, with an icon that signals the action, like TrashIcon."
+        refines:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+      - level: should
+        statement: IconButton defaults to level='primary', like Button. Set level='tertiary' on toolbar and list row actions. Leave `level` out only on the single most critical action in a group.
+      - level: should
+        statement: Pass `ref` straight to IconButton when you need the rendered element — to move focus to it, or to anchor a Popover to its trigger. It reaches the underlying element; there is no wrapper to add and no forwardRef to wait for.
+      - level: must-not
+        statement: IconButton does not accept Box layout props. Wrap in Box to control sizing or position.
+      - level: must-not
+        statement: 'Do not hand-write a native `<button>` to get a `ref` or an attribute the prop table does not list. Standard DOM attributes and event handlers — `ref`, `id`, `title`, `tabIndex`, `data-*`, `aria-*`, `onKeyDown` — pass through to the rendered element, so a stripped-down native button is never the way to reach one.'
+        checkedBy: assisted
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: shared-foundations#aria-disabled-keeps-focus
+            rel: same-as
+      - refs:
+          - to: shared-foundations#aria-pressed-toggle
+            rel: same-as
+  - kind: section
+    for: agent
+    freeform:
+      - title: Required props
+        body: |-
+          Both `icon` and `aria-label` are required — omitting either causes a TypeScript error.
+
+          ```tsx
+          <IconButton icon={AddIcon} aria-label="Add item" />
+          ```
+
+          `aria-label` is the only accessible name. Screen readers read it aloud. Describe the action, not the icon: `aria-label="Delete document"`, not `aria-label="Trash"`.
+      - title: Tooltip pairing
+        body: |-
+          Always wrap IconButton in a Tooltip so the label is visible on hover and keyboard focus.
+
+          ```tsx
+          <Tooltip content="Delete document">
+            <IconButton icon={TrashIcon} aria-label="Delete document" tone="critical" />
+          </Tooltip>
+          ```
+
+          Don't place a Tooltip on a disabled or loading IconButton. See Tooltip for the rule.
+
+uses:
+  - to: icons
+    note: IconButton requires an icon from @sanity/icons as its icon prop.
+alternatives:
+  - to: button
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32594-1782
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/icon-button/IconButton.tsx
+imports:
+  - platform: react
+    code: import { IconButton } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: level
+    description: Controls the visual weight of the button. Use tertiary for most actions, secondary for important but non-primary actions, and primary sparingly for the single most critical action per section.
+    values:
+      - id: tertiary
+        description: No background, low visual weight. For rare or background actions such as close or dismiss.
+      - id: secondary
+        description: Outlined/bordered look. For common but not the most critical actions.
+      - id: primary
+        description: Solid background, full visual weight. The most critical action in a group.
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic color of the button.
+    values:
+      - id: neutral
+        description: Neutral gray for general toolbar and list actions.
+      - id: critical
+        description: Red for destructive or unsafe actions. Always pair with an icon that signals a destructive action, like TrashIcon.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Composite prop setting padding and minimum hit area together.
+    values:
+      - id: regular
+        description: Padding 2, minimum size 25x25px. Default.
+      - id: loose
+        description: Padding 3, minimum size 33x33px. For spacious contexts.
+  - traitType: variant
+    kind: enum
+    id: type
+    description: The native HTML type attribute passes through to the underlying <button> element.
+    values:
+      - id: button
+        description: Standard button (default). For all actions outside of a form context.
+      - id: submit
+        description: Submits form data.
+      - id: reset
+        description: Resets form data.
+  - traitType: state
+    kind: boolean
+    id: loading
+    description: Button action is in progress. Button is also disabled while loading. Use for tasks over 200ms. For tasks over three seconds, show a confirmation message when the task completes.
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Button's standard state, clickable.
+  - traitType: state
+    kind: boolean
+    id: hovered
+    description: Cursor is resting over the button.
+  - traitType: state
+    kind: boolean
+    id: pressed
+    description: Button is being pressed.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Button has keyboard focus.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: Interaction is blocked. Removed from tab order via HTML disabled. Only use when the action could be harmful. Icon-only buttons give no context when disabled — add a nearby status message or info icon to explain why the action is blocked.
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

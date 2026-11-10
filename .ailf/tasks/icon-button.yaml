@@ -1,0 +1,108 @@
+- id: sanity-ui-v5-icon-button-requires-aria-label
+  mode: literacy
+  title: 'IconButton — always requires an aria-label, never gets a name from a tooltip'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1bda7220-3101-410a-9475-bac1f6a69e4e
+        path: ui/components/icon-button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1bda7220-3101-410a-9475-bac1f6a69e4e
+          perspective: rqgKNUCe1
+        reason: "IconButton has no text prop and no accessible name of its own — aria-label is required, and a Tooltip's content does not substitute for it"
+      - id: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+        path: ui/components/tooltip
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+          perspective: rqgKNUCe1
+        reason: "Tooltip content is visual/hover-only and is not read as the button's accessible name"
+  prompt:
+    text: |
+      I have a delete action rendered as `<IconButton icon={TrashIcon} tone="critical" />`, wrapped in a `<Tooltip content="Delete">` so sighted users see what it does on hover. Is that enough for screen reader users? If not, fix it.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps `icon={TrashIcon}` and `tone="critical"` on the IconButton and passes it no `text` prop
+        - The aria-label names the action (for example "Delete"), not the icon (for example "Trash")
+        - Provides corrected code adding aria-label="Delete" (or an equivalently descriptive string) to the IconButton
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - IconButton is imported from '@sanity/ui'
+        - aria-label is set directly on IconButton, not on Tooltip
+        - The Tooltip (if kept) still wraps the IconButton for sighted users, but is not relied on for the accessible name
+    - type: contains
+      value: 'aria-label'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-icon-button-not-for-dialog-decisions
+  mode: literacy
+  title: 'IconButton — never for dialog decisions; confirm and cancel are Buttons with visible labels'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1bda7220-3101-410a-9475-bac1f6a69e4e
+        path: ui/components/icon-button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1bda7220-3101-410a-9475-bac1f6a69e4e
+          perspective: rqgKNUCe1
+        reason: "Don't use IconButton in dialogs or decision prompts — use Button with a visible text label; IconButton is for space-limited contexts where the icon's meaning is clear; aria-label describes the action, not the icon"
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: "Button takes its label via text and an icon via iconStart; a destructive action uses tone='critical' and labels name the specific action"
+  prompt:
+    text: |
+      To keep our "Remove member" confirmation compact, I put two IconButtons in the dialog footer (everything from `@sanity/ui`, icons from `@sanity/icons`):
+
+      ```tsx
+      <Dialog.Footer>
+        <HStack gap={2}>
+          <IconButton icon={CloseIcon} aria-label="X" onClick={onCancel} />
+          <IconButton icon={CheckmarkIcon} aria-label="Checkmark" tone="critical" onClick={onRemove} />
+        </HStack>
+      </Dialog.Footer>
+      ```
+
+      Is this OK? Fix whatever needs fixing.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Rewrites both actions as Button with a `text` label that names the action (for example "Remove member" and "Keep member" or "Cancel")
+        - Keeps `tone="critical"` on the remove action and pairs it with a destructive icon or a verb naming what is lost
+        - Keeps `onCancel` and `onRemove` on the matching Buttons
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Both footer actions are Button elements with a `text` prop; no IconButton remains in the footer
+        - The destructive Button uses `tone="critical"`; `tone` is only ever `neutral` or `critical`
+        - Button icons, if any, use `iconStart` or `iconEnd`, imported from per-icon subpaths such as '@sanity/icons/Trash'
+        - Button and Dialog are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: '<Button'
+    - type: contains
+      value: 'tone="critical"'
+  baseline:
+    enabled: true
+    rubric: full

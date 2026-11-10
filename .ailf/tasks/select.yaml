@@ -1,0 +1,138 @@
+- id: sanity-ui-v5-select-v3-props-to-density-and-haserror
+  mode: literacy
+  title: 'Select — v3 sizing and validation props become density and hasError'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 3e61abe9-33be-4e06-a850-c9e8f2595a7c
+        path: ui/components/select
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 3e61abe9-33be-4e06-a850-c9e8f2595a7c
+          perspective: rqgKNUCe1
+        reason: "Select's v5 API: density (regular or loose) replaces fontSize, padding, radius and space; hasError replaces customValidity and renders no message; the picker icon is drawn by the component; Select fills its container"
+  prompt:
+    text: |
+      {% raw %}
+      I'm porting a settings form to Sanity UI 5. This Select worked in v3 but now fails the type check:
+
+      ```tsx
+      import {Select} from '@sanity/ui'
+      import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
+
+      <Select
+        fontSize={2}
+        padding={3}
+        radius={2}
+        icon={ChevronDownIcon}
+        customValidity={region ? undefined : 'Choose a region'}
+        style={{width: 320}}
+        value={region}
+        onChange={(e) => setRegion(e.currentTarget.value)}
+      >
+        {regions.map((r) => (
+          <option key={r.id} value={r.id}>{r.name}</option>
+        ))}
+      </Select>
+      ```
+
+      The form uses generous spacing. Rewrite it for v5 so it keeps the roomy look, still shows the "Choose a region" problem to the user, and stays 320px wide.
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'Uses `density="loose"` for the roomy form'
+        - 'Renders the "Choose a region" text as a visible message when no region is chosen'
+        - 'Keeps `value` and `onChange` wired to `region` as in the original'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'The Select has `hasError` driven by the missing value, with none of fontSize, padding, radius, space, icon, customValidity or style'
+        - 'An error message element with an id is rendered when the value is missing, and the Select references it through `aria-describedby`'
+        - 'The 320px width is applied to a wrapping element, not to the Select'
+        - "Options stay as native option children, and Select is imported from '@sanity/ui'"
+        - 'JSX is syntactically valid'
+    - type: contains
+      value: 'density="loose"'
+    - type: contains
+      value: 'hasError'
+    - type: contains
+      value: 'aria-describedby'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-select-accessible-name-and-no-disable-in-error
+  mode: literacy
+  title: 'Select — link a visible Label for the accessible name, and never disable a field in error'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 3e61abe9-33be-4e06-a850-c9e8f2595a7c
+        path: ui/components/select
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 3e61abe9-33be-4e06-a850-c9e8f2595a7c
+          perspective: rqgKNUCe1
+        reason: 'Every Select needs a visible label linked via htmlFor/id (or aria-label/aria-labelledby) for its accessible name; a Select in an error state must never be disabled; hasError sets aria-invalid but carries no message'
+      - id: bc29e90d-1a99-4cf0-917e-1915159cca05
+        path: ui/components/label
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: bc29e90d-1a99-4cf0-917e-1915159cca05
+          perspective: rqgKNUCe1
+        reason: 'v5 Label renders a native label and links to a control through htmlFor'
+  prompt:
+    text: |
+      axe reports a critical "select element must have an accessible name" on this field, and QA says users get stuck when the plan they had is discontinued. Fix both problems and show the corrected code.
+
+      ```tsx
+      import {Select, Text, VStack} from '@sanity/ui'
+
+      <VStack gap={2}>
+        <Text size={1} weight="medium">Billing plan</Text>
+        <Select
+          value={plan}
+          hasError={isDiscontinued}
+          disabled={isDiscontinued}
+          onChange={(e) => setPlan(e.currentTarget.value)}
+        >
+          <option value="free">Free</option>
+          <option value="growth">Growth</option>
+          <option value="enterprise">Enterprise</option>
+          <option value="legacy">Legacy (discontinued)</option>
+          <option value="team">Team</option>
+        </Select>
+      </VStack>
+      ```
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'Keeps "Billing plan" as the visible label text, now rendered by a Label rather than a bare Text'
+        - 'Keeps `hasError={isDiscontinued}`, and the error message says the plan is discontinued and tells the user to choose another plan'
+        - 'Provides the corrected JSX'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'Uses v5 `Label` with `htmlFor` pointing at an `id` on the Select'
+        - 'The Select no longer receives `disabled` tied to the error condition'
+        - "An error message element with an id is rendered when the plan is discontinued and referenced from the Select's `aria-describedby`"
+        - "Label and Select are imported from '@sanity/ui'"
+        - 'JSX is syntactically valid'
+    - type: contains
+      value: 'htmlFor='
+    - type: contains
+      value: 'aria-describedby'
+  baseline:
+    enabled: true
+    rubric: full

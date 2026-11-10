@@ -1,0 +1,97 @@
+- id: sanity-ui-v5-indicator-stack-each-child-needs-its-own-label
+  mode: literacy
+  title: 'IndicatorStack — every child Indicator needs its own label'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 0ec3fc65-cb93-40c3-98c5-70c76cca8107
+        path: ui/components/indicator-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 0ec3fc65-cb93-40c3-98c5-70c76cca8107
+          perspective: rqgKNUCe1
+        reason: 'Provide a label on each child Indicator inside an IndicatorStack — without it, that dot is aria-hidden and conveys nothing to screen readers, even if sibling dots in the stack have labels'
+      - id: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+        path: ui/components/indicator
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 4be9fdd7-dfe6-48a5-bbc7-b7c692f420c6
+          perspective: rqgKNUCe1
+        reason: "Indicator's own label requirement, which applies per-instance inside the stack too"
+  prompt:
+    text: |
+      I have an IndicatorStack showing three statuses — published, draft, and archived — for a batch of documents. I gave the first Indicator a `label="Published"` and assumed the stack would announce the rest from context. Is that enough? Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps `label="Published"` on the first Indicator and adds a label to the draft and the archived Indicators
+        - Each label names its own status; the per-dot labels are not replaced by one aria-label on the IndicatorStack
+        - Keeps all three Indicators inside the IndicatorStack
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - All three Indicator children inside IndicatorStack have a `label` prop
+        - IndicatorStack and Indicator are imported from '@sanity/ui'
+    - type: contains-any
+      value: ['label="Draft', 'label="draft', 'label="Has draft']
+    - type: contains-any
+      value: ['label="Archived', 'label="archived']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-indicator-stack-required-for-adjacent-dots
+  mode: literacy
+  title: 'IndicatorStack — side-by-side Indicators need IndicatorStack for the cut-out mask, not a Flex or HStack'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 0ec3fc65-cb93-40c3-98c5-70c76cca8107
+        path: ui/components/indicator-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 0ec3fc65-cb93-40c3-98c5-70c76cca8107
+          perspective: rqgKNUCe1
+        reason: "Use IndicatorStack whenever two or more Indicator dots appear side by side — it applies the cut-out mask between adjacent dots, and bare Indicators next to each other read as one blurred shape; only Indicator children are supported; use as='ul' with each Indicator as='li' when the stack is a list of statuses"
+  prompt:
+    text: |
+      In a document list row I show two status dots, built with `@sanity/ui`:
+
+      ```tsx
+      <HStack gap={1}>
+        <Indicator tone="positive" label="Published" />
+        <Indicator tone="caution" label="Unpublished changes" />
+        <Text size={1}>2 statuses</Text>
+      </HStack>
+      ```
+
+      Up close the two dots smear into one blob, and I'm not sure the markup is right either. Fix it.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps the "2 statuses" Text as a sibling of the IndicatorStack (for example both inside the HStack), not inside it
+        - Keeps a `label` on each Indicator
+        - Provides corrected JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The two Indicators are direct content of an IndicatorStack, not an HStack or Flex
+        - No non-Indicator element (such as the Text) is inside the IndicatorStack
+        - If the stack is marked up as a list, it uses as="ul" on IndicatorStack and as="li" on each Indicator
+        - IndicatorStack and Indicator are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: '<IndicatorStack'
+  baseline:
+    enabled: true
+    rubric: full

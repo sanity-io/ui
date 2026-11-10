@@ -1,0 +1,226 @@
+kind: sanity.foundation
+id: spacing-guidelines
+name: Spacing guidelines
+description: How to apply the spacing scale in Sanity UI layout components, and how space shows what belongs together.
+metadata:
+  tags:
+    - concept
+    - spacing
+    - layout
+    - scale
+    - padding
+    - gap
+    - grouping
+    - responsive
+    - accessibility
+    - margin
+    - proximity
+    - Fibonacci
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: spacing-is-an-integer-scale-token
+        level: must
+        statement: 'Pass a spacing step as an integer in braces: `padding={2}`, `gap={3}`. A string like `padding="2"` is a TypeScript error.'
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must
+        statement: Pass `padding` only to Box, Container, Flex, and Grid.
+      - level: must
+        statement: Set Card's padding and gap with `density`. Passing `padding` or `gap` to Card is a TypeScript error.
+      - level: must
+        statement: Pass only `gap` and `as` to VStack and HStack. They take no `padding`, `margin`, `columnGap`, or `rowGap`.
+      - id: back-groups-with-markup
+        level: must
+        statement: Back every visual group with markup, such as a `<label>`, a `<fieldset>` with a `<legend>`, list markup, or a labeled region.
+      - level: must
+        statement: Take every gap from the `0`–`9` scale.
+      - level: must
+        statement: Document every off-scale value as a named exception.
+      - refs:
+          - to: shared-foundations#inner-spacing-smaller-than-outer
+            rel: same-as
+      - refs:
+          - to: accessibility-guidelines#touch-target-minimum
+            rel: same-as
+      - id: group-size-limit-working-memory
+        level: should
+        statement: Split a list or form of more than about six items into labeled subgroups. Use a heading or a `<fieldset>` with a `<legend>`.
+      - level: should
+        statement: Separate subgroups by one full scale step more than the gap inside them.
+      - level: should
+        statement: Use the same row gap and column gap in a grid of similar items.
+      - level: should
+        statement: Group with space first. Add borders, dividers, or backgrounds only when space alone cannot show the grouping.
+      - level: should
+        statement: Use a surface or Card only when the content is separate, not to get a container.
+      - level: should
+        statement: Use `gap` on Flex, Grid, VStack, and HStack, not `margin` on each child.
+      - level: should
+        statement: Use `padding` instead of `margin`. Stacked vertical margins collapse to the larger value, but padding never collapses.
+      - level: should
+        statement: Start with steps `3`–`4`. Move tighter or looser only when content density calls for it.
+      - level: should
+        statement: Keep Card at `density="regular"` unless the context calls for `compact` or `loose`.
+      - level: should
+        statement: Reduce large spacing values at small breakpoints with responsive arrays.
+      - level: should
+        statement: Re-check target spacing at the smallest breakpoint after you reduce padding.
+      - id: trim-text-against-edges
+        level: should
+        statement: Add `trim` to text that sits against a border, an icon, or another fixed-height sibling.
+      - level: may
+        statement: Go off the scale for an optical adjustment, such as icon-to-text alignment.
+      - level: should-not
+        statement: Do not fill empty space because it is there. Every gap needs a reason.
+      - level: should-not
+        statement: Do not trim running text. Multi-line body copy needs its leading to stay readable.
+      - level: should-not
+        statement: Do not shrink a `gap` or `padding` value to make up for untrimmed leading. Trim the text instead.
+      - level: must-not
+        statement: Do not use steps `6`–`9` inside a component. Keep them for page-level and marketing layouts.
+      - level: must-not
+        statement: Do not hardcode the pixel values from the scale. Pass the step. The value then follows the token file.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          The space between things shows what belongs together, often before people read a word. Sanity UI's scale gives a small set of values that keep spacing consistent. It applies to the layout primitives: Box, Container, Card, Flex, Grid, VStack, and HStack.
+
+          This foundation covers `@sanity/ui`. Each primitive accepts a different set of spacing props. The Props section lists them.
+      - title: Principles
+        body: |-
+          **Meaningful.** Space is the main tool for grouping. Distance shows how elements relate. Related items sit close together. Unrelated items sit far apart. Borders and backgrounds only add emphasis to a grouping.
+
+          **Relational.** A gap depends on what surrounds it. In a container with large padding, items need more space between them. In a container with small padding, they need less.
+      - title: Fundamentals
+        body: |-
+          These facts about how people read space underlie every rule in this entry.
+
+          **Proximity is the strongest sign of relation.** It outweighs color, borders, and labels. Empty space adds less noise than borders or backgrounds.
+
+          **Only sighted users see spacing.** Screen readers do not announce gaps. Markup, `role`, and `aria` attributes must carry the grouping.
+
+          **Empty space does work.** It separates content, directs attention, and can signal state, such as an empty state.
+
+          **Arbitrary spacing suggests arbitrary meaning.** When two similar things have different spacing, people assume the difference means something. Consistent spacing gives people a simpler mental model.
+
+          **People compare gaps to each other.** One gap means nothing on its own. A {space-3} gap reads as tight next to {space-5}, and loose next to {space-1}.
+      - title: The scale
+        body: |-
+          The scale has ten steps, `0` through `9`. From step `2` up, each value is the sum of the two before it. Steps sit close together at small sizes and spread apart at large ones. The steps and their common uses are in the Space scale entry's table (`space`).
+
+          Steps `6`–`9` are for full-page and marketing layouts, where a section break must read across the viewport. If you need one inside a component, you probably skipped a grouping decision.
+      - title: Why numbers, not names
+        body: |-
+          Sanity UI uses integers (`padding={3}`), not named keys (`padding="md"`).
+
+          - Ten integers are faster to scan than ten size names.
+          - You can do math. `padding={basePadding - 1}` steps down one stop from a base value.
+          - The same number means the same size on every spacing prop.
+      - title: Props
+        body: |-
+          Each primitive takes only the spacing props that fit its role. A wrong prop is a TypeScript error, not a silent no-op.
+
+          | Component | `padding*` | `margin*` | `gap` / `columnGap` / `rowGap` |
+          | --- | --- | --- | --- |
+          | `Box` | ✓ | ✓ | — |
+          | `Container` | ✓ | ✓ | — |
+          | `Card` | via `density` only | ✓ | via `density` only |
+          | `Flex` | ✓ | ✓ | ✓ |
+          | `Grid` | ✓ | ✓ | ✓ |
+          | `VStack` | — | — | `gap` only |
+          | `HStack` | — | — | `gap` only |
+
+          | Prop | Controls | Accepted values |
+          | --- | --- | --- |
+          | `padding` | Inner spacing on all sides | Integer `0`–`9` |
+          | `paddingX` | Inner spacing on left and right | Integer `0`–`9` |
+          | `paddingY` | Inner spacing on top and bottom | Integer `0`–`9` |
+          | `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft` | Inner spacing on one side | Integer `0`–`9` |
+          | `margin` | Outer spacing on all sides | Integer `-9`–`9`, or `'auto'` |
+          | `marginX`, `marginY` | Outer spacing on one axis | Integer `-9`–`9`, or `'auto'` |
+          | `marginTop`, `marginRight`, `marginBottom`, `marginLeft` | Outer spacing on one side | Integer `-9`–`9`, or `'auto'` |
+          | `gap` | Space between children | Integer `0`–`9`, or `'inherit'` |
+          | `columnGap`, `rowGap` | Space between children on one axis (Flex, Grid only) | Integer `0`–`9`, or `'inherit'` |
+
+          Only `margin` goes negative or takes `'auto'`. A negative value pulls a child past its own edge, for example to bleed an image to a card's edge. `'auto'` centers or pushes an element within its row. Container centers itself with `marginX="auto"` by default. Padding and gap only add space.
+
+          Card's `density` sets padding, gap, and radius together:
+
+          | `density` | `padding` | `gap` | `radius` |
+          | --- | --- | --- | --- |
+          | `'compact'` | `3`, {space-3} | `2`, {space-2} | `2`, {radius-2} |
+          | `'regular'` (default) | `4`, {space-4} | `3`, {space-3} | `3`, {radius-3} |
+          | `'loose'` | `5`, {space-5} | `4`, {space-4} | `4`, {radius-4} |
+
+          Card's `margin` is a normal prop, outside `density`. Use it to space a Card from its siblings.
+
+          VStack and HStack have no per-axis gap and no padding or margin. Wrap them in a Box, or use Flex. Flex and Grid add `columnGap` and `rowGap` for separate row and column control. Box and Container hold one child region and have no gap prop.
+      - title: Choosing a value
+        body: |-
+          Choose by content density. Each band has a felt purpose, not only a pixel range.
+
+          - **Tight (`1`–`2`).** Items that form one unit, such as a label and its input, or an icon and its caption. The gap reads as a pause, not a break.
+          - **Standard (`3`–`4`).** Items in the same group with clear separation, such as form fields, cards in a list, or paragraphs. Most UI lives here.
+          - **Generous (`5`+).** Sections that need distance. The gap reads as a section change and does a divider's work.
+
+          | Context | Prop | Value |
+          | --- | --- | --- |
+          | Form label and input pair | `gap` | `1`–`2` |
+          | Form fields in a group | `gap` | `3` |
+          | Cards in a list | `gap` | `3`–`4` |
+          | Card padding (default) | `density` | `'regular'` (padding `4`) |
+          | Card padding (dense lists, table rows, sidebars) | `density` | `'compact'` (padding `3`) |
+          | Card padding (featured, standalone) | `density` | `'loose'` (padding `5`) |
+          | Section break | `gap` | `5` |
+
+          Measured space and perceived space can differ. Icon-to-text alignment is the common case: the eye reads balance, not pixels.
+      - title: Responsive values
+        body: |-
+          Every spacing prop accepts an array, read mobile-first: `[base, …larger breakpoints]`. The first value applies at every width. Each later value takes over at its breakpoint and holds until a later value replaces it. A shorter array carries its last value to the largest breakpoint. Write `undefined` in a slot to skip a breakpoint and keep the previous value. That holds for spacing props, which take steps. A prop that takes a CSS string or a number, such as `width`, `gridTemplateColumns` or `truncate`, resets at an `undefined` slot instead, so fill every slot up to the last one you set. The Responsive pattern's breakpoint table (`responsive`) lists the breakpoint for each slot.
+
+          Smaller padding at small breakpoints keeps content reachable. Heavy reduction can push adjacent targets into overlap.
+      - title: Grouping
+        body: |-
+          Space can group items before you add any border or background.
+
+          The gap inside a group must read as smaller than the gap around it. The gap between separate groups must read as a clear break.
+
+          Group size has a limit. Working memory holds about three to six items at once. Past that, labeled subgroups help people scan.
+
+          Equal row and column gaps in a grid show that every item is a peer. A tighter row or column gap reads as a separate group.
+
+          Each surface adds a border, a background, and often a shadow. That is why surfaces come after space.
+      - title: Vertical rhythm
+        body: |-
+          The spacing scale assumes a box that ends at its visible edge. Text boxes do not. A `Heading` or `Text` box is taller than its glyphs, because line-height adds leading above and below. Put `gap={3}` next to untrimmed text, and the visible gap reads larger than {space-3}.
+
+          This matters most where text sits against something with no leading. Examples are Card padding, an icon, an avatar, a divider, or a bordered edge. The `trim` prop removes the extra leading. The scale value is then the real distance. The Typography guidelines (`typography-guidelines`) explain `trim` in their Vertical rhythm section.
+
+          It matters least between lines of running text. A paragraph's line-height already accounts for its leading. Add a `gap` between paragraphs on top of that as normal.
+      - title: Related foundations
+        body: |-
+          - **Typography** (`typography-guidelines`) covers line height, the `trim` prop, and text spacing (WCAG 1.4.12).
+
+          Alignment is a separate grouping tool. This entry does not cover it. A shared edge, a column, and numbered steps are examples.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Apply the spacing scale by integer step, chosen by content density. Keep the gap inside a group smaller than the gap around it. Back every visual group with markup.
+refs:
+  - to: space
+    rel: relates-to
+  - to: typography-guidelines
+    rel: relates-to

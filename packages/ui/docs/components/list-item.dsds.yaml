@@ -1,0 +1,148 @@
+kind: component
+id: list-item
+name: List.Item
+description: A single row inside a List.
+metadata:
+  tags: [list, item, row, li]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Match the density of List.Item to the surrounding layout density.
+      - id: don-list-item-outside-list
+        level: must-not
+        statement: Don't use List.Item outside of a List — it renders as <li> and requires a <ul> or <ol> parent.
+      - id: don-place-more-one-interactive
+        level: must-not
+        statement: Don't place more than one interactive element in the end slot (or the start slot). It creates an unclear tab order.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - refs:
+          - to: list#subcomponents-not-named-exports
+            rel: same-as
+      - level: must-not
+        statement: Do not pass paddingX, paddingY, padding, or margin to List.Item — those props do not exist on it and cause a TypeScript error. Use density to control spacing instead.
+      - level: must-not
+        statement: There is no `trailing` prop on List.Item — it was replaced by `start` and `end` in a breaking change. `trailing={...}` is a TypeScript error (unknown prop); use `end` instead.
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: Buttons in `start` or `end` must have an accessible name via `aria-label` or visible text.
+      - level: should
+        statement: '**Don''t nest an interactive role inside another.** If the row itself carries an interactive role (`option`, `link`), don''t also wrap its content in an `<a>` or `<button>` — choose one interactive role per row (see the Accessibility foundation, "Nested interactive elements").'
+      - level: should
+        statement: A decorative preview image (`List.ItemImage`) whose `alt` repeats the row's own name announces that name twice — mark it decorative instead.
+      - level: must-not
+        statement: '`List.Item` renders as `<li>`. Do not use it outside a `<ul>` or `<ol>`.'
+  - kind: section
+    for: agent
+    freeform:
+      - title: Composition pattern
+        body: |-
+          List.Item is always a direct child of List. `start` renders before the row's children (left edge); `end` renders after them (right edge) — both render outside the flex-grown content area, per the component's own layout (`{start}<Flex flexGrow={1}>{children}</Flex>{end}`).
+
+          ```tsx
+          import { IconButton, List } from '@sanity/ui'
+          import { EllipsisVerticalIcon } from '@sanity/icons/EllipsisVertical'
+
+          <List>
+            <List.Item
+              start={<List.ItemImage src="/thumb.jpg" alt="Document thumbnail" />}
+              end={
+                <IconButton
+                  level="tertiary"
+                  icon={EllipsisVerticalIcon}
+                  aria-label="More actions"
+                />
+              }
+            >
+              <List.ItemText title="My document" subtitle="Last edited 2 hours ago" />
+            </List.Item>
+          </List>
+          ```
+
+          There is no `trailing` prop — it was replaced by `start`/`end` (breaking change).
+      - title: density values
+        body: |-
+          | Value | gap | paddingX | minHeight |
+          |-------|-----|----------|-----------|
+          | `compact` | 2 | 1 | 33px |
+          | `regular` | 2 | 2 | 37px |
+          | `loose` | 3 | 3 | 45px |
+
+          Match density to surrounding layout. Defaults to `regular`.
+
+  - kind: section
+    for: all
+    freeform:
+      - title: Examples
+        body: |-
+          Place children in this order: `start`, then the row's text content, then `end`. Use `start` for a thumbnail or icon, and `end` for an action, badge, or timestamp.
+
+          ```
+          import { List, IconButton } from '@sanity/ui'
+          import { EllipsisVerticalIcon } from '@sanity/icons/EllipsisVertical'
+
+          <List>
+            <List.Item
+              start={<List.ItemImage src="/thumb.jpg" alt="Document thumbnail" />}
+              end={
+                <IconButton
+                  level="tertiary"
+                  icon={EllipsisVerticalIcon}
+                  aria-label="More actions"
+                />
+              }
+            >
+              <List.ItemText title="My document" subtitle="Last edited 2 hours ago" />
+            </List.Item>
+          </List>
+          ```
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32243-2
+    rel: design
+    role: Figma component (v5)
+  - to: list
+    rel: relates-to
+    note: The parent component — see **List** for full compound component docs
+  - to: list-item-text
+    rel: relates-to
+    note: Text content for the row
+  - to: list-item-image
+    rel: relates-to
+    note: Thumbnail image for the row
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Composite prop setting padding, gap, and minimum height together.
+    values:
+      - id: compact
+        description: Padding 1, gap 2, minimum height 33px.
+      - id: regular
+        description: Padding 2, gap 2, minimum height 37px (default).
+      - id: loose
+        description: Padding 3, gap 3, minimum height 45px.
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

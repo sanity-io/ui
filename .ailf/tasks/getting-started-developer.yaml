@@ -1,0 +1,119 @@
+- id: sanity-ui-v5-getting-started-developer-polyfills-silent-failure
+  mode: literacy
+  title: 'Getting started — the missing polyfills import silently breaks Tooltip and Dialog'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/installation
+        reason: 'What each silent failure looks like: tooltips never appear where the Interest Invokers API is missing, and Dialog backdrop clicks stop dismissing in Safari while Escape and the close button still work'
+  prompt:
+    text: |
+      Two bugs in our app, and I can't find anything in the console for either one:
+
+      1. Tooltips on our icon buttons work in Chrome but never show up in Safari or Firefox.
+      2. In Safari, clicking the backdrop of a Dialog doesn't close it. Escape and the close button still work fine.
+
+      Both components are from Sanity UI 5 (`@sanity/ui`). Here is our entry file:
+
+      ```tsx
+      import {createRoot} from 'react-dom/client'
+      import '@sanity/ui/styles.css'
+      import App from './App'
+
+      createRoot(document.getElementById('root')!).render(<App />)
+      ```
+
+      Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Fixes both bugs with the one polyfills import, not with separate per-component changes
+        - Adds `import '@sanity/ui/polyfills'` once at the app entry point, next to (on the line above) the stylesheet import
+        - Shows the complete corrected entry file
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected entry file imports `@sanity/ui/polyfills`
+        - The polyfills import sits at the entry point with the stylesheet import, not inside a component file
+        - The `@sanity/ui/styles.css` import is kept
+        - Does not replace the design-system Tooltip or Dialog with a hand-written workaround or the native `title` attribute
+    - type: contains
+      value: '@sanity/ui/polyfills'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-getting-started-developer-project-setup-files
+  mode: literacy
+  title: 'Getting started — required devDependencies and the CLI tsconfig'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/installation
+        reason: 'Project setup rules (@types/react, @types/react-dom and @vitejs/plugin-react in devDependencies, no styled-components) and the tsconfig that npx @sanity/ui@alpha init writes (jsx react-jsx, moduleResolution bundler, TypeScript 5+)'
+  prompt:
+    text: |
+      I'm setting up a new Vite + React + TypeScript app that uses Sanity UI 5. Here's what I have so far:
+
+      ```json
+      {
+        "name": "my-app",
+        "type": "module",
+        "scripts": { "dev": "vite", "build": "tsc && vite build" },
+        "dependencies": {
+          "react": "^19.2",
+          "react-dom": "^19.2",
+          "@sanity/ui": "alpha",
+          "@sanity/icons": "latest",
+          "styled-components": "^6"
+        },
+        "devDependencies": {
+          "typescript": "^5",
+          "vite": "^6"
+        }
+      }
+      ```
+
+      ```json
+      {
+        "compilerOptions": {
+          "target": "ES2020",
+          "strict": true,
+          "moduleResolution": "node"
+        },
+        "include": ["src"]
+      }
+      ```
+
+      Type-checking fails with `TS7016: Could not find a declaration file for module 'react'` on every file and `TS17004: Cannot use JSX unless the '--jsx' flag is provided`. Fix `package.json` and `tsconfig.json` so the app type-checks, builds and runs in the dev server.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Adds `@types/react` and `@types/react-dom` to devDependencies to fix TS7016
+        - Adds `@vitejs/plugin-react` to devDependencies and registers it in vite.config
+        - Removes `styled-components`
+        - Sets `jsx` in compilerOptions (for example `"react-jsx"`) to fix TS17004
+        - Changes `moduleResolution` to `"bundler"`
+        - Bases the tsconfig on the config the Sanity UI CLI writes (`npx @sanity/ui@alpha init`) — ES2022 target, DOM and DOM.Iterable libs, module esnext, moduleResolution bundler, jsx react-jsx, strict
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - package.json devDependencies include `@types/react`, `@types/react-dom` and `@vitejs/plugin-react`, and dependencies no longer include styled-components
+        - 'tsconfig.json sets `"jsx": "react-jsx"` and `"moduleResolution": "bundler"` with `module` set to a bundler-compatible value such as `"esnext"`'
+        - The build script type-checks with `tsc --noEmit` rather than a bare `tsc`, so tsc does not write .js files next to the sources
+        - Both files are valid JSON and add no invented compilerOptions keys
+    - type: contains
+      value: '@types/react-dom'
+    - type: contains
+      value: '@vitejs/plugin-react'
+    - type: regex
+      value: "\"moduleResolution\"\\s*:\\s*\"bundler\""
+    - type: regex
+      value: "\"jsx\"\\s*:\\s*\"react-jsx\""
+  baseline:
+    enabled: true
+    rubric: full

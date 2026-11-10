@@ -1,0 +1,268 @@
+kind: component
+id: text
+name: Text
+description: Displays body paragraphs, captions, and metadata.
+metadata:
+  tags: [typography, text, body, caption, label, copy, paragraph, metadata, font]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Body copy, descriptions, captions, and metadata — any text that is not a heading.
+      - level: should-not
+        statement: Don't use Text to label a section in a Menu or above headings. Use Eyebrow instead.
+        alternatives:
+          - to: eyebrow
+      - level: should-not
+        statement: Don't use Text without as='label' to name a TextInput, Select or other input. Set as='label' and link it with htmlFor.
+      - level: should-not
+        statement: Don't use Text to denote a keyboard shortcut. Use KBD instead.
+        alternatives:
+          - to: kbd
+      - level: should-not
+        statement: Don't use Text for inline or block code samples. Use Code instead.
+        alternatives:
+          - to: code
+      - level: must-not
+        statement: Don't use Text for structural headings. Use Heading instead.
+        alternatives:
+          - to: heading
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - id: text-body-start-aligned
+        level: should
+        statement: "Start-align body copy and descriptive Text instances by default. Sanity's typographic system prefers start alignment unless a specific layout (for example, a centered hero) justifies a different one."
+        example:
+          title: Start-aligned body copy
+          description: "`<Text>Body copy runs start-aligned by default — no `align` needed.</Text>`. To verify, check the element's computed `text-align`; it should resolve to the start edge, not `center`."
+        checkedBy: manual
+      - id: text-secondary-uses-muted
+        level: should
+        statement: Apply muted to secondary or helper text (timestamps, captions, metadata, helper messages) so it renders visually less prominent than the primary text nearby.
+        example:
+          title: Secondary text carries muted
+          description: '`<Text size={1} muted>Edited 2 hours ago</Text>` beside `<Text>Document title</Text>`. To verify, confirm the `muted` prop is present on the secondary Text and that it renders at lower contrast than the primary text next to it.'
+        checkedBy: manual
+      - id: text-single-line-uses-truncate
+        level: should
+        statement: Set truncate={1} when a Text instance is intentionally limited to one visible line — an ellipsis appears once the content overflows.
+        example:
+          title: Single-line truncation
+          description: '`<Text truncate={1}>{title}</Text>`. To verify, narrow the container until the string overflows and confirm one line with a trailing ellipsis, carrying the `sui-text-overflow` class. Values above 1 clamp with `-webkit-line-clamp` instead.'
+        checkedBy: manual
+      - id: text-no-center-aligned-paragraphs
+        level: must-not
+        statement: Don't center-align long blocks of paragraph text — this disrupts reading flow. Multi-line paragraph Text instances (three or more lines at the default viewport) should stay start-aligned.
+        example:
+          title: The prohibited form — a centred multi-line paragraph
+          description: '`<Text align="center">` wrapping three or more lines of body copy. To verify, render at the default viewport width and count the visible lines; three or more must be start-aligned. Centring is acceptable only where the block stays within two lines at every supported width.'
+        checkedBy: manual
+      - id: text-tone-paired-with-icon-or-badge
+        level: must-not
+        statement: 'Don''t give Text a non-neutral tone (suggest, positive, caution, critical) unless it leads with the state, as in "**Error:** Upload failed.", or sits beside a matching icon in the same UI region.'
+        example:
+          title: The prohibited form — tone with no second channel
+          description: '`<Text tone="critical">Upload failed</Text>` with no icon beside it. The words describe what happened but do not name the state, so the colour does the work. To verify, view the region in grayscale and confirm the status still reads without colour. Fix it with a paired icon (InfoOutlineIcon, CheckmarkIcon, WarningOutlineIcon, ErrorOutlineIcon), or lead with the state: "**Error:** Upload failed."'
+        checkedBy: manual
+        refines:
+          - to: shared-foundations#tone-paired-with-second-channel
+      - id: text-no-emojis
+        level: must-not
+        statement: Never intersperse emojis with text, under any circumstances — not inline mid-sentence, not as a bullet substitute, not as a leading or trailing accent. An emoji inside a Text run is announced by its CLDR name in the middle of the sentence, disrupts line-height and vertical rhythm, and renders differently on every platform. When a visual symbol is required, use Icon beside the Text.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        refines:
+          - to: shared-foundations#no-emojis
+        $extensions:
+          io.jev:
+            type: boolean
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't use inline font-size or color styles on Text. Use the size, weight, and tone props instead.
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - level: should
+        statement: Frame instructions as clear steps, not passive descriptions.
+      - refs:
+          - to: content-guidelines#plain-language
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: Text must maintain 4.5:1 contrast against the background for standard text and 3:1 for large text (WCAG 1.4.3 AA). Take care with `muted` on non-white backgrounds.
+      - level: must
+        statement: Text must remain legible at 200% browser zoom. Avoid fixed pixel units in overrides.
+      - level: should
+        statement: Text defaults to `<span>`. Use `as="p"` when the text should serve as a paragraph. Use `as="li"` inside lists.
+  - kind: section
+    for: all
+    freeform:
+      - title: Semantics
+        body: |-
+          `as` sets the HTML element Text renders. It defaults to `span` and accepts any
+          element type, so the element is yours to choose and yours to get right — Text
+          applies no semantics of its own beyond the tag you name.
+
+          - Use `as="p"` for a paragraph, and `as="li"` inside a list.
+          - Use `as="abbr"` for abbreviations and acronyms. Avoid shortening terms — internal terms and jargon above all.
+          - Use `as="dfn"` for terms a reader may not know on first read. Link to a dedicated page when a short definition doesn't work.
+alternatives:
+  - to: heading
+    note: Semantic page headings that define content hierarchy
+  - to: code
+  - to: kbd
+refs:
+  - to: badge
+    rel: relates-to
+    note: Inline status labels with semantic tone
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/text/Text.tsx
+imports:
+  - platform: react
+    code: import { Text } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: truncate
+    description: 'Limits the text to a set number of lines and adds an ellipsis once it overflows. Takes a positive integer and accepts a responsive array (`truncate={[1, 1, 2]}`). Fill every slot up to the last one you set: `undefined` in a slot turns truncation off at that breakpoint. Unset means no truncation. Use it for metadata and support labels only — never for body text or a preview of it.'
+    values:
+      - id: '1'
+        description: 'One line. Clipped with `text-overflow: ellipsis` and `white-space: nowrap`, applied through the `sui-text-overflow` class.'
+      - id: '2-or-more'
+        description: Clamped to that many lines with `-webkit-line-clamp`. Any integer above 1 works; the value passes straight through.
+  - traitType: variant
+    kind: enum
+    id: size
+    description: Visual font size from the body text scale.
+    values:
+      - id: '0'
+        description: Smallest. Fine print, legal text, high-density layouts.
+      - id: '1'
+        description: Small. UI labels, menu items, toast messages, empty states.
+      - id: '2'
+        description: Medium (default). Content editing text, calls to action.
+      - id: '3'
+        description: Large. Rarely needed. Used for increased visual hierarchy/emphasis.
+      - id: '4'
+        description: Extra large. Rarely needed. Used for high visual hierarchy/emphasis or decorative purposes.
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic text color.
+    values:
+      - id: neutral
+        description: Default. No semantic meaning.
+      - id: suggest
+        description: Suggestions or informational content. Pair with InfoOutlineIcon.
+      - id: positive
+        description: Success, published, healthy. Pair with CheckmarkIcon.
+      - id: caution
+        description: Needs attention. Pair with WarningOutlineIcon.
+      - id: critical
+        description: Error, failed, rejected. Pair with ErrorOutlineIcon.
+  - traitType: variant
+    kind: boolean
+    id: muted
+    description: Reduces visual prominence for secondary or helper text like timestamps and captions.
+  - traitType: variant
+    kind: boolean
+    id: trim
+    description: Removes extra whitespace above and below the text box for precise alignment with icons or badges.
+  - traitType: variant
+    kind: enum
+    id: align
+    description: CSS text-align property.
+    values:
+      - id: left
+        description: Default. Body copy, UI labels, and most other cases.
+      - id: center
+        description: Rare. Empty-state copy, labels inside centered UI elements.
+      - id: right
+        description: Numeric data in table cells, or right-to-left body copy.
+  - traitType: variant
+    kind: enum
+    id: weight
+    description: CSS font-weight property.
+    values:
+      - id: regular
+        description: Default. General body text above size 0.
+      - id: medium
+        description: Visual separation from body copy; improves legibility at small sizes.
+      - id: semibold
+        description: Emphasis within body copy, or labels in custom interactive components.
+      - id: bold
+        description: Strong emphasis at size 0, to aid legibility at the smallest size.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        `textOverflow` is replaced by `truncate` — both `"ellipsis"` and `"clip"` map to `truncate={1}`. `accent` is removed — use `tone` instead. `trim` and margin props are new. The codemod also adds `as="div"` and `trim` so migrated markup keeps its v3 rendering.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:text --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        Text in the new system has new typography props. **Text no longer removes top/bottom text spacing by default. Use `trim` to match Sanity UI 3's vertical trimming style.**
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet instead of `styled-components`.
+        - v3 Text rendered a `<div>` by default. The new Text renders `<span>`. Use `as="p"` when Text is long-form or block-level content.
+        - `textOverflow` replaced by `truncate`. Use `truncate={1}` for single-line truncation.
+        - `accent` removed. Use `tone` or a parent with a semantic tone for colored text.
+        - `trim` added. Removes extra whitespace above and below the text box when needed.
+        - Margin props added. Text now accepts `margin`, `marginX`, `marginY`, and per-side margin props.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `accent` | — | Removed. No accent color prop. |
+        | `textOverflow="ellipsis"` | `truncate={1}` | The codemod maps both `"ellipsis"` and `"clip"` to `truncate={1}`. |
+        | — | `trim` | New. Applies `text-box-trim` for precise vertical alignment. |
+        | — | `truncate` | New. Limit to N visible lines. Adds multi-line clamping. |
+        | — | `margin*` | New. Text accepts margin props directly. |
+
+        ### Breaking changes
+
+        - `textOverflow` prop removed. `<Text textOverflow="ellipsis">` will fire a TypeScript error. Use `<Text truncate={1}>`.
+        - `accent` prop removed. `<Text accent>` does nothing. Use Card `tone` or a parent element with a semantic tone.
+        - `styled-components` is no longer used. Custom styled-components extensions like `styled(Text)` will not work.
+
+        ### Codemod
+
+        A codemod is available to ease the changes above. Run the command below with the path to the file or folder you want to migrate. Use spaces to pass more than one path.
+
+        ```
+        pnpx @sanity/ui-codemod latest:text --paths <paths> --toPackage @sanity/ui
+        ```
+
+        If a component instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with “UI-POC-CODEMOD TODO”.

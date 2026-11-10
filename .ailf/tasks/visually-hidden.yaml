@@ -1,0 +1,105 @@
+# Rescoped 2026-08-31. This task previously asked for screen-reader-only text
+# on an ICON-ONLY BUTTON and required `<VisuallyHidden`. The docs now rule the
+# other way for that case: "To give an accessible name to an icon-only control
+# ... use an `aria-label` attribute instead" (should-not), and IconButton takes
+# a required aria-label. So the old task punished models for following the
+# documentation — a grader even conceded "aria-label ... is a valid
+# accessibility approach. However, the rubric specifically requires
+# VisuallyHidden." Rescoped to a case the docs list as a `should` for
+# VisuallyHidden: per-row context added to a control that already has a visual
+# label, where the text is dynamic and so must be real DOM content.
+- id: sanity-ui-v5-visually-hidden-accessible-name
+  mode: literacy
+  title: 'VisuallyHidden — per-row context on a control that already has a visual label'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/visually-hidden/visually-hidden-accessible-name.tsx
+  context:
+    docs:
+      - id: e7527f68-ad6f-4606-8070-e05beee442ba
+        path: ui/components/visually-hidden
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e7527f68-ad6f-4606-8070-e05beee442ba
+          perspective: rqgKNUCe1
+        reason: 'VisuallyHidden is for screen-reader-only context on a control that already has a visual label, and for dynamic content that must be real DOM text — as opposed to aria-label, which the docs prefer for short fixed strings on icon-only controls'
+  prompt:
+    text: |
+      I have a table of people. Every row has an "Edit" button, so a screen reader hears "Edit, Edit, Edit" with no way to tell the rows apart. I want each button to announce which person it edits, using the row's name, without changing what sighted users see.
+
+      Using the `@sanity/ui` package, show the JSX for one row's button.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps the visible "Edit" text and adds the person's name as screen-reader-only context, rather than replacing the visible label
+        - Uses VisuallyHidden, not aria-label, for the added per-row context
+        - The resulting accessible name distinguishes one row's button from another
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses the VisuallyHidden component rather than a custom display:none or CSS clip hack
+        - VisuallyHidden is imported from '@sanity/ui'
+        - The row's name is interpolated as dynamic content, not hardcoded as a fixed string
+        - No interactive element is nested inside VisuallyHidden
+    - type: contains
+      value: '<VisuallyHidden'
+  baseline:
+    enabled: true
+    rubric: full
+
+# Updated 2026-09-28. The previous criteria accepted either VisuallyHidden or
+# aria-label for an icon-only control. The docs now pick one: for an icon-only
+# control use aria-label (VisuallyHidden "should-not"), and v5 IconButton
+# requires aria-label (a TypeScript error without it, verified on alpha.11).
+# NOTE: reference-solutions/visually-hidden/visually-hidden-vs-aria-label.tsx
+# still shows the old "either is fine" answer and needs updating separately.
+- id: sanity-ui-v5-visually-hidden-vs-aria-label
+  mode: literacy
+  title: 'VisuallyHidden vs aria-label — when to use which'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/visually-hidden/visually-hidden-vs-aria-label.tsx
+  context:
+    docs:
+      - id: e7527f68-ad6f-4606-8070-e05beee442ba
+        path: ui/components/visually-hidden
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e7527f68-ad6f-4606-8070-e05beee442ba
+          perspective: rqgKNUCe1
+        reason: 'For an icon-only control, use aria-label rather than VisuallyHidden; prefer aria-label for short fixed strings and VisuallyHidden for real DOM text — dynamic data, formatting, several elements, or per-row context on a control that already has a visible label'
+      - id: 1bda7220-3101-410a-9475-bac1f6a69e4e
+        path: ui/components/icon-button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1bda7220-3101-410a-9475-bac1f6a69e4e
+          perspective: rqgKNUCe1
+        reason: 'IconButton requires aria-label'
+  prompt:
+    text: |
+      For an icon-only control, should I use VisuallyHidden text or an aria-label? Using the `@sanity/ui` package, show the code for the right approach.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Shows one correct example of the recommended approach
+        - The `aria-label` is a short, fixed string
+        - The control shows only the icon, with no visible text
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The icon-only control is an IconButton with an `icon` and an `aria-label`
+        - VisuallyHidden is not used as the accessible name of the icon-only control
+        - IconButton is imported from '@sanity/ui' and the icon from its `@sanity/icons/<Name>` subpath
+    - type: contains
+      value: 'aria-label='
+  baseline:
+    enabled: true
+    rubric: full

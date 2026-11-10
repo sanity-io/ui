@@ -1,0 +1,103 @@
+kind: component
+id: list-button-item
+name: List.ButtonItem
+description: The interactive, selectable variant of List.Item.
+metadata:
+  tags: [list, item, row, li, button, interactive, selectable]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: A row that navigates, selects, or triggers an action — a document in a browser list, a sidebar nav item, a selectable row in a picker.
+      - level: should
+        statement: Anywhere you would otherwise wrap List.Item in PressArea by hand.
+      - level: should-not
+        statement: A row with no interaction. Use plain List.Item instead.
+        alternatives:
+          - to: list-item
+      - level: should-not
+        statement: A row containing more than one interactive control. Nested interactive elements inside a button/anchor break keyboard and screen-reader expectations — use List.Item with start/end slots and make only one child interactive.
+        alternatives:
+          - to: list-item
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: every-prop-besides-selected-density
+        level: must
+        statement: Every prop besides as/selected/density/start/end/children forwards to the inner <button>/<a>, not the outer <li>. This differs from plain List.Item, whose extra props land on the <li> itself.
+      - level: must-not
+        statement: Don't use List.ButtonItem outside of a List — it renders as <li> and requires a <ul> or <ol> parent.
+      - level: must-not
+        statement: 'Don''t pass selected unconditionally. selected={false} still renders data-selected="false", and the component''s CSS selects on attribute presence ([data-selected]), not value — so selected={false} looks identical to selected={true}. Only omit the prop to render the unselected state: {...(isActive ? {selected: true} : {})}, or selected={isActive || undefined}.'
+      - id: don-nest-another-interactive-element
+        level: must-not
+        statement: Don't nest another interactive element (Button, a second PressArea) inside List.ButtonItem. The whole row is already one press target.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - refs:
+          - to: list#subcomponents-not-named-exports
+            rel: same-as
+      - level: must
+        statement: The selected prop sets no ARIA state — only a data-selected styling hook. When using selected, also set aria-current="true" (for a current-item-in-a-list pattern like active nav) or aria-selected="true" (inside a listbox/grid with role wired accordingly) when the row is selected, and omit that ARIA attribute entirely when it is not (do not set it to "false").
+      - level: must-not
+        statement: selected={false} is not equivalent to omitting selected. Because the component's CSS rule is `.sui-ListButtonItem[data-selected]` (an attribute-presence selector, not a value match) and React renders data-selected={false} as the literal attribute data-selected="false", a row with selected={false} is styled identically to selected={true}. Only pass the selected prop when true — use selected={isActive || undefined} or a conditional spread, never a bare boolean expression.
+      - level: must-not
+        statement: "Using onClick on a plain List.Item instead of List.ButtonItem. Instead: List.Item is not interactive and has none of List.ButtonItem's keyboard handling — use List.ButtonItem for any pressable row."
+  - kind: section
+    for: all
+    freeform:
+      - title: Composition
+        body: |-
+          Same child order as List.Item: `start`, then the row's text content, then `end`. Use `start` for a thumbnail or icon, and `end` for an action, badge, or timestamp.
+
+          ```tsx
+          import { List } from '@sanity/ui'
+
+          <List>
+            {documents.map((doc) => (
+              <List.ButtonItem
+                key={doc.id}
+                onClick={() => setActiveId(doc.id)}
+                selected={activeId === doc.id || undefined}
+                start={<List.ItemImage src={doc.thumbnailUrl} alt="" />}
+              >
+                <List.ItemText title={doc.title} subtitle={doc.updatedAt} />
+              </List.ButtonItem>
+            ))}
+          </List>
+          ```
+alternatives:
+  - to: list-item
+    note: The non-interactive row — see **List.Item** docs
+  - to: press-area
+    note: The lower-level interaction primitive List.ButtonItem is built on
+refs:
+  - to: list
+    rel: relates-to
+    note: The parent component — see **List** for full compound component docs
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: selected
+    description: Marks the row as the current selection via a data-selected styling hook. Only pass this prop when true — see the how-to-use guidance below.
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

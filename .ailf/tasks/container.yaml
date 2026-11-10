@@ -1,0 +1,75 @@
+- id: sanity-ui-v5-container-max-width-centering
+  mode: literacy
+  title: 'Container — cap content width and center it'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/container/container-max-width-centering.tsx
+  context:
+    docs:
+      - id: 758c62c4-4b6b-4c91-8889-941238ffc5b7
+        path: ui/components/container
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 758c62c4-4b6b-4c91-8889-941238ffc5b7
+          perspective: rqgKNUCe1
+        reason: 'Container API — `size` (max-width, scale 0–5); centers via marginX=auto by default. `width` is a separate prop taking a raw CSS string, so width={4} is a type error'
+  prompt:
+    text: |
+      Constrain a reading column to a maximum width and center it on wide screens using the `@sanity/ui` package. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses Container from '@sanity/ui', with a size step or relying on the default size={2}
+        - Content is centered on wide screens
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - size, if set, is a scale integer (0–5)
+        - Does not use width={n} for the max-width — width takes a raw CSS string, so a number is a type error
+        - Relies on Container's built-in centering (marginX="auto") rather than custom CSS max-width
+    - type: contains
+      value: '<Container'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-container-not-for-app-chrome
+  mode: literacy
+  title: 'Container — content width, not app chrome'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/container/container-not-for-app-chrome.tsx
+  context:
+    docs:
+      - id: 758c62c4-4b6b-4c91-8889-941238ffc5b7
+        path: ui/components/container
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 758c62c4-4b6b-4c91-8889-941238ffc5b7
+          perspective: rqgKNUCe1
+        reason: 'Container usage — wrap content areas only; use Box/Flex for sidebars, toolbars, scroll wrappers'
+  prompt:
+    text: |
+      In a page with a sidebar, a toolbar, and a scrollable content list (built with `@sanity/ui`), where should Container go and where should it not? Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Container wraps only the content area to cap and center its width
+        - The sidebar and toolbar are not wrapped in Container
+        - Scrolling is owned by a Box or Flex around the content, or by the Container's own layout props (Container accepts flexGrow and overflowY)
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - App chrome (sidebar, toolbar, scroll wrapper) uses Box or Flex, not Container
+        - The content Container uses a size step (0–5) or relies on the default size={2}
+    - type: contains-any
+      value: ['<Box', '<Flex']
+  baseline:
+    enabled: true
+    rubric: full

@@ -1,0 +1,153 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: radius-0
+    name: radius-0
+    description: Square corners — full-bleed surfaces, table cells.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-0
+  - kind: token
+    id: radius-1
+    name: radius-1
+    description: Hairline rounding.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-1
+  - kind: token
+    id: radius-2
+    name: radius-2
+    description: Small controls — badges, tags, inputs.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-2
+  - kind: token
+    id: radius-3
+    name: radius-3
+    description: Standard rounding — buttons, cards.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-3
+  - kind: token
+    id: radius-4
+    name: radius-4
+    description: Larger surfaces — panels, popovers.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-4
+  - kind: token
+    id: radius-5
+    name: radius-5
+    description: Large containers.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-5
+  - kind: token
+    id: radius-6
+    name: radius-6
+    description: Extra-large containers.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-6
+  - kind: token
+    id: radius-round
+    name: radius-round
+    description: Fully rounded — pills, avatars, circular buttons.
+    metadata:
+      status:
+        status: stable
+      group: radius
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/radius.tokens.json#radius-round
+  - kind: entry
+    id: radius
+    name: Radius scale
+    description: The border-radius scale for corner rounding on Sanity UI surfaces and controls.
+    metadata:
+      tags: [radius, border-radius, corner, rounding, scale, dimension]
+      status:
+        status: stable
+      group: radius
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Take every corner value from the scale. Don't hardcode a raw `border-radius` that duplicates a step.
+          - level: should
+            statement: Match the rounding to the surface size — small controls use `2`–`3`; large panels use `4`–`6`.
+          - level: should
+            statement: Use `radius="full"` only for shapes meant to read as a pill or circle.
+          - level: should-not
+            statement: Don't mix several radius steps on parts of one component. One surface, one rounding decision.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: The `radius` prop takes an integer step, not a string or a px value. `radius={2}` is correct; `radius="4px"` is wrong.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              The radius scale sets corner rounding. Surfaces and controls reference a step so rounding stays consistent. The scale has steps `0` through `6`, plus `full` for a full pill or circle. Pass it as `radius="full"`; it uses the `radius-round` token.
+          - title: The scale
+            body: |-
+              | Step | Token | Common use |
+              | --- | --- | --- |
+              | `0` | `radius-0` | Square corners — full-bleed surfaces, table cells |
+              | `1` | `radius-1` | Hairline rounding |
+              | `2` | `radius-2` | Small controls — badges, tags, inputs |
+              | `3` | `radius-3` | Standard rounding — buttons, cards |
+              | `4` | `radius-4` | Larger surfaces — panels, popovers |
+              | `5` | `radius-5` | Large containers |
+              | `6` | `radius-6` | Extra-large containers |
+              | `full` | `radius-round` | Fully rounded — pills, avatars, circular buttons |
+
+              The sizes live in `docs/tokens/dtcg/json/radius.tokens.json`. `radius-round` is a fixed large value, not a step in the numeric progression. Use it when a shape should read as a pill or circle at any size.
+          - title: Related
+            body: |-
+              - **Card** — couples its corner rounding to the `density` prop.
+              - **Box** — accepts the `radius` prop for surfaces that set their own rounding.
+              - **Elevation guidelines** — pairs rounding with depth on raised surfaces.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Choose a corner-rounding step by surface size. Use `radius="full"` only for pills and circles.
+    refs:
+      - href: ./dtcg/json/radius.tokens.json
+        rel: source
+        role: DTCG source

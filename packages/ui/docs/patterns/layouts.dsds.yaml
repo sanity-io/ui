@@ -1,0 +1,403 @@
+kind: sanity.pattern
+id: layouts
+name: Layout guidelines
+description: 'The Sanity UI application layout system: a Navigation sidebar, a Content area (with its own toolbar and display), and an Inspection sidebar, composed into five shell layouts. Covers layout structure, navigation patterns, action placement, sidebar show/hide behavior, responsiveness, and the accessibility rules that hold the whole thing together.'
+metadata:
+  tags:
+    - tutorial
+    - layout
+    - navigation sidebar
+    - inspection sidebar
+    - content toolbar
+    - shell
+    - app shell
+    - action hierarchy
+    - overflow menu
+    - responsive
+    - landmark
+    - sidebar toggle
+    - tree view
+    - drill-in navigation
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use the default light color scheme for all structural layout regions (Navigation sidebar, Content area, Content toolbar, Inspection sidebar). Sanity UI does not support dark or inverted structural regions; Card has no `inverted` prop.
+        tags: [visual-design]
+      - level: must
+        statement: Keep the Navigation → Content → Inspection order fixed along the inline axis (Navigation always inline-start, Content always center, Inspection always inline-end). This order never changes across layout types.
+        tags: [visual-design]
+      - level: must
+        statement: Only use a Navigation sidebar when the application has multiple pages/views that require navigation.
+        tags: [development]
+      - level: must
+        statement: 'Use only Sanity UI''s `<List.ButtonItem />` for Navigation Content items and filters. A navigation item renders as a link: pass `as="a"` and `href`.'
+        tags: [development]
+      - level: must
+        statement: Show the application name as the Content Toolbar Title when there is no Navigation sidebar; otherwise show the current page or view name. The title anchors the collection of content being viewed and should be given priority in spacing to avoid truncation at all costs.
+        tags: [content]
+      - level: must
+        statement: Use Sanity UI's `<Button />` for all Content Toolbar actions; open a menu with a `<Popover />` around the trigger, never a plain `<Button />` alone.
+        tags: [development]
+      - level: must
+        statement: Accompany every action button with a tooltip describing the action in greater detail, accessible to screen readers; do not add tooltips to disabled buttons, since disabled buttons are removed from the tab order and tooltips on them are inaccessible to keyboard users.
+        tags: [accessibility]
+        refines:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+      - level: must
+        statement: Place the primary action (`level="primary"`) first (inline-start) in a Content Toolbar action row, with only one primary action per action area.
+        tags: [interaction]
+      - level: must
+        statement: 'Give destructive actions `tone="critical"` and an `ErrorOutlineIcon` through `iconStart` (`iconStart={ErrorOutlineIcon}`).'
+        tags: [visual-design]
+        refines:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+      - level: must
+        statement: Show an empty state in Content display when no content exists, explaining why nothing is shown and offering an action to add content when one is available.
+        tags: [content]
+      - level: must
+        statement: 'Vary the Inspection sidebar''s displayed information by selection count: parent metadata or an empty state when nothing is selected; item actions/metadata for one selection; shared field values, fields marked "Mixed" where values differ, and hidden uncommon fields for multiple selections.'
+        tags: [interaction]
+      - level: must
+        statement: Order navigation menu items by one consistent logic per group — logical order, frequency of use, or alphabetically — and never mix ordering strategies within a single group.
+        tags: [content]
+      - level: must
+        statement: Separate navigation menu groups only with a horizontal divider and spacing — never background color, cards, or indentation.
+        tags: [visual-design]
+      - level: must
+        statement: Write navigation group labels as short (one or two words) category names, not actions ("Documents" not "Manage documents").
+        tags: [content]
+      - level: must
+        statement: Update the URL when a navigation item is selected, in addition to the selected state, the Content toolbar title, and the rendered content. Supports direct linking and browser history.
+        tags: [interaction]
+      - id: action-cap-three-visible
+        level: must
+        statement: Limit every action area — the Navigation header, the Navigation sidebar's Control slot, the Content toolbar, and the Content inspector header — to three visible actions. When more exist, keep the primary action (`level="primary"`) among the visible three and move the remainder into a `<Popover />` overflow with an ellipsis icon, never a plain `<Button />`.
+        tags: [interaction]
+      - level: must
+        statement: Use `level="primary"`/`level="secondary"`/`level="tertiary"` on the Button component to express action hierarchy, with only one primary action per action area.
+        tags: [development]
+      - level: must
+        statement: Use `loading={true}` only for processes that consistently take longer than 200ms, keep the button disabled and its label unchanged while loading, and show a confirmation message on completion for processes over three seconds.
+        tags: [interaction]
+      - level: must
+        statement: 'Require explicit confirmation before executing a destructive action — a confirmation dialog stating what will happen, with a cancel option, whose confirm button repeats the destructive action''s name (for example, "Delete 3 items") and uses `level="primary" tone="critical"` — confirming is the dialog''s most important action, so it is not demoted for being destructive.'
+        tags: [interaction]
+      - level: must
+        statement: Use a `<Popover />` with an ellipsis icon trigger, not a plain `<Button />`, for actions that exceed an area's visible-action limit.
+        tags: [development]
+      - level: must
+        statement: Place destructive items at the bottom of an overflow menu, separated by a divider, with `tone="critical"`.
+        tags: [visual-design]
+        refines:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+      - level: must
+        statement: Keep primary actions (`level="primary"`) for critical workflows visible at all times — never hide them.
+        tags: [interaction]
+      - level: must
+        statement: When a disabled action state is used, explain why via an adjacent info icon or inline status message, not a tooltip. Disabled buttons are removed from the tab order, making tooltips on them inaccessible to keyboard users.
+        tags: [accessibility]
+        refines:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+      - level: must
+        statement: 'Give each toggleable sidebar a well-labeled `IconButton` at `level="tertiary"` with an `aria-label` describing the action (for example, `aria-label="Show navigation"`).'
+        tags: [accessibility]
+      - level: must
+        statement: Place the Navigation sidebar toggle in the Content toolbar, inline-start before the title; place the Inspection sidebar toggle in the Content toolbar actions area, using `aria-pressed={true}` to indicate the pressed state.
+        tags: [interaction]
+      - level: must
+        statement: Update a sidebar toggle's `aria-label` and tooltip to reflect the available action — "Hide [sidebar name]" when visible, "Show [sidebar name]" when hidden.
+        tags: [accessibility]
+      - level: must
+        statement: Resize the Content area smoothly when a sidebar is shown or hidden, without content jumping or layout shifts that cause the user to lose their place.
+        tags: [interaction]
+      - level: must
+        statement: Show and hide sidebars instantly, without animation, when the user's OS has "Reduce motion" enabled — do not override this preference.
+        tags: [accessibility]
+      - level: must
+        statement: Move focus to the first focusable element inside a sidebar when it opens via its toggle, and return focus to the toggle button when it closes. Keyboard users should not have to tab through the entire layout to reach newly visible content, or lose focus to a hidden or removed element.
+        tags: [accessibility]
+      - level: must
+        statement: Remove a hidden sidebar's contents from the tab order.
+        tags: [accessibility]
+      - level: must
+        statement: Size every touch-interactive control at least 24×24 pixels, and provide a mobile-friendly fallback for any interaction that relied on hover.
+        tags: [accessibility]
+        refines:
+          - to: accessibility-guidelines#touch-target-minimum
+      - level: must
+        statement: Access the Navigation header on tablet and mobile through a `<Popover />` with a menu icon trigger, inline-start aligned to the Content toolbar title — never a plain `<Button />`.
+        tags: [development]
+      - level: must
+        statement: Display the Inspection sidebar as a full-screen overlay on mobile when an item is selected, with an explicit close button block-start and inline-end aligned.
+        tags: [interaction]
+      - level: must
+        statement: Start action labels with a verb.
+        tags: [content]
+        refs:
+          - to: content-guidelines#label-length-by-element
+            rel: relates-to
+      - level: must
+        statement: State what is missing in an empty state and offer a path forward.
+        tags: [content]
+      - level: must
+        statement: Open a confirm dialog for destructive actions in layouts, with the confirm button repeating the action verb.
+        tags: [content]
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+        tags: [content]
+      - refs:
+          - to: semantics#app-shell-landmark-regions
+            rel: same-as
+        tags: [accessibility]
+      - level: must
+        statement: Make layouts work at a 320px viewport width without horizontal scrolling — hide sidebars behind toggle buttons or stack the layout into a single column, using `Flex` with `flexWrap="wrap"` and avoiding fixed `px` widths on layout columns. A three-column layout that does not collapse will overflow at narrow widths.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/reflow.html
+            role: WCAG 1.4.10 Reflow
+        tags: [accessibility]
+      - level: must
+        statement: 'Fit layout region headings into the page hierarchy: use `<h1>` for the Content area heading, `<h2>` or lower for sidebar headings, and never skip heading levels across regions.'
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html
+            role: WCAG 2.4.6 Headings and Labels
+        tags: [accessibility]
+      - refs:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+            rel: same-as
+      - level: should
+        statement: Keep the application's title fully displayed in the Navigation header; treat truncation as a last resort.
+        tags: [content]
+      - level: should
+        statement: 'Write Content Toolbar Action button labels as verb-led and two words or less (for example, "New document", "Export", "Delete"). This is stricter than the general button length in content-guidelines.'
+        tags: [content]
+      - level: should
+        statement: Center minimal Content display content in the viewport when no scrolling is necessary.
+        tags: [visual-design]
+      - level: should
+        statement: Reserve the Inspection sidebar for cases where the user must view/edit multiple pieces of content at once, and keep key item actions available in the main content pane in case it's hidden.
+        tags: [interaction]
+      - level: should
+        statement: 'Keep Inspection sidebar layouts simple: fields should ideally span the entire column, with no more than two columns.'
+        tags: [visual-design]
+      - level: should
+        statement: Order Content inspector properties vertically by importance, and group them with visible labels once 3 or more groups exist or the grouping isn't immediately intuitive; make only non-essential groups collapsible.
+        tags: [visual-design]
+      - level: should
+        statement: Size navigation menu groups between 2 and 7 items, merging single-item groups and splitting groups over 7 items; keep no more than 5 groups visible in the sidebar at once.
+        tags: [visual-design]
+      - level: should
+        statement: Give a visible label to navigation menu groups of 3 or more items, omitting it only when the grouping is self-evident. A self-evident grouping for a power user may not be so for a first-time user.
+        tags: [content]
+      - level: should
+        statement: Style navigation group labels as visually understated relative to the items they describe (smaller size, muted color, or lighter weight).
+        tags: [visual-design]
+      - level: should
+        statement: Hide actions from a multi-item selection that cannot be applied to the full selection, rather than disabling them without context. If hiding would cause confusion, a disabled state may be used, but must be paired with an adjacent status message or info icon — not a tooltip, since disabled buttons are removed from the tab order and their tooltips are inaccessible to keyboard users.
+        tags: [interaction]
+        refines:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+      - level: should
+        statement: Limit inline actions within Content display to 1–2 per item, using `IconButton` at `level="tertiary"` with an `aria-label` and a paired tooltip.
+        tags: [interaction]
+      - level: should
+        statement: Reveal inline actions on hover for desktop interfaces; keep them persistently visible or accessible via long-press/context menu on touch devices.
+        tags: [interaction]
+      - level: should
+        statement: Make inline actions a redundant shortcut, not the only path — the same action should remain available through the inspector or Content toolbar.
+        tags: [interaction]
+      - level: should
+        statement: Combine icons with text labels only to reinforce `tone="positive"`/`tone="caution"`/`tone="critical"` buttons with the matching icon, or to add emphasis on a single most-critical primary action; otherwise use text-only labels, and reserve icon-only buttons for high-density spaces with a universally understood icon, always paired with an `aria-label` and a tooltip.
+        tags: [development]
+      - level: should
+        statement: 'Place a single, prominent, centered call to action in the Content display area for an empty state, addressing the empty state directly (for example, "Create your first document" instead of "Get started").'
+        tags: [content]
+      - level: should
+        statement: Animate sidebars in and out with a fast (150–200ms) horizontal slide, ease-out for opening and ease-in for closing.
+        tags: [interaction]
+      - level: should
+        statement: Remember a user's explicit show/hide preference for the sidebar for the duration of the session, and persist it across sessions when technically feasible.
+        tags: [interaction]
+      - level: should
+        statement: "Allow a context-driven override to open a sidebar automatically (for example, selecting an item opens the Inspection sidebar) only when the user's action directly implies they need it, and let the user dismiss it manually afterward."
+        tags: [interaction]
+      - level: should
+        statement: "Provide a bracket-based keyboard shortcut to toggle each sidebar (for example, `[` for Navigation, `]` for Inspection), discoverable via the toggle button's tooltip."
+        tags: [accessibility]
+      - level: should
+        statement: Default sidebars to visible on desktop-sized screens, unless the application's primary use case demands maximum content area.
+        tags: [visual-design]
+      - level: should
+        statement: 'Give desktop-oriented components a mobile treatment on small viewports — a Dialog, for example, should fill the viewport rather than float in it.'
+        tags: [visual-design]
+      - level: should
+        statement: Lead status messages with the outcome, use past tense for completed actions, and include a next step when applicable.
+        tags: [content]
+      - level: should-not
+        statement: Avoid toggling Inspection sidebar visibility except when horizontal space is critical. Hiding it by default risks hiding critical functionality from new users.
+        tags: [visual-design]
+      - level: should-not
+        statement: Avoid a state where both the Navigation and Inspection sidebars are hidden simultaneously on desktop in layouts that support both. This creates an interface that looks like a Pane or Shell layout, disorienting users who expect navigation and inspection to be available. If both must be hideable, at least one should be visible by default.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not use dark background inline styles or any other technique to force a dark appearance on structural layout elements. A design calling for a dark sidebar or header falls outside the supported Sanity UI interface pattern and needs a fully custom implementation outside the component system.
+        tags: [visual-design]
+      - level: must-not
+        statement: Do not add tooltips to menu items inside an overflow menu.
+        tags: [accessibility]
+      - level: must-not
+        statement: Do not make navigation group labels interactive — they must not expand, collapse, or navigate.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not place filtering, sorting, application/view search, or in-view content tabs inside the Navigation sidebar. Navigation is the act of moving between distinct views. Filtering and sorting belong in the Content toolbar or display; application-wide search belongs in the Navigation header; view-specific search belongs in the Content toolbar; in-view tabs belong in the Content display area.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not use `<Button />` for navigation (use `<List.ButtonItem as="a" href=…>` instead) or to switch between views within a surface (use tabs instead), and do not use `<Button />` alone as a menu activator (wrap it in a `<Popover />`). Assistive technology users expect buttons to perform actions and links to navigate; `<Popover />` handles menu placement and display consistently.
+        tags: [development]
+      - level: must-not
+        statement: Do not exceed 8 items in an overflow menu; group items into labeled sections when more exist.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not place more than one toggle per sidebar.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not auto-hide a sidebar when the user clicks or interacts with the Content area. Hiding a sidebar should be an explicit user action via the toggle button or a keyboard shortcut.
+        tags: [interaction]
+      - level: must-not
+        statement: Do not use sidebars as progressive disclosure for secondary content that only needs to appear temporarily — use a Popover or Dialog instead.
+        tags: [interaction]
+      - level: must-not
+        statement: 'Do not reorder layout columns with CSS `order`, `flex-direction: row-reverse`, or grid placement — the inline-start → center → inline-end visual order must match DOM order. Screen readers and keyboard navigation follow DOM order.'
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html
+            role: WCAG 1.3.2 Meaningful Sequence
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html
+            role: WCAG 2.4.3 Focus Order
+        tags: [accessibility]
+      - level: must-not
+        statement: "Do not use inline styles for scroll behavior (`style={{ overflowY: 'auto' }}`) — use the `overflow`, `overflowX`, and `overflowY` props on `Box`/`Flex` instead."
+        tags: [development]
+  - kind: definitions
+    for: all
+    title: Anatomy
+    description: The Navigation sidebar, Content window, and Inspection sidebar each break down into further named sub-parts.
+    items:
+      - id: navigation-header
+        term: Navigation header
+        definition: Provides context for the application and displays critical global actions. Fixed at the top position, remaining in place when scrolling through menu items. Comprised of a Navigation Header Title (inline-start aligned, the app's title, fully displayed whenever possible — truncation is a last resort) and Navigation Header Actions (inline-end aligned, horizontally-stacked buttons for application-level actions such as settings, adding/editing/removing navigation items, or sorting/filtering navigation items).
+        usage: Optional.
+      - id: navigation-content
+        term: Navigation content
+        definition: Displays all navigation options or filters for content, using only Sanity UI's `<List.ButtonItem />` component. Scrolls independently to accommodate overflow.
+        usage: Optional.
+      - id: navigation-footer
+        term: Navigation footer
+        definition: Ancillary information and actions related to an application's status, such as help/support/feedback, an appearance (dark/light) toggle, or settings.
+        usage: Optional.
+      - id: content-toolbar
+        term: Content toolbar
+        definition: A block-start bar that orients the user and provides actions for editing/managing the presented content. Has a block-end border separating it from Content display; controls aim for a 50px height but grow when necessary. Comprised of a Content Toolbar Title (inline-start, the current page/view name, or the application name when no Navigation sidebar exists — given priority in spacing to avoid truncation at all costs) and Content Toolbar Actions (inline-end, all actions for editing/managing/manipulating the presented content; the de-facto location for application-level actions when a layout has no Navigation sidebar).
+        usage: Required.
+      - id: content-display
+        term: Content display
+        definition: 'The main section where content is presented and users interact with it, in one of two variants: Document width (forms, long-form text; optimizes for ~50-70 characters per line) or Full width (grids, tabular data, or anything needing maximum horizontal space). Scrolls independently to accommodate overflow. When minimal content is presented with no scrolling necessary, content should be centered in the viewport. Content display should present something — an empty state explaining why nothing is shown, with an add-content action if one exists.'
+        usage: Required.
+      - id: content-inspector-header
+        term: Content inspector header
+        definition: 'Orients the user on what content is selected and allows bulk actions on it. Follows the same patterns as the Navigation header: fixed, remaining in place while scrolling through properties, with the title start-aligned and actions end-aligned. Controls with three or more actions display only one action with a Popover overflow menu for the rest.'
+        usage: Optional.
+      - id: content-inspector-properties
+        term: Content inspector properties
+        definition: Provides the ability to view/edit an item's (or multiple items') metadata. Scrolls independently to accommodate overflow. Properties flow vertically, ordered by importance; group when logical categorization exists, and add group labels when 3 or more groups exist or the grouping is not immediately intuitive. Groups can be collapsible in cases of extreme scrolling — only make non-essential groups collapsible.
+        usage: Required.
+      - id: content-inspector-footer
+        term: Content inspector footer
+        definition: Optional information related to an item's (or multiple items') status/availability, such as time since last updated or time since published.
+        usage: Optional.
+traits:
+  - traitType: variant
+    kind: enum
+    id: shell-composition
+    name: Layout composition
+    description: "A layout can be as simple as a single page or a full-blown multi-view interface. Sanity's layout components let you compose the level of complexity needed. Each composition implies a default sidebar visibility: 'not available' means the layout does not support that sidebar at all (no toggle, no way to summon it); 'visible'/'hidden' mean the sidebar exists and can be toggled."
+    values:
+      - id: shell
+        name: Shell
+        description: |-
+          A single-view application with no toolbar for title/actions and no Navigation or Inspection sidebar (both not available). Ideal for single-use applications such as an asset uploader.
+
+          Composition: `<AppShell><AppShell.Main>{content}</AppShell.Main></AppShell>`
+
+          Use when the application consists of one view/page and all content, logic, and actions are contained within the main content window — for example, a single form with a submit action.
+
+          Do not use when critical actions need to be persistent regardless of scroll position (use Shell with Toolbar instead), when the application has multiple pages/views to navigate across (use Shell with Navigation instead), or when one or more items need a dedicated area to view/edit metadata (use Shell with Inspector instead).
+      - id: shell-with-toolbar
+        name: Shell with Toolbar
+        description: |-
+          A single-view application with persistent actions (Navigation sidebar not available; Inspection sidebar not available). Ideal for simple management of content.
+
+          Use when the application consists of one view/page with important actions and filtering that need easy access — for example, a read-only content navigator.
+
+          Do not use when the application has multiple pages/views to navigate across (use Shell with Navigation instead), or when one or more items need a dedicated area to view/edit metadata (use Shell with Inspector instead).
+      - id: shell-with-inspector
+        name: Shell with Inspector
+        description: |-
+          A single-view application with persistent actions and viewing/editing of content metadata (Navigation sidebar not available; Inspection sidebar visible by default). Ideal for simple management of content and its metadata.
+
+          Use when one or more items in the application need a dedicated area to view/edit metadata.
+
+          Do not use when the application has multiple pages/views to navigate across (use Shell with Navigation and Inspector instead), or when all editing of content metadata can be handled in the main content window (use Shell or Shell with Toolbar instead).
+      - id: shell-with-navigation
+        name: Shell with Navigation
+        description: |-
+          A multi-view application with persistent navigation and actions (Navigation sidebar visible by default; Inspection sidebar not available). Ideal for more organized, fine-grained management of content.
+
+          Use when the application has more than one page/view to navigate across.
+
+          Do not use when the application has only one view and requires no navigation (use Shell, Shell with Toolbar, or Shell with Inspector instead), or when at least one page/view needs a dedicated area to view/edit metadata (use Shell with Navigation and Inspector instead).
+      - id: shell-with-navigation-and-inspector
+        name: Shell with Navigation and Inspector
+        description: |-
+          A multi-view application with persistent navigation, actions, and viewing/editing of content metadata (Navigation sidebar visible by default; Inspection sidebar visible by default). Ideal for more organized, fine-grained management of content and its metadata. It's recommended to hide the Inspection sidebar on pages/views where it's not used.
+
+          Use when the application has more than one page/view to navigate across and at least one page/view needs a dedicated area to view/edit metadata.
+
+          Do not use when the application has only one view and requires no navigation (use Shell with Inspector instead), or when all editing of content metadata can be handled in the main content window (use Shell with Navigation instead).
+  - traitType: variant
+    kind: enum
+    id: navigation-pattern
+    name: Navigation sidebar pattern
+    description: All application navigation lives in the Navigation sidebar. There are no secondary navigation bars, no in-content navigation panels, and no additional sidebars dedicated to navigation — this is the single, persistent location where users move between views, for predictability, simplicity, and scalability. Each pattern is designed for a specific purpose and should not be mixed. When content is hierarchical, that hierarchy is represented within the sidebar — it is not split across multiple panels or surfaces.
+    values:
+      - id: flat
+        name: Flat navigation
+        description: The default. Use when there is no meaningful parent-child relationship between views. When all views exist at the same level of hierarchy, the sidebar displays them as a single list of menu items. Each item navigates the user to a distinct view. The active view is visually indicated with a selected state.
+      - id: tree-view
+        name: Nested navigation via tree view
+        description: Allows users to expand and collapse sections to reveal child items without leaving the sidebar. Use when content has a parent-child hierarchy no more than three levels deep, when the number of descendants is relatively low (typically under 100), or when navigation items need to display more than a title (a caption or other metadata below the title).
+      - id: hierarchical-drill-in
+        name: Nested navigation via hierarchical drill-in
+        description: The sidebar displays one level of the hierarchy at a time. Selecting a parent replaces the current list with that parent's children, and a back affordance returns the user to the previous level. Use when content hierarchies exceed three levels, when the number of child items at any level would create excessive scrolling, or when navigation items need to show secondary information such as captions or metadata.
+  - traitType: state
+    kind: boolean
+    id: sidebar-visible
+    name: Sidebar visible
+    description: The sidebar (Navigation or Inspection) is shown. Its toggle IconButton reflects the pressed state via `aria-pressed={true}` (for the Inspection sidebar toggle) or shows a close icon (for the Navigation sidebar toggle). The aria-label and tooltip read "Hide [sidebar name]."
+  - traitType: state
+    kind: boolean
+    id: sidebar-hidden
+    name: Sidebar hidden
+    description: The sidebar (Navigation or Inspection) is hidden and its contents are removed from the tab order. Its toggle IconButton shows a menu/hamburger icon (Navigation) or an inspector/panel icon (Inspection). The aria-label and tooltip read "Show [sidebar name]."
+uses:
+  - to: button
+    note: Required part.
+  - to: icon-button
+    note: Optional part.
+  - to: responsive
+  - to: navigation
+  - to: confirmation-dialogs

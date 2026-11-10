@@ -1,0 +1,221 @@
+kind: sanity.guide
+id: api-essentials
+name: API essentials
+description: Cross-cutting rules for writing Sanity UI 5. Covers prop value types, prop ownership, and import shapes.
+metadata:
+  tags:
+    - agent
+    - api
+    - props
+    - prop types
+    - responsive
+    - spacing
+    - layout
+    - imports
+    - icons
+    - theming
+    - v5
+    - getting-started
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: What v5 provides
+    items:
+      - level: must
+        statement: >-
+          Check that a component is in the component reference, and verify
+          the export before writing against it. Run `node -e "console.log(Object.keys(require('@sanity/ui')))"` in the project to list the exports of the installed version
+          for the installed version. The reference is the single index; this document does not
+          keep a second copy of it.
+        refs:
+          - to: component-reference
+            rel: relates-to
+      - level: must
+        statement: Do not write your own version of anything on that list. Compose what exists.
+
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Prop value types
+    items:
+      - level: must
+        statement: Spacing and sizing take different value types. Write `<Box padding={2} width="300px">`. The integer and the string are both correct on that one element. Do not carry the integer form over to a sizing prop.
+      - level: must
+        statement: >-
+          Pass spacing as an integer in braces. Write `<Box padding={2}>` or `<Flex gap={3}>`, never `padding="2"`. A string is a TypeScript error. `padding`, `margin` and `gap` take a step on the spacing scale, never a pixel value. The scale is non-linear: {space-0}, {space-1}, {space-2}, {space-3}, {space-4}, {space-5}, {space-6}, {space-7}, {space-8}, {space-9}. The number after `space-` is the step you pass. `radius` takes a step on its own scale: {radius-0}, {radius-1}, {radius-2}, {radius-3}, {radius-4}, {radius-5}, {radius-6}, and `radius="full"` for a pill or circle, which is {radius-round}.
+        refs:
+          - to: spacing-guidelines
+            rel: relates-to
+      - level: must
+        statement: >-
+          Pass a type size as a step too. `size` on Text, Heading, Code and Eyebrow is a step on that component's scale, not a pixel value — `<Text size={1}>` is {body-1}, and `<Text size={20}>` is a TypeScript error. Text runs {body-0} to {body-4}. Heading runs {heading-0} to {heading-5}. For every step, read `docs/tokens/typography.dsds.yaml`.
+        refs:
+          - to: typography-guidelines
+            rel: relates-to
+      - level: must
+        statement: >-
+          Pass `shadow` as a step from 0 to 5 on Box, Container, Flex or Grid. Choose it by the surface's role, not its look. Use `shadow={0}` for a flat surface, `1` for a resting card, `2` for a hovered card or small raised element, `3` for a popover, dropdown or menu, `4` for a modal or overlay, and `5` for a top-layer surface. Never write a `box-shadow` in `style`. The recipes are {shadow-0} to {shadow-5}; read `docs/tokens/shadow.dsds.yaml` for their values.
+      - level: must
+        statement: >-
+          Position props take a spacing step, not a CSS length. `top`, `right`, `bottom`, `left` and `inset` on Box, Container, Flex and Grid accept a step from 0 to 9, or `"auto"`, the same values as `padding`. `top={0}` is {space-0}, but `top={4}` is {space-4}, not four pixels. For a length the scale does not have, such as `50%` or `64px`, set it in `style`. That is the one case where `style` is correct for these properties.
+      - id: sizing-is-a-css-string
+        level: must
+        statement: Pass sizing as a CSS string, including zero. Write `<Box width="300px" maxWidth="100%" minHeight="0">`. A pixel value is a string as well — write `width="140px"`, not `width={140}`. A number is a TypeScript error. This is the exception to the integer rule above, and it covers `width`, `height`, `minWidth`, `maxWidth`, `minHeight`, and `maxHeight`.
+      - level: must
+        statement: 'The flexbox shrink idiom also takes a string. Write `<Flex flexGrow={1} minHeight="0">` — `flexGrow` is a number and `minHeight` is a string, on the same element.'
+      - level: must
+        statement: Pass flex values as numbers. Write `<Box flexGrow={1} flexShrink={0}>`, never `flexGrow` on its own and never `flexGrow={true}`. A boolean is a TypeScript error.
+      - id: responsive-array-undefined-slot
+        level: must
+        statement: >-
+          A responsive array has at most six slots, one per breakpoint: `[base, 360px, 600px, 900px, 1200px, 1800px]`. Each value applies from that `min-width` up.
+          For CSS string and number props, fill every slot up to the last one you set. In `padding={[2, undefined, 4]}`,
+          an `undefined` slot keeps the previous breakpoint's value for step and keyword props, such as `padding`
+          and `flexDirection`. For a CSS string or number prop, such as `width` or `flexBasis`, it resets the value.
+      - level: must
+        statement: Pass tone and color as token keys, not CSS colors. Write `<Badge tone="critical">`. A hex value or an arbitrary string is a TypeScript error.
+      - level: must
+        statement: >-
+          In custom markup that no component covers, take color from the semantic custom properties, which follow light and dark mode on their own. Write `var(--background-low)` for a surface, `var(--foreground-high)` or `var(--foreground-low)` for text, and `var(--separator-low)` for a border. Their values are {background-low}, {foreground-high} and {foreground-low}. Read `docs/tokens/semantic.dsds.yaml` for the full set. The names `--card-border-color`, `--card-bg-color` and `--card-fg-color` do not exist, so a declaration that uses them does nothing.
+        refs:
+          - to: semantic-tokens
+            rel: relates-to
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Which component accepts which prop
+    items:
+      - level: must
+        statement: Box, Container, Flex, and Grid accept `padding` and `margin` directly. Reach for one of these when you need spacing.
+      - level: must
+        statement: Card sets spacing and radius through `density`. Leave it out for the regular spacing, or write `density="compact"` or `density="loose"`. Passing `padding`, `gap`, or `radius` to Card is a TypeScript error.
+      - level: must
+        statement: VStack and HStack accept only `gap` and `as`. Write `<Box padding={3}><VStack gap={2}>…</VStack></Box>` when you need anything else.
+      - level: must
+        statement: Icons render an SVG element and accept no layout props. Wrap a glyph in `<Icon>`, set its scale with `size`, and set its color with `tone`.
+      - id: prop-before-inline-style
+        level: should
+        statement: >-
+          Any CSS with a component-prop equivalent is passed as that prop, not
+          inside a `style` object. `style` is for values with no prop path —
+          a transform, a gradient, an aspect ratio, a CSS custom property.
+          A native element with no Sanity UI equivalent, such as `<table>`,
+          `<td>` or `<fieldset>`, has no props at all. `style` on it is correct.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: no-default-prop-values
+        level: should-not
+        statement: >-
+          Don't write a prop at its default value. `<Card density="regular">`,
+          `<Button level="primary">` and `<Text size={2}>` render the same as
+          `<Card>`, `<Button>` and `<Text>`. Write a prop only to choose
+          something other than the default. The linter removes a default-valued
+          prop on its own.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Prop names
+    items:
+      - level: must
+        statement: Flex uses the CSS property names. Write `<Flex flexDirection="column" alignItems="center" justifyContent="space-between">`. `direction`, `align`, `justify`, and `wrap` do not exist.
+      - level: must
+        statement: Grid takes `gridTemplateColumns` with a CSS string. Write `<Grid gridTemplateColumns="repeat(3, 1fr)" gap={3}>`. There is no `columns` prop.
+      - level: must
+        statement: Icon takes `icon`, not `symbol`. Write `<Icon icon={SearchIcon} />`. Passing `symbol` is a TypeScript error and renders no icon.
+      - level: must
+        statement: Tooltip takes its label as `content`, and points at its `children`. Write `<Tooltip content="Search"><IconButton … /></Tooltip>`. There is no `text` or `trigger` prop.
+      - level: must
+        statement: A label element takes its text as `children`. Write `<Text as="label" htmlFor="email">Email address</Text>`, linking `htmlFor` to the input's `id`.
+      - level: must
+        statement: IconButton takes `icon` plus native button attributes. Write `<IconButton icon={SearchIcon} aria-label="Search" />`. It has no `label` or `size` prop.
+      - level: must
+        statement: Button accepts `tone="neutral"` or `tone="critical"`, and nothing else. Write `<Button text="Delete" tone="critical" />`. There is no `primary`, `positive`, or `caution`. Use a plain Button for a default action, and `critical` only for a destructive one.
+      - level: must
+        statement: SkipToContent takes `href` and `label`. Write `<SkipToContent href="#main-content" label="Skip to main content" />`, keeping the leading `#`. There is no `hash` prop.
+      - level: must
+        statement: 'Name a Switch with a linked label element, `aria-label` or `aria-labelledby`. Switch has no `label` prop, so `<Switch label="…" />` is a TypeScript error. Write `<Switch id="notify" />` beside `<Text as="label" htmlFor="notify">Enable notifications</Text>`.'
+      - level: should
+        statement: ESLint fixes wrong prop names on Flex, Grid, Icon, Container and Tooltip on its own. Where your setup has it, run it after writing code that uses them.
+      - level: should-not
+        statement: >-
+          Avoid spreading props from a loosely typed object, as in
+          `const p: Record<string, unknown> = { direction: 'row' }` and then
+          `<Flex {...p} />`. Those props skip type checking, so a wrong prop
+          name stays silent and does nothing at runtime. If a new prop has no
+          visible effect, check for a spread like this first.
+      - level: must-not
+        statement: Do not put `flexDirection`, `alignItems`, `justifyContent` or `flexWrap` on `Box`. They belong to `Flex`. On `Box` they are a TypeScript error, not a setting that quietly does nothing.
+      - id: no-layout-props-on-typography-or-actions
+        level: must-not
+        statement: >-
+          Button and IconButton accept no layout, spacing or sizing props —
+          `padding`, `margin*`, `width`, `height`, `flexGrow`, `flexShrink`,
+          `alignSelf` and the like belong on a wrapping Box. Text and Heading
+          accept the margin props (`margin`, `marginX`, `marginY` and each
+          side, on the spacing scale) and nothing else from that list.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Imports
+    items:
+      - id: icon-import-from-subpath
+        level: must
+        statement: Each icon is imported from its own subpath — `import {SearchIcon} from '@sanity/icons/Search'` — not from the package root. The subpath drops the `Icon` suffix.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must
+        statement: Do not import an icon from the package root. The root ships a type-only stub. The import passes `tsc` and then fails in the browser.
+      - level: must
+        statement: Import `List` alone and reach its parts through dot access, as in `<List.Item>` and `<List.ItemText>`. `ListItem` is not an export.
+      - id: choose-icons-from-icons-entry
+        level: should
+        statement: >-
+          To choose an icon, look it up in the `icons` entry: every icon in
+          @sanity/icons, with its import path, purpose and other names it goes by.
+          Find an icon by purpose by searching `docs/icons.dsds.yaml` for the purpose word.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Interaction and theming
+    items:
+      - level: must
+        statement: Do not put `onClick` on Box or Card, and do not set `as="button"` on Box. Use Button, or wrap a custom surface in PressArea.
+      - level: must
+        statement: v5 ships no theming API. It has no `ThemeProvider`, no `studioTheme`, and no runtime scheme toggle. Importing one from v5 is a TypeScript error.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Work within the system's opinions
+    items:
+      - level: must
+        statement: Use the prop the component gives you, even when it is coarser than the control you had in mind. Card takes `density` — `compact`, `regular` or `loose` — and that is its whole spacing surface. It has no `padding`, `gap` or `radius` prop, and passing one is a TypeScript error.
+      - level: must
+        statement: Treat a missing knob as a decision, not a gap. The system withholds a control when the choice belongs to the system, not the page. Pick the nearest value it offers and move on.
+      - level: must
+        statement: Build what the brief asks for out of the components the system provides. Match its content and its structure. Do not reproduce a specific visual treatment the system does not offer.
+      - level: should-not
+        statement: Avoid wrapping a design system component in a Box purely to add spacing it withholds. A wrapper that exists only to re-space a component is the same override written one level out.
+      - level: must-not
+        statement: 'Do not restyle a design system component with `style={{ … }}` or a `className`. Inline styles bypass the token system, break in dark mode, and drift from every other instance of that component.'
+      - level: must-not
+        statement: Do not override a component's own colour, spacing or radius through CSS custom properties. Those properties let custom markup match the system. They are not a way to restyle the system's own components.

@@ -1,0 +1,125 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: shadow-0
+    name: shadow-0
+    description: No shadow (transparent). The flat base level.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-0
+  - kind: token
+    id: shadow-1
+    name: shadow-1
+    description: Subtle hairline lift. Resting cards and raised surfaces.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-1
+  - kind: token
+    id: shadow-2
+    name: shadow-2
+    description: Low lift. Hovered cards and small raised elements.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-2
+  - kind: token
+    id: shadow-3
+    name: shadow-3
+    description: Medium lift. Popovers, dropdowns, and menus.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-3
+  - kind: token
+    id: shadow-4
+    name: shadow-4
+    description: High lift. Modals and overlays.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-4
+  - kind: token
+    id: shadow-5
+    name: shadow-5
+    description: Highest lift. Modals and top-layer surfaces.
+    metadata:
+      status:
+        status: stable
+      group: shadow
+    tokenType: shadow
+    source:
+      href: ./dtcg/json/shadow.tokens.json#shadow-5
+  - kind: entry
+    id: shadow
+    name: Shadow scale
+    description: The elevation shadow recipes that signal depth and layering on Sanity UI surfaces.
+    metadata:
+      tags: [elevation, shadow, depth, z-index, overlay, layering]
+      status:
+        status: stable
+      group: shadow
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Reference a named shadow level. Never paste an inline `box-shadow` onto a component.
+          - level: must
+            statement: Never rely on shadow alone to separate surfaces. Pair it with a tonal difference or a border, especially in dark mode, where shadows nearly vanish.
+          - level: should
+            statement: Assign a level by the element's role and stacking intent, not by look.
+          - level: should
+            statement: Use the lowest level that does the job. If everything is elevated, nothing reads as raised.
+          - level: should
+            statement: Let z-order follow the level. Don't fight it with ad hoc z-index values.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Shadow tokens express elevation — which surfaces sit in front of which. Each token is a layered shadow recipe. All recipes share one light source from above. Shadow grows larger and softer as the level rises.
+          - title: The scale
+            body: |-
+              | Token | Level | Use for |
+              | --- | --- | --- |
+              | `shadow-0` | Flat | No shadow. The base surface. |
+              | `shadow-1` | Resting | Resting cards and raised surfaces. |
+              | `shadow-2` | Low | Hovered cards and small raised elements. |
+              | `shadow-3` | Medium | Popovers, dropdowns, and menus. |
+              | `shadow-4` | High | Modals and overlays. |
+              | `shadow-5` | Highest | Modals and top-layer surfaces. |
+
+              Elevation is relative and ordinal — it conveys order, not height. Higher levels read as more temporary and more in front.
+          - title: Related
+            body: |-
+              - **Elevation guidelines** — principles, rules, the grayscale and dark-mode tests, and the checklist.
+              - **Color guidelines** — dark-mode tonal elevation, where shadow nearly vanishes.
+              - **Motion** — elevation changes on hover or drag animate with the motion tokens.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Choose a shadow level by the surface's role and stacking order. Pair elevation with a tonal or border difference.
+    refs:
+      - href: ./dtcg/json/shadow.tokens.json
+        rel: source
+        role: DTCG source

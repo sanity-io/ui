@@ -1,0 +1,58 @@
+{
+  "radius-0": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 0
+    }
+  },
+  "radius-1": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 1
+    }
+  },
+  "radius-2": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 3
+    }
+  },
+  "radius-3": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 7
+    }
+  },
+  "radius-4": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 11
+    }
+  },
+  "radius-5": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 15
+    }
+  },
+  "radius-6": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 19
+    }
+  },
+  "radius-round": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 9999
+    }
+  }
+}

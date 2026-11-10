@@ -1,0 +1,61 @@
+- id: sanity-ui-v5-shadow-floating-bar-uses-level-prop
+  mode: literacy
+  title: 'Shadow — use a shadow level prop, paired with a border, not an inline box-shadow'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/tokens/shadow
+        reason: 'Reference a named shadow level (0–5), never an inline box-shadow; never rely on shadow alone to separate surfaces, because shadows nearly vanish in dark mode'
+      - path: ui/foundations/elevation-guidelines
+        reason: 'Pass shadow={0} to shadow={5} on Box, Flex, Grid or Container'
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'Card has no shadow prop; it accepts only density, tone, margin and as'
+  prompt:
+    text: |
+      {% raw %}
+      I have a floating bulk-actions bar that sits over a document list. It's a `Flex` from `@sanity/ui`:
+
+      ```tsx
+      <Flex
+        position="fixed"
+        bottom={4}
+        gap={2}
+        padding={2}
+        style={{
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+          background: '#fff',
+        }}
+      >
+        {actions}
+      </Flex>
+      ```
+
+      In dark mode the bar is a white slab and you can't see where it ends. A teammate suggested switching it to a Card and giving the Card a shadow instead. Fix the bar the right way and show the corrected code.
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces the inline boxShadow with the shadow prop set to a level from the scale (1–5)
+        - Removes the hardcoded white background and uses a theme-aware surface instead, such as the tone prop
+        - Keeps the bar a Flex (or Box) instead of switching it to a Card
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The bar uses shadow={n} with an integer from 1 to 5
+        - No inline box-shadow and no hex background remain in the style prop
+        - The bar carries a border (the border prop) or a tone, not only a shadow
+        - Components are imported from '@sanity/ui'
+    - type: regex
+      value: "shadow=\\{[1-5]\\}"
+  baseline:
+    enabled: true
+    rubric: full

@@ -171,3 +171,15 @@ export const Truncate: Story = {
     )
   },
 }
+
+export const NestedElements: Story = {
+  render: (props) => {
+    return (
+      <Text {...props}>
+        Here is a Text component with some nested semantic elements:{' '}
+        <strong>the strong element,</strong> <em>the emphasized element</em> and{' '}
+        <code>the code element.</code>
+      </Text>
+    )
+  },
+}

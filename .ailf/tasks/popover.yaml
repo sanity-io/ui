@@ -1,0 +1,97 @@
+- id: sanity-ui-v5-popover-content-not-children-and-portal
+  mode: literacy
+  title: 'Popover — floating content is the content prop, and portal is rarely needed'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: fda6895a-36c2-42fb-a114-76baa5d1f6c1
+        path: ui/components/popover
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: fda6895a-36c2-42fb-a114-76baa5d1f6c1
+          perspective: rqgKNUCe1
+        reason: "Popover's floating content is passed via the content prop (children is the trigger) — and portal is rarely needed, because the content already sits in the browser's top layer where overflow ancestors do not clip it"
+  prompt:
+    text: |
+      I'm building a filter panel that opens from a button. I tried putting the panel's JSX as children of `<Popover>`, but nothing floats — it just renders inline. The trigger also sits inside a container with `overflow: hidden`, and a teammate told me I have to set `portal` or the panel will get clipped. Fix the component and show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides the corrected component in full, with the filter panel and its button trigger
+        - Does not set `portal` on the Popover
+        - 'Leaves the trigger inside the `overflow: hidden` container, with no other workaround for clipping (such as removing the overflow or moving the trigger out)'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The filter panel JSX is passed to the `content` prop, not rendered as a child of Popover
+        - The trigger button remains the single child of Popover
+        - Popover is imported from '@sanity/ui'
+    - type: contains
+      value: 'content='
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-popover-uncontrolled-no-open-prop
+  mode: literacy
+  title: 'Popover — uncontrolled: no open or onClose; the button trigger opens it and the browser closes it'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: fda6895a-36c2-42fb-a114-76baa5d1f6c1
+        path: ui/components/popover
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: fda6895a-36c2-42fb-a114-76baa5d1f6c1
+          perspective: rqgKNUCe1
+        reason: "Popover is uncontrolled — there is no open, onOpen or onClose prop; the trigger opens it and the browser closes it, handling Escape and outside-click dismissal itself; the single child must render a button (popovertarget only works on buttons); set autoFocus on the first focusable element in the content; don't set aria-expanded by hand"
+  prompt:
+    text: |
+      I'm porting a v3 Popover to Sanity UI 5 and TypeScript rejects `open` and `onClose`:
+
+      ```tsx
+      const [open, setOpen] = useState(false)
+
+      useEffect(() => {
+        const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+        document.addEventListener('keydown', onKey)
+        return () => document.removeEventListener('keydown', onKey)
+      }, [])
+
+      <Popover open={open} onClose={() => setOpen(false)} content={<FilterForm />}>
+        <Box onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+          <Text>Filters</Text>
+        </Box>
+      </Popover>
+      ```
+
+      Show the v5 version of this code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The trigger has no hand-written `aria-expanded`
+        - Sets `autoFocus` on the first focusable element inside the content
+        - The filter form is still passed through the `content` prop
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Popover receives no `open` or `onClose` prop, and no useState or keydown listener drives it
+        - The single child of Popover is a Button (or IconButton), not a Box or Text
+        - Popover and Button are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'autoFocus'
+    # The prompt's trigger is a Box, so a Button trigger comes from the answer.
+    - type: contains-any
+      value: ['<Button', '<IconButton']
+  baseline:
+    enabled: true
+    rubric: full

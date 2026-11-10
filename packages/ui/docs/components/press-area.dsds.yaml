@@ -1,0 +1,279 @@
+kind: component
+id: press-area
+name: PressArea
+description: PressArea wraps a non-interactive element (Card, Box, Avatar) into an interactive target.
+metadata:
+  tags:
+    - interactive
+    - press
+    - click
+    - surface
+    - card
+    - row
+    - clickable
+    - navigation
+    - anchor
+    - button
+    - press-area
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To make a non-Button interactive surface — a whole Card, a media tile, a list row, or an avatar that opens a profile.
+      - level: should
+        statement: To wrap a complex layout (icon + title + description + badge) in a single press target without rebuilding Button's chrome.
+      - level: should
+        statement: Add type='button' when PressArea is inside a <form> — the component sets no type, so the browser would default to type='submit'.
+      - level: should-not
+        statement: "For standard labeled actions like 'Save', 'Cancel', or 'Publish', and for icon-only toolbar buttons. Use Button — it provides label styling, icon support, tone, and loading state."
+        alternatives:
+          - to: button
+      - level: should-not
+        statement: For a clickable text link inside a paragraph. Render an <a> directly, or use a Link component if your app has one.
+        alternatives:
+          - to: link
+      - level: should-not
+        statement: For tabbed interfaces. Use Tabs — it provides keyboard navigation and aria-selected wiring.
+        alternatives:
+          - to: tabs
+      - level: should-not
+        statement: To wrap another interactive element (Button inside PressArea, PressArea inside PressArea). Nested interactives fail screen reader expectations (WCAG 4.1.2 A).
+      - id: non-interactive-backdrop-dialog-overlay
+        level: must-not
+        statement: "As a non-interactive backdrop, dialog overlay, or plain layout wrapper. PressArea must be activatable and cannot render as='div' — for a non-interactive surface use a styled Box."
+        alternatives:
+          - to: box
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use PressArea for switching between views. Use Tabs instead — it wires aria-selected and arrow-key navigation.
+        alternatives:
+          - to: tabs
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: press-area-renders-native-element
+        level: must
+        statement: 'PressArea renders a native `<button>` or `<a>`, never a `<div role="button">`.'
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must
+        statement: Give every PressArea an accessible name. Visible child text serves as the name; for purely visual content (icon-only press, captionless avatar) provide an aria-label that describes the action.
+      - level: must
+        statement: Use PressArea only for interactive surfaces — a real press target. Never use it as a non-interactive backdrop, dialog overlay, or layout wrapper; render a styled Box for those.
+      - id: keep-constrained-button-react-component
+        level: must
+        statement: Keep as constrained to 'button', 'a', or a React component. InteractiveAs<T> rejects arbitrary tags like 'div' or 'span'. Passing as='div' produces the error "Type 'string' is not assignable to type 'undefined'" — switch to 'button'/'a', or use Box if the element is not interactive.
+      - level: should
+        statement: Set as='a' with href when the press changes the URL; omit as when the press performs an action. Real anchors give middle-click and 'Open in new tab' for free.
+      - level: must-not
+        statement: "Don't style PressArea directly — it takes no padding, margin, background, radius, loading, icon, or other layout/visual props (passing them is a type error), and it sets no cursor. Put padding, background, tone, and border on the child Card or Box."
+      - level: must-not
+        statement: Don't nest interactive elements — Button inside PressArea, PressArea inside Button, or PressArea inside another PressArea. Screen readers and keyboard users can't reach the inner control reliably (WCAG 4.1.2 A).
+      - level: must-not
+        statement: Don't add role='button' to PressArea — it already renders a real <button>; overriding role breaks the native semantics.
+      - id: don-add-custom-onkeydown-handle
+        level: must-not
+        statement: Don't add a custom onKeyDown to handle Enter/Space — the native <button> and <a> already activate on those keys (WCAG 2.1.1 A).
+      - id: don-remove-focus-ring-outline
+        level: must-not
+        statement: "Don't remove the focus ring with outline: none or override it with inline styles — the offset and color are tuned for system contrast (WCAG 2.4.7 AA)."
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: 'Nesting a Button or another interactive element inside a PressArea. Instead: move the secondary action outside the press surface — for example, a Flex holding the PressArea and the Button as siblings.'
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - id: press-area-sets-no-text-styles
+        level: should
+        statement: '**PressArea does not set text styles.** It provides an interaction surface. Use Text or Heading inside for typography.'
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - id: aria-label
+        level: must
+        statement: "Set `aria-label` on a PressArea whose children are purely visual (an icon-only press, an avatar with no caption). Describe the action — 'Open recipe details' — not the layout."
+        refines:
+          - to: content-guidelines#name-the-action
+      - id: aria-current
+        level: must
+        statement: 'Set `aria-current="page"` on the rendered `<a>` to mark the active item in a navigation list.'
+      - id: aria-disabled
+        level: must
+        statement: 'On the `<a>` form, use `aria-disabled` to show a disabled state, because `<a>` has no native `disabled`. When it is set, also stop navigation in `onClick`.'
+        refines:
+          - to: shared-foundations#aria-disabled-keeps-focus
+  - kind: section
+    for: all
+    freeform:
+      - title: For agents
+        body: |-
+          ### Element selection — `as` prop
+
+          PressArea's rendered element is set by `as`. It defaults to `'button'`.
+
+          | `as` value | Renders | Use when |
+          |------------|---------|----------|
+          | `'button'` (default) | `<button>` | The press performs an action (open inspector, toggle expanded, run a command) |
+          | `'a'` | `<a href="...">` | The press changes the URL (navigate to a detail page, jump to an anchor) |
+          | Custom component | That component | Router links — pass `as={Link}` from your router |
+
+          > **`as` is constrained to `'button'`, `'a'`, or a React component.** Passing an arbitrary tag like `'div'` fails the TypeScript check.
+
+          ### Width override pattern
+
+          PressArea fills its parent's width by default (`width: 100%` via `sui-width-full`). To shrink it to its content — for example, an icon-only press inside a toolbar — wrap it in a sized parent:
+
+          ```tsx
+          {/* Default — full width, good for list rows and Cards */}
+          <PressArea onClick={handleSelect}>
+            <Card>...</Card>
+          </PressArea>
+
+          {/* Shrink to content — wrap in a sized parent */}
+          <Box width="fit-content">
+            <PressArea onClick={handleToggle}>
+              <Icon icon={MenuIcon} />
+            </PressArea>
+          </Box>
+          ```
+
+          ### Inline style overrides
+
+          Most inline styles aren't needed. PressArea is intentionally minimal — apply visual state to the child component.
+
+          | Inline style | Alternative |
+          |--------------|-------------|
+          | `style={{ background: '...' }}` | Apply `tone` to the child Card or Box |
+          | `style={{ padding: '8px' }}` | Apply padding to the child Box or Card |
+          | `style={{ outline: 'none' }}` | Don't remove the focus ring — it's required for WCAG 2.4.7 AA |
+
+          ### Building a clickable Card
+
+          The most common use of PressArea is a clickable Card list row:
+
+          ```tsx
+          import { PressArea, Card, Flex, VStack, Heading, Text, Badge } from '@sanity/ui'
+
+          function RecipeRow({ recipe, onSelect }: { recipe: Recipe; onSelect: () => void }) {
+            return (
+              <PressArea onClick={onSelect} aria-label={`Open recipe: ${recipe.title}`}>
+                <Card>
+                  <Flex alignItems="center" justifyContent="space-between" gap={3}>
+                    <VStack gap={1}>
+                      <Heading as="h3" size={1}>{recipe.title}</Heading>
+                      <Text size={1} muted>{recipe.cuisine} · {recipe.prepTime}</Text>
+                    </VStack>
+                    <Badge tone={recipe.status === 'Published' ? 'positive' : 'caution'}>
+                      {recipe.status}
+                    </Badge>
+                  </Flex>
+                </Card>
+              </PressArea>
+            )
+          }
+          ```
+
+          The `aria-label` describes the action ("Open recipe: …"), not the layout. Screen reader users get a clear "what does this press do?" announcement.
+
+          ### Don't nest interactives
+
+          ```tsx
+          {/* ✗ — Button inside a clickable PressArea — screen readers can't reach the inner Button reliably */}
+          <PressArea onClick={openRow}>
+            <Card>
+              <Heading as="h3">{title}</Heading>
+              <Button text="Quick edit" onClick={openEditor} />
+            </Card>
+          </PressArea>
+
+          {/* ✓ — move the secondary action outside the press surface */}
+          <Flex alignItems="center" gap={2}>
+            <PressArea onClick={openRow} aria-label={`Open ${title}`}>
+              <Card>
+                <Heading as="h3">{title}</Heading>
+              </Card>
+            </PressArea>
+            <Button text="Quick edit" onClick={openEditor} />
+          </Flex>
+          ```
+
+          ### PressArea vs Button
+
+          Use Button when the press is a chrome action with a label, icon, or tone. Use PressArea when the press is the content itself.
+
+          | Use **Button** for | Use **PressArea** for |
+          |---|---|
+          | "Save", "Cancel", "Publish" | Whole-Card "open detail" presses |
+          | Icon-only toolbar actions | Avatar / media-tile presses that open a profile |
+          | Form submit / reset | Navigation rows that should render as `<a>` |
+          | Anything that needs `tone`, `loading`, or `iconEnd` | Content surfaces with arbitrary children |
+alternatives:
+  - to: button
+    note: Standard action trigger with label, icon, tone, and loading state. Use Button for chrome actions ("Save", "Publish"); use PressArea for content surfaces (a whole Card)
+  - to: box
+  - to: tabs
+    note: For switching between views
+refs:
+  - to: card
+    rel: relates-to
+    note: Visual content surface. Often the child of PressArea when the whole card should be interactive
+  - to: list-button-item
+    rel: relates-to
+    note: Action trigger inside a Popover list
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/press-area/PressArea.tsx
+imports:
+  - platform: react
+    code: import { PressArea } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Included in the tab order; onClick/href is active. PressArea sets no cursor, so the element's native cursor applies — pointer on <a href>, the default arrow on <button>.
+  - traitType: state
+    kind: boolean
+    id: hovered
+    description: Unstyled by default. Apply any visual hover through the child (for example, Card's tone change).
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: 'Design-system focus ring on :focus-visible: outline --focus-outline with offset --focus-offset.'
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: 'On the <button> form: the native disabled attribute removes it from the tab order, suppresses click and keyboard activation, and CSS sets pointer-events: none.'
+  - traitType: state
+    kind: boolean
+    id: disabled-link
+    description: "On the <a> form: no native disabled exists. Use aria-disabled='true' and suppress navigation in onClick."
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

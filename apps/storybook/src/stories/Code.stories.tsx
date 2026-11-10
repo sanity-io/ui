@@ -5,6 +5,7 @@ import {Code as CodeV3} from 'ui3'
 import {Code} from '../../../../packages/ui/src/components/code/Code'
 import {codeProps} from '../../../../packages/ui/src/components/code/code.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
+import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {CODE_SIZE} from '../../../../packages/ui/src/types/Code'
 import {RefractorLanguage} from '../components/RefractorLanguage'
 import {getArgTypes} from '../utils/getArgTypes'
@@ -38,6 +39,7 @@ export const Default: Story = {
     return <Code {...props} />
   },
   play: async ({canvas}) => {
+    await expect((await canvas.findByText('Code Component')).parentElement?.tagName).toBe('PRE')
     await expect((await canvas.findByText('Code Component')).tagName).toBe('CODE')
   },
 }
@@ -45,17 +47,41 @@ export const Default: Story = {
 export const Inline: Story = {
   render: (props) => {
     return (
-      <>
-        <Text>Use the command </Text>
-        <Code {...props} as="span">
-          pnpm run dev
-        </Code>
-        <Text> to run.</Text>
-      </>
+      <VStack gap={2}>
+        <Text>
+          Use the JSX{' '}
+          <Code {...props} inline>
+            {'<Code inline>...</Code>'}
+          </Code>{' '}
+          to render an inline code block.
+        </Text>
+
+        <RefractorLanguage>
+          <Text>
+            Or use{' '}
+            <Code {...props} inline language="jsx">
+              {'<Code inline language="jsx">...</Code>'}
+            </Code>{' '}
+            for an inline code block with syntax highlighting.
+          </Text>
+        </RefractorLanguage>
+      </VStack>
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('pnpm run dev')).parentElement?.tagName).toBe('SPAN')
+    const code = await canvas.findByText('<Code inline>...</Code>')
+
+    await expect(code.parentElement?.tagName).toBe('SPAN')
+    await expect(code.tagName).toBe('CODE')
+
+    await waitFor(async () => {
+      const highlightedCode = await canvas.findByText(
+        (_, el) =>
+          el?.tagName === 'CODE' && el.textContent === '<Code inline language="jsx">...</Code>',
+      )
+      await expect(highlightedCode.parentElement?.tagName).toBe('SPAN')
+      await expect(highlightedCode.tagName).toBe('CODE')
+    })
   },
 }
 
@@ -80,6 +106,11 @@ export const Sizes: Story = {
 }
 
 export const SyntaxHighlighting: Story = {
+  parameters: {
+    a11y: {
+      context: '.refractor',
+    },
+  },
   render: (props) => {
     return (
       <RefractorLanguage>
@@ -103,6 +134,8 @@ export const SyntaxHighlighting: Story = {
         (_, el) =>
           el?.textContent === `console.log('Code Component') // Comment` && el?.tagName === 'CODE',
       )
+
+      await expect(code.parentElement?.tagName).toBe('PRE')
       await expect(code.classList).toContain('refractor')
     })
   },

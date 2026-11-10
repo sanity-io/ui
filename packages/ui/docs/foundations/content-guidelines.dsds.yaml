@@ -1,0 +1,285 @@
+kind: sanity.foundation
+id: content-guidelines
+name: Content guidelines
+description: Rules and principles governing UI copy, naming, labels, casing, internationalization, and truncation in Sanity UI.
+metadata:
+  tags: [concept, content, writing, voice, naming, labels, casing, i18n, truncation, copy, tone]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Say what you mean. Cut the rest. Every word earns its place. "Buttons trigger actions." Not "Buttons are interactive elements that allow users to initiate a variety of actions."
+      - level: should
+        statement: Write for speech. If it sounds like a press release, rewrite it. Read it aloud to test.
+      - id: plain-language
+        level: must-not
+        statement: "Don't use jargon, internal vocabulary or design-speak in user-facing copy, and spell out an acronym the first time it appears. Use short, common words and short sentences. Plain language is an accessibility rule: it serves screen reader users, non-native readers and anyone reading under stress. When a technical term is the only accurate word, explain it in plain words beside it."
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must-not
+        statement: Don't use emojis. Use icons when a visual symbol is needed.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: One name per concept, everywhere. The same thing has the same name in the UI, the docs, the code, and the Figma library. Synonyms force translation for humans and mislead agents.
+      - level: must
+        statement: Names are short, plain, and self-describing. No clever names. No acronyms. A name that becomes an acronym has failed.
+      - level: should
+        statement: Manage recurring strings as named content tokens. Cancel, generic errors, and other repeats map one concept to one string in one place — for example `error.required-field`. One source keeps the wording in sync.
+      - level: should-not
+        statement: Avoid names that sound alike. "Tag" and "Tab" sound alike and cause real errors. Fix the names before shipping.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: start-with-a-verb
+        level: must
+        statement: Start with a verb. "Publish," not "Publishing." "Upload image," not "Image upload."
+      - id: name-the-action
+        level: must
+        statement: 'Name the specific action or destination in every label: buttons, links, menu items and accessible names. Generic labels such as "OK", "Submit", "Confirm", "Done", "Yes", "Go", "Click here", "Read more" and "Get started" don''t say what will happen. Out of context they also sound the same, and screen reader users often move through a page by its list of links and buttons (WCAG 2.4.4). Write "Export as CSV", not "Submit"; "Delete 3 items", not "Confirm"; "Read the upload limits", not "Read more".'
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: overflow-labels-stand-alone
+        level: must
+        statement: Overflow menu labels must stand alone. No icon or tooltip in overflow menus. The label has to be self-sufficient.
+      - id: toggle-labels-show-next-action
+        level: must
+        statement: Toggle labels show the next action. Sidebar shown → "Hide nav." Sidebar hidden → "Show nav."
+      - level: should
+        statement: Labels tell users what happens before they act. Every label must be honest, brief, and clear.
+      - id: group-labels-name-the-group
+        level: should
+        statement: Group labels name the group, not the action. "Documents," not "Manage documents."
+      - id: label-length-by-element
+        level: should
+        statement: Keep labels within the word limits in the Labels and actions reference below.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: sentence-case-all-system-set
+        level: must
+        statement: Sentence case for all system-set copy. Cap the first word and proper nouns only. This covers headings, titles, labels, options, buttons, menu items, tooltips, errors and status text.
+      - level: must
+        statement: User- and machine-generated text keeps its original casing. Typed titles, IDs, and URLs are not re-cased.
+      - id: keep-proper-noun-casing
+        level: must
+        statement: Proper nouns, brand names, and common short forms (CSV, JSON, URL) keep their own casing.
+      - id: no-period-on-fragments
+        level: must
+        statement: No dot at the end of fragments. Button labels, menu items, tooltip fragments, and headings carry no dot. Full sentences in body text and errors follow normal rules.
+      - id: figures-for-counts
+        level: must
+        statement: Use figures, not words, for counts. "Delete 3 items," not "Delete three items."
+      - id: oxford-comma
+        level: must
+        statement: Oxford comma in lists of three or more.
+      - id: no-exclamation-marks
+        level: should-not
+        statement: Avoid exclamation marks. They read as forced enthusiasm and don't translate as warmth across cultures.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: allow-text-growth
+        level: must
+        statement: Allow 30–50% growth. German and Finnish labels can run 50% longer than English. Plan layouts for this.
+      - level: must
+        statement: 'Handle plurals with the platform''s plural rules, not by appending "s". "You have {count, plural, one {# item} other {# items}}." English has two plural forms; some languages have up to six.'
+      - id: support-rtl
+        level: must
+        statement: Support right-to-left scripts. Use `inline-start` and `inline-end` instead of `left` and `right`.
+      - id: test-longest-translation
+        level: should
+        statement: Test labels at their longest translated length. Check that the layout holds.
+      - level: should-not
+        statement: Avoid directional language in copy. "On the right" and "below" break in right-to-left layouts. They mean nothing to screen reader users. Name the thing instead.
+      - id: no-string-concatenation
+        level: must-not
+        statement: 'No string joining. "You have " + count + " items" breaks where word order differs. Use a template: "You have {count} items."'
+      - id: no-idioms
+        level: must-not
+        statement: No idioms or sayings. "Low-hanging fruit" and "out of the box" do not translate.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: ellipsis-for-clipped-text
+        level: must
+        statement: Use ellipsis (`…`) for clipped text. Use `clip` only for decorative elements.
+      - id: system-labels-never-clip
+        level: must
+        statement: System-set labels — buttons, menu items, headings — must not clip. Write them short.
+      - id: truncate-only-generated-text
+        level: must
+        statement: Truncation is for user- or machine-generated text. Typed titles, auto-generated IDs, and long URLs.
+      - level: should
+        statement: Truncation is a last resort.
+      - id: shorten-before-truncating
+        level: should
+        statement: Shorten the text first. The best truncation is no truncation.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: Writing in Sanity UI follows the same discipline as visual design. This page covers the laws that govern reading, then Sanity's stance on applying them, then the rules by content type.
+      - title: Principles
+        body: |-
+          These describe how Sanity UI applies the fundamentals. They are stances, not laws.
+
+          **Plain by default.** Short words, short sentences, and familiar terms are the baseline. They lower the cost of reading for everyone — non-native readers, stressed users, and assistive-tech users. Reach for a longer or rarer word only when it is the precise one.
+
+          **Sanity sounds like a knowledgeable colleague.** Direct, calm, and confident. It never sounds salesy, cute, or alarmed. Tone shifts within that voice — calm in an error, brief in a confirmation, warm in an empty state.
+
+          **Copy belongs to a state.** When the state changes, the copy changes. Each state-driven section below maps to a component state or a pattern flow. The component spec defines when a component enters the state; this doc defines what it says.
+
+          **One concept, one name, one string.** A thing keeps the same name everywhere, and a recurring string lives in one place. Standard names give predictable results — even when the team thinks the standard name is wrong. A non-standard name is a deliberate cost; document why.
+
+          **The element comes before the copy.** If a string needs helper text to make sense, the element is the problem. Fix the element first.
+      - title: Fundamentals
+        body: |-
+          These describe how reading and comprehension work. They hold regardless of Sanity. The rules in this document follow from them.
+
+          **People scan; they don't read.** On screen, people fixate on a few words per line and skip the rest. The words that carry meaning have to come first.
+
+          **Words are recognized, not decoded.** Reading is fast pattern recognition. Familiar words process at once. Jargon and unusual words slow readers down.
+
+          **Hierarchy is meaning.** People extract structure before they read content. They expect the most important thing first — in a sentence, a label, and a page.
+
+          **Concrete sticks; abstract fades.** "Something went wrong" teaches nothing. "Your session expired" is clear.
+
+          **Voice is constant; tone shifts.** A product has one voice across every surface. Its tone adapts to the moment.
+
+          **Names set expectations.** Readers and agents make large assumptions from a name alone. Standard, predictable names give predictable results.
+
+          **Meaning carried by one channel is meaning some people miss.** A signal sent through color alone, or hover alone, reaches only the people who can use that channel. A second channel reaches the rest.
+  - kind: section
+    for: all
+    freeform:
+      - title: Content tokens
+        body: |-
+          Naming above sets the rule: manage recurring concepts as named content tokens, one term per concept. This is the catalog — canonical terms for the concepts that drift most in practice, evidenced by a full audit of Sanity Studio's shipped microcopy (see studio-microcopy-audit-2026-08-18.md). Use the canonical term. Everything under "Retire" is a synonym error, not a stylistic choice.
+
+          ### Removing and undoing content
+
+          Six words compete for four distinct operations. Choose by what happens to the data.
+
+          | Concept | Canonical term | Use for | Retire | Example |
+          | --- | --- | --- | --- | --- |
+          | Permanently destroy an object | Delete | A document, comment, task, or release that will not come back. | — | "Delete this document? This can't be undone." |
+          | Abandon unsaved or unpublished edits | Discard | Return to the last saved or published state. The object itself survives. | — | "Discard changes" |
+          | Take an item out of a collection | Remove | The item still exists; only its membership changes. | Take out, exclude | "Remove from release" |
+          | Empty a field's value | Clear | The field stays; its content doesn't. | — | "Clear field" |
+          | Bring back a deleted object or a prior version | Restore | Undo a delete, or return to a version from history. | Revert | "Restore to this revision" |
+
+          Retire "Revert." One audited feature (document revision history) names its own button "Revert to revision," while its tooltip, confirm dialog, disabled state, and success toast all say "Restore" for the identical action. Restore is plainer and already wins 4-to-1 within that single feature — standardize on it everywhere.
+
+          ### Creating and naming new objects
+
+          "Create" and "New" are not synonyms once split by grammatical role:
+
+          | Role | Canonical term | Example |
+          | --- | --- | --- |
+          | Trigger button, menu item (verb-first, per Labels and actions) | Create + noun | "Create document," "Create release" |
+          | Dialog title, empty-state heading (noun phrase) | New + noun | "New document," "New release" |
+
+          Use both, consistently assigned by role. The problem isn't that both words exist — it's a single control disagreeing with its own tooltip and aria-label on which one to use. Every string describing one control must agree.
+
+          ### The docked side panel
+
+          | Concept | Canonical term | Retire |
+          | --- | --- | --- |
+          | A collapsible, docked auxiliary region attached to the main content (comments, tasks, field help) | Panel | Pane, inspector |
+          | The primary, persistent navigation rail | Sidebar | — |
+
+          "Sidebar" and "panel" name different things; keep them that way. "Pane" and "inspector" are retired synonyms for panel.
+
+          ### The modal surface
+
+          | Concept | Canonical term | Retire |
+          | --- | --- | --- |
+          | A focus-trapping overlay that blocks interaction until dismissed | Dialog | Modal |
+          | A non-modal, anchored floating surface that doesn't trap focus | Popover | — |
+
+          "Modal" describes a behavior (focus-trapping), not a component. Use "dialog" for the noun; "modal" only as an adjective if needed ("a modal dialog"). A control that could be described as "popover/dialog" is the bug — every control is one or the other, never both.
+
+          This row covers the generic UI-pattern vocabulary for product copy and code comments. As of @sanity/ui@5.0.0-alpha.7 the Sanity UI component identifier agrees with it: the component shipped as `Modal` in alpha.5 and was renamed to `Dialog` in alpha.7, so the canonical term and the component name are now the same word. Decision D1 in terminology-glossary-2026-08-18.md, which ruled the other way, was made on the opposite premise and is superseded.
+
+          ### Problem severity
+
+          | Concept | Canonical term | Use for | Retire (as a synonym) |
+          | --- | --- | --- | --- |
+          | Something invalid or broken that blocks progress | Error | Validation failures, failed operations | Issue, when it only ever means "error" |
+          | Something that may be a problem but doesn't block progress | Warning | Advisory, non-blocking notices | — |
+          | An aggregate that may include both | Issue | Only for a summary count that can mix errors and warnings — for example, "3 issues found" covering 2 errors and 1 warning | — |
+
+          If a string's own key says error but its value says "issue" — or the reverse — that's a bug, not a style choice.
+
+          ### Document and schema type errors
+
+          Use document type for any user-facing error about a specific document's type. Reserve schema type for developer- or config-level errors — a broken schema definition, not a document instance. Never use bare "type" alone in a title; it reads as an error-checker leak, not a sentence a person wrote.
+
+          ### Needs a product decision, not a copy fix
+
+          One concept family mixes vocabulary because the underlying product concepts may not be fully settled, not because the copy is careless. Flagged here rather than assigned a canonical term:
+
+          - Release scheduling. "Content Release," "Release," "Scheduled Draft," and "Scheduled publish" all appear for what looks like overlapping parts of one feature area. Resolve the taxonomy with the product team before naming it here.
+
+          ### A demo of this catalog as tokens
+
+          dsds/tokens/content.dsds.json (with its source content.tokens.json) shows what this catalog looks like encoded as DTCG tokens instead of prose tables — one canonical value per concept, retired synonyms and audit evidence attached as metadata. It is a proposal, not a shipped part of @sanity-labs/design-tokens, and it is not wired into the main documentation bundle for that reason.
+  - kind: section
+    for: all
+    freeform:
+      - title: Labels and actions reference
+        body: |-
+          | Element | Length | Verb-first | Example |
+          | --- | --- | --- | --- |
+          | Button label | 1–3 words | Yes | "Save draft" |
+          | Menu item | 1–3 words | Yes | "Rename" |
+          | Overflow menu item | 1–5 words | Yes | "Export as CSV" |
+          | Nav group label | 1–2 words | No (noun phrase) | "Media library" |
+          | Tab label | 1–2 words | No (noun phrase) | "Page settings" |
+          | Toggle button | 1–3 words | Yes | "Show inspector" |
+          | Badge | 1–3 words | No (noun phrase) | "Published" |
+          | Form field label | 1–3 words, longer if needed for clarity | No (noun phrase) | "Email address" |
+
+          All labels use sentence case (`sentence-case-all-system-set`).
+  - kind: section
+    for: all
+    freeform:
+      - title: Pre-ship checklist
+        body: |-
+          Before any UI string ships:
+
+          - Fewest words needed?
+          - Plain language a newcomer understands?
+          - Tells the user what to do, not only what happened?
+          - Specific, not generic?
+          - Names this concept the same way every other surface does?
+          - Matches the tone for this context?
+          - Does meaning survive without color? Tone paired with an icon or text?
+          - If an error: cause and a path forward, tied to its field?
+          - If a string needs helper text to make sense, the element is the problem, not the copy.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to evaluate, write, or review UI copy in Sanity UI, ensuring strings follow voice, naming, label, casing, i18n, and truncation rules.

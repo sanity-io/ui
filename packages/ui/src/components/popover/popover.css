@@ -1,11 +1,13 @@
-.sui-PopoverContent {
+.sui-Popover {
   visibility: hidden;
   opacity: 0;
   scale: 0.9;
   transition: none;
+  --popover-color: var(--foreground-high);
+  color: var(--popover-color);
 }
 
-.sui-PopoverContent:popover-open {
+.sui-Popover:popover-open {
   visibility: visible;
   opacity: 1;
   scale: 1;
@@ -13,7 +15,7 @@
 }
 
 @starting-style {
-  .sui-PopoverContent:popover-open {
+  .sui-Popover:popover-open {
     visibility: hidden;
     opacity: 0;
     scale: 0.9;

@@ -1,0 +1,155 @@
+kind: component
+id: v-stack
+name: VStack
+description: Stacks children vertically with even spacing.
+metadata:
+  tags: [layout, vertical, stack, column, gap, form, vstack, list, flex]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'For common layouts with uniform vertical spacing: form fields, item collections, and sequential controls or content.'
+      - level: should-not
+        statement: For horizontal stacking. Use HStack or Flex instead.
+        alternatives:
+          - to: h-stack
+          - to: flex
+      - level: should-not
+        statement: For vertical layouts needing custom alignment or wrapping. Use Flex instead.
+        alternatives:
+          - to: flex
+      - level: should-not
+        statement: For two-axis layouts. Use Grid instead.
+        alternatives:
+          - to: grid
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: "Size the gap to the content: {space-1} between a label and its input, {space-3} between form fields, and {space-4} or more between sections. The full scale is in the Space scale entry's table (`space`)."
+      - level: should
+        statement: Wrap VStack with Box when padding or margin values are needed.
+      - id: don-vstack-need-alignitems-justifycontent
+        level: must-not
+        statement: "Don't use VStack when you need alignItems, justifyContent, flexWrap, or any other flex prop — use Flex with flexDirection='column'. VStack only accepts `as` and `gap`. Passing any other prop is a TypeScript error."
+        refines:
+          - to: v-stack#do-not-use-vstack-for-centered-or-space-between-layouts-use-flex-flexdirection-column-justifycontent-center-instead-instead-use-flex-with-flexdirection-column-and-the-appropriate-alignitems-or-justifycontent
+      - level: must-not
+        statement: Don't add margin to children for spacing — use gap.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "VStack accepts only as and gap. Don't pass any other prop directly as a JSX attribute (padding, tone, width/height, position, border, alignItems, justifyContent, flexGrow, overflowY)."
+      - level: must-not
+        statement: 'Do not use VStack for centered or space-between layouts. Use `<Flex flexDirection="column" justifyContent="center">` instead. Instead: Use Flex with flexDirection=''column'' and the appropriate alignItems or justifyContent.'
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: Using `as="ul"` or `as="ol"` with VStack needs extra setup. Children must be `<li>` elements and `role="list"` must be applied.
+      - id: v-stack-dom-order-not-css-order
+        level: must-not
+        statement: Don’t use CSS to change the visual order of VStack's children. Children render in DOM order–meaning screen readers will not detect CSS order changes.
+  - kind: section
+    for: agent
+    freeform:
+      - title: VStack vs Flex column
+        body: |-
+          VStack only accepts `as` and `gap`. Passing any other prop directly is a TypeScript error.
+
+          ```tsx
+          // correct — gap is the only spacing control
+          <VStack gap={4}>
+            <Heading as="h2">Title</Heading>
+            <Text>Body text</Text>
+          </VStack>
+
+          // wrong — TS2322: padding and alignItems do not exist on VStack
+          <VStack gap={4} padding={4} alignItems="center">
+            ...
+          </VStack>
+          ```
+
+          When you need padding, alignment, or distribution, use `Flex`:
+
+          ```tsx
+          <Flex flexDirection="column" gap={4} padding={4} alignItems="center">
+            <Heading as="h2">Title</Heading>
+            <Text>Body text</Text>
+          </Flex>
+          ```
+
+alternatives:
+  - to: flex
+    note: Column or row layout with full flex control
+  - to: h-stack
+    note: Horizontal row, aligned to center
+  - to: grid
+    note: Two-axis layout
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32600-2620
+    rel: design
+    role: Figma component (v5)
+  - to: space
+    rel: relates-to
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/v-stack/VStack.tsx
+imports:
+  - platform: react
+    code: import { VStack } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        VStack replaces `@sanity/ui`'s Stack used in its default vertical direction. `space`→`gap`; `sizing` is removed with no replacement. A Stack that used padding, margin, overflow, or flex props migrates to `Flex flexDirection="column"` instead, since VStack accepts only `gap` and `as`.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:stack --paths <paths> --toPackage @sanity/ui`. It chooses VStack or Flex per instance depending on which props are present.
+      guidance: |-
+        VStack replaces `@sanity/ui`'s Stack component, used with its default vertical direction. The API changes are:
+
+        ### Key differences
+
+        - `space` renamed to `gap`, matching the prop name used across other v5 layout components.
+        - `sizing` removed. v3's `sizing` prop has no v5 equivalent — use `style={{ boxSizing: '...' }}` directly if needed.
+        - A v3 Stack that used padding, margin, overflow, or flex props migrates to `Flex flexDirection="column"` instead of VStack, since VStack accepts only `gap` and `as`.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `space` | `gap` | Renamed. Same scale (`0`–`9`, `'inherit'`). |
+        | `sizing` | — | Removed. No direct replacement. |
+        | `padding`, `margin`, `overflow`, `flex*` | — | Not supported on VStack. A Stack using any of these migrates to `Flex flexDirection="column"` instead — see the Flex migration guide for that prop set. |
+
+        ### Breaking changes
+
+        - **`space` prop renamed to `gap`.** `<Stack space={3}>` no longer sets spacing. Use `<VStack gap={3}>`.
+        - **`sizing` prop removed.** `<Stack sizing="border">` does nothing on VStack. There is no replacement prop.
+        - **Layout props no longer apply.** A v3 Stack that set `padding`, `margin`, `overflow`, or any flex prop needs `Flex flexDirection="column"` in v5, not VStack — VStack accepts only `gap` and `as`.
+
+        ### Codemod
+
+        A codemod is available to ease the changes above. Run the command below with the path to the file or folder you want to migrate. Use spaces to pass more than one path.
+
+        ```
+        pnpx @sanity/ui-codemod latest:stack --paths <paths> --toPackage @sanity/ui
+        ```
+
+        The codemod inspects each Stack instance. One with only `space`/`gap`-style props becomes `VStack`, with `space` renamed to `gap`. One that also uses padding, margin, overflow, or flex props becomes `Flex flexDirection="column"` instead, with those props converted the same way as the Flex codemod. If a component instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with "UI-POC-CODEMOD TODO".

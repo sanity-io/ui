@@ -1,0 +1,167 @@
+kind: component
+id: code
+name: Code
+description: Used for inline code snippets and multi-line code blocks.
+metadata:
+  tags: [code, monospace, syntax, snippet, pre, file path, API, terminal]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Multi-line code blocks in documentation, changelogs, or developer-facing content.
+      - level: should
+        statement: Short inline code snippets in tooltips or descriptions.
+      - level: should
+        statement: Displaying API responses, file paths, or user-entered code strings.
+      - level: should-not
+        statement: For body copy, captions, or UI labels. Use Text instead.
+        alternatives:
+          - to: text
+      - level: should-not
+        statement: For keyboard shortcuts. Use KBD instead.
+        alternatives:
+          - to: kbd
+      - level: should-not
+        statement: As an editable input. Code is display-only.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Pass language when the code has a known type to enable syntax highlighting.
+      - level: should
+        statement: Set `inline` for code inside a sentence. Block code renders as a `pre` element by default.
+      - level: must-not
+        statement: Don't wrap Code in a Box with fontFamily style — Code already uses a system monospace stack.
+      - level: must-not
+        statement: Don't add onClick or tabIndex to Code — it is not interactive.
+      - level: must-not
+        statement: Don't set maxWidth with inline styles — wrap Code in a Box with maxWidth instead.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "Setting inline fontFamily: 'monospace' on a Box to render code. Instead: Use the Code component, which provides the correct monospace stack and token colors."
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - id: screen-readers-announce-text-inside
+        level: should
+        statement: Screen readers announce the text inside `<code>` but do not show syntax highlighting colors. Do not rely on token colors to convey meaning.
+      - level: should
+        statement: Code has no keyboard handling or focus management. Do not add `onClick` or `tabIndex`. Wrap in a Button or PressArea if the code needs a copy or select action.
+alternatives:
+  - to: text
+    note: Body copy and UI labels
+  - to: kbd
+    note: Keyboard shortcut display
+refs:
+  - to: heading
+    rel: relates-to
+    note: Semantic page headings
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/code/Code.tsx
+imports:
+  - platform: react
+    code: import { Code } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: CSS font-size property.
+    values:
+      - id: '0'
+        description: Smallest.
+      - id: '1'
+        description: Small.
+      - id: '2'
+        description: Medium (default).
+      - id: '3'
+        description: Large.
+      - id: '4'
+        description: Extra large.
+  - traitType: variant
+    kind: boolean
+    id: muted
+    description: Lowers the visual weight of secondary code text.
+  - traitType: variant
+    kind: boolean
+    id: trim
+    description: Removes extra whitespace above and below the text box for precise alignment with icons or badges.
+  - traitType: variant
+    kind: boolean
+    id: inline
+    description: Renders the code inside a sentence as a span. Block code renders as a pre element by default.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Code drops flex layout props and `maxWidth` entirely (removed, not renamed). Use `inline` for inline code in place of `as`. `muted` and `trim` are new additions.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:code --paths <paths> --toPackage @sanity/ui`. It converts `flex`/`maxWidth`/`width` to an inline `style` object.
+      guidance: |-
+        Code in v3 had flex layout props, and a `maxWidth` prop. These are removed in v5\.
+
+        ### Key differences
+
+        - `as` is not a v5 prop. Use `inline` to render a span. Block code renders as a `pre` by default.
+        - `maxWidth` removed. Use a wrapping `Box` for width constraints.
+        - Flex props removed. Code is a block typography element, not a flex container.
+        - `muted` prop added to reduce visual contrast for secondary code content.
+        - `trim` prop added to remove leading and trailing whitespace from the text box.
+        - Refractor enables when `language` is set. When no `language` is set, v5 skips Refractor and renders right away.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `size` | `size` | Same scale (`0`–`4`). Default is `2` in both versions. |
+        | `weight` | — | Removed. Code renders at regular weight. |
+        | `as` | `inline` | Use `inline` for a span. Block code renders as a `pre` by default. |
+        | `maxWidth` | — | Removed. Wrap Code in `Box` with `maxWidth` instead. |
+        | Flex props | — | Removed. Code no longer extends flex layout props. |
+        | — | `muted` | New. Reduces visual contrast. |
+        | — | `trim` | New. Applies `text-box-trim` for precise vertical alignment. |
+
+        ### Breaking changes
+
+        - `as` is removed. Use `inline` for inline code. `<Code as="div">` fails to compile.
+        - `weight` is removed. Code renders at regular weight.
+        - `maxWidth` prop removed**.** `<Code maxWidth={4}>` does nothing. Wrap Code in a `Box` or `Container.`
+
+        ```
+        {/* v3 */}
+        <Code maxWidth={4}>...</Code>
+
+        {/* v5 */}
+        <Box maxWidth={4}>
+          <Code>...</Code>
+        </Box>
+        ```
+
+        - Flex layout props removed. `display`, `gap`, and other flex props from v3 no longer apply to Code.
+
+        ### Codemod
+
+        A codemod is available to ease the changes above. Run the command below with the path to the file or folder you want to migrate. Use spaces to pass more than one path.
+
+        ```
+        pnpx @sanity/ui-codemod latest:code --paths <paths> --toPackage @sanity/ui
+        ```
+
+        The codemod converts `flex`, `maxWidth`, and `width` to an inline `style` object, since Code no longer accepts them as props. If a component instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with "UI-POC-CODEMOD TODO".

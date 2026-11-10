@@ -1,0 +1,80 @@
+- id: sanity-ui-v5-radio-group-name-controlled
+  mode: literacy
+  title: 'Radio — grouped options share a name'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/radio/radio-group-name-controlled.tsx
+  context:
+    docs:
+      - id: 68f6586c-1951-4012-9c30-b5446da17d0d
+        path: ui/components/radio
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68f6586c-1951-4012-9c30-b5446da17d0d
+          perspective: rqgKNUCe1
+        reason: 'Radio API — required `label` prop, grouping by shared `name`, controlled or uncontrolled selection'
+  prompt:
+    text: |
+      Build a set of three radio options for choosing a plan (Free, Pro, Team) using the `@sanity/ui` package. Only one can be selected. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Each option is a Radio from '@sanity/ui' with the required label prop
+        - All radios share the same name so only one is selectable
+        - Selection is either controlled (`checked` paired with `onChange`) or uncontrolled (`defaultChecked`); `checked` is never set without `onChange`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The label text is provided through the `label` prop
+        - The same name is used across the group
+        - Does not hand-roll a raw <input type="radio">
+    - type: contains
+      value: 'label='
+    - type: contains
+      value: 'name='
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-radio-group-accessible-fieldset
+  mode: literacy
+  title: 'Radio — group with an accessible name'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/radio/radio-group-accessible-fieldset.tsx
+  context:
+    docs:
+      - id: 68f6586c-1951-4012-9c30-b5446da17d0d
+        path: ui/components/radio
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68f6586c-1951-4012-9c30-b5446da17d0d
+          perspective: rqgKNUCe1
+        reason: 'Radio grouping accessibility — wrap related radios in fieldset/legend (or role=radiogroup)'
+  prompt:
+    text: |
+      Group the plan radios from the `@sanity/ui` package so screen readers announce the group's purpose. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Radios are wrapped in a <fieldset> with a <legend> (or a role=radiogroup container with an accessible name)
+        - Each Radio still has its label prop
+        - The radios share a name
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The grouping pattern is internally consistent (fieldset+legend, or radiogroup+aria-labelledby)
+        - Radio is imported from '@sanity/ui'
+    - type: contains-any
+      value: ['<fieldset', 'role="radiogroup"']
+    - type: contains
+      value: 'label='
+  baseline:
+    enabled: true
+    rubric: full

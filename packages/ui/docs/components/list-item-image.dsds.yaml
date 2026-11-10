@@ -1,0 +1,82 @@
+kind: component
+id: list-item-image
+name: List.ItemImage
+description: A thumbnail image slot inside a List.Item.
+metadata:
+  tags: [list, item, image, thumbnail, avatar]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Use the --aspect-ratio CSS custom property to change the image aspect ratio from the default square.
+      - level: must-not
+        statement: "Don't override width, height, or max-width with inline styles. The fixed size (42px max-width) keeps rows visually even."
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - refs:
+          - to: list#subcomponents-not-named-exports
+            rel: same-as
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - id: list-item-image-alt-always-required
+        level: must
+        statement: Always pass `alt`. The component renders a native `<img>` with no implicit accessible name.
+      - id: only-image-decorative-row-title
+        level: must
+        statement: Use `alt=""` only when the image is decorative and the row title already describes the item.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Examples
+        body: |-
+          List.ItemImage renders a fixed-size (42px max-width) square thumbnail.
+
+          ```tsx
+          // ✓ — meaningful image: item has no adjacent text describing it
+          <List.ItemImage src="/user.jpg" alt="Jane Doe" />
+
+          // ✓ — decorative: adjacent title already describes the item
+          <List.ItemImage src="/thumb.jpg" alt="" />
+
+          // ✗ — do not override dimensions
+          <List.ItemImage src="/thumb.jpg" alt="" style={{ width: 80, height: 80 }} />
+          ```
+
+          Place List.ItemImage before `List.ItemText` inside `List.Item`.
+
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32249-481
+    rel: design
+    role: Figma component (v5)
+  - to: list-item
+    rel: relates-to
+    note: The parent row
+  - to: list
+    rel: relates-to
+    note: The root list component — see **List** for full compound component docs
+  - to: avatar
+    rel: relates-to
+    note: A good fit for user portraits inside list rows
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

@@ -1,0 +1,215 @@
+kind: sanity.guide
+id: component-reference
+name: Component reference
+description: The index of what to build with — every documented Sanity UI component, grouped by taxonomy category, with its status in Sanity UI 5 (stable, beta or unavailable).
+metadata:
+  tags:
+    - concept
+    - components
+    - index
+    - reference
+    - taxonomy
+    - v5
+    - status
+    - stable
+    - beta
+    - unavailable
+    - package
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Check a component's status before writing code against it. An unavailable component is documented ahead of its release, and importing it is a build error.
+      - level: should
+        statement: Treat rows marked with a dagger (best-fit placement) as this doc's own categorization, not a placement confirmed in the source taxonomy — the taxonomy is still in progress and some categories (Discovery, Messaging) have no components officially assigned yet.
+      - level: should
+        statement: Check the guidance in `docs/patterns/` before you build a common pattern out of primitives. Patterns cover the accessibility requirements that cause most failures in this library, such as landmarks and heading order.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          Every documented Sanity UI component and its status in Sanity UI 5. This is the single index — each entry is a `ref` to the component's own document, so the list cannot drift from the corpus. Each ref's role is that component's own `status`.
+
+          - **stable** — exported from `@sanity/ui` 5 and ready to build with.
+          - **beta** — exported from `@sanity/ui` 5 and ready to build with. Its API may still change before 5.0.
+          - **unavailable** — not exported from `@sanity/ui` 5 yet. Importing it is a build error. Its doc keeps the usage guidance, so you can see what is coming and build a stand-in.
+          - **deprecated** — still exported, but do not use it in new code. Its doc names the replacement.
+          - **experimental** — exported, but marked `@alpha` in the source. Its API can change without notice; check it before relying on it.
+      - title: Layout
+        body: Composes content into logical arrangements.
+        refs:
+          - to: box
+            rel: relates-to
+            role: stable
+          - to: flex
+            rel: relates-to
+            role: stable
+          - to: grid
+            rel: relates-to
+            role: stable
+          - to: container
+            rel: relates-to
+            role: stable
+          - to: v-stack
+            rel: relates-to
+            role: stable
+          - to: h-stack
+            rel: relates-to
+            role: stable
+          - to: inline
+            rel: relates-to
+            role: deprecated
+            note: '**Deprecated** — use HStack instead'
+          - to: visually-hidden
+            rel: relates-to
+            role: stable
+      - title: Organization
+        body: Orders content into logical groupings.
+        refs:
+          - to: card
+            rel: relates-to
+            role: stable
+          - to: divider
+            rel: relates-to
+            role: stable
+          - to: list
+            rel: relates-to
+            role: beta
+          - to: list-item
+            rel: relates-to
+            role: beta
+          - to: list-item-text
+            rel: relates-to
+            role: beta
+          - to: list-item-image
+            rel: relates-to
+            role: beta
+          - to: list-button-item
+            rel: relates-to
+            role: beta
+          - to: avatar-stack
+            rel: relates-to
+            role: beta
+      - title: Action
+        body: Triggers actions.
+        refs:
+          - to: button
+            rel: relates-to
+            role: beta
+          - to: press-area
+            rel: relates-to
+            role: beta
+          - to: icon-button
+            rel: relates-to
+            role: beta
+      - title: Information
+        body: Displays content in various formats.
+        refs:
+          - to: text
+            rel: relates-to
+            role: stable
+          - to: heading
+            rel: relates-to
+            role: stable
+          - to: code
+            rel: relates-to
+            role: stable
+          - to: icon
+            rel: relates-to
+            role: stable
+          - to: eyebrow
+            rel: relates-to
+            role: beta
+          - to: kbd
+            rel: relates-to
+            role: experimental
+          - to: hotkeys
+            rel: relates-to
+            role: experimental
+          - to: badge
+            rel: relates-to
+            role: beta
+          - to: avatar
+            rel: relates-to
+            role: beta
+          - to: avatar-counter
+            rel: relates-to
+            role: beta
+      - title: Disclosure
+        body: Reveals relevant/contextual content when requested.
+        refs:
+          - to: tooltip
+            rel: relates-to
+            role: beta
+          - to: tooltip-group
+            rel: relates-to
+            role: beta
+          - to: dialog
+            rel: relates-to
+            role: beta
+            note: Shipped as `Modal` in 5.0.0-alpha.5, renamed to `Dialog` in 5.0.0-alpha.7. No `Modal` alias.
+          - to: popover
+            rel: relates-to
+            role: beta
+            note: Ships in v5 — exported from the root barrel and present in 5.0.0-alpha.10.
+      - title: Discovery
+        body: Provides a way to find relevant content. No components confirmed in the source taxonomy yet.
+      - title: Navigation
+        body: Allows traversal to different areas of an application.
+        refs:
+          - to: link
+            rel: relates-to
+            role: beta
+          - to: skip-to-content
+            rel: relates-to
+            role: beta
+          - to: tabs
+            rel: relates-to
+            role: beta
+      - title: Input
+        body: Provides a way to add/manipulate content.
+        refs:
+          - to: checkbox
+            rel: relates-to
+            role: beta
+          - to: radio
+            rel: relates-to
+            role: beta
+          - to: switch
+            rel: relates-to
+            role: beta
+          - to: text-input
+            rel: relates-to
+            role: beta
+          - to: text-area
+            rel: relates-to
+            role: beta
+          - to: select
+            rel: relates-to
+            role: beta
+      - title: Feedback
+        body: Delivers a response to an action.
+        refs:
+          - to: spinner
+            rel: relates-to
+            role: beta
+          - to: indicator
+            rel: relates-to
+            role: beta
+          - to: indicator-stack
+            rel: relates-to
+            role: beta
+      - title: Messaging
+        body: Proactively communicates information. No components confirmed in the source taxonomy yet.
+      - title: See also
+        body: Shared props (spacing, tone, sizing and positioning) are described in `docs/overview/api-essentials.dsds.yaml`.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this index to check a component's status — stable, beta or unavailable — before importing it or writing code against its docs.

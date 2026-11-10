@@ -1,0 +1,72 @@
+kind: sanity.pattern
+id: messaging
+name: Messaging
+description: Rules and guidance for writing tooltips, confirm dialogs, and status messages in Sanity UI.
+metadata:
+  tags:
+    - tutorial
+    - tooltip
+    - dialog
+    - status
+    - messaging
+    - copy
+    - tone
+    - confirm dialog
+    - status message
+    - toast
+    - aria-live
+    - disabled
+    - WCAG
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Keep tooltip text under 75 characters. This keeps the tooltip on one line at common widths. Shorter is fine.
+      - refs:
+          - to: accessibility-guidelines#disabled-control-no-tooltip
+            rel: same-as
+      - level: should
+        statement: 'Start with a verb for action tooltips. For example: "Edit profile," not "Profile editor."'
+      - level: must-not
+        statement: Don't restate visible text. If the button says "Delete," the tooltip adds detail, not a repeat.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: 'The title names the action and the thing. For example: "Delete ''About us'' page?" Not "Are you sure?"'
+      - level: must
+        statement: 'The confirm button repeats the action verb. For example: "Delete 3 items," not "Confirm."'
+      - level: must
+        statement: The cancel button says "Cancel."
+      - level: should
+        statement: 'State side effects in the body. For example: "This will also remove 12 links to it."'
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: status-message-specificity
+        level: must
+        statement: 'Name the action and its result. For example: "Document published," not "Success."'
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - level: must
+        statement: Status copy must reach screen reader users via a live region (aria-live). Never show status visually only (WCAG 4.1.3). Don't auto-dismiss a result before a slow reader or magnifier user sees it — keep it visible until the user dismisses it, or use a duration long enough to read.
+      - id: status-message-past-tense
+        level: should
+        statement: 'Use past tense for done actions. For example: "Saved," "Published," "Deleted."'
+      - level: should
+        statement: Keep status messages to one sentence at most.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to write correct, accessible copy for tooltips, confirm dialogs, and status messages in Sanity UI.

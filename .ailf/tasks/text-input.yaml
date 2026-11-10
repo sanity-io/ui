@@ -1,0 +1,146 @@
+# Added 2026-10-08. TextInput is new in 5.0.0-alpha.13. Verified against
+# alpha.14: TextInputProps is the native input attributes (minus `type`) plus
+# `density` ('regular' | 'loose'), `hasError` and a `type` that excludes the
+# non-text input types. The component writes `aria-invalid` from `hasError`
+# after the caller's props, and always fills its container (sui-width-full).
+- id: sanity-ui-v5-text-input-v3-props-to-density-and-haserror
+  mode: literacy
+  title: 'TextInput — v3 sizing, slot and validation props become density and hasError'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: d16de9eb-b4ac-41ed-abda-23eb27e1f887
+        path: ui/components/text-input
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: d16de9eb-b4ac-41ed-abda-23eb27e1f887
+          perspective: rqgKNUCe1
+        reason: "TextInput's v5 API: density (regular or loose) replaces fontSize, padding, radius and space; there are no icon, prefix, suffix or clear-button slots; hasError replaces customValidity and renders no message; TextInput fills its container"
+  prompt:
+    text: |
+      {% raw %}
+      I'm porting a project settings form to Sanity UI 5. This TextInput worked in v3 but now fails the type check:
+
+      ```tsx
+      import {TextInput} from '@sanity/ui'
+      import {LinkIcon} from '@sanity/icons/Link'
+
+      <TextInput
+        fontSize={2}
+        padding={3}
+        radius={2}
+        icon={LinkIcon}
+        clearButton={Boolean(url)}
+        onClear={() => setUrl('')}
+        customValidity={isValidUrl(url) ? undefined : 'Enter a full URL, starting with https://'}
+        style={{width: 400}}
+        type="url"
+        value={url}
+        onChange={(e) => setUrl(e.currentTarget.value)}
+      />
+      ```
+
+      The form uses generous spacing. Rewrite it for v5 so it keeps the roomy look, still lets the user clear the field, still shows the URL problem to the user, and stays 400px wide.
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'Uses `density="loose"` for the roomy form'
+        - 'Renders the "Enter a full URL, starting with https://" text as a visible message when the URL is not valid'
+        - 'Keeps a way to clear the field, as a separate Button outside the TextInput that sets the value to an empty string'
+        - 'Keeps `type="url"`, `value` and `onChange` wired to `url` as in the original'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'The TextInput has `hasError` driven by the invalid URL, with none of fontSize, padding, radius, icon, clearButton, onClear, customValidity or style'
+        - 'An error message element with an id is rendered when the URL is invalid, and the TextInput references it through `aria-describedby`'
+        - 'The 400px width is applied to a wrapping element, not to the TextInput'
+        - 'Any link icon kept is placed beside the field, not passed to the TextInput'
+        - "TextInput is imported from '@sanity/ui'"
+        - 'JSX is syntactically valid'
+    - type: contains
+      value: 'density="loose"'
+    - type: contains
+      value: 'hasError'
+    - type: contains
+      value: 'aria-describedby'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-text-input-visible-label-and-error-message
+  mode: literacy
+  title: 'TextInput — a visible Label for the accessible name, and hasError instead of a hand-set aria-invalid'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: d16de9eb-b4ac-41ed-abda-23eb27e1f887
+        path: ui/components/text-input
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: d16de9eb-b4ac-41ed-abda-23eb27e1f887
+          perspective: rqgKNUCe1
+        reason: 'Mark an invalid field with hasError, which sets aria-invalid and renders no message; a hand-set aria-invalid is overwritten; pair the input with a visible Label linked through htmlFor and id'
+      - path: ui/patterns/forms
+        reason: 'Every form field needs a visible label; a placeholder is never the label'
+      - id: bc29e90d-1a99-4cf0-917e-1915159cca05
+        path: ui/components/label
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: bc29e90d-1a99-4cf0-917e-1915159cca05
+          perspective: rqgKNUCe1
+        reason: 'v5 Label renders a native label and links to a control through htmlFor'
+  prompt:
+    text: |
+      {% raw %}
+      axe reports "form elements must have labels" on this field, and screen reader users say they never hear why the form won't submit. Fix both problems and show the corrected code.
+
+      ```tsx
+      import {Text, TextInput, VStack} from '@sanity/ui'
+
+      <VStack gap={2}>
+        <TextInput
+          type="email"
+          placeholder="Email address"
+          value={email}
+          aria-invalid={emailError ? 'true' : 'false'}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+        />
+        {emailError && <Text size={1}>{emailError}</Text>}
+      </VStack>
+      ```
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'Adds a visible "Email address" label rendered by a Label component'
+        - 'Keeps the `emailError` message visible when there is an error'
+        - 'Provides the corrected JSX'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'Uses v5 `Label` with `htmlFor` pointing at an `id` on the TextInput'
+        - 'Replaces the hand-set `aria-invalid` with `hasError` driven by `emailError`'
+        - 'The error message element has an id, and the TextInput references it through `aria-describedby` when there is an error'
+        - "The placeholder is not used as the field's only label"
+        - "Label and TextInput are imported from '@sanity/ui'"
+        - 'JSX is syntactically valid'
+    - type: contains
+      value: 'htmlFor='
+    - type: contains
+      value: 'hasError'
+    - type: contains
+      value: 'aria-describedby'
+  baseline:
+    enabled: true
+    rubric: full

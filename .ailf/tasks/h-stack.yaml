@@ -1,0 +1,110 @@
+- id: sanity-ui-v5-hstack-only-as-and-gap
+  mode: literacy
+  title: 'HStack — only as and gap are accepted; alignment and padding are type errors'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 09fe4726-dce7-4fa2-97bb-8a9d8321f66e
+        path: ui/components/h-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 09fe4726-dce7-4fa2-97bb-8a9d8321f66e
+          perspective: rqgKNUCe1
+        reason: "HStack's prop surface is only as and gap — passing alignItems, justifyContent, padding, or any other layout prop directly is a TypeScript error (TS2322), because the signature is HStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof HStackProps<T>>"
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex as the alternative when alignment or padding control is needed on a horizontal row'
+  prompt:
+    text: |
+      I'm building a toolbar row that should push a title to the left and its actions to the right, with padding around the whole row. I wrote `<HStack gap={2} justifyContent="space-between" padding={3}>` and the build fails with `TS2322: Property 'justifyContent' does not exist on type ...`. What should I use instead? Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected example using Flex with justifyContent="space-between" and padding
+        - The title and the actions are separate children of the row, so space-between pushes them to opposite ends (an inner HStack grouping the actions carries only `gap`)
+        - Keeps the spacing between items on a `gap` prop, not margins on the children
+        - Does not silence the error with a type cast, `@ts-ignore` or a props spread that keeps the layout props on HStack
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example uses Flex (not HStack) wherever justifyContent or padding is set
+        - Flex is imported from '@sanity/ui'
+        - No alignItems, justifyContent, or padding prop is left on an HStack element
+    - type: contains
+      value: '<Flex'
+    - type: contains
+      value: 'justifyContent'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-h-stack-wraps-and-shrinks-use-flex
+  mode: literacy
+  title: 'HStack — always inline-flex and wrapping; a full-width row that must stay on one line needs Flex'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 09fe4726-dce7-4fa2-97bb-8a9d8321f66e
+        path: ui/components/h-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 09fe4726-dce7-4fa2-97bb-8a9d8321f66e
+          perspective: rqgKNUCe1
+        reason: 'HStack has three fixed defaults — display inline-flex (sizes to content, does not stretch), alignItems center, and flexWrap wrap — none changeable through props; do not use it for full-width rows or rows that must stay on one line; use Flex, which does not wrap unless flexWrap is set'
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex as the alternative for full-width, single-line rows'
+  prompt:
+    text: |
+      I built a breadcrumb bar for the top of a document panel with `@sanity/ui`:
+
+      ```tsx
+      <HStack gap={2}>
+        <Text size={1}>Content</Text>
+        <Text size={1}>/</Text>
+        <Text size={1}>Blog posts</Text>
+        <Text size={1}>/</Text>
+        <Text size={1}>{title}</Text>
+      </HStack>
+      ```
+
+      Two problems: the bar doesn't span the width of the panel, and when the panel is narrow the crumbs drop onto a second line. I need it full width and always on one line. How do I fix it?
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps all five crumbs as Text children of the one row, in the original order
+        - The Flex does not set `flexWrap="wrap"`, so the crumbs stay on one line
+        - Keeps the spacing between crumbs on the row's `gap` prop rather than margins on the children
+        - Provides corrected JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The row is a Flex, not an HStack
+        - No flexWrap, display, or alignItems prop is passed to an HStack, and no inline style is used to force HStack onto one line
+        - Flex and Text are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: '<Flex'
+  baseline:
+    enabled: true
+    rubric: full

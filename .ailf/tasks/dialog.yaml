@@ -1,0 +1,112 @@
+- id: sanity-ui-v5-dialog-modal-rename-and-header
+  mode: literacy
+  title: 'Dialog — Modal was renamed to Dialog, and header is optional but recommended'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 91ba6383-74cd-4fa2-9300-a9bd66bb57ac
+        path: ui/components/dialog
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 91ba6383-74cd-4fa2-9300-a9bd66bb57ac
+          perspective: rqgKNUCe1
+        reason: "Dialog replaces Modal (Modal, Modal.Content, Modal.Footer, and ModalProps no longer exist, with no alias) and documents the header prop's accessibility role"
+  prompt:
+    text: |
+      I'm porting an older Sanity UI snippet that uses `Modal`, `Modal.Content`, and `Modal.Footer` with a `ModalProps` type import, plus a `header` prop set to a confirmation message. The build fails because none of those names resolve.
+
+      Fix the imports and component names for the current API, keeping the `header` prop. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides the corrected import and JSX using Dialog, Dialog.Content, and Dialog.Footer
+        - Replaces the `ModalProps` type import with `DialogProps`
+        - Keeps the `header` prop set to the confirmation message
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - No Modal-prefixed name remains in the imports, types or JSX
+        - Dialog is imported from '@sanity/ui'
+        - The header prop is passed as a string on Dialog itself, not on Dialog.Content
+    - type: contains
+      value: '<Dialog'
+    - type: contains
+      value: 'Dialog.Footer'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-dialog-v3-port-open-prop-and-native-dismissal
+  mode: literacy
+  title: 'Dialog — porting a v3 Dialog: keep it mounted with open, use size and Dialog.Footer, and drop hand-rolled dismissal'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 91ba6383-74cd-4fa2-9300-a9bd66bb57ac
+        path: ui/components/dialog
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 91ba6383-74cd-4fa2-9300-a9bd66bb57ac
+          perspective: rqgKNUCe1
+        reason: "v5 Dialog is a native dialog driven by the open prop (keep it mounted; conditional mounting skips the transitions); onClose is required and fires for Escape, the close button and backdrop click; footer, width and onClickOutside are removed in favour of Dialog.Footer, size and closedby='any'; do not implement Escape or backdrop-click handling; import @sanity/ui/polyfills for backdrop dismissal in Safari"
+  prompt:
+    text: |
+      I'm moving this v3 dialog to `@sanity/ui` and it no longer type-checks:
+
+      ```tsx
+      useEffect(() => {
+        if (!open) return
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+        window.addEventListener('keydown', onKey)
+        return () => window.removeEventListener('keydown', onKey)
+      }, [open])
+
+      {open && (
+        <Dialog
+          id="rename-dialog"
+          header="Rename document"
+          width={1}
+          onClickOutside={() => setOpen(false)}
+          onClose={() => setOpen(false)}
+          footer={<Button text="Rename document" level="primary" onClick={handleRename} />}
+        >
+          <RenameForm />
+        </Dialog>
+      )}
+      ```
+
+      Port it to the v5 Dialog. Keep the behaviour: Escape, clicking outside and the close button should all close it.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps the Dialog mounted and drives it with the `open` prop instead of conditionally rendering it
+        - Moves the footer into a `Dialog.Footer` child and the form into `Dialog.Content`
+        - Replaces `width` with the `size` prop
+        - Imports `@sanity/ui/polyfills` once at the app entry point, so backdrop-click dismissal works in Safari
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Dialog is imported from '@sanity/ui' and receives `open`, a required `onClose`, and `header` as a string
+        - No `footer`, `width`, or `onClickOutside` prop is passed to Dialog, and no keydown listener for Escape remains
+        - The footer Button is inside `Dialog.Footer` and the form inside `Dialog.Content`
+        - Dialog width is set with `size` (for example `size={1}`), not with a width prop or inline style
+        - JSX is syntactically valid
+    - type: contains
+      value: 'open={'
+    - type: contains
+      value: 'Dialog.Content'
+    - type: contains
+      value: 'size='
+    - type: contains
+      value: '@sanity/ui/polyfills'
+  baseline:
+    enabled: true
+    rubric: full

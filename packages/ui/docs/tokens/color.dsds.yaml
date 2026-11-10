@@ -1,0 +1,1158 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: gray-50
+    name: gray-50
+    description: Gray, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-50
+  - kind: token
+    id: gray-100
+    name: gray-100
+    description: Gray, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-100
+  - kind: token
+    id: gray-200
+    name: gray-200
+    description: Gray, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-200
+  - kind: token
+    id: gray-300
+    name: gray-300
+    description: Gray, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-300
+  - kind: token
+    id: gray-400
+    name: gray-400
+    description: Gray, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-400
+  - kind: token
+    id: gray-500
+    name: gray-500
+    description: Gray, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-500
+  - kind: token
+    id: gray-600
+    name: gray-600
+    description: Gray, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-600
+  - kind: token
+    id: gray-700
+    name: gray-700
+    description: Gray, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-700
+  - kind: token
+    id: gray-800
+    name: gray-800
+    description: Gray, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-800
+  - kind: token
+    id: gray-900
+    name: gray-900
+    description: Gray, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-900
+  - kind: token
+    id: gray-950
+    name: gray-950
+    description: Gray, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#gray-950
+  - kind: token
+    id: blue-50
+    name: blue-50
+    description: Blue, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-50
+  - kind: token
+    id: blue-100
+    name: blue-100
+    description: Blue, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-100
+  - kind: token
+    id: blue-200
+    name: blue-200
+    description: Blue, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-200
+  - kind: token
+    id: blue-300
+    name: blue-300
+    description: Blue, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-300
+  - kind: token
+    id: blue-400
+    name: blue-400
+    description: Blue, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-400
+  - kind: token
+    id: blue-500
+    name: blue-500
+    description: Blue, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-500
+  - kind: token
+    id: blue-600
+    name: blue-600
+    description: Blue, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-600
+  - kind: token
+    id: blue-700
+    name: blue-700
+    description: Blue, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-700
+  - kind: token
+    id: blue-800
+    name: blue-800
+    description: Blue, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-800
+  - kind: token
+    id: blue-900
+    name: blue-900
+    description: Blue, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-900
+  - kind: token
+    id: blue-950
+    name: blue-950
+    description: Blue, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#blue-950
+  - kind: token
+    id: purple-50
+    name: purple-50
+    description: Purple, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-50
+  - kind: token
+    id: purple-100
+    name: purple-100
+    description: Purple, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-100
+  - kind: token
+    id: purple-200
+    name: purple-200
+    description: Purple, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-200
+  - kind: token
+    id: purple-300
+    name: purple-300
+    description: Purple, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-300
+  - kind: token
+    id: purple-400
+    name: purple-400
+    description: Purple, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-400
+  - kind: token
+    id: purple-500
+    name: purple-500
+    description: Purple, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-500
+  - kind: token
+    id: purple-600
+    name: purple-600
+    description: Purple, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-600
+  - kind: token
+    id: purple-700
+    name: purple-700
+    description: Purple, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-700
+  - kind: token
+    id: purple-800
+    name: purple-800
+    description: Purple, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-800
+  - kind: token
+    id: purple-900
+    name: purple-900
+    description: Purple, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-900
+  - kind: token
+    id: purple-950
+    name: purple-950
+    description: Purple, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#purple-950
+  - kind: token
+    id: magenta-50
+    name: magenta-50
+    description: Magenta, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-50
+  - kind: token
+    id: magenta-100
+    name: magenta-100
+    description: Magenta, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-100
+  - kind: token
+    id: magenta-200
+    name: magenta-200
+    description: Magenta, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-200
+  - kind: token
+    id: magenta-300
+    name: magenta-300
+    description: Magenta, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-300
+  - kind: token
+    id: magenta-400
+    name: magenta-400
+    description: Magenta, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-400
+  - kind: token
+    id: magenta-500
+    name: magenta-500
+    description: Magenta, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-500
+  - kind: token
+    id: magenta-600
+    name: magenta-600
+    description: Magenta, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-600
+  - kind: token
+    id: magenta-700
+    name: magenta-700
+    description: Magenta, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-700
+  - kind: token
+    id: magenta-800
+    name: magenta-800
+    description: Magenta, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-800
+  - kind: token
+    id: magenta-900
+    name: magenta-900
+    description: Magenta, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-900
+  - kind: token
+    id: magenta-950
+    name: magenta-950
+    description: Magenta, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#magenta-950
+  - kind: token
+    id: red-50
+    name: red-50
+    description: Red, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-50
+  - kind: token
+    id: red-100
+    name: red-100
+    description: Red, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-100
+  - kind: token
+    id: red-200
+    name: red-200
+    description: Red, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-200
+  - kind: token
+    id: red-300
+    name: red-300
+    description: Red, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-300
+  - kind: token
+    id: red-400
+    name: red-400
+    description: Red, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-400
+  - kind: token
+    id: red-500
+    name: red-500
+    description: Red, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-500
+  - kind: token
+    id: red-600
+    name: red-600
+    description: Red, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-600
+  - kind: token
+    id: red-700
+    name: red-700
+    description: Red, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-700
+  - kind: token
+    id: red-800
+    name: red-800
+    description: Red, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-800
+  - kind: token
+    id: red-900
+    name: red-900
+    description: Red, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-900
+  - kind: token
+    id: red-950
+    name: red-950
+    description: Red, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#red-950
+  - kind: token
+    id: orange-50
+    name: orange-50
+    description: Orange, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-50
+  - kind: token
+    id: orange-100
+    name: orange-100
+    description: Orange, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-100
+  - kind: token
+    id: orange-200
+    name: orange-200
+    description: Orange, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-200
+  - kind: token
+    id: orange-300
+    name: orange-300
+    description: Orange, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-300
+  - kind: token
+    id: orange-400
+    name: orange-400
+    description: Orange, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-400
+  - kind: token
+    id: orange-500
+    name: orange-500
+    description: Orange, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-500
+  - kind: token
+    id: orange-600
+    name: orange-600
+    description: Orange, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-600
+  - kind: token
+    id: orange-700
+    name: orange-700
+    description: Orange, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-700
+  - kind: token
+    id: orange-800
+    name: orange-800
+    description: Orange, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-800
+  - kind: token
+    id: orange-900
+    name: orange-900
+    description: Orange, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-900
+  - kind: token
+    id: orange-950
+    name: orange-950
+    description: Orange, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#orange-950
+  - kind: token
+    id: yellow-50
+    name: yellow-50
+    description: Yellow, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-50
+  - kind: token
+    id: yellow-100
+    name: yellow-100
+    description: Yellow, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-100
+  - kind: token
+    id: yellow-200
+    name: yellow-200
+    description: Yellow, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-200
+  - kind: token
+    id: yellow-300
+    name: yellow-300
+    description: Yellow, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-300
+  - kind: token
+    id: yellow-400
+    name: yellow-400
+    description: Yellow, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-400
+  - kind: token
+    id: yellow-500
+    name: yellow-500
+    description: Yellow, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-500
+  - kind: token
+    id: yellow-600
+    name: yellow-600
+    description: Yellow, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-600
+  - kind: token
+    id: yellow-700
+    name: yellow-700
+    description: Yellow, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-700
+  - kind: token
+    id: yellow-800
+    name: yellow-800
+    description: Yellow, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-800
+  - kind: token
+    id: yellow-900
+    name: yellow-900
+    description: Yellow, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-900
+  - kind: token
+    id: yellow-950
+    name: yellow-950
+    description: Yellow, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#yellow-950
+  - kind: token
+    id: green-50
+    name: green-50
+    description: Green, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-50
+  - kind: token
+    id: green-100
+    name: green-100
+    description: Green, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-100
+  - kind: token
+    id: green-200
+    name: green-200
+    description: Green, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-200
+  - kind: token
+    id: green-300
+    name: green-300
+    description: Green, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-300
+  - kind: token
+    id: green-400
+    name: green-400
+    description: Green, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-400
+  - kind: token
+    id: green-500
+    name: green-500
+    description: Green, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-500
+  - kind: token
+    id: green-600
+    name: green-600
+    description: Green, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-600
+  - kind: token
+    id: green-700
+    name: green-700
+    description: Green, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-700
+  - kind: token
+    id: green-800
+    name: green-800
+    description: Green, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-800
+  - kind: token
+    id: green-900
+    name: green-900
+    description: Green, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-900
+  - kind: token
+    id: green-950
+    name: green-950
+    description: Green, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#green-950
+  - kind: token
+    id: cyan-50
+    name: cyan-50
+    description: Cyan, step 50.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-50
+  - kind: token
+    id: cyan-100
+    name: cyan-100
+    description: Cyan, step 100.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-100
+  - kind: token
+    id: cyan-200
+    name: cyan-200
+    description: Cyan, step 200.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-200
+  - kind: token
+    id: cyan-300
+    name: cyan-300
+    description: Cyan, step 300.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-300
+  - kind: token
+    id: cyan-400
+    name: cyan-400
+    description: Cyan, step 400.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-400
+  - kind: token
+    id: cyan-500
+    name: cyan-500
+    description: Cyan, step 500.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-500
+  - kind: token
+    id: cyan-600
+    name: cyan-600
+    description: Cyan, step 600.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-600
+  - kind: token
+    id: cyan-700
+    name: cyan-700
+    description: Cyan, step 700.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-700
+  - kind: token
+    id: cyan-800
+    name: cyan-800
+    description: Cyan, step 800.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-800
+  - kind: token
+    id: cyan-900
+    name: cyan-900
+    description: Cyan, step 900.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-900
+  - kind: token
+    id: cyan-950
+    name: cyan-950
+    description: Cyan, step 950.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#cyan-950
+  - kind: token
+    id: black
+    name: black
+    description: Black, the darkest base color.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#black
+  - kind: token
+    id: white
+    name: white
+    description: White, the lightest base color.
+    metadata:
+      status:
+        status: stable
+      group: color
+    tokenType: color
+    source:
+      href: ./dtcg/json/color.tokens.json#white
+  - kind: entry
+    id: color-palette
+    name: Color palette
+    description: The base color palette that the semantic color layer is built from.
+    metadata:
+      tags:
+        [
+          color,
+          colour,
+          palette,
+          base,
+          hue,
+          gray,
+          blue,
+          red,
+          green,
+          yellow,
+          orange,
+          purple,
+          magenta,
+          cyan,
+        ]
+      status:
+        status: stable
+      group: color
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Use semantic tokens when composing UI. Reach for a palette token only when the semantic layer does not cover the use case. The Color guidelines explain the two layers.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              The palette holds the base hues, each in a ramp from `50` to `950`, plus `black` and `white`. Tokens are named by hue and step: `gray-500`, `blue-100`. Components take their color from `tone` and the semantic layer, which is built on this palette.
+    refs:
+      - to: color-guidelines
+        rel: relates-to
+      - href: ./dtcg/json/color.tokens.json
+        rel: source
+        role: DTCG source

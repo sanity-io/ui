@@ -23,7 +23,6 @@ import {
   Indicator,
   IndicatorStack,
   KBD,
-  Label,
   Link,
   List,
   PressArea,
@@ -158,7 +157,7 @@ export default function Ui5() {
       <h2>{count} Headings</h2>
       <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Heading key={i} size={2} muted>
+          <Heading key={i} as="h2" size={2}>
             Heading
           </Heading>
         ))}
@@ -170,13 +169,6 @@ export default function Ui5() {
           <Text key={i} size={2} muted>
             Text
           </Text>
-        ))}
-      </Profiler>
-
-      <h2>{count} Labels</h2>
-      <Profiler id="Label" onRender={handleOnRender}>
-        {iterator.map((i) => (
-          <Label key={i}>Label</Label>
         ))}
       </Profiler>
 
@@ -204,21 +196,21 @@ export default function Ui5() {
       <h2>{count} Checkboxes</h2>
       <Profiler id="Checkbox" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Checkbox key={i} label="Checkbox" />
+          <Checkbox key={i} aria-label="Checkbox" />
         ))}
       </Profiler>
 
       <h2>{count} Switches</h2>
       <Profiler id="Switch" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Switch key={i} label="Switch" />
+          <Switch key={i} aria-label="Switch" />
         ))}
       </Profiler>
 
       <h2>{count} Radios</h2>
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Radio key={i} name="radio" label="Radio" />
+          <Radio key={i} name="radio" aria-label="Radio" />
         ))}
       </Profiler>
 
@@ -394,7 +386,7 @@ export default function Ui5() {
         {iterator.map((i) => (
           <Card key={i} density={['regular', 'loose']} marginBottom={2}>
             <Flex flexDirection="column" gap={3}>
-              <Heading size={3} muted>
+              <Heading as="h3" size={3}>
                 Card content
               </Heading>
               <Box padding={3}>

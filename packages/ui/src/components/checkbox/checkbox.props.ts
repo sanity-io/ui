@@ -1,11 +1,10 @@
-import {type MarginProps, marginProps} from '../../props/margin'
 import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProps {
+export interface CheckboxProps extends React.ComponentProps<'input'> {
   /**
-   * Applies error styling to the checkbox mark.
-   * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
+   * Applies error styling to the checkbox mark for invalid states.
+   * @remarks Use when form validation fails. Pair with a visible error message.
    */
   hasError?: boolean
   /**
@@ -13,10 +12,6 @@ export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProp
    * @remarks Use when the checkbox controls a group with some-but-not-all children checked.
    */
   indeterminate?: boolean
-  /**
-   * Visible label next to the checkbox.
-   */
-  label: React.ReactNode
 }
 
 export const checkboxProps: Record<string, PropDef> = {
@@ -26,8 +21,4 @@ export const checkboxProps: Record<string, PropDef> = {
   indeterminate: {
     type: 'boolean',
   },
-  label: {
-    type: 'string',
-  },
-  ...marginProps,
 }

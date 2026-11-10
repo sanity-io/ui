@@ -1,12 +1,7 @@
 import {type ReactNode} from 'react'
 import {createPortal} from 'react-dom'
 
-export function renderPortal(
-  node: ReactNode,
-  mounted: boolean,
-  portal?: boolean,
-  portalElement?: Element | DocumentFragment,
-) {
+export function renderPortal(node: ReactNode, mounted: boolean, portal?: boolean) {
   if (!portal) {
     return node
   }
@@ -15,5 +10,5 @@ export function renderPortal(
     return null
   }
 
-  return createPortal(node, portalElement || document.body)
+  return createPortal(node, document.body)
 }

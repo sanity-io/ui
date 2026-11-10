@@ -1,0 +1,110 @@
+- id: sanity-ui-v5-divider-vs-border-decision
+  mode: literacy
+  title: 'Divider — choose correctly between Divider and borderBottom on Box'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 93f1bde1-72a0-4538-9357-4f11c6e3376b
+        path: ui/components/divider
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 93f1bde1-72a0-4538-9357-4f11c6e3376b
+          perspective: rqgKNUCe1
+        reason: 'Divider — when to use vs borderBottom, semantic thematic break vs container edge, and Divider between groups of items rather than between every item'
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box borderBottom — for separating a container from the content below it'
+  prompt:
+    text: |
+      For each of the following UI scenarios, decide whether to use the `Divider` component or `borderBottom` on a `Box`.
+
+      1. A toolbar at the top of a panel that needs a visual line separating it from the scrollable content area below it
+      2. A settings list split into two groups (account settings, then notification settings), where a clear boundary between the groups helps scanning
+      3. A sidebar nav header (containing a title and a close button) that needs a line below it to separate it from the nav links
+      4. Content inside a VStack where the user is switching from a metadata section to an actions section — marking a topical shift
+
+      All components come from the `@sanity/ui` package.
+
+      Write the JSX for all four scenarios. For scenarios 2 and 4, show Divider used correctly inside a VStack.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The JSX for scenario 1 puts borderBottom on the toolbar Box, with no Divider
+        - The JSX for scenario 2 uses Divider between the two groups
+        - The JSX for scenario 3 puts borderBottom on the nav header Box, with no Divider
+        - The JSX for scenario 4 uses Divider
+        - The JSX for scenario 2 places a single Divider as a sibling inside a VStack between the two groups, not after every item
+        - The JSX for scenario 4 places Divider as a sibling inside a VStack between the metadata and actions sections
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Divider is imported from the '@sanity/ui' package
+        - Divider receives no props other than the margin family (margin, marginX, marginY, marginTop, marginBottom, marginLeft, marginRight) — it has no tone, size, orientation, or as prop
+        - Box is imported from the '@sanity/ui' package when used for borderBottom scenarios
+        - VStack is used (not a bare Stack — v5 has no Stack component)
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-divider-not-a-spacing-tool
+  mode: literacy
+  title: "Divider — not a spacing tool; don't stack Dividers or split a label from its field"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 93f1bde1-72a0-4538-9357-4f11c6e3376b
+        path: ui/components/divider
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 93f1bde1-72a0-4538-9357-4f11c6e3376b
+          perspective: rqgKNUCe1
+        reason: "Divider is not a spacing tool (use VStack gap); don't put multiple Dividers in a row (use a larger gap); a Label followed by a Divider followed by a field creates a false thematic break (pair them with VStack gap={1}); Divider renders an hr announced as a thematic break"
+  prompt:
+    text: |
+      Review this form section (all components from `@sanity/ui`). I used Dividers to get the vertical rhythm I wanted:
+
+      ```tsx
+      <VStack>
+        <Heading as="h2" size={1}>Publishing</Heading>
+        <Divider />
+        <Divider />
+        <Label htmlFor="slug">Slug</Label>
+        <Divider />
+        <Select id="slug">…</Select>
+      </VStack>
+      ```
+
+      Fix it and show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces the two Dividers in a row with a larger VStack gap
+        - Removes the Divider between the Label and the Select, and pairs the label with its field in a VStack with a small gap such as gap={1}
+        - Provides corrected JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected code has no Divider between the Label and the Select
+        - No two Dividers are adjacent in the corrected code
+        - Spacing is expressed with the VStack `gap` prop using spacing-scale numbers, not margins or inline styles
+        - VStack, Label, Select and Divider are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains-any
+      value: ['gap={1}', 'gap={2}']
+  baseline:
+    enabled: true
+    rubric: full

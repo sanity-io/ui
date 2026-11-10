@@ -1,0 +1,108 @@
+kind: component
+id: link
+name: Link
+description: Acts as a navigational element to move across pages.
+metadata:
+  tags: [link, anchor, navigation, href, url, external, internal]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To navigate to another page or external URL.
+      - level: should
+        statement: To scroll to a fragment within the same page (href='#section').
+      - level: should-not
+        statement: To trigger an action that doesn't navigate. Use Button instead.
+        alternatives:
+          - to: button
+      - level: should-not
+        statement: To switch between views on a screen. Use Tab instead.
+        alternatives:
+          - to: tabs
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: SkipToContent is a specialized skip-navigation Link; use it at the top of the page for keyboard bypass.
+        alternatives:
+          - to: skip-to-content
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: content-guidelines#name-the-action
+            rel: same-as
+      - id: link-open-in-new-tab-prop
+        level: should
+        statement: Use the openInNewTab prop instead of manually setting target='_blank', so it sets both target='_blank' and rel='noopener noreferrer' together.
+        example:
+          title: How to satisfy this
+          description: Review the component source or JSX and confirm that any link intended to open in a new tab passes openInNewTab={true} rather than target='_blank'. Inspect the rendered anchor element in DevTools and confirm rel='noopener noreferrer' is present alongside target='_blank'.
+        checkedBy: manual
+      - id: link-not-used-for-actions
+        level: must-not
+        statement: Don't use Link to trigger a side effect, such as opening a dialog, submitting data, or toggling state, without navigating to a new URL or fragment — use Button instead.
+        example:
+          title: How to satisfy this
+          description: Review each Link's onClick handler and href. Confirm the href is a real destination (URL, path, or fragment), not '#' or 'javascript:void(0)'. For any link that triggers an action, confirm the element has been replaced with a Button.
+        alternatives:
+          - to: button
+        checkedBy: manual
+      - id: link-no-nested-interactive
+        level: must-not
+        statement: "Don't nest interactive elements inside Link's children, such as a Button, input, select, textarea, or another anchor."
+        example:
+          title: How to satisfy this
+          description: Inspect the rendered DOM and confirm there is no button, input, select, textarea, or anchor element descendant inside the Link's anchor tag. Review the JSX passed to the children prop and confirm it contains only non-interactive content (text, icons, inline images).
+        checkedBy: manual
+      - id: link-no-unsafe-blank-target
+        level: must-not
+        statement: Don't hand-set target='_blank' without also setting rel='noopener noreferrer' — use the openInNewTab prop, which sets both safely.
+        example:
+          title: How to satisfy this
+          description: Search the codebase for target='_blank' and confirm every occurrence either uses the openInNewTab prop or explicitly includes rel='noopener noreferrer'. Inspect rendered anchor elements with target='_blank' in DevTools and confirm the rel attribute includes both 'noopener' and 'noreferrer'.
+        checkedBy: manual
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - level: should-not
+        statement: Don’t format text in a link any differently than regular text content.
+      - level: should-not
+        statement: Don’t add a trailing period when the link is a phrase on its own. Keep the period when the link sits inside a sentence.
+alternatives:
+  - to: button
+    note: For actions that don't navigate
+  - to: skip-to-content
+    note: A built-in skip-navigation link that uses Link
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/link/Link.tsx
+imports:
+  - platform: react
+    code: import { Link } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        In v3, links were either bare `<a>` tags or composed with `<Text>`. Link is a typed anchor with consistent defaults.
+
+        | v3 pattern | v5 pattern | Notes |
+        | :---- | :---- | :---- |
+        | `<a href="...">...</a>` | `<Link href="...">...</Link>` | Same API, different component; adds `sui-Link` class and `data-ui` attribute |
+        | `<a target="_blank" rel="noopener noreferrer">` | `<Link openInNewTab>` | New prop handles both attributes together |
+        | `text-decoration: underline` (CSS) | `underlined` (prop, default `true`) | Set `underlined={false}` to remove the underline |

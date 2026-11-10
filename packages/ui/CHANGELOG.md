@@ -1,5 +1,33 @@
 # @sanity/ui
 
+## 5.0.0-alpha.23
+
+### Patch Changes
+
+- ba3e618: initial commits for docs
+
+## 5.0.0-alpha.22
+
+### Patch Changes
+
+- 5002265: move shadow token definitions to repo
+
+## 5.0.0-alpha.21
+
+### Patch Changes
+
+- 80650b0: remove 'weight' and 'muted' from Heading, make 'as' mandatory
+- 410157c: switch as to inline and remove weight in code component
+- 3d32506: fix: apply --font-mono to code elements in reset
+
+## 5.0.0-alpha.20
+
+### Patch Changes
+
+- f21f5a2: remove label wrapper from checkbox, radio, and switch components
+- 3cfacb2: fix trim prop on eyebrow
+- 5e5d285: fix tooltip default and placement styling
+
 ## 5.0.0-alpha.19
 
 ### Patch Changes

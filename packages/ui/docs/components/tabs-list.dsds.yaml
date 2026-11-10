@@ -1,0 +1,56 @@
+kind: component
+id: tabs-list
+name: Tabs.List
+description: The row that holds the Tabs.Tab buttons. It renders with role="tablist", lays its tabs out in a row, and moves focus between them with the arrow keys.
+metadata:
+  tags: [tabs, tablist, tabpanel, navigation, views, tab, sections]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: pre-select-default-tab-user
+        level: must
+        statement: Set Tabs value to one of the Tab values. This shows a panel on first render.
+      - level: must
+        statement: Show at least 2 tabs. A single tab provides no benefit.
+      - level: must-not
+        statement: Don't use more than 10 tabs. If more are needed, consider breaking the page up into smaller separate pages.
+      - level: must-not
+        statement: Don't pass onKeyDown to Tabs.List. The component ignores it and uses its own arrow-key handler.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: Give Tabs.List an aria-label or aria-labelledby. The type requires one of them.
+
+refs:
+  - to: tabs
+    rel: relates-to
+    note: The family this list belongs to.
+  - to: tab
+    rel: relates-to
+    note: The buttons this list holds.
+  - to: tabs-panel
+    rel: relates-to
+    note: The content each tab selects.
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=23902-5282
+    rel: design
+    role: Figma component
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/tabs/Tabs.tsx
+imports:
+  - platform: react
+    code: import { Tabs } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

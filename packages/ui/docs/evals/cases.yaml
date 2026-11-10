@@ -1,0 +1,1319 @@
+# Labelled cases for the guidelines that carry `rel: agent-test`.
+#
+# Shape follows ESLint's RuleTester, which eslint-plugin-sanity-ui already
+# uses for the same rules: a case is explicitly valid or invalid for a named
+# rule. Nothing is inferred from absence.
+#
+#   kind        `conforms` or `violates` — what this code does to the
+#               guidelines named below. A `must` guideline's natural
+#               illustration is a conforming case; a `must-not`'s is a
+#               violating one.
+#   guidelines  the guideline item ids this case is evidence for. A case is
+#               UNLABELLED for any guideline it does not name — not a
+#               negative. Omission used to mean 'clean', which silently
+#               mislabelled every existing case whenever a guideline was
+#               added.
+#   code        the snippet, or a list of snippets sharing this entry's kind
+#               and guidelines. Each is its own data point; the list only
+#               saves repeating the labels. Small on purpose: a case needing
+#               a screenful of context tests retrieval, not judgment.
+#
+# `guidelines` rather than `rules` because DSDS retires that word —
+# terms.yaml: `use: item / not: entry, rule, criterion` — and because
+# Tools/dsds-jev-eval already uses 'rules' for ESLint rule ids.
+#
+# To add a case: append one entry. To make another guideline assessable: add
+# `checks`/`$extensions` to it in the corpus, then add at least one
+# conforming and one violating case naming it here.
+
+cases:
+  - kind: violates
+    guidelines: ['no-onclick-on-card']
+    code:
+      - |
+        import { Card, Text } from '@sanity/ui-v5'
+        export function Row({ item, onOpen }) {
+          return <Card onClick={() => onOpen(item)}><Text>{item.title}</Text></Card>
+        }
+      - |
+        import { Card, Text } from '@sanity/ui-v5'
+        export function ClickableCard({ item, onOpen }) {
+          return <Card padding={3} onClick={() => onOpen(item)}><Text>{item.title}</Text></Card>
+        }
+  - kind: conforms
+    guidelines: ['no-onclick-on-card']
+    code:
+      - |
+        import { Card, PressArea, Text } from '@sanity/ui-v5'
+        export function Row({ item, onOpen }) {
+          return <PressArea onClick={() => onOpen(item)} aria-label={`Open ${item.title}`}>
+            <Card><Text>{item.title}</Text></Card>
+          </PressArea>
+        }
+      - |
+        import { Card, PressArea, Text } from '@sanity/ui-v5'
+        export function ClickableCard({ item, onOpen }) {
+          return <PressArea onClick={() => onNavigate(item)} aria-label={`Go to ${item.title}`}>
+            <Card density="compact"><Text>Go to {item.title}</Text></Card>
+          </PressArea>
+        }
+  - kind: violates
+    guidelines: ['flex-no-onclick']
+    code:
+      - |
+        import { Flex, Text } from '@sanity/ui-v5'
+        export function Toolbar({ onSelect }) {
+          return <Flex gap={2} onClick={onSelect}><Text>Filter</Text></Flex>
+        }
+      - |
+        import { HStack, Text } from '@sanity/ui-v5'
+        export function Bar({ onOpen }) {
+          return <HStack gap={2} onClick={() => onOpen()}><Text>Open</Text></HStack>
+        }
+  - kind: conforms
+    guidelines: ['flex-no-onclick']
+    code:
+      - |
+        import { Button, Flex } from '@sanity/ui-v5'
+        export function Toolbar({ onSelect }) {
+          return <Flex gap={2}><Button text="Filter" onClick={onSelect} /></Flex>
+        }
+      - |
+        import { Flex, PressArea, Text } from '@sanity/ui-v5'
+        export function Toolbar({ onSelect }) {
+          return <PressArea onClick={onSelect}><Flex gap={2}><Text>Filter</Text></Flex>
+        }
+  - kind: violates
+    guidelines: ['spacing-is-an-integer-scale-token']
+    code: |
+      import { Box, Text } from '@sanity/ui-v5'
+      export function Panel() {
+        return <Box padding="2"><Text>Body</Text></Box>
+      }
+  - kind: conforms
+    guidelines: ['spacing-is-an-integer-scale-token']
+    code: |
+      import { Box, Text } from '@sanity/ui-v5'
+      export function Panel() {
+        return <Box padding={2}><Text>Body</Text></Box>
+      }
+  - kind: violates
+    guidelines: ['button-icon-only-accessible-name', 'icon-only-control-needs-name']
+    code: |
+      import { IconButton } from '@sanity/ui-v5'
+      import { TrashIcon } from '@sanity/icons/Trash'
+      export function DeleteAction({ onDelete }) {
+        return <IconButton icon={TrashIcon} onClick={onDelete} />
+      }
+  - kind: conforms
+    guidelines: ['button-icon-only-accessible-name', 'icon-only-control-needs-name']
+    code: |
+      import { IconButton } from '@sanity/ui-v5'
+      import { TrashIcon } from '@sanity/icons/Trash'
+      export function DeleteAction({ onDelete }) {
+        return <IconButton icon={TrashIcon} onClick={onDelete} aria-label="Delete item" />
+      }
+  - kind: violates
+    guidelines:
+      [
+        'button-icon-only-accessible-name',
+        'icon-not-sole-content-of-control',
+        'icon-only-control-needs-name',
+      ]
+    code: |
+      import { Button, Icon } from '@sanity/ui-v5'
+      import { EditIcon } from '@sanity/icons/Edit'
+      export function EditAction({ onEdit }) {
+        return <Button onClick={onEdit}><Icon icon={EditIcon} /></Button>
+      }
+  - kind: conforms
+    guidelines:
+      [
+        'button-icon-only-accessible-name',
+        'icon-not-sole-content-of-control',
+        'icon-only-control-needs-name',
+      ]
+    code:
+      - |
+        import { Button } from '@sanity/ui-v5'
+        import { EditIcon } from '@sanity/icons/Edit'
+        export function EditAction({ onEdit }) {
+          return <Button text="Edit" iconStart={EditIcon} onClick={onEdit} />
+        }
+      - |
+        import { IconButton } from '@sanity/ui-v5'
+        import { EditIcon } from '@sanity/icons/Edit'
+        export function EditAction({ onEdit }) {
+          return <IconButton icon={EditIcon} onClick={onEdit} aria-label="Edit" />
+        }
+  - kind: violates
+    guidelines: ['flex-no-inline-styles']
+    code: |
+      import { Flex, Text } from '@sanity/ui-v5'
+      export function Row() {
+        return <Flex style={{ gap: 8, alignItems: 'center' }}><Text>A</Text></Flex>
+      }
+  - kind: conforms
+    guidelines: ['flex-no-inline-styles']
+    code: |
+      import { Flex, Text } from '@sanity/ui-v5'
+      export function Row() {
+        return <Flex gap={2} alignItems="center"><Text>A</Text></Flex>
+      }
+  - kind: violates
+    guidelines: ['no-inline-style-for-spacing']
+    code: |
+      import { Card, Text } from '@sanity/ui-v5'
+      export function Panel() {
+        return <Card style={{ padding: 16, borderRadius: 6 }}><Text>Body</Text></Card>
+      }
+  - kind: conforms
+    guidelines: ['no-inline-style-for-spacing']
+    code: |
+      import { Card, Text } from '@sanity/ui-v5'
+      export function Panel() {
+        return <Card density="regular"><Text>Body</Text></Card>
+      }
+  - kind: violates
+    guidelines: ['button-not-hand-written-native']
+    code: |
+      export function SaveAction({ onSave, buttonRef }) {
+        return <button ref={buttonRef} onClick={onSave} className="save">Save</button>
+      }
+  - kind: conforms
+    guidelines: ['button-not-hand-written-native']
+    code: |
+      import { Button } from '@sanity/ui-v5'
+      export function SaveAction({ onSave, buttonRef }) {
+        return <Button ref={buttonRef} text="Save" onClick={onSave} />
+      }
+  - kind: violates
+    guidelines: ['press-area-renders-native-element']
+    code: |
+      export function Tile({ onOpen, label }) {
+        return <div role="button" tabIndex={0} onClick={onOpen}>{label}</div>
+      }
+  - kind: conforms
+    guidelines: ['press-area-renders-native-element']
+    code: |
+      import { PressArea, Text } from '@sanity/ui-v5'
+      export function Tile({ onOpen, label }) {
+        return <PressArea onClick={onOpen}><Text>{label}</Text></PressArea>
+      }
+  - kind: violates
+    guidelines: ['card-no-layout-props']
+    code:
+      - |
+        import { Card, Text } from '@sanity/ui-v5'
+        export function Tile({ title }) {
+          return <Card flexGrow={1} minWidth={0} radius={2} padding={3}><Text>{title}</Text></Card>
+        }
+  - kind: conforms
+    guidelines: ['card-no-layout-props']
+    code: |
+      import { Box, Card, Text } from '@sanity/ui-v5'
+      export function Tile({ title }) {
+        return <Box flexGrow={1} minWidth={0}><Card density="compact"><Text>{title}</Text></Card></Box>
+      }
+  - kind: violates
+    guidelines: ['checkbox-label-required']
+    code: |
+      import { Checkbox, Flex, Text } from '@sanity/ui-v5'
+      export function SelectRow({ checked, onChange }) {
+        return <Flex gap={2}><Checkbox checked={checked} onChange={onChange} /><Text>Select</Text></Flex>
+      }
+  - kind: conforms
+    guidelines: ['checkbox-label-required']
+    code: |
+      import { Checkbox } from '@sanity/ui-v5'
+      export function SelectRow({ checked, onChange }) {
+        return <Checkbox label="Select row" checked={checked} onChange={onChange} />
+      }
+  - kind: violates
+    guidelines: ['icon-import-from-subpath']
+    code: |
+      import { Button } from '@sanity/ui-v5'
+      import { SearchIcon, TrashIcon } from '@sanity/icons'
+      export function Actions() {
+        return <Button text="Search" iconStart={SearchIcon} />
+      }
+  - kind: conforms
+    guidelines: ['icon-import-from-subpath']
+    code: |
+      import { Button } from '@sanity/ui-v5'
+      import { SearchIcon } from '@sanity/icons/Search'
+      export function Actions() {
+        return <Button text="Search" iconStart={SearchIcon} />
+      }
+  # Real pre-fix agent output. `marginBottom` on Heading/Text used to be
+  # labelled a violation here, and counted as the most common layout-prop
+  # mistake (1,218 Heading and 1,030 Text occurrences). It is valid: v5
+  # TypographyProps extends MarginProps. That snippet is now a conforming case
+  # below; these two still break the rule.
+  - kind: violates
+    guidelines: ['no-layout-props-on-typography-or-actions']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function FieldLabel({ children }) {
+          return <Text as="label" size={0} weight="medium" display="block" marginBottom={1}>{children}</Text>
+        }
+      - |
+        import { Button, Flex } from '@sanity/ui-v5'
+        export function Actions({ onSave }) {
+          return <Flex gap={2}><Button text="Save" onClick={onSave} width="fill" marginTop={2} /></Flex>
+        }
+  - kind: conforms
+    guidelines: ['no-layout-props-on-typography-or-actions']
+    code:
+      # Margins are props on Text and Heading. A judgment that fires here is wrong.
+      - |
+        import { Heading, Text, VStack } from '@sanity/ui-v5'
+        export function Section({ title, body }) {
+          return (
+            <VStack>
+              <Heading as="h4" size={0} marginBottom={3}>{title}</Heading>
+              <Text size={0} muted as="p" marginTop={2}>{body}</Text>
+            </VStack>
+          )
+        }
+      - |
+        import { Box, Heading, Text, VStack } from '@sanity/ui-v5'
+        export function Section({ title, body }) {
+          return (
+            <VStack gap={3}>
+              <Heading as="h4" size={0}>{title}</Heading>
+              <Box marginTop={2}><Text size={0} muted as="p">{body}</Text></Box>
+            </VStack>
+          )
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Caption({ children }) {
+          return <Text size={0} muted align="center">{children}</Text>
+        }
+  # Real pre-fix agent output. `style={{}}` on a DS component is the single
+  # largest error class in the corpus: 13,670 CSS properties across the run
+  # history, led by width (1,021), height (854), minWidth (771), padding
+  # (534) — all of which have a prop.
+  - kind: violates
+    guidelines: ['prop-before-inline-style']
+    code:
+      - |
+        import { Box, Flex, Text } from '@sanity/ui-v5'
+        export function Panel({ children }) {
+          return (
+            <Box style={{ width: '100%', overflowX: 'auto' }}>
+              <Flex alignItems="center" gap={2} style={{ backgroundColor: '#f5f5f5', borderRadius: '4px', padding: '0 12px' }}>
+                <Text size={0}>{children}</Text>
+              </Flex>
+            </Box>
+          )
+        }
+      - |
+        import { Card } from '@sanity/ui-v5'
+        export function Tile({ children }) {
+          return <Card density="regular" style={{ height: '100%' }}>{children}</Card>
+        }
+  - kind: conforms
+    guidelines: ['prop-before-inline-style']
+    code:
+      - |
+        import { Box, Flex, Text } from '@sanity/ui-v5'
+        export function Panel({ children }) {
+          return (
+            <Box width="fill" overflowX="auto">
+              <Flex alignItems="center" gap={2} radius={2} paddingX={3}>
+                <Text size={0}>{children}</Text>
+              </Flex>
+            </Box>
+          )
+        }
+      # The legitimate case: no prop path exists for either of these, so the
+      # rule deliberately allows them. A judgment that fires here is wrong.
+      - |
+        import { Box } from '@sanity/ui-v5'
+        export function Sheet({ children }) {
+          return <Box style={{ transform: 'translateY(-2px)', backgroundImage: 'linear-gradient(#000, #fff)' }}>{children}</Box>
+        }
+  # The `no-emojis` family. The shared rule and its three component
+  # refinements are labelled together on the same case wherever a snippet
+  # breaks both: an emoji in a Heading violates `heading-no-emojis` and
+  # `no-emojis` at once, the same refines-chain shape as the icon-only cases
+  # above. Fixtures necessarily contain the emojis the rule forbids.
+  - kind: violates
+    guidelines: ['heading-no-emojis', 'no-emojis']
+    code:
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}>🚀 Deployments</Heading>
+        }
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}>Deployments ✅</Heading>
+        }
+
+  - kind: conforms
+    guidelines: ['heading-no-emojis', 'heading-no-icons', 'no-emojis']
+    code:
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}>Deployments</Heading>
+        }
+      # The symbol sits on an adjacent element with its own accessible name,
+      # not inside the Heading. A judgment that fires here is wrong.
+      - |
+        import { Badge, Flex, Heading } from '@sanity/ui-v5'
+        import { RocketIcon } from '@sanity/icons/Rocket'
+        export function SectionTitle() {
+          return (
+            <Flex alignItems="center" gap={2}>
+              <Heading as="h2" size={2}>Deployments</Heading>
+              <Badge tone="positive" text="Live" iconStart={RocketIcon} />
+            </Flex>
+          )
+        }
+
+  - kind: violates
+    guidelines: ['heading-no-icons']
+    code:
+      - |
+        import { Flex, Heading, Icon } from '@sanity/ui-v5'
+        import { RocketIcon } from '@sanity/icons/Rocket'
+        export function SectionTitle() {
+          return (
+            <Flex alignItems="center" gap={2}>
+              <Icon icon={RocketIcon} />
+              <Heading as="h2" size={2}>Deployments</Heading>
+            </Flex>
+          )
+        }
+      - |
+        import { Heading, Icon } from '@sanity/ui-v5'
+        import { RocketIcon } from '@sanity/icons/Rocket'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}><Icon icon={RocketIcon} /> Deployments</Heading>
+        }
+  - kind: violates
+    guidelines: ['text-no-emojis', 'no-emojis']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Status() {
+          return <Text size={1}>Your changes were saved ✅ — nothing else to do.</Text>
+        }
+      - |
+        import { Text, VStack } from '@sanity/ui-v5'
+        export function Checklist() {
+          return (
+            <VStack gap={2}>
+              <Text size={1}>✔️ Connect a dataset</Text>
+              <Text size={1}>✔️ Invite your team</Text>
+            </VStack>
+          )
+        }
+      - |
+        import {Flex, Text } from '@sanity/ui-v5'
+        export function errorMessage() {
+          return <Flex gap={2}><Text size={2}>⛔️</Text><Text size={2}>Error!</Text></Flex>
+        }
+  - kind: conforms
+    guidelines: ['text-no-emojis', 'no-emojis']
+    code:
+      - |
+        import { Flex, Icon, Text } from '@sanity/ui-v5'
+        import { CheckmarkIcon } from '@sanity/icons/Checkmark'
+        export function Status() {
+          return (
+            <Flex alignItems="center" gap={2}>
+              <Icon icon={CheckmarkIcon} />
+              <Text size={1}>Your changes were saved.</Text>
+            </Flex>
+          )
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Status() {
+          return <Text size={1}>Your changes were saved.</Text>
+        }
+      - |
+        import {Flex, Text } from '@sanity/ui-v5'
+        import { ErrorOutlineIcon } from '@sanity/icons/ErrorOutlineIcon'
+        export function errorMessage() {
+          return <Flex gap={2}><Icon icon={ErrorOutlineIcon} size={2} /><Text size={2}>Error!</Text></Flex>
+        }
+  - kind: violates
+    guidelines: ['badge-no-emojis', 'no-emojis']
+    code:
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function PublishState() {
+          return <Badge tone="positive" text="✅ Published" />
+        }
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function PublishState() {
+          return <Badge tone="caution" text="⚠️ In review" />
+        }
+      - |
+        import {Badge } from '@sanity/ui-v5'
+        export function errorMessage() {
+          return <Badge text="⛔️ Critical" tone="critical" />
+        }
+  - kind: conforms
+    guidelines: ['badge-no-emojis', 'no-emojis']
+    code:
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        import { CheckmarkIcon } from '@sanity/icons/Checkmark'
+        export function PublishState() {
+          return <Badge tone="positive" text="Published" iconStart={CheckmarkIcon} />
+        }
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function PublishState() {
+          return <Badge tone="caution" text="In review" />
+        }
+      - |
+        import {Badge } from '@sanity/ui-v5'
+        import { ErrorOutlineIcon } from '@sanity/icons/ErrorOutlineIcon'
+        export function errorMessage() {
+          return <Badge iconStart={ErrorOutlineIcon} text="Critical" tone="critical" />
+        }
+  - kind: conforms
+    guidelines: ['no-emojis']
+    code:
+      # The carve-out: `no-emojis` permits user reactions. The emoji is
+      # user-supplied content, not a design decision. A judgment that fires
+      # here is wrong.
+      - |
+        import { Button, Flex } from '@sanity/ui-v5'
+        export function Reactions({ reactions, onToggle }) {
+          return (
+            <Flex gap={1}>
+              {reactions.map((reaction) => (
+                <Button
+                  key={reaction.id}
+                  text={`${reaction.emoji} ${reaction.count}`}
+                  onClick={() => onToggle(reaction.id)}
+                />
+              ))}
+            </Flex>
+          )
+        }
+  # `prefer-component-over-native-element`. The most-violated rule in the
+  # mined corpus that had no question: 332 of 2,176 real generated files
+  # (15%) trip `sanity-ui/no-native-html-elements`.
+  #
+  # The negative cases matter more than usual here. The rule covers a closed
+  # list — div, span, p, button, h1-h6, ul, ol, li, a, hr — and the corpus
+  # positively requires native `<table>` markup (see the data-table and
+  # sortable-data-table chunks). A judgment that fires on a table is wrong.
+  - kind: violates
+    guidelines: ['prefer-component-over-native-element']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Panel({ title, body }) {
+          return (
+            <div className="panel">
+              <h2>{title}</h2>
+              <p>{body}</p>
+            </div>
+          )
+        }
+      - |
+        import { Card } from '@sanity/ui-v5'
+        export function Actions({ onSave, href }) {
+          return (
+            <Card>
+              <button onClick={onSave}>Save</button>
+              <a href={href}>Read more</a>
+              <hr />
+            </Card>
+          )
+        }
+  - kind: conforms
+    guidelines: ['prefer-component-over-native-element']
+    code:
+      - |
+        import { Box, Divider, Heading, Text } from '@sanity/ui-v5'
+        export function Panel({ title, body }) {
+          return (
+            <Box padding={3}>
+              <Heading as="h2" size={2}>{title}</Heading>
+              <Text size={1}>{body}</Text>
+              <Divider />
+            </Box>
+          )
+        }
+      # The carve-out: table markup has no component equivalent and the
+      # corpus's own data-table chunks require it. A judgment that fires
+      # here is wrong.
+      - |
+        import { Box, Text } from '@sanity/ui-v5'
+        export function AssetTable({ rows }) {
+          return (
+            <Box padding={3}>
+              <table>
+                <thead>
+                  <tr><th scope="col"><Text size={0}>Name</Text></th></tr>
+                </thead>
+                <tbody>
+                  {rows.map((r) => (
+                    <tr key={r.id}><td><Text size={1}>{r.name}</Text></td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </Box>
+          )
+        }
+
+  # ═══ Judgment questions, moved from template-cases.yaml on 2026-09-23 ═══
+  # ── tone-is-semantic → tone-signals-state ────────────────────────────────
+  # The decorative half of the rule: a tone with no real state behind it.
+  - kind: violates
+    guidelines: ['tone-signals-state']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Greeting({ name }) {
+          return <Text size={3} tone="critical">Welcome back, {name}</Text>
+        }
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function CategoryTag({ category }) {
+          return <Badge tone="positive" text={category} />
+        }
+      # Tone used to make a section title stand out. Nothing is in a state.
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function GettingStarted() {
+          return <Heading as="h2" size={2} tone="caution">Getting started</Heading>
+        }
+  - kind: conforms
+    guidelines: ['tone-signals-state']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function Greeting({ name }) {
+          return <Text size={3}>Welcome back, {name}</Text>
+        }
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function PublishState() {
+          return <Badge tone="positive" text="Published" />
+        }
+      # A plain category carries no state, so it stays neutral.
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function CategoryTag({ category }) {
+          return <Badge text={category} />
+        }
+      # Emphasis comes from size and heading level, not tone.
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function GettingStarted() {
+          return <Heading as="h2" size={3}>Getting started</Heading>
+        }
+
+  # ── color-alone → second-channel-required ────────────────────────────────
+  # Meaning carried by one channel only. The status dot is colour and nothing
+  # else, so it breaks both rules. Tone plus descriptive text is the pairing
+  # rule's concern alone: the broad rule accepts any visible text, so those
+  # cases are labelled for tone-paired-with-second-channel only.
+  - kind: violates
+    guidelines: ['second-channel-required', 'tone-paired-with-second-channel']
+    code:
+      - |
+        import { Icon } from '@sanity/ui-v5'
+        import { CircleIcon } from '@sanity/icons/Circle'
+        export function SyncDot({ ok }) {
+          return <Icon icon={CircleIcon} tone={ok ? 'positive' : 'critical'} />
+        }
+  # Tone and text, no icon. The text describes the event but never names the state.
+  - kind: violates
+    guidelines: ['tone-paired-with-second-channel']
+    code:
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function ErrorMarker() {
+          return <Badge tone="critical" text="Failed" />
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function SuccessMessage() {
+          return <Text tone="positive">Process complete</Text>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function TimeoutMessage() {
+          return <Text tone="critical">Timed out</Text>
+        }
+  - kind: conforms
+    guidelines: ['second-channel-required', 'tone-paired-with-second-channel']
+    code:
+      - |
+        import { Flex, Icon, Text } from '@sanity/ui-v5'
+        import { ErrorOutlineIcon } from '@sanity/icons/ErrorOutline'
+        export function UploadStatus() {
+          return (
+            <Flex gap={2} alignItems="center">
+              <Icon icon={ErrorOutlineIcon} tone="critical" aria-hidden={true} />
+              <Text tone="critical">Upload failed</Text>
+            </Flex>
+          )
+        }
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        import { ErrorOutlineIcon } from '@sanity/icons/ErrorOutline'
+        export function ErrorMarker() {
+          return <Badge tone="critical" text="Failed" iconStart={ErrorOutlineIcon} />
+        }
+      - |
+        import { Flex, Icon, Text } from '@sanity/ui-v5'
+        import { CheckmarkIcon } from '@sanity/icons/Checkmark'
+        export function SuccessMessage() {
+          return <Flex gap={1}><Icon icon={CheckmarkIcon} tone="positive" aria-hidden={true} /><Text tone="positive">Process complete</Text></Flex>
+        }
+      # No icon, but the text names the state outright, so text is enough.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function TimeoutMessage() {
+          return (
+            <Text tone="critical">
+              <strong>Error:</strong> Process timed out. Restart the process to try again.
+            </Text>
+          )
+        }
+  # ── action-labels → name-the-action ──────────────────────────────────────
+  - kind: violates
+    guidelines: ['name-the-action']
+    code:
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function ExportForm({ onExport }) {
+          return <Button text="Submit" level="primary" onClick={onExport} />
+        }
+      - |
+        import { Link, Text } from '@sanity/ui-v5'
+        export function LimitsNote() {
+          return <Text size={1}>Files over 50 MB fail. <Link href="/docs/limits">Read more</Link></Text>
+        }
+      - |
+        import { Button, Flex } from '@sanity/ui-v5'
+        export function LeavePrompt({ onLeave, onStay }) {
+          return (
+            <Flex gap={2}>
+              <Button text="Yes" onClick={onLeave} />
+              <Button text="No" level="secondary" onClick={onStay} />
+            </Flex>
+          )
+        }
+  - kind: conforms
+    guidelines: ['name-the-action']
+    code:
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function ExportForm({ onExport }) {
+          return <Button text="Export as CSV" level="primary" onClick={onExport} />
+        }
+      - |
+        import { Link, Text } from '@sanity/ui-v5'
+        export function LimitsNote() {
+          return <Text size={1}>Files over 50 MB fail. <Link href="/docs/limits">Read the upload limits</Link></Text>
+        }
+      # "Cancel" names the only thing it can do. A judgment that fires here is wrong.
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function CancelEdit({ onCancel }) {
+          return <Button text="Cancel" level="secondary" onClick={onCancel} />
+        }
+
+  # ── plain-language → plain-language ──────────────────────────────────────
+  - kind: violates
+    guidelines: ['plain-language']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function SearchHint() {
+          return <Text size={1}>Leverage the GROQ projection pipeline to hydrate refs.</Text>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function SignInHint() {
+          return <Text size={1}>Enable SSO via your SAML IdP.</Text>
+        }
+  - kind: conforms
+    guidelines: ['plain-language']
+    code:
+      # The acronym is spelled out on first use. A judgment that fires here is wrong.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function SignInHint() {
+          return <Text size={1}>Sign in with single sign-on (SSO) through your company account.</Text>
+        }
+
+  # More plain-language cases, one way jargon reaches the UI per snippet.
+  # Each violation has a rewrite of the same interface below it, so the only
+  # difference a judge can use is the wording. Copy lives in props as often
+  # as in children — `label`, `text`, `content`, `aria-label` — so the cases
+  # spread across them.
+  - kind: violates
+    guidelines: ['plain-language']
+    code:
+      # An internal codename.
+      - |
+        import { Switch } from '@sanity/ui-v5'
+        export function ImportToggle({ on, onToggle }) {
+          return <Switch label="Enable Mercury ingest" checked={on} onChange={onToggle} />
+        }
+      # Design-speak.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function DensityHint() {
+          return <Text size={1}>Adjust the affordance density of your workspace.</Text>
+        }
+      # An unexplained acronym on an action.
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function AccessSettings({ onOpen }) {
+          return <Button text="Configure RBAC" onClick={onOpen} />
+        }
+      # Implementation vocabulary in a tooltip.
+      - |
+        import { IconButton, Tooltip } from '@sanity/ui-v5'
+        import { LinkIcon } from '@sanity/icons/Link'
+        export function OpenSource({ onOpen }) {
+          return (
+            <Tooltip content="Dereference to the canonical rev">
+              <IconButton icon={LinkIcon} aria-label="Open original" onClick={onOpen} />
+            </Tooltip>
+          )
+        }
+      # Jargon in an accessible name, where no one sees it to catch it.
+      - |
+        import { IconButton } from '@sanity/ui-v5'
+        import { RefreshIcon } from '@sanity/icons/Refresh'
+        export function Purge({ onPurge }) {
+          return <IconButton icon={RefreshIcon} aria-label="Purge edge cache" onClick={onPurge} />
+        }
+      # Internal vocabulary as a heading.
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}>Ingest pipeline v2</Heading>
+        }
+      # Plain words, but one long bureaucratic sentence.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function AccessNote() {
+          return (
+            <Text size={1}>
+              In order to facilitate optimal utilisation of collaborative functionality, it is necessary to ensure that
+              appropriate permissions have been provisioned prior to initiating a session.
+            </Text>
+          )
+        }
+  - kind: conforms
+    guidelines: ['plain-language']
+    code:
+      - |
+        import { Switch } from '@sanity/ui-v5'
+        export function ImportToggle({ on, onToggle }) {
+          return <Switch label="Import documents from the old site" checked={on} onChange={onToggle} />
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function DensityHint() {
+          return <Text size={1}>Show more or less space between items.</Text>
+        }
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function AccessSettings({ onOpen }) {
+          return <Button text="Choose who can edit" onClick={onOpen} />
+        }
+      - |
+        import { IconButton, Tooltip } from '@sanity/ui-v5'
+        import { LinkIcon } from '@sanity/icons/Link'
+        export function OpenSource({ onOpen }) {
+          return (
+            <Tooltip content="Open the original document">
+              <IconButton icon={LinkIcon} aria-label="Open original" onClick={onOpen} />
+            </Tooltip>
+          )
+        }
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SectionTitle() {
+          return <Heading as="h2" size={2}>Import settings</Heading>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function AccessNote() {
+          return <Text size={1}>Ask an admin for edit access to start a session.</Text>
+        }
+      # User content is not system copy. A document titled "GROQ cheat sheet"
+      # is the user's words. A judgment that fires here is wrong.
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function PostTitle({ post }) {
+          return <Heading as="h1" size={3}>{post.title}</Heading>
+        }
+
+  # A third round: product vocabulary, sentence shape and more controls.
+  # The first rounds were mostly single words of jargon. These add Sanity's
+  # own terms, which an agent copies from the docs it reads, plus copy that
+  # uses no jargon at all and is still hard to read.
+  - kind: violates
+    guidelines: ['plain-language']
+    code:
+      # Internal status vocabulary on a badge.
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function AssetUsage() {
+          return <Badge text="Orphaned" />
+        }
+      # A developer verb on an editor's action.
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function UpdateDraft({ onUpdate }) {
+          return <Button text="Rebase draft" onClick={onUpdate} />
+        }
+      # Two acronyms, neither spelled out.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function CacheHint() {
+          return <Text size={1}>Set the CDN TTL for published assets.</Text>
+        }
+      # An engineering pattern name as a setting.
+      - |
+        import { Switch } from '@sanity/ui-v5'
+        export function InstantSave({ on, onToggle }) {
+          return <Switch label="Enable optimistic UI" checked={on} onChange={onToggle} />
+        }
+      # No jargon, but long words where short ones exist.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function LanguageHint() {
+          return <Text size={1}>Utilize the dropdown to select your preferred locale configuration.</Text>
+        }
+      # Nouns doing the work of verbs.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function DeleteWarning() {
+          return <Text size={1}>Execution of the deletion will result in the permanent unavailability of this asset.</Text>
+        }
+      # A double negative.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function ListHint() {
+          return <Text size={1}>Documents that are not unpublished will not be hidden from the list.</Text>
+        }
+      # Internal vocabulary as a heading.
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SchemaWarning() {
+          return <Heading as="h2" size={2}>Schema drift detected</Heading>
+        }
+      # Query language in an empty result.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function NoResults() {
+          return <Text size={1}>0 hits for filter predicate.</Text>
+        }
+  - kind: conforms
+    guidelines: ['plain-language']
+    code:
+      - |
+        import { Badge } from '@sanity/ui-v5'
+        export function AssetUsage() {
+          return <Badge text="Not used anywhere" />
+        }
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function UpdateDraft({ onUpdate }) {
+          return <Button text="Add the latest changes" onClick={onUpdate} />
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function CacheHint() {
+          return <Text size={1}>Choose how long visitors see a saved copy of your images.</Text>
+        }
+      - |
+        import { Switch } from '@sanity/ui-v5'
+        export function InstantSave({ on, onToggle }) {
+          return <Switch label="Show changes before they finish saving" checked={on} onChange={onToggle} />
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function LanguageHint() {
+          return <Text size={1}>Pick your language from the list.</Text>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function DeleteWarning() {
+          return <Text size={1}>Deleting this image removes it for good.</Text>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function ListHint() {
+          return <Text size={1}>Published documents stay in the list.</Text>
+        }
+      - |
+        import { Heading } from '@sanity/ui-v5'
+        export function SchemaWarning() {
+          return <Heading as="h2" size={2}>Some fields have changed</Heading>
+        }
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function NoResults() {
+          return <Text size={1}>No documents match these filters.</Text>
+        }
+      # The user's own search words, echoed back. A judgment that fires here is wrong.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function NoMatches({ query }) {
+          return <Text size={1}>No results for "{query}".</Text>
+        }
+      # A product name is a name, not jargon. A judgment that fires here is wrong.
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function GitHubSignIn({ onSignIn }) {
+          return <Button text="Sign in with GitHub" onClick={onSignIn} />
+        }
+
+  # An error message that leaks implementation detail breaks both the
+  # plain-language rule and error-messaging's own.
+  - kind: violates
+    guidelines: ['plain-language', 'name-what-failed']
+    code: |
+      import { Text } from '@sanity/ui-v5'
+      export function SaveError() {
+        return <Text size={1} tone="critical">Mutation rejected: _rev mismatch (409)</Text>
+      }
+  - kind: conforms
+    guidelines: ['plain-language', 'name-what-failed']
+    code: |
+      import { Text } from '@sanity/ui-v5'
+      export function SaveError() {
+        return <Text size={1} tone="critical">Someone else changed this document. Reload to see their version.</Text>
+      }
+
+  # ── destructive-copy → the dialog's title and button rules ───────────────
+  # Labelled per rule, so a judge that only reads the title shows up as a
+  # miss on the button case and not as a pass.
+  # Both titles are fine for the title rule: the first names the action and
+  # the target, and the second is not destructive. Only the buttons fail.
+  - kind: violates
+    guidelines: ['dialog-buttons-reinforce-the-action']
+    code:
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ document, open, onConfirm, onCancel }) {
+          return (
+            <Dialog header={`Do you want to delete ${document.name}?`} open={open} onClose={onCancel}>
+              <Dialog.Content><Text>This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Cancel" level="secondary" onClick={onCancel} />
+                  <Button text="Confirm" tone="critical" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ open, onConfirm, onCancel }) {
+          return (
+            <Dialog header="Upgrade your account?" open={open} onClose={onCancel}>
+              <Dialog.Content><Text>Upgrading gives you more tokens per month.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="No, not yet" tone="critical" level="secondary" onClick={onCancel} />
+                  <Button text="Yes, upgrade my account " level="primary" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+  # The button repeats the verb; only the title is vague.
+  - kind: violates
+    guidelines: ['destructive-dialog-title-names-target']
+    code:
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ open, onConfirm, onCancel }) {
+          return (
+            <Dialog header="Delete?" open={open} onClose={onCancel}>
+              <Dialog.Content><Text>This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Cancel" level="secondary" onClick={onCancel} />
+                  <Button text="Delete" tone="critical" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ open, onConfirm, onCancel }) {
+          return (
+            <Dialog header="Stop process?" open={open} onClose={onCancel}>
+              <Dialog.Content><Text>This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="No" level="secondary" onClick={onCancel} />
+                  <Button text="Yes" tone="critical" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+
+  - kind: conforms
+    guidelines: ['destructive-dialog-title-names-target', 'dialog-buttons-reinforce-the-action']
+    code:
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ page, open, onConfirm, onCancel }) {
+          return (
+            <Dialog header={`Delete '${page.title}'?`} open={open} onClose={onCancel}>
+              <Dialog.Content><Text>The page and its 3 drafts are removed. This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Don't delete" level="secondary" onClick={onCancel} />
+                  <Button text="Delete page and 3 drafts" tone="critical" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        export function ConfirmDelete({ process, open, onConfirm, onCancel }) {
+          return (
+            <Dialog header={`Stop '${process.name}'?`} open={open} onClose={onCancel}>
+              <Dialog.Content><Text>This will immediately suspend the active process and can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Don't stop process" level="secondary" onClick={onCancel} />
+                  <Button text="Stop process" tone="critical" onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+
+  # ── destructive-tone → destructive-actions-use-critical-tone ─────────────
+  - kind: violates
+    guidelines: ['destructive-actions-use-critical-tone']
+    code:
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function DeleteProject({ onDelete }) {
+          return <Button text="Delete project" onClick={onDelete} />
+        }
+      # Tone without the icon the rule pairs it with.
+      - |
+        import { Button } from '@sanity/ui-v5'
+        export function RevokeAccess({ onRevoke }) {
+          return <Button text="Revoke access" tone="critical" onClick={onRevoke} />
+        }
+      # The confirm is demoted below Cancel to make it less prominent.
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        import { TrashIcon } from '@sanity/icons/Trash'
+        export function ConfirmDeleteProject({ project, open, onConfirm, onCancel }) {
+          return (
+            <Dialog header={`Delete '${project.name}'?`} open={open} onClose={onCancel}>
+              <Dialog.Content><Text>All documents in the project are removed. This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Don't delete" level="secondary" onClick={onCancel} />
+                  <Button text="Delete project" tone="critical" level="tertiary" iconStart={TrashIcon} onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+  - kind: conforms
+    guidelines: ['destructive-actions-use-critical-tone']
+    code:
+      - |
+        import { Button } from '@sanity/ui-v5'
+        import { TrashIcon } from '@sanity/icons/Trash'
+        export function DeleteProject({ onDelete }) {
+          return <Button text="Delete project" tone="critical" level="primary" iconStart={TrashIcon} onClick={onDelete} />
+        }
+      # The same dialog with the confirm at its real importance.
+      - |
+        import { Button, Dialog, Flex, Text } from '@sanity/ui-v5'
+        import { TrashIcon } from '@sanity/icons/Trash'
+        export function ConfirmDeleteProject({ project, open, onConfirm, onCancel }) {
+          return (
+            <Dialog header={`Delete '${project.name}'?`} open={open} onClose={onCancel}>
+              <Dialog.Content><Text>All documents in the project are removed. This can't be undone.</Text></Dialog.Content>
+              <Dialog.Footer>
+                <Flex gap={3} justifyContent="flex-end">
+                  <Button text="Don't delete" level="secondary" onClick={onCancel} />
+                  <Button text="Delete project" tone="critical" level="primary" iconStart={TrashIcon} onClick={onConfirm} />
+                </Flex>
+              </Dialog.Footer>
+            </Dialog>
+          )
+        }
+
+  # ── truncate-body → no-truncate-body-copy ────────────────────────────────
+  - kind: violates
+    guidelines: ['no-truncate-body-copy']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function ArticleBody({ article }) {
+          return <Text truncate={2}>{article.body}</Text>
+        }
+      - |
+        import { Card, Text } from '@sanity/ui-v5'
+        export function ReleaseNote({ note }) {
+          return <Card><Text truncate={1}>{note.summaryParagraph}</Text></Card>
+        }
+  - kind: conforms
+    guidelines: ['no-truncate-body-copy']
+    code:
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function ArticleBody({ article }) {
+          return <Text>{article.body}</Text>
+        }
+      # Metadata is exactly what truncate is for. A judgment that fires here is wrong.
+      - |
+        import { Text } from '@sanity/ui-v5'
+        export function DocSlug({ doc }) {
+          return <Text size={1} muted truncate={1}>{doc.slug}</Text>
+        }
+  # Added 2026-09-25 from the corpus's own chunks, which Jev flagged. Each is
+  # correct under the current docs: Icon and IconButton hide their icon by
+  # themselves, `style` is the only path on a native element, and layout
+  # props belong on the Box around a Text or Button.
+  - kind: conforms
+    guidelines: ['icon-only-control-needs-name']
+    code:
+      # From toolbar-action-bar. The IconButton names itself; the Tooltip only adds a hint.
+      - |
+        import { Flex, IconButton, Tooltip } from '@sanity/ui-v5'
+        import { CopyIcon } from '@sanity/icons/Copy'
+        import { EllipsisHorizontalIcon } from '@sanity/icons/EllipsisHorizontal'
+        export function SecondaryActions({ onCopy, onMore }) {
+          return (
+            <Flex gap={1}>
+              <Tooltip content="Copy">
+                <IconButton icon={CopyIcon} aria-label="Copy" onClick={onCopy} />
+              </Tooltip>
+              <IconButton icon={EllipsisHorizontalIcon} aria-label="More actions" onClick={onMore} />
+            </Flex>
+          )
+        }
+      # A bare decorative Icon beside visible text. Icon hides itself.
+      - |
+        import { Flex, Icon, Text } from '@sanity/ui-v5'
+        import { DocumentIcon } from '@sanity/icons/Document'
+        export function DocumentRow({ title }) {
+          return (
+            <Flex gap={2} alignItems="center">
+              <Icon icon={DocumentIcon} muted />
+              <Text size={1}>{title}</Text>
+            </Flex>
+          )
+        }
+  - kind: violates
+    guidelines: ['icon-only-control-needs-name']
+    code:
+      # A Tooltip is not an accessible name.
+      - |
+        import { IconButton, Tooltip } from '@sanity/ui-v5'
+        import { CloseIcon } from '@sanity/icons/Close'
+        export function CloseAction({ onClose }) {
+          return (
+            <Tooltip content="Close navigation">
+              <IconButton icon={CloseIcon} onClick={onClose} />
+            </Tooltip>
+          )
+        }
+  - kind: conforms
+    guidelines: ['prop-before-inline-style']
+    code:
+      # From data-table. A native table has no Sanity UI equivalent, so style is its only path.
+      - |
+        import { Box, Text } from '@sanity/ui-v5'
+        export function Table({ rows }) {
+          return (
+            <Box overflowX="auto">
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <tbody>
+                  {rows.map((r) => (
+                    <tr key={r.id}>
+                      <td style={{ padding: 'var(--space-3)', borderTop: '1px solid var(--separator-low)' }}>
+                        <Text size={1}>{r.title}</Text>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Box>
+          )
+        }
+      # From form-layout. The reset removes the browser's default fieldset border and spacing.
+      - |
+        import { Box, Checkbox, Text, VStack } from '@sanity/ui-v5'
+        export function Notifications() {
+          return (
+            <fieldset style={{ border: 0, margin: 0, padding: 0, minWidth: 0 }}>
+              <legend style={{ padding: 0 }}>
+                <Text size={1} weight="medium">Notifications</Text>
+              </legend>
+              <Box marginTop={3}>
+                <VStack gap={3}>
+                  <Checkbox label="Email notifications" name="notifyEmail" />
+                </VStack>
+              </Box>
+            </fieldset>
+          )
+        }
+  - kind: conforms
+    guidelines: ['no-layout-props-on-typography-or-actions']
+    code:
+      # From inspector-panel. Layout props sit on the Box; fullWidth is Button's own prop.
+      - |
+        import { Box, Button, VStack } from '@sanity/ui-v5'
+        export function PanelActions({ actions }) {
+          return (
+            <Box padding={3} flexShrink={0}>
+              <VStack gap={2}>
+                {actions.map((a) => (
+                  <Button key={a.label} level="secondary" text={a.label} fullWidth onClick={a.onClick} />
+                ))}
+              </VStack>
+            </Box>
+          )
+        }
+      # From inspector-panel. The Box sizes the column; the Text inside has only its own props.
+      - |
+        import { Box, Flex, Text } from '@sanity/ui-v5'
+        export function DetailRow({ label, value }) {
+          return (
+            <Flex gap={3} alignItems="flex-start">
+              <Box minWidth="120px" flexShrink={0}>
+                <Text size={1} muted weight="semibold">{label}</Text>
+              </Box>
+              <Box flexGrow={1} minWidth="0">
+                <Text size={1}>{value}</Text>
+              </Box>
+            </Flex>
+          )
+        }
