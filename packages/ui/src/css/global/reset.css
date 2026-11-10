@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light dark;
+}
+
 /* Prevent adjustments of font size after orientation changes in iOS. */
 :where(html) {
   -webkit-text-size-adjust: 100%;
@@ -7,7 +11,6 @@
 :where([class*="sui-"]):not(:where([class*="sui-"]) :where([class*="sui-"])) {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
-  color-scheme: light dark;
 }
 
 /* Default to border-box sizing */
