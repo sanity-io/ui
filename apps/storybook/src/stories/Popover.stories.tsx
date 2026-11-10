@@ -113,10 +113,12 @@ export const Placements: Story = {
       <Grid gridTemplateColumns="repeat(3, 1fr)" gap={3} paddingX={3} paddingY={4}>
         {PLACEMENT.map((placement) => (
           <div key={placement}>
+            {/* The overflow: hidden prevents an axe scrollable-region-focusable false positive */}
             <Popover
               {...props}
               placement={placement}
               content={`${placement[0].toUpperCase() + placement.slice(1)} Popover Content`}
+              style={{overflow: 'hidden'}}
             >
               <Button
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Popover`}
