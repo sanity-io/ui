@@ -19,6 +19,10 @@ export interface PopoverProps
    */
   content?: React.ReactNode
   /**
+   * Removes popover padding.
+   */
+  fullBleed?: boolean
+  /**
    * Renders the content into `document.body` through a React portal instead of inline.
    */
   portal?: boolean
@@ -30,6 +34,11 @@ export const popoverProps: Record<string, PropDef> = {
   },
   content: {
     type: 'string',
+  },
+  fullBleed: {
+    type: 'boolean',
+    className: 'p0',
+    inverseClassName: 'p2',
   },
   portal: {
     type: 'boolean',

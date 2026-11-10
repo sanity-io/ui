@@ -8,10 +8,11 @@ import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type PopoverProps, popoverProps} from './popover.props'
 
-const popoverClassName = suffixClassName('sui-PopoverContent')
+const popoverClassName = suffixClassName('sui-Popover')
 
 function PopoverRoot({
   placement = 'bottom',
+  fullBleed = false,
   ...props
 }: PopoverProps & {
   triggerProps?: Record<string, unknown>
@@ -26,7 +27,7 @@ function PopoverRoot({
     portal,
     triggerProps: forwardedTriggerProps,
     ...rest
-  } = getProps({placement, ...props}, popoverProps)
+  } = getProps({placement, fullBleed, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
   const [open, setOpen] = useState(false)
@@ -54,7 +55,7 @@ function PopoverRoot({
           <div
             className={clsx(
               popoverClassName,
-              'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+              'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
               className,
             )}
             style={{
