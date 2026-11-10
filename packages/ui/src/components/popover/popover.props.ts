@@ -23,7 +23,7 @@ export interface PopoverProps
    */
   fullBleed?: boolean
   /**
-   * Renders the label into `document.body` through a React portal instead of inline.
+   * Renders the content into `document.body` through a React portal instead of inline.
    */
   portal?: boolean
 }
