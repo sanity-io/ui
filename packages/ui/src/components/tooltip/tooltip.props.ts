@@ -17,9 +17,14 @@ export interface TooltipProps
    */
   content?: React.ReactNode
   /**
-   * Renders the label into `document.body` through a React portal instead of inline.
+   * Renders the content into a React portal instead of inline.
+   * @remarks Content can be rendered into `document.body` or an optional `portalElement`
    */
   portal?: boolean
+  /**
+   * Element to render the portal into.
+   */
+  portalElement?: Element | DocumentFragment
 }
 
 export const tooltipProps: Record<string, PropDef> = {
@@ -30,6 +35,9 @@ export const tooltipProps: Record<string, PropDef> = {
     type: 'string',
   },
   portal: {
+    type: 'boolean',
+  },
+  portalElement: {
     type: 'boolean',
   },
   ...placementProps,
