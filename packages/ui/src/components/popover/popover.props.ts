@@ -23,14 +23,9 @@ export interface PopoverProps
    */
   fullBleed?: boolean
   /**
-   * Renders the content into a React portal instead of inline.
-   * @remarks Content can be rendered into `document.body` or an optional `portalElement`
+   * Renders the label into `document.body` through a React portal instead of inline.
    */
   portal?: boolean
-  /**
-   * Element to render the portal into.
-   */
-  portalElement?: Element | DocumentFragment
 }
 
 export const popoverProps: Record<string, PropDef> = {
@@ -46,9 +41,6 @@ export const popoverProps: Record<string, PropDef> = {
     inverseClassName: 'p2',
   },
   portal: {
-    type: 'boolean',
-  },
-  portalElement: {
     type: 'boolean',
   },
   ...placementProps,

@@ -25,7 +25,6 @@ function PopoverRoot({
     anchorName,
     content,
     portal,
-    portalElement,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, fullBleed, ...props}, popoverProps)
@@ -74,7 +73,6 @@ function PopoverRoot({
         </Activity>,
         isClient,
         portal,
-        portalElement,
       )}
     </>
   )

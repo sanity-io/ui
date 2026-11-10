@@ -24,7 +24,6 @@ function TooltipRoot({
     anchorName,
     content,
     portal,
-    portalElement,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
@@ -85,7 +84,6 @@ function TooltipRoot({
         </div>,
         isClient,
         portal,
-        portalElement,
       )}
     </>
   )
