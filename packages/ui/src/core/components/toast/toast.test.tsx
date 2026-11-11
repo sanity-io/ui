@@ -45,7 +45,7 @@ describe('components/toast', () => {
 
       function Debug() {
         try {
-          // oxlint-disable-next-line react/hooks, react/rules-of-hooks
+          // oxlint-disable-next-line react/rules-of-hooks
           useToast()
         } catch (err) {
           log(err)
@@ -75,7 +75,7 @@ describe('components/toast', () => {
 
       function Debug() {
         try {
-          // oxlint-disable-next-line react/hooks, react/rules-of-hooks
+          // oxlint-disable-next-line react/rules-of-hooks
           useToast()
         } catch (err) {
           log(err)
