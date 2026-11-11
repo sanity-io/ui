@@ -976,14 +976,19 @@ describe('Popover', () => {
       expect(error).not.toHaveBeenCalled()
     })
 
-    it('has the `size` middleware write sizes of zero, never negative ones', async () => {
+    it('has the `size` middleware write a width of zero, and no max size where there is no room', async () => {
       const {rerender} = render(<Example constrainSize matchReferenceWidth />)
       await settle()
 
       const card = queryPopoverCard()!
 
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('72px')
+
       // Margins wider than the reference and taller than the room below it, and a boundary narrower
-      // than its padding: CSS ignores a negative length, which would keep the first render's sizes
+      // than its padding: CSS ignores a negative length, which would keep the first pass's sizes,
+      // and a max size of zero collapses the popover (a submenu placed beside the scrolling menu
+      // its reference is in has no room within that menu)
       rerender(
         <Example
           __unstable_margins={[60, 60, 60, 60]}
@@ -994,9 +999,10 @@ describe('Popover', () => {
       )
       await settle()
 
+      // The cap from the boundary's size still applies
       expect(card.style.width).toBe('0px')
-      expect(card.style.maxWidth).toBe('0px')
-      expect(card.style.maxHeight).toBe('0px')
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('')
     })
   })
 })

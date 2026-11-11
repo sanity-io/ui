@@ -58,8 +58,8 @@ export function size(options: {
       // IMPORTANT – APPLY ELEMENT STYLES HERE
       // Elements need to be resized BEFORE the `platform.getDimensions` call below, and never to a
       // negative size: CSS ignores a negative length, keeping the previous one
-      const availableWidth = Math.max(0, maxWidth - margins[1] - margins[3])
-      const availableHeight = Math.max(0, maxHeight - margins[0] - margins[2])
+      const availableWidth = maxWidth - margins[1] - margins[3]
+      const availableHeight = maxHeight - margins[0] - margins[2]
       const referenceWidth = Math.max(0, reference.width - margins[1] - margins[3])
 
       if (matchReferenceWidth) {
@@ -67,9 +67,18 @@ export function size(options: {
       }
 
       if (constrainSize) {
-        elements.floating.style.maxWidth = `${Math.min(availableWidth, options.maxWidth ?? Infinity)}px`
+        // No room at all means the popover lies outside the area it is measured in, like a submenu
+        // beside the scrolling menu its reference is in: a max size of zero would collapse it
+        const constrainedWidth = Math.min(
+          availableWidth > 0 ? availableWidth : Infinity,
+          options.maxWidth ?? Infinity,
+        )
 
-        elements.floating.style.maxHeight = `${availableHeight}px`
+        elements.floating.style.maxWidth = Number.isFinite(constrainedWidth)
+          ? `${constrainedWidth}px`
+          : ''
+
+        elements.floating.style.maxHeight = availableHeight > 0 ? `${availableHeight}px` : ''
       }
 
       const nextDimensions = await platform.getDimensions(elements.floating)
