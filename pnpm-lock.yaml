@@ -314,8 +314,8 @@ importers:
         specifier: ^16.4.2
         version: 16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       pako:
-        specifier: ^3.0.2
-        version: 3.0.2
+        specifier: ^3.0.3
+        version: 3.0.3
       prettier:
         specifier: ^3.9.10
         version: 3.9.10
@@ -7051,8 +7051,8 @@ packages:
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
 
-  pako@3.0.2:
-    resolution: {integrity: sha512-uBv6IT2aT1A78iU6dpNEbf6+CyhlV/6g9JlJs9kpgjFGFhruIICVRysF/W0SLzXg5+hCl+KroH7e4YUyfEmgLg==}
+  pako@3.0.3:
+    resolution: {integrity: sha512-tmrebBBYI5FOw8QICGwJNqE8fotC8R+gwcxOvoFNv+GKehOI6Lc6YBolNcQNnC4v96l1wt7rh102ifD4kVeZAQ==}
 
   parse-duration@2.1.9:
     resolution: {integrity: sha512-q73c2djLx0fPIEcnW4Eb9LBZnH+NunMUzKh3/UwHyMz8LKxd4hF0OVq3nap8x0AevX1QEyCojF7QO/vAb6PFiA==}
@@ -15092,7 +15092,7 @@ snapshots:
 
   pako@0.2.9: {}
 
-  pako@3.0.2: {}
+  pako@3.0.3: {}
 
   parse-duration@2.1.9: {}
 
