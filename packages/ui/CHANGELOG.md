@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.4.11
+
+### Patch Changes
+
+- [#3329](https://github.com/sanity-io/ui/pull/3329) [`212152e`](https://github.com/sanity-io/ui/commit/212152e8e1f24d36eb8e6e392a7259acde416a88) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^14.12.0
+
+- [#3305](https://github.com/sanity-io/ui/pull/3305) [`663f6a4`](https://github.com/sanity-io/ui/commit/663f6a473d049e1706d5d38f0afb7330a54c0b7b) Thanks [@stipsan](https://github.com/stipsan)! - Keep a `constrainSize` popover with no room in the area it is measured in, such as a submenu beside the scrolling menu its reference is in, from collapsing to a max width or height of zero. The boundary's cap still applies.
+
 ## 4.4.10
 
 ### Patch Changes
