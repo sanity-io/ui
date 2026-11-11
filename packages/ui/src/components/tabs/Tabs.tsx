@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {createContext, isValidElement, useContext, useId} from 'react'
+import {createContext, isValidElement, useContext, useId, type KeyboardEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -55,7 +55,7 @@ function TabsRoot({value, onValueChange, ...props}: TabsProps) {
   )
 }
 
-function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
   // Ignore keydowns if made with alt, ctrl, or meta
   if (event.altKey || event.ctrlKey || event.metaKey) {
     return

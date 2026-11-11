@@ -1,9 +1,8 @@
-import {placementProps, type PlacementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
 import type {PopoverProps} from '../popover/popover.props'
 
 /** @public */
-export interface MenuProps extends Omit<PopoverProps<'nav'>, 'as' | 'content'> {
+export interface MenuProps extends Omit<PopoverProps, 'content'> {
   /** Menu content */
   menu?: React.ReactNode
 }
@@ -15,7 +14,7 @@ export const menuProps: Record<string, PropDef> = {
 }
 
 /** @public */
-export interface MenuSubmenuProps extends Omit<PopoverProps<'ul'>, 'as' | 'content'> {
+export interface MenuSubmenuProps extends Omit<PopoverProps, 'content'> {
   /** Menu content */
   menu?: React.ReactNode
 }
