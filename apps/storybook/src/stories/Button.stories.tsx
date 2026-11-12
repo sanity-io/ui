@@ -138,3 +138,29 @@ export const Tones: Story = {
     ).toContain('sui-button-level-primary')
   },
 }
+
+export const Selected: Story = {
+  render: () => {
+    return (
+      <HStack gap={5}>
+        {BUTTON_LEVEL.map((level) => (
+          <VStack key={level} gap={2}>
+            <Button level={level} text={`Normal ${level} button`} />
+            <Button level={level} text={`Pressed ${level} button`} pressed />
+          </VStack>
+        ))}
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(
+      (await canvas.findByText('Pressed primary button')).parentElement?.ariaPressed,
+    ).toBe('true')
+    await expect(
+      (await canvas.findByText('Pressed secondary button')).parentElement?.ariaPressed,
+    ).toBe('true')
+    await expect(
+      (await canvas.findByText('Pressed tertiary button')).parentElement?.ariaPressed,
+    ).toBe('true')
+  },
+}

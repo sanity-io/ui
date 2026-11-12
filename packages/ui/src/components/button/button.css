@@ -13,6 +13,7 @@
   appearance: none;
 }
 
+.sui-Button[aria-pressed="true"],
 .sui-Button:hover {
   background: color-mix(
     in srgb,
@@ -44,16 +45,6 @@
 }
 
 /**
-  * Disabled
-  */
-.sui-Button[class*='sui-tone']:disabled {
-  --background-color: var(--inert-background);
-  --foreground-color: var(--inert-foreground);
-  --border-color: transparent;
-  pointer-events: none;
-}
-
-/**
   * Primary
   */
 .sui-button-level-primary {
@@ -62,20 +53,16 @@
   --hover-blend-color: light-dark(var(--gray-50), var(--gray-600));
 }
 
+.sui-Button.sui-button-level-primary[aria-pressed="true"],
 .sui-Button.sui-button-level-primary:hover {
-  background: color-mix(
-    in srgb,
-    var(--hover-blend-color) 25%,
-    var(--background-color)
-  );
   color: var(--foreground-low-emphasized);
 }
 
+/* Primary critical */
 .sui-button-level-primary.sui-tone-critical {
   --background-color: var(--background-low-emphasized);
   --hover-blend-color: light-dark(var(--red-50), var(--red-700));
 }
-
 
 /**
   * Secondary
@@ -84,6 +71,7 @@
   --border-color: var(--separator-low)
 }
 
+/* Secondary critical */
 .sui-button-level-secondary.sui-tone-critical {
   --background-color: var(--background-low);
   --foreground-color: var(--foreground-low);
@@ -91,9 +79,19 @@
 }
 
 /**
-  * Tertiary
+  * Tertiary critical
   */
 .sui-button-level-tertiary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
   --hover-blend-color: light-dark(var(--red-400), var(--red-500));
+}
+
+/**
+  * Disabled
+  */
+.sui-Button[class*='sui-tone']:disabled {
+  --background-color: var(--inert-background);
+  --foreground-color: var(--inert-foreground);
+  --border-color: transparent;
+  pointer-events: none;
 }

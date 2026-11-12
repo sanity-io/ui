@@ -27,6 +27,7 @@ export function Button<T extends ElementType = 'button'>({
     iconStart: IconStart,
     iconEnd: IconEnd,
     loading,
+    pressed,
     text,
     type = 'button',
     ...rest
@@ -44,6 +45,7 @@ export function Button<T extends ElementType = 'button'>({
       data-ui="Button"
       disabled={disabled || loading}
       aria-busy={loading ? true : undefined}
+      aria-pressed={pressed || undefined}
       type={type}
       {...rest}
     >
