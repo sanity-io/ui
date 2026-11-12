@@ -3,18 +3,12 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
-import {Divider} from '../../../../packages/ui/src/components/divider/Divider'
 import {Icon} from '../../../../packages/ui/src/components/icon/Icon'
 import {Menu} from '../../../../packages/ui/src/components/menu/Menu'
-import {menuProps} from '../../../../packages/ui/src/components/menu/menu.props'
-import {getArgTypes} from '../utils/getArgTypes'
-
-const argTypes = getArgTypes(menuProps)
 
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   args: {},
-  argTypes,
   component: Menu,
   tags: ['autodocs'],
   parameters: {
@@ -36,76 +30,38 @@ export const Default: Story = {
       <Menu
         {...props}
         menu={
-          <>
-            <Menu.Item density="none">
-              <Menu.ButtonItem>Test link</Menu.ButtonItem>
-            </Menu.Item>
-            <Menu.Item density="none">
-              <Menu.ButtonItem>Test link two</Menu.ButtonItem>
-            </Menu.Item>
-            <Menu.ButtonItem start={<Icon size={1} marginLeft={-1} icon={ExpandIcon} />}>
+          <Menu.Content>
+            <Menu.Button>Test link</Menu.Button>
+            <Menu.Button>Test link two</Menu.Button>
+            <Menu.Button start={<Icon size={1} marginLeft={-1} icon={ExpandIcon} />}>
               Test link three
-            </Menu.ButtonItem>
+            </Menu.Button>
 
-            <Menu.Item density="none">
-              <Menu.Submenu
-                menu={
-                  <>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link one</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link two</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link three</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link four</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link five</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link six</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link seven</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link eight</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test linke nine</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link ten</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test linke eleven</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link twelve</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test linke thirteen</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link fourteen</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test linke fifteen</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link sixteen</Menu.ButtonItem>
-                    </Menu.Item>
-                  </>
-                }
-              >
-                <Menu.ButtonItem>Open submenu</Menu.ButtonItem>
-              </Menu.Submenu>
-            </Menu.Item>
-          </>
+            <Menu.Submenu
+              menu={
+                <Menu.Content>
+                  <Menu.Button>Submenu test link one</Menu.Button>
+                  <Menu.Button>Submenu test link two</Menu.Button>
+                  <Menu.Button>Submenu test link three</Menu.Button>
+                  <Menu.Button>Submenu test link four</Menu.Button>
+                  <Menu.Button>Submenu test link five</Menu.Button>
+                  <Menu.Button>Submenu test link six</Menu.Button>
+                  <Menu.Button>Submenu test link seven</Menu.Button>
+                  <Menu.Button>Submenu test link eight</Menu.Button>
+                  <Menu.Button>Submenu test linke nine</Menu.Button>
+                  <Menu.Button>Submenu test link ten</Menu.Button>
+                  <Menu.Button>Submenu test linke eleven</Menu.Button>
+                  <Menu.Button>Submenu test link twelve</Menu.Button>
+                  <Menu.Button>Submenu test linke thirteen</Menu.Button>
+                  <Menu.Button>Submenu test link fourteen</Menu.Button>
+                  <Menu.Button>Submenu test linke fifteen</Menu.Button>
+                  <Menu.Button>Submenu test link sixteen</Menu.Button>
+                </Menu.Content>
+              }
+            >
+              <Menu.Button>Open submenu</Menu.Button>
+            </Menu.Submenu>
+          </Menu.Content>
         }
       >
         <Button text="Open Menu" />
@@ -123,37 +79,25 @@ export const WithSubmenus: Story = {
       <Menu
         {...props}
         menu={
-          <>
-            <Menu.Item density="none">
-              <Menu.ButtonItem>Test link</Menu.ButtonItem>
-            </Menu.Item>
+          <Menu.Content>
+            <Menu.Button>Test link</Menu.Button>
 
-            <Menu.Item density="none">
-              <Menu.ButtonItem>Test link two</Menu.ButtonItem>
-            </Menu.Item>
-            <Menu.Item density="none">
-              <Menu.ButtonItem start={<Icon size={1} marginLeft={-1} icon={ExpandIcon} />}>
-                Test link three
-              </Menu.ButtonItem>
-            </Menu.Item>
+            <Menu.Button>Test link two</Menu.Button>
+            <Menu.Button start={<Icon size={1} marginLeft={-1} icon={ExpandIcon} />}>
+              Test link three
+            </Menu.Button>
 
-            <Menu.Item density="none">
-              <Menu.Submenu
-                menu={
-                  <>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test linke one</Menu.ButtonItem>
-                    </Menu.Item>
-                    <Menu.Item density="none">
-                      <Menu.ButtonItem>Submenu test link two</Menu.ButtonItem>
-                    </Menu.Item>
-                  </>
-                }
-              >
-                <Menu.ButtonItem>Open submenu</Menu.ButtonItem>
-              </Menu.Submenu>
-            </Menu.Item>
-          </>
+            <Menu.Submenu
+              menu={
+                <Menu.Content>
+                  <Menu.Button>Submenu test linke one</Menu.Button>
+                  <Menu.Button>Submenu test link two</Menu.Button>
+                </Menu.Content>
+              }
+            >
+              <Menu.Button>Open submenu</Menu.Button>
+            </Menu.Submenu>
+          </Menu.Content>
         }
       >
         <Button text="Open Menu" />

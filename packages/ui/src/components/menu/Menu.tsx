@@ -1,74 +1,115 @@
 import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import clsx from 'clsx'
-import {type ComponentPropsWithRef, type KeyboardEvent, type PointerEvent} from 'react'
+import {type KeyboardEvent, type MouseEvent, type PointerEvent} from 'react'
 
+import {handleFocusKeyDown} from '../../utils/handleFocusKeyDown'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Icon} from '../icon/Icon'
 import {List} from '../list/List'
 import {Popover} from '../popover/Popover'
-import {type MenuProps, type MenuSubmenuProps} from './menu.props'
+import {
+  type MenuButtonProps,
+  type MenuContentProps,
+  type MenuProps,
+  type MenuSubmenuProps,
+} from './menu.props'
 
 const menuClassName = suffixClassName('sui-Menu')
+const menuButtonClassName = suffixClassName('sui-MenuButton')
 const menuSubmenuClassName = suffixClassName('sui-MenuSubmenu')
-// const menuContentClassName = suffixClassName('sui-MenuContent')
 
-function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-  const menu = e.currentTarget
-  const focusedItem = e.target
-  const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
-  const focusedTabIndex = items.indexOf(focusedItem as HTMLElement)
-
-  if (e.key === 'ArrowUp') {
-    e.preventDefault()
-    const previousTab = items[(focusedTabIndex - 1 + items.length) % items.length]
-    previousTab?.focus()
+const handleOpenKeyDown = (
+  e: KeyboardEvent<HTMLButtonElement>,
+  orientation: 'horizontal' | 'vertical' = 'vertical',
+) => {
+  if (e.altKey || e.ctrlKey || e.metaKey) {
+    return
   }
 
-  if (e.key === 'ArrowDown') {
-    e.preventDefault()
-    const nextTab = items[(focusedTabIndex + 1) % items.length]
-    nextTab?.focus()
+  const menu = e.currentTarget.popoverTargetElement as HTMLElement
+  const items = Array.from(menu!.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+
+  if (!(menu instanceof HTMLElement) || menu.matches(':popover-open')) {
+    return
   }
-  if (e.key === 'Home') {
+
+  if (
+    e.key === 'Enter' ||
+    e.key === ' ' ||
+    (orientation === 'horizontal' && e.key === 'ArrowRight') ||
+    (orientation === 'vertical' && e.key === 'ArrowDown')
+  ) {
     e.preventDefault()
+    menu?.showPopover({source: e.currentTarget})
     items[0]?.focus()
   }
-  if (e.key === 'End') {
+
+  if (orientation === 'vertical' && e.key === 'ArrowUp') {
     e.preventDefault()
+    menu?.showPopover({source: e.currentTarget})
     items[items.length - 1]?.focus()
   }
 }
 
-function MenuRoot({menu, children, className, style, ...props}: MenuProps) {
-  const triggerProps = {
-    onKeyDown: (e: KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault()
-        const menu = document.getElementById(e.currentTarget.getAttribute('popovertarget') || '')
-        const items = menu
-          ? Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
-          : []
-        const focusedItem = e.key === 'ArrowDown' ? items[0] : items[items.length - 1]
-        menu?.showPopover()
-        focusedItem?.focus()
-      }
-    },
+const handleCloseKeyDown = (
+  e: KeyboardEvent<HTMLElement>,
+  orientation: 'horizontal' | 'vertical' = 'vertical',
+) => {
+  const menu = e.currentTarget
+
+  if (!(menu instanceof HTMLElement) || !menu.matches(':popover-open')) {
+    return
   }
 
+  if (orientation === 'horizontal' && e.key === 'ArrowLeft') {
+    e.preventDefault()
+    const trigger = document.querySelector(`[popovertarget=${e.currentTarget.id}]`) as HTMLElement
+    trigger?.focus()
+    menu?.hidePopover()
+  }
+
+  if (e.key === 'Tab') {
+    e.preventDefault()
+
+    document.querySelectorAll('[popover]:popover-open').forEach((menu) => {
+      ;(menu as HTMLElement).hidePopover()
+    })
+  }
+}
+
+const handlePointerEnter = (e: PointerEvent<HTMLButtonElement>) => {
+  const menu = e.currentTarget.popoverTargetElement
+
+  if (!(menu instanceof HTMLElement) || menu.matches(':popover-open')) {
+    return
+  }
+
+  menu.showPopover({source: e.currentTarget})
+}
+
+const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault()
+  const menu = e.currentTarget.popoverTargetElement
+  const items = Array.from(menu!.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+  items[0]?.focus()
+  // need to remove focus on hover
+}
+
+function MenuRoot({menu, children, className, ...props}: MenuProps) {
   return (
     <Popover
       data-ui="Menu"
-      role="menu"
-      content={
-        <Flex flexDirection="column" padding={1} gap={1} onKeyDown={handleKeyDown}>
-          {menu}
-        </Flex>
-      }
+      content={menu}
       className={clsx(menuClassName, className)}
-      style={style}
       fullBleed
-      triggerProps={triggerProps}
+      triggerProps={{
+        onKeyDown: handleOpenKeyDown,
+      }}
+      onKeyDown={(e) => {
+        handleFocusKeyDown(e, '[role="menuitem"]', 'vertical')
+        handleCloseKeyDown(e)
+      }}
       {...props}
     >
       {children}
@@ -76,62 +117,54 @@ function MenuRoot({menu, children, className, style, ...props}: MenuProps) {
   )
 }
 
-const MenuItem: typeof List.ButtonItem = (props) => (
-  <List.Item
-    data-ui="MenuItem"
-    density="compact"
-    className="sui-text-body1 sui-weight-medium"
-    {...props}
-  />
-)
+function MenuContent(props: MenuContentProps) {
+  return (
+    <Flex data-ui="MenuContent" role="menu" flexDirection="column" padding={1} gap={1} {...props} />
+  )
+}
 
-const MenuButtonItem: typeof List.ButtonItem = (props) => (
-  <List.ButtonItem
-    data-ui="MenuButtonItem"
-    density="compact"
-    className="sui-text-body1 sui-weight-medium"
-    role="menuitem"
-    {...props}
-  />
-)
-
-const MenuSubmenuButtonItem: typeof List.ButtonItem = (props) => (
-  <List.ButtonItem
-    data-ui="MenuButtonItem"
-    density="compact"
-    className="sui-text-body1 sui-weight-medium sui-gap3"
-    end={<Icon icon={ChevronRightIcon} size={1} marginRight={-1} />}
-    {...props}
-  />
-)
+function MenuButton({className, ...props}: MenuButtonProps) {
+  return (
+    <List.ButtonItem
+      data-ui="MenuButton"
+      role="menuitem"
+      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', className)}
+      tabIndex={-1}
+      density="compact"
+      {...props}
+    />
+  )
+}
 
 function MenuSubmenu({
   menu,
   children,
   className,
-  style,
+  placement = 'right-start',
   ...props
-}: MenuSubmenuProps & Omit<ComponentPropsWithRef<'ul'>, keyof MenuSubmenuProps>) {
+}: MenuSubmenuProps) {
   return (
     <Popover
       data-ui="MenuSubmenu"
       content={menu}
-      placement="right-start"
       portal
-      {...props}
+      fullBleed
       className={clsx(menuSubmenuClassName, className)}
-      style={{padding: 'var(--space-1)', ...style}}
+      placement={placement}
       triggerProps={{
-        onPointerEnter: (event: PointerEvent<HTMLButtonElement>) => {
-          const popover = event.currentTarget.popoverTargetElement
-
-          if (!(popover instanceof HTMLElement) || popover.matches(':popover-open')) {
-            return
-          }
-
-          popover.showPopover({source: event.currentTarget})
+        onPointerEnter: handlePointerEnter,
+        onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
+          handleOpenKeyDown(e, 'horizontal')
         },
+        onClick: handleClick,
+        end: <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
       }}
+      onKeyDown={(e) => {
+        e.stopPropagation()
+        handleFocusKeyDown(e, '[role="menuitem"]')
+        handleCloseKeyDown(e, 'horizontal')
+      }}
+      {...props}
     >
       {children}
     </Popover>
@@ -140,8 +173,9 @@ function MenuSubmenu({
 
 /** @beta */
 export const Menu = Object.assign(MenuRoot, {
-  Item: MenuItem,
-  ButtonItem: MenuButtonItem,
+  Content: MenuContent,
+  Button: MenuButton,
   Submenu: MenuSubmenu,
-  SubmenuButtonItem: MenuSubmenuButtonItem,
 })
+
+export type {MenuProps, MenuContentProps, MenuButtonProps, MenuSubmenuProps}
