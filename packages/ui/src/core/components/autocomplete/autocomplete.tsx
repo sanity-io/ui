@@ -27,6 +27,7 @@ import {useEffectEvent} from 'use-effect-event'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_raf} from '../../helpers/animation'
 import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {Box, BoxProps} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
 import {Card} from '../../primitives/card/card'
@@ -217,6 +218,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
 
   // Value refs
+  const disabledRef = useLatestRef(disabled)
   const listFocusedRef = useRef(false)
   const popoverMouseWithinRef = useRef(false)
 
@@ -246,7 +248,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   )
   const filteredOptionsLen = filteredOptions.length
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
-  const querying = (query !== null && loading) || (focused && query !== null)
+  const querying = !disabled && query !== null && (loading || focused)
   // The list opens in a deferred render, so the keystroke, focus or click that opens it paints
   // first, and closes in the same render as the state that closes it. Dispatching the open in a
   // transition instead would drop a render-phase `value` sync while the transition is pending.
@@ -305,6 +307,9 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const handleOptionSelect = useCallback(
     (v: string) => {
+      // Options defer selection until after the click has propagated.
+      if (disabledRef.current) return
+
       dispatch({type: 'value/change', value: v})
 
       popoverMouseWithinRef.current = false
@@ -315,7 +320,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
       inputElementRef.current?.focus()
     },
-    [onChange, onSelect, onQueryChange],
+    [disabledRef, onChange, onSelect, onQueryChange],
   )
 
   const handleRootKeyDown = useCallback(
