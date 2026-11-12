@@ -7,153 +7,153 @@ importers:
     configDependencies: {}
     packageManagerDependencies:
       pnpm:
-        specifier: 12.14.0
-        version: 12.14.0
+        specifier: 12.18.0
+        version: 12.18.0
 
 packages:
 
-  '@pnpm/exe.android-arm64@12.14.0':
-    resolution: {integrity: sha512-+iSh7x21C3A2hqc+Z0ZmbKTcn6YNlzrXM142PsnQH/dLj0DYxFzoBvc6XAnL/yfQ5nnH2ebBiRj/zVxr61fZbQ==}
+  '@pnpm/exe.android-arm64@12.18.0':
+    resolution: {integrity: sha512-fOF6IwgvnUKEmVedGqiAsNPfN2Ry8GvaqzSQOiF3RJFbpBfPKO/6YT54s1GjToyYinRxw9preHHPe4y2N3SzhA==}
     cpu: [arm64]
     os: [android]
 
-  '@pnpm/exe.android-x64@12.14.0':
-    resolution: {integrity: sha512-qT+0LqEr2wBVaxcG2T8cX/R8SSRz2Rvpp8nRR4fh8tnGUZRch87gFmsHUAoSQh7w6j1h0qTjrA384j4xi8frvw==}
+  '@pnpm/exe.android-x64@12.18.0':
+    resolution: {integrity: sha512-6OiolnaCsB3/GcJ9XNrenbUH3zFHRJ+5QynrMUUEyThbgnnCzWxa199hpQlOmxN4rAXuYQ0IYgWFNUZxyzg31Q==}
     cpu: [x64]
     os: [android]
 
-  '@pnpm/exe.darwin-arm64@12.14.0':
-    resolution: {integrity: sha512-tnrdUB8ecJoehuKKqi1YHCBVl61xtJ9XVGcx5EviC6fWO4DeGI8GtXrjvJxDBM3nuVjJeWistgsUp/N142x4sw==}
+  '@pnpm/exe.darwin-arm64@12.18.0':
+    resolution: {integrity: sha512-zkq+4YzVIX39ETYLyC3W7LY7MpHEU/J3nRhHl4i2yPld2Cf2+rEKRh3ejJ4AmaQ77HHJLCktY4Z3jq0fpcxFXg==}
     cpu: [arm64]
     os: [darwin]
 
-  '@pnpm/exe.darwin-x64@12.14.0':
-    resolution: {integrity: sha512-vlBfGkruqQRsEHTW43cPwpYd7QlbIJ//cvpAdb3bVXkI8SgTPoXhCnc05m+ZNiPrrEkBsX/t7KHw9aXpkzPm3Q==}
+  '@pnpm/exe.darwin-x64@12.18.0':
+    resolution: {integrity: sha512-qMsL9qx92unOTa6hgkfiTJv8ceZaTx0IQg7InhYDVX2ZrTECujaVEEVypnJK5m3eGUsP1KD7Y4qIgleCwfRsYw==}
     cpu: [x64]
     os: [darwin]
 
-  '@pnpm/exe.freebsd-x64@12.14.0':
-    resolution: {integrity: sha512-Qg5rxBrGYl6Tfso+EyygPf84fY1Fzy55E/0or+iuYKtnf0vc0MlHJfVIlT7pBukMRntQHRik7hUi0Z4s7AlJsw==}
+  '@pnpm/exe.freebsd-x64@12.18.0':
+    resolution: {integrity: sha512-/9vy/4ms52cU4MjZ5NhHd6N2d9L9W0kARf5/ff2tweAHu0VeUzs/0qp/7ZHFuddm2Wa/m0AKQoPum9AVUCqKsw==}
     cpu: [x64]
     os: [freebsd]
 
-  '@pnpm/exe.linux-arm64-musl@12.14.0':
-    resolution: {integrity: sha512-DRIe4yQkXBGA/PhVJdzlbnllxBdAtnMMvTVLLcGpsK5FvJz9kxD2Hyxtn68ovmNkVX06f6p45cQwfm3wx2jn1A==}
+  '@pnpm/exe.linux-arm64-musl@12.18.0':
+    resolution: {integrity: sha512-Vp+TIMPPyackVCXkOdEKH/RmAn/r07EcIyrgZYQK7VrkksqZOie0GnWIx+85mPqeFEYCRtXIZAFJ9L4ceTndDg==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@pnpm/exe.linux-arm64@12.14.0':
-    resolution: {integrity: sha512-7joGShZ44Nk3WpNU+60JoOPjCXlgxhJAq11S2UiVtwCUDgTer1yTPPfxGW8pxaD6046actYLIYDbZNlubHWs0A==}
+  '@pnpm/exe.linux-arm64@12.18.0':
+    resolution: {integrity: sha512-2dpyVBCHT+FfpuQh9i+7MXAqNWYLCvD5vYr5p6Eimxoga8USLnjbUgyj72AOrO0hjc5ri3TEFP3jiyBHjkSZpQ==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.linux-ppc64@12.14.0':
-    resolution: {integrity: sha512-gSoryn7ySdXd//gjgf3MvvA8ZerJayaSbuMZMtAWq4vb2/wlVEgpl0Kvqt54y58TRj533Qjq2txKgnxd4JyoAQ==}
+  '@pnpm/exe.linux-ppc64@12.18.0':
+    resolution: {integrity: sha512-BBOOOfNJ2QwIIya3eKqOjiN4WNTszfRz7HCvw9XggcT7+ftMjNP8XJ/GfW+ltCBeUFR9d8WBVsr2m/NLjX2CZQ==}
     cpu: [ppc64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.linux-riscv64@12.14.0':
-    resolution: {integrity: sha512-EMjew1H9WqQ7pL+tYqCPwiuB+0PeCiJRV7fyWeuFw0wwYUajFBjcaPO3IGAVu9sdmJDU+e+HYv/Zey6aKae0Vw==}
+  '@pnpm/exe.linux-riscv64@12.18.0':
+    resolution: {integrity: sha512-7kMN77xSOYJX8GPSH5RbNAc5oM61LMmcSUukDDUwllnZPXm8GRPskCNsTWy8SCw01Kr1FB+5SwGNMiTdiziLNQ==}
     cpu: [riscv64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.linux-s390x@12.14.0':
-    resolution: {integrity: sha512-shYOj/SFoXD35fHe0pWr2JofwSXulC0BnEIXLj2QokDi0EF//AfKsui35yKIkTEl+s2VJybc3PO4iJNhKIj5Qw==}
+  '@pnpm/exe.linux-s390x@12.18.0':
+    resolution: {integrity: sha512-htuSCpEcmDzhKoJqXbPkvfr176dBHU0QIF5mWcRiqxRXAB/1JoYiMYotfjWpk+ztgpB9qlx4XnWlLFAf7gzc6g==}
     cpu: [s390x]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.linux-x64-musl@12.14.0':
-    resolution: {integrity: sha512-btZiZ2Ot0llKK1ndSfA5i3IRX7/S0VrmzseNH/BJ4c+Cady+S81H6vvU1zByggHMyqQhC8OgxO5PiIY7D9bH0Q==}
+  '@pnpm/exe.linux-x64-musl@12.18.0':
+    resolution: {integrity: sha512-Uj+vzfIQ62kDP10x36yHZIXVs5ohdNtiPYwn5FhCLlNScHPo0OAI+ShGDtLofiBXKE7umu71Jmjm7N8a8zVcDw==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@pnpm/exe.linux-x64@12.14.0':
-    resolution: {integrity: sha512-F6K8e/jWxiuEYJaQtRRUG9ynBSTEHa+t7Lf86MKuOO5UA7WVVMbi+oB8nY6iKW++ncWS2yG6T9faXZGxqNsfoQ==}
+  '@pnpm/exe.linux-x64@12.18.0':
+    resolution: {integrity: sha512-OJ+X2wcraldCwj75pCIerWARQSRpdfj0eBTs/2ODyhfeW46ylOnjTIE/GKra6Mn6E72/gBmXS8igrUioa+F9fQ==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.win32-arm64@12.14.0':
-    resolution: {integrity: sha512-DOjlkVB6TtTKeAAe0hNZXn5S7YqESmo1Z6SGbR4BZNQ4isRg31XVHjX2RFTbY8gnZq68IwzyLmPqlEjMmYxofg==}
+  '@pnpm/exe.win32-arm64@12.18.0':
+    resolution: {integrity: sha512-wEY6jiACGcbhhi5yD59doHqNTndS7AaujaPmtWAu1DKkHru2hy5fJ9yUGecW72Ypaw2/I3BEprfMOopap2NQtw==}
     cpu: [arm64]
     os: [win32]
 
-  '@pnpm/exe.win32-x64@12.14.0':
-    resolution: {integrity: sha512-/LSX6mew/sLf08XqcjemuklNKf1K/Ftpgj4//hK/HKzI2dKbmxDB27a/2OaQ5a0O3/3OFzlssXDziZsi+yVBwQ==}
+  '@pnpm/exe.win32-x64@12.18.0':
+    resolution: {integrity: sha512-5FJkghO7RLRkQpWxeVEygW9XsmnNuxzPfXbgwFWCHsFyFhpDn/vOdL88ToQEM0Kt5igdW5s6U0/IDH8Dvkt3pg==}
     cpu: [x64]
     os: [win32]
 
-  pnpm@12.14.0:
-    resolution: {integrity: sha512-wYum2HmT09Fky16JSPMrLAbuhUSH4GzY2GeBNC+z5btGNDZwNHEehoArqpw3vqkGzhkprQjXCITJfYAd8TOJpg==}
-    engines: {node: '>=18.*'}
+  pnpm@12.18.0:
+    resolution: {integrity: sha512-nXiC1dyCFH7PxOBiqjSDTgrQKWcQoYN6ERWuASEn02txCeMhrBWYod0KZVl2gbHpmRfhLtDXSerpEYeUM2O+sw==}
+    engines: {node: '>=18'}
     hasBin: true
 
 snapshots:
 
-  '@pnpm/exe.android-arm64@12.14.0':
+  '@pnpm/exe.android-arm64@12.18.0':
     optional: true
 
-  '@pnpm/exe.android-x64@12.14.0':
+  '@pnpm/exe.android-x64@12.18.0':
     optional: true
 
-  '@pnpm/exe.darwin-arm64@12.14.0':
+  '@pnpm/exe.darwin-arm64@12.18.0':
     optional: true
 
-  '@pnpm/exe.darwin-x64@12.14.0':
+  '@pnpm/exe.darwin-x64@12.18.0':
     optional: true
 
-  '@pnpm/exe.freebsd-x64@12.14.0':
+  '@pnpm/exe.freebsd-x64@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-arm64-musl@12.14.0':
+  '@pnpm/exe.linux-arm64-musl@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-arm64@12.14.0':
+  '@pnpm/exe.linux-arm64@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-ppc64@12.14.0':
+  '@pnpm/exe.linux-ppc64@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-riscv64@12.14.0':
+  '@pnpm/exe.linux-riscv64@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-s390x@12.14.0':
+  '@pnpm/exe.linux-s390x@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-x64-musl@12.14.0':
+  '@pnpm/exe.linux-x64-musl@12.18.0':
     optional: true
 
-  '@pnpm/exe.linux-x64@12.14.0':
+  '@pnpm/exe.linux-x64@12.18.0':
     optional: true
 
-  '@pnpm/exe.win32-arm64@12.14.0':
+  '@pnpm/exe.win32-arm64@12.18.0':
     optional: true
 
-  '@pnpm/exe.win32-x64@12.14.0':
+  '@pnpm/exe.win32-x64@12.18.0':
     optional: true
 
-  pnpm@12.14.0:
+  pnpm@12.18.0:
     optionalDependencies:
-      '@pnpm/exe.android-arm64': 12.14.0
-      '@pnpm/exe.android-x64': 12.14.0
-      '@pnpm/exe.darwin-arm64': 12.14.0
-      '@pnpm/exe.darwin-x64': 12.14.0
-      '@pnpm/exe.freebsd-x64': 12.14.0
-      '@pnpm/exe.linux-arm64': 12.14.0
-      '@pnpm/exe.linux-arm64-musl': 12.14.0
-      '@pnpm/exe.linux-ppc64': 12.14.0
-      '@pnpm/exe.linux-riscv64': 12.14.0
-      '@pnpm/exe.linux-s390x': 12.14.0
-      '@pnpm/exe.linux-x64': 12.14.0
-      '@pnpm/exe.linux-x64-musl': 12.14.0
-      '@pnpm/exe.win32-arm64': 12.14.0
-      '@pnpm/exe.win32-x64': 12.14.0
+      '@pnpm/exe.android-arm64': 12.18.0
+      '@pnpm/exe.android-x64': 12.18.0
+      '@pnpm/exe.darwin-arm64': 12.18.0
+      '@pnpm/exe.darwin-x64': 12.18.0
+      '@pnpm/exe.freebsd-x64': 12.18.0
+      '@pnpm/exe.linux-arm64': 12.18.0
+      '@pnpm/exe.linux-arm64-musl': 12.18.0
+      '@pnpm/exe.linux-ppc64': 12.18.0
+      '@pnpm/exe.linux-riscv64': 12.18.0
+      '@pnpm/exe.linux-s390x': 12.18.0
+      '@pnpm/exe.linux-x64': 12.18.0
+      '@pnpm/exe.linux-x64-musl': 12.18.0
+      '@pnpm/exe.win32-arm64': 12.18.0
+      '@pnpm/exe.win32-x64': 12.18.0
 
 ---
 lockfileVersion: '9.0'
@@ -524,7 +524,7 @@ importers:
         version: 1.142.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@26.6.6)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@26.6.6)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -5164,6 +5164,11 @@ packages:
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
 
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
@@ -7737,10 +7742,13 @@ packages:
     resolution: {integrity: sha512-drKKsqvDBxVRn4ySU67iQ5nQBuo/1xyYeBfdhDde112PkqrS3+95KPnpDs5hFRcmrW+q6+gbyywYYYR14oWFtw==}
     engines: {node: '>= 16'}
     peerDependencies:
+      css-to-react-native: '>= 3.2.0'
       react: ^19.3.1
       react-dom: ^19.3.1
       react-native: '>= 0.68.0'
     peerDependenciesMeta:
+      css-to-react-native:
+        optional: true
       react-dom:
         optional: true
       react-native:
@@ -10976,6 +10984,23 @@ snapshots:
   '@oxlint/binding-win32-x64-msvc@1.89.0':
     optional: true
 
+  '@pandacss/cli@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+    dependencies:
+      '@clack/prompts': 1.7.0
+      '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/compiler-shared': 2.5.0
+      '@pandacss/config': 2.5.0
+      '@pandacss/types': 2.5.0
+      '@parcel/watcher': 2.5.6
+      citty: 0.2.2
+      fflate: 0.8.3
+      picocolors: 1.1.1
+      string-width: 7.2.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+    optional: true
+
   '@pandacss/cli@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@clack/prompts': 1.7.0
@@ -11020,6 +11045,26 @@ snapshots:
   '@pandacss/compiler-win32-x64-msvc@2.5.0':
     optional: true
 
+  '@pandacss/compiler@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/compiler-shared': 2.5.0
+      '@pandacss/config': 2.5.0
+      '@pandacss/types': 2.5.0
+    optionalDependencies:
+      '@pandacss/compiler-darwin-arm64': 2.5.0
+      '@pandacss/compiler-darwin-x64': 2.5.0
+      '@pandacss/compiler-linux-arm64-gnu': 2.5.0
+      '@pandacss/compiler-linux-arm64-musl': 2.5.0
+      '@pandacss/compiler-linux-x64-gnu': 2.5.0
+      '@pandacss/compiler-linux-x64-musl': 2.5.0
+      '@pandacss/compiler-win32-arm64-msvc': 2.5.0
+      '@pandacss/compiler-win32-x64-msvc': 2.5.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+    optional: true
+
   '@pandacss/compiler@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
@@ -11050,6 +11095,20 @@ snapshots:
       microdiff: 1.5.0
       rolldown: 1.2.7
 
+  '@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31)':
+    dependencies:
+      '@pandacss/cli': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/config': 2.5.0
+      '@pandacss/postcss': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31)
+      '@pandacss/types': 2.5.0
+    optionalDependencies:
+      postcss: 8.5.31
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+    optional: true
+
   '@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31)':
     dependencies:
       '@pandacss/cli': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
@@ -11063,6 +11122,16 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
+  '@pandacss/postcss@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31)':
+    dependencies:
+      '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/compiler-shared': 2.5.0
+      postcss: 8.5.31
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+    optional: true
+
   '@pandacss/postcss@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31)':
     dependencies:
       '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
@@ -11071,6 +11140,18 @@ snapshots:
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
+
+  '@pandacss/transformer@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+    dependencies:
+      '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/compiler-shared': 2.5.0
+      unplugin: 2.3.11
+    optionalDependencies:
+      vite: 8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+    optional: true
 
   '@pandacss/transformer@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
@@ -11960,6 +12041,23 @@ snapshots:
       - '@types/react'
       - vitest
 
+  '@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+    dependencies:
+      '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@pandacss/transformer': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      lightningcss: 1.33.0
+      postcss: 8.5.31
+      tsdown: 0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1)
+    optionalDependencies:
+      '@pandacss/dev': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31)
+      vite: 8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - rollup
+      - webpack
+    optional: true
+
   '@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@pandacss/compiler': 2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
@@ -12134,6 +12232,32 @@ snapshots:
   '@sanity/template-validator@3.1.1':
     dependencies:
       yaml: 2.9.1
+
+  '@sanity/tsdown-config@0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@26.6.6)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+    dependencies:
+      '@microsoft/api-extractor': 7.59.4(@types/node@26.6.6)
+      '@microsoft/tsdoc-config': 0.18.3
+      '@sanity/browserslist-config': 1.0.5
+      '@sanity/vanilla-extract-tsdown-plugin': 0.5.1(rolldown@1.2.14)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))
+      '@typescript/typescript6': 6.0.2
+      '@vitejs/plugin-react': 6.3.0(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(oxc-transform-react@0.155.0)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      browserslist: 4.29.4
+      jsonc-parser: 3.3.1
+      lightningcss: 1.33.0
+      package-manager-detector: 1.9.0
+      publint: 0.3.25
+      rolldown: 1.2.14
+      tsdown: 0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1)
+      typescript: 7.0.2
+    optionalDependencies:
+      '@babel/core': 7.29.7(supports-color@8.1.1)
+      '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      '@sanity/pandacss-tsdown-plugin': 0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      oxc-transform-react: 0.155.0
+    transitivePeerDependencies:
+      - '@types/node'
+      - babel-plugin-macros
+      - vite
 
   '@sanity/tsdown-config@0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@26.6.6)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
