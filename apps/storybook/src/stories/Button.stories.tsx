@@ -119,13 +119,13 @@ export const Loading: Story = {
         loading
         iconStart={ArrowUpIcon}
         iconEnd={ArrowDownIcon}
-        text="Loading Button"
+        text="Save Content"
       />
     )
   },
   play: async ({canvas}) => {
     await expect(
-      ((await canvas.findByText('Loading Button')).parentElement as HTMLButtonElement)?.ariaBusy,
+      ((await canvas.findByText('Save Content')).parentElement as HTMLButtonElement)?.ariaBusy,
     ).toBe('true')
   },
 }

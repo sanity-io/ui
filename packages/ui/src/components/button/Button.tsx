@@ -44,7 +44,7 @@ export function Button<T extends ElementType = 'button'>({
       style={style}
       data-ui="Button"
       disabled={disabled || loading}
-      aria-busy={loading ? true : undefined}
+      aria-busy={loading}
       aria-pressed={pressed || undefined}
       type={type}
       {...rest}
@@ -56,6 +56,7 @@ export function Button<T extends ElementType = 'button'>({
           alignItems="center"
           justifyContent="center"
           data-ui="Button-Spinner"
+          aria-hidden="true"
         >
           <Spinner />
         </Flex>
