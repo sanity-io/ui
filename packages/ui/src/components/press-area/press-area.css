@@ -1,4 +1,4 @@
-.sui-PressArea {
+:where(.sui-PressArea) {
   background: none;
   font: inherit;
   color: inherit;

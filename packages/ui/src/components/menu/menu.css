@@ -11,7 +11,7 @@
   position-try-fallbacks: --left-fill, --viewport-fill;
 }
 
-// Add styling for main trigger and submenu triggers
+/* Add styling for main trigger and submenu triggers */
 
 .sui-MenuButton:hover, .sui-MenuButton:focus {
   background: var(--active-background-emphasized);

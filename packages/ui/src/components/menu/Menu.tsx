@@ -125,7 +125,7 @@ function MenuContent(props: MenuContentProps) {
 
 function MenuButton({className, ...props}: MenuButtonProps) {
   return (
-    <List.ButtonItem
+    <List.ItemButton
       data-ui="MenuButton"
       role="menuitem"
       className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', className)}

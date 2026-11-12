@@ -25,7 +25,14 @@ export const listProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListItemProps extends React.ComponentProps<'li'> {
+export interface ListItemProps extends React.ComponentProps<'li'> {}
+
+/** @beta */
+export interface ListItemButtonProps<T extends React.ElementType = 'button'> extends ListItemProps {
+  /**
+   * Element or component to render for the press target.
+   */
+  as?: InteractiveAs<T>
   /**
    * Sets horizontal padding, gap, and minimum row height together.
    */
@@ -38,9 +45,24 @@ export interface ListItemProps extends React.ComponentProps<'li'> {
    * Slot at the right edge of the row.
    */
   end?: React.ReactNode
+  /**
+   * Marks the row as the current selection.
+   */
+  selected?: boolean
+  /**
+   * Main label.
+   */
+  text?: React.ReactNode
+  /**
+   * Text below the title.
+   */
+  subtext?: React.ReactNode
 }
 
-export const listItemProps: Record<string, PropDef> = {
+export const listButtonProps: Record<string, PropDef> = {
+  as: {
+    type: 'string',
+  },
   density: {
     type: 'composite',
     values: DENSITY_NONE,
@@ -80,54 +102,16 @@ export const listItemProps: Record<string, PropDef> = {
   start: {
     type: 'string',
   },
-}
-
-/** @beta */
-export interface ListButtonItemProps<T extends React.ElementType = 'button'> extends ListItemProps {
-  /**
-   * Element or component to render for the press target.
-   */
-  as?: InteractiveAs<T>
-  /**
-   * Marks the row as the current selection.
-   */
-  selected?: boolean
-}
-
-export const listButtonItemProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
   selected: {
     type: 'boolean',
   },
-  ...listItemProps,
+  text: {
+    type: 'string',
+  },
+  subtext: {
+    type: 'string',
+  },
 }
 
 /** @beta */
-export interface ListItemTextProps<T extends React.ElementType = 'div'> {
-  /**
-   * HTML element to render.
-   */
-  as?: T
-  /**
-   * Main label.
-   */
-  title?: React.ReactNode
-  /**
-   * Text below the title.
-   */
-  subtitle?: React.ReactNode
-}
-
-export const listItemTextProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
-  title: {
-    type: 'string',
-  },
-  subtitle: {
-    type: 'string',
-  },
-}
+export interface ListImageProps extends React.ComponentProps<'img'> {}

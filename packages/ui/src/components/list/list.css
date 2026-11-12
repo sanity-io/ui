@@ -2,19 +2,29 @@
   list-style-type: none;
 }
 
-.sui-ListButtonItem:hover,
-.sui-ListButtonItem:focus-visible {
-  background: var(--background-low);
+.sui-ListItem,
+.sui-ListItemButton {
+  --list-color: var(--foreground-high);
+  color: var(--list-color);
 }
 
-.sui-ListButtonItem:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: var(--focus-offset);
+.sui-ListItemButton {
+  --background-color: transparent;
+  background: var(--background-color);
 }
 
-.sui-ListButtonItem[data-selected] {
-  background: var(--active-background-emphasized);
-  color: var(--active-foreground-emphasized);
+.sui-ListItemButton:hover,
+.sui-ListItemButton:focus-visible {
+  --background-color: var(--background-low);
+}
+
+.sui-ListItemButton:disabled {
+  --list-color: var(--inert-foreground);
+}
+
+.sui-ListItemButton[aria-pressed="true"] {
+  --background-color: var(--active-background-emphasized);
+  --list-color: var(--active-foreground-emphasized);
 }
 
 .sui-ListItemImage {
