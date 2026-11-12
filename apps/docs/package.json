@@ -4,7 +4,6 @@
   "private": true,
   "license": "MIT",
   "imports": {
-    "#app/*": "./src/app/*",
     "#lib/*": "./src/lib/*",
     "#context/*": "./src/context/*.tsx"
   },
