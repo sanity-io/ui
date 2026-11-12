@@ -52,6 +52,10 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
    * Sets Button's semantic meaning and related color.
    */
   tone?: ButtonTone
+  /**
+   * The HTML `type` attribute; defaults to 'button', and shouldn’t usually need to be changed
+   */
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
 }
 
 export const buttonProps: Record<string, PropDef> = {

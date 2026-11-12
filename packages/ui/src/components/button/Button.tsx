@@ -28,6 +28,7 @@ export function Button<T extends ElementType = 'button'>({
     iconEnd: IconEnd,
     loading,
     text,
+    type = 'button',
     ...rest
   } = getProps({density, level, tone, ...props}, buttonProps)
   const Component = as || 'button'
@@ -43,6 +44,7 @@ export function Button<T extends ElementType = 'button'>({
       data-ui="Button"
       disabled={disabled || loading}
       aria-busy={loading ? true : undefined}
+      type={type}
       {...rest}
     >
       {loading && (
