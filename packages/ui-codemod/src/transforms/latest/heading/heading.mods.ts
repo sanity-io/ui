@@ -42,12 +42,29 @@ export const HEADING_MODS: AttributeMods = {
       5: '120rem',
     },
   },
+  muted: {
+    type: 'style-mapped',
+    style: 'color',
+    mapping: {
+      true: 'var(--foreground-low)',
+    },
+  },
   textOverflow: {
     type: 'rename-mapped',
     name: 'truncate',
     mapping: {
       ellipsis: 1,
       clip: 1,
+    },
+  },
+  weight: {
+    type: 'style-mapped',
+    style: 'fontWeight',
+    mapping: {
+      regular: 'var(--regular)',
+      medium: 'var(--medium)',
+      semibold: 'var(--semibold)',
+      bold: 'var(--bold)',
     },
   },
   width: {

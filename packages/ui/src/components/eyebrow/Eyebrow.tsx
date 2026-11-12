@@ -22,6 +22,7 @@ export function Eyebrow<T extends ElementType = 'span'>({
         className={clsx(
           eyebrowClassName,
           className?.replace('sui-line-clamp', '').replace('sui-text-overflow', ''),
+          'sui-weight-semibold',
         )}
         style={style}
         data-ui="Eyebrow"
@@ -41,7 +42,12 @@ export function Eyebrow<T extends ElementType = 'span'>({
 
   return (
     <Component
-      className={clsx(eyebrowClassName, props.truncate && 'sui-overflow-hidden', className)}
+      className={clsx(
+        eyebrowClassName,
+        props.truncate && 'sui-overflow-hidden',
+        'sui-weight-semibold',
+        className,
+      )}
       style={style}
       data-ui="Eyebrow"
       {...rest}
