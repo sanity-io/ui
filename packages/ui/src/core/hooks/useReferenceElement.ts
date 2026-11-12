@@ -31,7 +31,7 @@ interface ChildRefAttachment {
 export function useReferenceElement(
   refs: FloatingRefs,
   childRef: React.Ref<HTMLElement> | undefined,
-  onAttach?: (node: HTMLElement) => () => void,
+  onAttach?: (node: HTMLElement | null) => () => void,
 ): {
   handOverReference: () => void
   referenceRef: React.RefObject<HTMLElement | null>
@@ -42,7 +42,7 @@ export function useReferenceElement(
   const childRefRef = useLatestRef(childRef)
 
   const setReference = useCallback(
-    (node: HTMLElement) => {
+    (node: HTMLElement | null) => {
       referenceRef.current = node
       if (refs.floating.current) refs.setReference(node)
       const detach = onAttach?.(node)
