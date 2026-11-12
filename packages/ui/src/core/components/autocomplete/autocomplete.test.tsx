@@ -73,6 +73,31 @@ describe('components/autocomplete', () => {
     expect(screen.queryByRole('button', {name: 'Open'})).toBeNull()
   })
 
+  it('prevents selection when an open autocomplete becomes disabled', async () => {
+    const user = userEvent.setup()
+    const onChange = vi.fn()
+    const onSelect = vi.fn()
+    const props = {onChange, onSelect, openOnFocus: true, value: 'foo'}
+    const {rerender} = renderAutocomplete(props)
+
+    await user.click(getInput())
+    await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'true'))
+    const option = getOption('bar')
+
+    fireEvent.click(option)
+    rerender({...props, disabled: true})
+    fireEvent.click(option)
+    await act(async () => {
+      // Option selection is deferred to let the click propagate.
+      await new Promise((resolve) => setTimeout(resolve, 0))
+    })
+
+    expect(getInput()).toHaveValue('foo')
+    expect(onChange).not.toHaveBeenCalled()
+    expect(onSelect).not.toHaveBeenCalled()
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+  })
+
   it('labels the open button "Open" when `openButton` is `true`', () => {
     render(<Autocomplete id="ac" openButton options={OPTIONS} />)
 
