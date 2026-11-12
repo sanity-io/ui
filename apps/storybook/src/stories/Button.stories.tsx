@@ -1,3 +1,7 @@
+import ArrowDownIcon from '@sanity/icons/ArrowDown'
+import ArrowLeftIcon from '@sanity/icons/ArrowLeft'
+import ArrowRightIcon from '@sanity/icons/ArrowRight'
+import ArrowUpIcon from '@sanity/icons/ArrowUp'
 import {EditIcon} from '@sanity/icons/Edit'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
@@ -43,47 +47,6 @@ export const Default: Story = {
   },
 }
 
-export const Disabled: Story = {
-  render: (props) => {
-    return (
-      <HStack gap={3}>
-        <Button {...props} level="primary" disabled text="Disabled Primary Button" />
-        <Button {...props} level="secondary" disabled text="Disabled Secondary Button" />
-        <Button {...props} level="tertiary" disabled text="Disabled Tertiary Button" />
-        <Button {...props} tone="critical" disabled text="Disabled Critical Button" />
-      </HStack>
-    )
-  },
-  play: async ({canvas}) => {
-    await expect(
-      ((await canvas.findByText('Disabled Primary Button')).parentElement as HTMLButtonElement)
-        ?.disabled,
-    ).toBe(true)
-  },
-}
-
-export const Loading: Story = {
-  render: (props) => {
-    return <Button {...props} loading text="Loading Button" />
-  },
-  play: async ({canvas}) => {
-    await expect(
-      ((await canvas.findByText('Loading Button')).parentElement as HTMLButtonElement)?.ariaBusy,
-    ).toBe('true')
-  },
-}
-
-export const FullWidth: Story = {
-  render: (props) => {
-    return <Button {...props} fullWidth />
-  },
-  play: async ({canvas}) => {
-    await expect((await canvas.findByText('Button')).parentElement?.classList).toContain(
-      'sui-width-full',
-    )
-  },
-}
-
 export const Density: Story = {
   render: (props) => {
     return (
@@ -104,6 +67,92 @@ export const Density: Story = {
     await expect(
       (await canvas.findByText('Button Size Regular')).parentElement?.classList,
     ).toContain('sui-p2')
+  },
+}
+
+export const Disabled: Story = {
+  render: (props) => {
+    return (
+      <HStack gap={3}>
+        <Button {...props} level="primary" disabled text="Disabled Primary Button" />
+        <Button {...props} level="secondary" disabled text="Disabled Secondary Button" />
+        <Button {...props} level="tertiary" disabled text="Disabled Tertiary Button" />
+        <Button {...props} tone="critical" disabled text="Disabled Critical Button" />
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByText('Disabled Primary Button')).parentElement as HTMLButtonElement)
+        ?.disabled,
+    ).toBe(true)
+  },
+}
+
+export const FullWidth: Story = {
+  render: (props) => {
+    return <Button {...props} fullWidth />
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Button')).parentElement?.classList).toContain(
+      'sui-width-full',
+    )
+  },
+}
+
+export const Icons: Story = {
+  render: () => {
+    return (
+      <HStack gap={3}>
+        <Button iconStart={ArrowRightIcon} text="Button with start icon" />
+        <Button iconEnd={ArrowLeftIcon} text="Button with end icon" />
+      </HStack>
+    )
+  },
+}
+
+export const Loading: Story = {
+  render: (props) => {
+    return (
+      <Button
+        {...props}
+        loading
+        iconStart={ArrowUpIcon}
+        iconEnd={ArrowDownIcon}
+        text="Loading Button"
+      />
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByText('Loading Button')).parentElement as HTMLButtonElement)?.ariaBusy,
+    ).toBe('true')
+  },
+}
+
+export const Selected: Story = {
+  render: () => {
+    return (
+      <HStack gap={5}>
+        {BUTTON_LEVEL.map((level) => (
+          <VStack key={level} gap={2}>
+            <Button level={level} text={`Normal ${level} button`} />
+            <Button level={level} text={`Pressed ${level} button`} pressed />
+          </VStack>
+        ))}
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(
+      (await canvas.findByText('Pressed primary button')).parentElement?.ariaPressed,
+    ).toBe('true')
+    await expect(
+      (await canvas.findByText('Pressed secondary button')).parentElement?.ariaPressed,
+    ).toBe('true')
+    await expect(
+      (await canvas.findByText('Pressed tertiary button')).parentElement?.ariaPressed,
+    ).toBe('true')
   },
 }
 
@@ -136,31 +185,5 @@ export const Tones: Story = {
     await expect(
       (await canvas.findByText('Button Primary Critical')).parentElement?.classList,
     ).toContain('sui-button-level-primary')
-  },
-}
-
-export const Selected: Story = {
-  render: () => {
-    return (
-      <HStack gap={5}>
-        {BUTTON_LEVEL.map((level) => (
-          <VStack key={level} gap={2}>
-            <Button level={level} text={`Normal ${level} button`} />
-            <Button level={level} text={`Pressed ${level} button`} pressed />
-          </VStack>
-        ))}
-      </HStack>
-    )
-  },
-  play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('Pressed primary button')).parentElement?.ariaPressed,
-    ).toBe('true')
-    await expect(
-      (await canvas.findByText('Pressed secondary button')).parentElement?.ariaPressed,
-    ).toBe('true')
-    await expect(
-      (await canvas.findByText('Pressed tertiary button')).parentElement?.ariaPressed,
-    ).toBe('true')
   },
 }
