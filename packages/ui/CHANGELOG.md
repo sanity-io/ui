@@ -1,5 +1,15 @@
 # @sanity/ui
 
+## 4.4.12
+
+### Patch Changes
+
+- [#3347](https://github.com/sanity-io/ui/pull/3347) [`e5fc19a`](https://github.com/sanity-io/ui/commit/e5fc19a2c3122eda3750a3907b57b86458bf4c61) Thanks [@Xapollon430](https://github.com/Xapollon430)! - Close the Autocomplete results when it becomes disabled and ignore any pending option selection while disabled.
+
+- [#3351](https://github.com/sanity-io/ui/pull/3351) [`7ce8270`](https://github.com/sanity-io/ui/commit/7ce8270f8abd93c16a15ad359a1d4444748d5891) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^14.13.0
+
+- [#3345](https://github.com/sanity-io/ui/pull/3345) [`df9aab6`](https://github.com/sanity-io/ui/commit/df9aab60bc242f626252655c6698d72572a7b50d) Thanks [@stipsan](https://github.com/stipsan)! - Fix `Popover` crashing when its child forwards a ref that is null. A closed `Tooltip` does this: it forwards its floating card, which is not mounted yet, and React 19 passes that null to the ref callback `Popover` clones on for hover intent. `addEventListener` then ran on null. A null ref and a ref that moves to another element now detach any intent listeners already attached, and a null ref attaches none.
+
 ## 4.4.11
 
 ### Patch Changes
