@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@next/playwright": "^16.4.2",
-    "@playwright/test": "^1.64.1",
+    "@playwright/test": "^1.65.0",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^26.6.6",
