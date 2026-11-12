@@ -10,10 +10,9 @@ const eyebrowClassName = suffixClassName('sui-Eyebrow')
 /** @public */
 export function Eyebrow<T extends ElementType = 'span'>({
   size = 2,
-  weight = 'semibold',
   ...props
 }: EyebrowProps<T> & Omit<ComponentPropsWithRef<T>, keyof EyebrowProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, eyebrowProps)
+  const {as, children, className, style, ...rest} = getProps({size, ...props}, eyebrowProps)
   const Component = as || 'span'
 
   if (props.truncate && props.trim) {
