@@ -199,6 +199,9 @@ function attachedNames(src) {
   return out
 }
 
+// Summary goes to stdout directly; the lint config allows only console.warn and console.error.
+const say = (line) => process.stdout.write(`${line}\n`)
+
 async function main() {
   const {interfaces, globalDocs, conflicts} = indexSource(SRC)
   const components = []
@@ -512,8 +515,6 @@ async function main() {
   writeFileSync(join(DOCS_DIR, 'components.json'), JSON.stringify(result, null, 2) + '\n')
   writeMarkdown(components, DOCS_DIR)
 
-  // Summary goes to stdout directly; the lint config allows only console.warn and console.error.
-  const say = (line) => process.stdout.write(`${line}\n`)
   const kinds = {}
   for (const c of components) for (const p of c.props) kinds[p.kind] = (kinds[p.kind] || 0) + 1
   say(`${components.length} components, ${result.propCount} props`)
