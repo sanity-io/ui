@@ -71,10 +71,11 @@
     }
   },
   "scripts": {
-    "build": "pnpm run sync-version && pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:cli",
+    "build": "pnpm run sync-version && pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:cli && pnpm run build:props-docs",
     "build:cli": "tsc -p tsconfig.cli.json",
     "build:css": "NODE_ENV=production postcss src/index.css -o dist/styles.css",
     "build:js": "tsdown",
+    "build:props-docs": "node --import ./scripts/generate-props-docs/register.mjs scripts/generate-props-docs/generate.mjs",
     "clean": "rimraf dist",
     "dev": "concurrently -n css,js \"pnpm run dev:css\" \"pnpm run dev:js\"",
     "dev:css": "postcss src/index.css -o dist/styles.css --watch",
