@@ -30,7 +30,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "@vitest/browser-playwright": "^5.1.0",
-    "chrome-devtools-mcp": "^1.12.0",
+    "chrome-devtools-mcp": "^1.13.0",
     "oxc-transform-react": "catalog:",
     "playwright": "^1.65.0",
     "react": "catalog:",
