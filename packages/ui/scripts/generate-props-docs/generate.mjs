@@ -36,8 +36,6 @@ if (!existsSync(SRC)) {
   process.exit(1)
 }
 
-const dashToPascal = (s) => s.replace(/(^|-)(\w)/g, (_, __, c) => c.toUpperCase())
-
 /** Flatten one PropDef into a documented prop. */
 function describe(name, def, doc) {
   const p = {
@@ -58,7 +56,7 @@ function describe(name, def, doc) {
     for (const [target, spec] of Object.entries(def.composition ?? {})) {
       p.expandsTo[target] = {
         kind: spec.propDef?.type ?? 'unknown',
-        mapping: {...(spec.mapping ?? {})},
+        mapping: {...spec.mapping},
       }
     }
   } else if (def.type === 'conditional') {
@@ -219,32 +217,46 @@ async function main() {
   // record, so all of them are loaded before any component is built rather
   // than relying on alphabetical order putting `button` before `icon-button`.
   const records = new Map()
-  for (const dir of dirs) {
-    const pf = readdirSync(join(SRC, 'components', dir)).find((f) => f.endsWith('.props.ts'))
-    if (!pf) continue
-    try {
-      const m = await import(join(SRC, 'components', dir, pf))
-      for (const [k, v] of Object.entries(m)) {
-        if (/Props$/.test(k) && typeof v === 'object' && v !== null) records.set(k, v)
+  // Loaded in parallel; results are applied in directory order so the output is the same.
+  const componentModules = await Promise.all(
+    dirs.map(async (dir) => {
+      const pf = readdirSync(join(SRC, 'components', dir)).find((f) => f.endsWith('.props.ts'))
+      if (!pf) return null
+      try {
+        return await import(join(SRC, 'components', dir, pf))
+      } catch {
+        // Reported per-component by the main loop; a failure here just means
+        // picked props from this record cannot be resolved.
+        return null
       }
-    } catch {
-      // Reported per-component by the main loop; a failure here just means
-      // picked props from this record cannot be resolved.
+    }),
+  )
+  for (const m of componentModules) {
+    if (!m) continue
+    for (const [k, v] of Object.entries(m)) {
+      if (k.endsWith('Props') && typeof v === 'object' && v !== null) records.set(k, v)
     }
   }
 
   // Records in props/ are shared groups (layoutProps, toneProps, ...). A component
   // reaches them by extending their interface, so they are loaded too.
-  for (const f of readdirSync(join(SRC, 'props'))) {
-    if (!f.endsWith('.ts')) continue
-    try {
-      const m = await import(join(SRC, 'props', f))
-      for (const [k, v] of Object.entries(m)) {
-        if (/Props$/.test(k) && typeof v === 'object' && v !== null && !records.has(k))
-          records.set(k, v)
-      }
-    } catch {
-      // A shared group that fails to load only costs the props it would add.
+  const sharedModules = await Promise.all(
+    readdirSync(join(SRC, 'props'))
+      .filter((f) => f.endsWith('.ts'))
+      .map(async (f) => {
+        try {
+          return await import(join(SRC, 'props', f))
+        } catch {
+          // A shared group that fails to load only costs the props it would add.
+          return null
+        }
+      }),
+  )
+  for (const m of sharedModules) {
+    if (!m) continue
+    for (const [k, v] of Object.entries(m)) {
+      if (k.endsWith('Props') && typeof v === 'object' && v !== null && !records.has(k))
+        records.set(k, v)
     }
   }
 
@@ -302,7 +314,7 @@ async function main() {
   }
 
   /** Props an interface picks off another component's record. */
-  function pickedProps(iface, have, ifaceName) {
+  function pickedProps(iface, have) {
     const out = []
     for (const pick of iface.picks ?? []) {
       // `ButtonProps` is declared alongside the record `buttonProps`.
@@ -320,6 +332,23 @@ async function main() {
     return out
   }
 
+  // Each component's props module, loaded in parallel. Node caches these imports,
+  // so loading them again here costs nothing.
+  const modules = new Map(
+    await Promise.all(
+      dirs.map(async (dir) => {
+        const compDir = join(SRC, 'components', dir)
+        const propsFile = readdirSync(compDir).find((f) => f.endsWith('.props.ts'))
+        if (!propsFile) return [dir, null]
+        try {
+          return [dir, {mod: await import(join(compDir, propsFile))}]
+        } catch (e) {
+          return [dir, {error: e.message}]
+        }
+      }),
+    ),
+  )
+
   for (const dir of dirs) {
     const compDir = join(SRC, 'components', dir)
     const propsFile = readdirSync(compDir).find((f) => f.endsWith('.props.ts'))
@@ -328,20 +357,19 @@ async function main() {
       continue
     }
 
-    let mod
-    try {
-      mod = await import(join(compDir, propsFile))
-    } catch (e) {
-      problems.push({component: dir, issue: `could not evaluate: ${e.message}`})
+    const loaded = modules.get(dir)
+    if (loaded.error) {
+      problems.push({component: dir, issue: `could not evaluate: ${loaded.error}`})
       continue
     }
+    const mod = loaded.mod
 
     // A directory can hold more than one component — `list` exports listProps,
     // listItemProps, listItemTextProps and listButtonItemProps. Each gets its
     // own entry rather than being merged into the directory's name.
     const recordsHere = Object.fromEntries(
       Object.entries(mod).filter(
-        ([k, v]) => /Props$/.test(k) && typeof v === 'object' && v !== null,
+        ([k, v]) => k.endsWith('Props') && typeof v === 'object' && v !== null,
       ),
     )
     // A component can declare its props as an interface alone, with no
@@ -402,7 +430,7 @@ async function main() {
       const have = new Set(Object.keys(record))
       const props = Object.entries(record)
         .map(([name, def]) => describe(name, def, iface.members.get(name) ?? globalDocs.get(name)))
-        .concat(pickedProps(iface, have, ifaceName))
+        .concat(pickedProps(iface, have))
         .concat(inheritedRecordProps(ifaceName, iface, have))
         .concat(interfaceOnlyProps(ifaceName, iface, have))
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -474,32 +502,32 @@ async function main() {
   writeFileSync(join(DOCS_DIR, 'components.json'), JSON.stringify(result, null, 2) + '\n')
   writeMarkdown(components, DOCS_DIR)
 
+  // Summary goes to stdout directly; the lint config allows only console.warn and console.error.
+  const say = (line) => process.stdout.write(`${line}\n`)
   const kinds = {}
   for (const c of components) for (const p of c.props) kinds[p.kind] = (kinds[p.kind] || 0) + 1
-  console.log(`${components.length} components, ${result.propCount} props`)
-  console.log(
+  say(`${components.length} components, ${result.propCount} props`)
+  say(
     'by kind:',
     Object.entries(kinds)
       .map(([k, v]) => `${k} ${v}`)
       .join(', '),
   )
   const noDesc = components.reduce((n, c) => n + c.props.filter((p) => !p.description).length, 0)
-  console.log(`descriptions: ${result.propCount - noDesc}/${result.propCount}`)
-  console.log(
+  say(`descriptions: ${result.propCount - noDesc}/${result.propCount}`)
+  say(
     `composites expanded: ${components.reduce((n, c) => n + c.props.filter((p) => p.kind === 'composite').length, 0)}`,
   )
   const withEvents = components.filter((c) => c.events)
   const eventCount = withEvents.reduce((n, c) => n + c.events.handlers.length, 0)
-  console.log(`markdown: ${components.length} tables -> dist/props-docs/`)
-  console.log(
+  say(`markdown: ${components.length} tables -> dist/props-docs/`)
+  say(
     `events: ${eventCount} handlers on ${withEvents.length} components, from ${events?.source ?? 'nothing — types not resolvable'}`,
   )
   // Notes about the extraction, printed rather than written to a file.
-  if (problems.length)
-    console.log(`\n${problems.length} extraction note(s); pass --verbose to list them`)
-  if (process.argv.includes('--verbose')) for (const p of problems) console.log(p)
-  if (conflicts.length)
-    console.log(`${conflicts.length} description conflict(s) across shared prop groups`)
+  if (problems.length) say(`\n${problems.length} extraction note(s); pass --verbose to list them`)
+  if (process.argv.includes('--verbose')) for (const p of problems) say(JSON.stringify(p))
+  if (conflicts.length) say(`${conflicts.length} description conflict(s) across shared prop groups`)
 }
 
 main()
