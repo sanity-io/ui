@@ -34,6 +34,13 @@ export function Button<T extends ElementType = 'button'>({
   } = getProps({density, level, tone, ...props}, buttonProps)
   const Component = as || 'button'
 
+  const buttonOnlyProps = {
+    disabled,
+    type,
+    'aria-busy': loading,
+    'aria-pressed': pressed,
+  }
+
   return (
     <Component
       className={clsx(
@@ -43,10 +50,7 @@ export function Button<T extends ElementType = 'button'>({
       )}
       style={style}
       data-ui="Button"
-      disabled={disabled || loading}
-      aria-busy={loading}
-      aria-pressed={pressed || undefined}
-      type={type}
+      {...(Component === 'button' ? buttonOnlyProps : {})}
       {...rest}
     >
       {loading && (

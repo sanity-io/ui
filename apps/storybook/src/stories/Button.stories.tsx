@@ -130,7 +130,7 @@ export const Loading: Story = {
   },
 }
 
-export const Selected: Story = {
+export const Pressed: Story = {
   render: () => {
     return (
       <HStack gap={5}>

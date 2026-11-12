@@ -91,8 +91,8 @@
   * Disabled
   */
 .sui-Button[class*='sui-tone']:disabled {
-  --background-color: var(--inert-background);
-  --foreground-color: var(--inert-foreground);
+  background-color: var(--inert-background);
+  color: var(--inert-foreground);
   --border-color: transparent;
   pointer-events: none;
 }
