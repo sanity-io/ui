@@ -105,27 +105,7 @@ minimumReleaseAgeExclude:
   - oxfmt
   - oxlint
   - '@lezer/highlight@1.2.5'
-  - '@vitejs/plugin-react@6.1.2'
   - styled-components@6.6.0
-  - '@playwright/test@1.64.1'
-  - playwright-core@1.64.1
-  - playwright@1.64.1
-  - '@rolldown/binding-android-arm-eabi@1.2.14'
-  - '@rolldown/binding-android-arm64@1.2.14'
-  - '@rolldown/binding-darwin-arm64@1.2.14'
-  - '@rolldown/binding-darwin-x64@1.2.14'
-  - '@rolldown/binding-freebsd-x64@1.2.14'
-  - '@rolldown/binding-linux-arm-gnueabihf@1.2.14'
-  - '@rolldown/binding-linux-arm64-gnu@1.2.14'
-  - '@rolldown/binding-linux-arm64-musl@1.2.14'
-  - '@rolldown/binding-linux-ppc64-gnu@1.2.14'
-  - '@rolldown/binding-linux-s390x-gnu@1.2.14'
-  - '@rolldown/binding-linux-x64-gnu@1.2.14'
-  - '@rolldown/binding-linux-x64-musl@1.2.14'
-  - '@rolldown/binding-openharmony-arm64@1.2.14'
-  - '@rolldown/binding-win32-arm64-msvc@1.2.14'
-  - '@rolldown/binding-win32-x64-msvc@1.2.14'
-  - rolldown@1.2.14
 
 minimumReleaseAgeExcludePrune: true
 
