@@ -247,14 +247,14 @@ export function Tooltip(
   const handleClick = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(false, true)
-      childProp?.props.onClick?.(e)
+      childProp?.props?.onClick?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(false, true)
-      childProp?.props.onContextMenu?.(e)
+      childProp?.props?.onContextMenu?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )

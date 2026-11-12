@@ -50,7 +50,7 @@ describe('theme', () => {
 
       function Debug() {
         try {
-          // oxlint-disable-next-line react/hooks, react/rules-of-hooks
+          // oxlint-disable-next-line react/rules-of-hooks
           useRootTheme()
         } catch (err) {
           log(err)
