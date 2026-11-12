@@ -40,7 +40,8 @@
   color: inherit;
 }
 
-.sui-Button > [data-ui="Button-Spinner"] + * {
+/* Visually hide button contents other than the spinner when loading=true */
+.sui-Button[aria-busy="true"] > :not([data-ui="Button-Spinner"]) {
   opacity: 0;
 }
 
