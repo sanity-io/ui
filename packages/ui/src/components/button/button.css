@@ -4,7 +4,7 @@
 .sui-Button {
   --background-color: hsl(from var(--backdrop) h s l / var(--opacity-high));
   --foreground-color: var(--foreground-high);
-  --hover-blend-color: var(--gray-500);
+  --hover-blend-color: light-dark(var(--gray-500), var(--gray-300));
   background: var(--background-color);
   box-shadow: inset 0 0 0 1px var(--border-color, transparent);
   color: var(--foreground-color);
@@ -16,7 +16,7 @@
 .sui-Button:hover {
   background: color-mix(
     in srgb,
-    var(--hover-blend-color) 12%,
+    var(--hover-blend-color) 25%,
     var(--background-color)
   );
   color: color-mix(
@@ -59,13 +59,13 @@
 .sui-button-level-primary {
   --background-color: var(--background-high-emphasized);
   --foreground-color: var(--foreground-low-emphasized);
-  --hover-blend-color: light-dark(var(--gray-950), var(--gray-50));
+  --hover-blend-color: light-dark(var(--gray-50), var(--gray-600));
 }
 
 .sui-Button.sui-button-level-primary:hover {
   background: color-mix(
     in srgb,
-    var(--hover-blend-color) 12%,
+    var(--hover-blend-color) 25%,
     var(--background-color)
   );
   color: var(--foreground-low-emphasized);
@@ -73,9 +73,8 @@
 
 .sui-button-level-primary.sui-tone-critical {
   --background-color: var(--background-low-emphasized);
-  --hover-blend-color: light-dark(var(--red-950), var(--red-50));
+  --hover-blend-color: light-dark(var(--red-50), var(--red-700));
 }
-
 
 
 /**
@@ -88,7 +87,7 @@
 .sui-button-level-secondary.sui-tone-critical {
   --background-color: var(--background-low);
   --foreground-color: var(--foreground-low);
-  --hover-blend-color: var(--red-500);
+  --hover-blend-color: light-dark(var(--red-400), var(--red-500));
 }
 
 /**
@@ -96,5 +95,5 @@
   */
 .sui-button-level-tertiary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
-  --hover-blend-color: var(--red-500);
+  --hover-blend-color: light-dark(var(--red-400), var(--red-500));
 }
