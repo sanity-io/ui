@@ -163,7 +163,9 @@ export interface PopoverProps
 const INTENT_EVENT_TYPES = ['focusin', 'pointerenter', 'pointerdown'] as const
 
 /** Calls `handleIntent` on intent to open the popover, until the returned function is called */
-function listenForIntent(element: HTMLElement, handleIntent: () => void): () => void {
+function listenForIntent(element: HTMLElement | null, handleIntent: () => void): () => void {
+  if (!element) return () => {}
+
   const controller = new AbortController()
   const {signal} = controller
 
@@ -186,11 +188,15 @@ function listenForIntent(element: HTMLElement, handleIntent: () => void): () => 
 /**
  * Listens for intent on the cloned child's element from the moment it attaches, until it detaches
  * or the popover has rendered. Returns the callback for `useReferenceElement` to attach with.
+ *
+ * The node is null when the child forwards a ref with nothing mounted, and when that ref later
+ * clears. Null and a swap onto another element both stop whatever was already listening. A child
+ * may report the next node without running the previous cleanup. Null attaches nothing.
  */
 function useChildIntent(
   shouldRender: boolean,
   handleIntent: () => void,
-): (node: HTMLElement) => () => void {
+): (node: HTMLElement | null) => () => void {
   const shouldRenderRef = useLatestRef(shouldRender)
   const stopRef = useRef<(() => void) | null>(null)
 
@@ -199,8 +205,10 @@ function useChildIntent(
   }, [shouldRender])
 
   return useCallback(
-    (node: HTMLElement) => {
-      if (!shouldRenderRef.current) stopRef.current = listenForIntent(node, handleIntent)
+    (node: HTMLElement | null) => {
+      stopListening(stopRef)
+
+      if (node && !shouldRenderRef.current) stopRef.current = listenForIntent(node, handleIntent)
 
       return () => stopListening(stopRef)
     },

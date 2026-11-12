@@ -6,7 +6,14 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {Activity, type CSSProperties, Profiler, useState} from 'react'
+import {
+  Activity,
+  type CSSProperties,
+  Profiler,
+  useImperativeHandle,
+  useLayoutEffect,
+  useState,
+} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -14,6 +21,7 @@ import {_elementSizeObserver} from '../../observers/elementSizeObserver'
 import {BoundaryElementProvider} from '../../utils/boundaryElement/boundaryElementProvider'
 import {Button} from '../button/button'
 import {Text} from '../text/text'
+import {Tooltip} from '../tooltip/tooltip'
 import {Popover, type PopoverProps} from './popover'
 
 const content = <Text size={1}>Popover content</Text>
@@ -595,6 +603,187 @@ describe('Popover', () => {
       expect(callbackRefWithCleanup.mock.calls).toEqual([[otherReference], [otherReference]])
       expect(cleanup).toHaveBeenCalledTimes(1)
       expect(phasesOf(onRender)).not.toContain('nested-update')
+    })
+
+    it('does not throw when a closed Tooltip is the child', () => {
+      // A closed Tooltip forwards its floating card, which is null until the tooltip is shown.
+      // React 19 passes that null to the ref callback Popover clones onto the child.
+      const {rerender} = render(
+        <Popover content={content}>
+          <Tooltip content={<Text size={1}>Tip</Text>}>
+            <Button text="Reference" />
+          </Tooltip>
+        </Popover>,
+      )
+
+      expect(screen.getByRole('button', {name: 'Reference'})).toBeVisible()
+      expectNotRendered()
+
+      fireEvent.pointerEnter(getReference())
+      fireEvent.focusIn(getReference())
+      expectNotRendered()
+
+      rerender(
+        <Popover content={content} open>
+          <Tooltip content={<Text size={1}>Tip</Text>}>
+            <Button text="Reference" />
+          </Tooltip>
+        </Popover>,
+      )
+
+      expectVisible()
+    })
+
+    it('drops intent listeners when the child ref is null or moves to another element', () => {
+      const first = document.createElement('button')
+      const second = document.createElement('button')
+      const firstListeners = spyOnIntentListeners(first)
+      const secondListeners = spyOnIntentListeners(second)
+
+      // Calls the ref with the next node and ignores the cleanup it returns, the way a child can
+      // report a new element (or null) without React having detached the previous one first.
+      function ForwardedReference(props: {
+        element: HTMLElement | null
+        ref?: React.Ref<HTMLElement | null>
+      }) {
+        const {element, ref} = props
+
+        useLayoutEffect(() => {
+          if (typeof ref === 'function') ref(element)
+        }, [element, ref])
+
+        return <Button text="Reference" />
+      }
+
+      const {rerender} = render(
+        <Popover content={content}>
+          <ForwardedReference element={null} />
+        </Popover>,
+        {strict: false},
+      )
+
+      expectNotRendered()
+      expect(firstListeners.total()).toBe(0)
+      expect(secondListeners.total()).toBe(0)
+
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={first} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(3)
+      expect(secondListeners.active()).toBe(0)
+
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={null} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(0)
+      expectNotRendered()
+
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={first} />
+        </Popover>,
+      )
+
+      // Detach on null, then attach again: the first registration was aborted, so the total is 6
+      expect(firstListeners.active()).toBe(3)
+      expect(firstListeners.total()).toBe(6)
+
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={second} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(0)
+      expect(firstListeners.total()).toBe(6)
+      expect(secondListeners.active()).toBe(3)
+      expectNotRendered()
+
+      fireEvent.pointerEnter(first)
+      expectNotRendered()
+
+      fireEvent.pointerEnter(second)
+      expectRenderedHidden()
+      expect(secondListeners.active()).toBe(0)
+
+      // Already rendered: a null ref, then another element, does not listen again
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={null} />
+        </Popover>,
+      )
+      rerender(
+        <Popover content={content}>
+          <ForwardedReference element={first} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(0)
+      expect(firstListeners.total()).toBe(6)
+      expect(secondListeners.active()).toBe(0)
+      expect(secondListeners.total()).toBe(3)
+    })
+
+    it('detaches intent listeners when an imperative child ref goes null, then listens on the next element', () => {
+      const first = document.createElement('button')
+      const second = document.createElement('button')
+      const firstListeners = spyOnIntentListeners(first)
+      const secondListeners = spyOnIntentListeners(second)
+
+      function ImperativeReference(props: {
+        element: HTMLElement | null
+        ref?: React.Ref<HTMLElement | null>
+      }) {
+        const {element, ref} = props
+
+        useImperativeHandle<HTMLElement | null, HTMLElement | null>(ref, () => element, [element])
+
+        return <Button text="Reference" />
+      }
+
+      const {rerender} = render(
+        <Popover content={content}>
+          <ImperativeReference element={null} />
+        </Popover>,
+        {strict: false},
+      )
+
+      expect(firstListeners.total()).toBe(0)
+
+      rerender(
+        <Popover content={content}>
+          <ImperativeReference element={first} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(3)
+
+      rerender(
+        <Popover content={content}>
+          <ImperativeReference element={null} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(0)
+      expectNotRendered()
+
+      rerender(
+        <Popover content={content}>
+          <ImperativeReference element={second} />
+        </Popover>,
+      )
+
+      expect(firstListeners.active()).toBe(0)
+      expect(secondListeners.active()).toBe(3)
+
+      fireEvent.pointerEnter(second)
+      expectRenderedHidden()
     })
 
     it('leaves the child’s own ref on the child when a `referenceElement` is given', () => {
