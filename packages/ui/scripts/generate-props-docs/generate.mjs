@@ -77,9 +77,15 @@ function domOnlyComponents(compDir, dir, recordKeys) {
   if (!tsxName) return []
   const src = readFileSync(join(compDir, tsxName), 'utf8')
 
-  // How sub-components are exposed: `ListRoot.ItemImage = ListItemImage`
+  // How sub-components are exposed: `ListRoot.ItemImage = ListItemImage`, with
+  // `export const List = ListRoot`. The public name is `List.ItemImage`.
+  const rootAlias = new Map()
+  for (const m of src.matchAll(/^export const (\w+) = (\w+)\s*$/gm)) rootAlias.set(m[2], m[1])
   const attachedAs = new Map()
-  for (const m of src.matchAll(/\w+\.(\w+)\s*=\s*(\w+)/g)) attachedAs.set(m[2], m[1])
+  for (const m of src.matchAll(/^(\w+)\.(\w+)\s*=\s*(\w+)\s*$/gm)) {
+    const [, root, attached, fn] = m
+    attachedAs.set(fn, {attached, publicName: `${rootAlias.get(root) ?? root}.${attached}`})
+  }
 
   const out = []
   const fnRe = /function\s+([A-Z]\w*)\s*(?:<[^>]*>)?\s*\(\s*(?:props|\{[^}]*\})\s*:\s*([^)]+?)\)/gs
@@ -92,13 +98,13 @@ function domOnlyComponents(compDir, dir, recordKeys) {
     const recordName = fnName[0].toLowerCase() + fnName.slice(1) + 'Props'
     if (recordKeys.includes(recordName)) continue
 
-    const suffix = attachedAs.get(fnName)
-    const id = suffix
-      ? `${dir}-${suffix.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`
+    const attached = attachedAs.get(fnName)
+    const id = attached
+      ? `${dir}-${attached.attached.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`
       : fnName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
     out.push({
       id,
-      name: fnName,
+      name: attached?.publicName ?? fnName,
       directory: dir,
       sourceFile: relative(UI_ROOT, join(compDir, tsxName)),
       propsFile: null,
@@ -140,10 +146,14 @@ function domOnlyComponents(compDir, dir, recordKeys) {
 function polymorphicTargets(src) {
   const out = new Map()
   const re =
-    /function\s+([A-Z]\w*)\s*<\s*T\s+extends\s+(?:React\.)?ElementType\s*=\s*'([a-z][a-z0-9]*)'\s*>\s*\(([\s\S]*?)\)\s*\{/g
+    /function\s+([A-Z]\w*)\s*<\s*T\s+extends\s+[^=>]+?\s*=\s*'([a-z][a-z0-9]*)'\s*>\s*\(([\s\S]*?)\)\s*\{/g
   for (const [, fnName, tag, params] of src.matchAll(re)) {
     if (!/ComponentProps(?:With(?:out)?Ref)?<\s*T\s*>/.test(params)) continue
     out.set(fnName, tag)
+    // The props type the signature names, e.g. `ListProps<T>` on `ListRoot`. A
+    // component's interface is looked up by this name, which may not match the function.
+    const propsType = /(\w+Props)<\s*T\s*>/.exec(params)?.[1]
+    if (propsType) out.set(propsType, tag)
   }
   return out
 }
@@ -455,7 +465,7 @@ async function main() {
       const sourceFile = readdirSync(compDir).find((f) => /^[A-Z]\w*\.tsx$/.test(f))
 
       const componentName = ifaceName.replace(/Props$/, '')
-      const polymorphicTag = polymorphic.get(componentName)
+      const polymorphicTag = polymorphic.get(ifaceName) ?? polymorphic.get(componentName)
       const fromInterface = [...new Set(iface.external)]
       // The signature describes where `...rest` goes; the interface describes
       // what the type extends. When both speak, the first one is the one a
