@@ -9,7 +9,7 @@
   --error-background-emphasized: light-dark(var(--red-600), var(--red-400));
   --error-foreground: light-dark(var(--red-800), var(--red-200));
   --error-separator: light-dark(var(--red-600), var(--red-400));
-  --focus-outline: 2px solid var(--blue-500);
+  --focus-outline: 2px solid light-dark(var(--blue-600), var(--blue-400));
   --focus-offset: 2px;
   --hover-lightness-delta: 0.125;
   --hover-transition: border-color 100ms linear, background-color 100ms linear, transform 100ms linear;
