@@ -98,6 +98,12 @@ sections:
       - id: no-mixed-controlled-uncontrolled
         level: must-not
         statement: Don't set both `checked` and `defaultChecked` on the same Checkbox, Radio or Switch. Choose one pattern — controlled or uncontrolled — per instance; mixing them produces inconsistent behaviour.
+      - id: no-pressed-for-form-values
+        level: must-not
+        statement: Don't use Button's `pressed` prop to toggle one or more values in a form. Use Checkbox or Radio instead.
+        alternatives:
+          - to: checkbox
+          - to: radio
   - kind: guidelines
     for: all
     title: Accessibility
