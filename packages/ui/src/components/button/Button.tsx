@@ -22,11 +22,12 @@ export function Button<T extends ElementType = 'button'>({
     as,
     children,
     className,
-    disabled,
     style,
     iconStart: IconStart,
     iconEnd: IconEnd,
     loading,
+    onClick,
+    pressed,
     text,
     ...rest
   } = getProps({density, level, tone, ...props}, buttonProps)
@@ -41,8 +42,17 @@ export function Button<T extends ElementType = 'button'>({
       )}
       style={style}
       data-ui="Button"
-      disabled={disabled || loading}
-      aria-busy={loading ? true : undefined}
+      aria-busy={loading}
+      aria-disabled={loading}
+      aria-pressed={pressed}
+      onClick={
+        loading
+          ? (e: Event) => {
+              e.preventDefault()
+            }
+          : onClick
+      }
+      type={Component === 'button' ? 'button' : undefined}
       {...rest}
     >
       {loading && (
@@ -52,6 +62,7 @@ export function Button<T extends ElementType = 'button'>({
           alignItems="center"
           justifyContent="center"
           data-ui="Button-Spinner"
+          aria-hidden="true"
         >
           <Spinner />
         </Flex>
