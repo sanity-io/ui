@@ -88,20 +88,24 @@ Each document is a DSDS file, written as YAML. Its `guidelines` carry a level: `
 
 ## Tokens
 
-- [Sanity UI](docs/tokens/color.dsds.yaml): 
-- [Sanity UI](docs/tokens/container-widths.dsds.yaml): 
-- [Sanity UI](docs/tokens/content.dsds.yaml): 
-- [Sanity UI](docs/tokens/font-family.dsds.yaml): 
-- [Sanity UI](docs/tokens/font-weight.dsds.yaml): 
-- [Sanity UI](docs/tokens/radius.dsds.yaml): 
-- [Sanity UI](docs/tokens/semantic.dsds.yaml): 
-- [Sanity UI](docs/tokens/shadow.dsds.yaml): 
-- [Sanity UI](docs/tokens/space.dsds.yaml): 
-- [Sanity UI](docs/tokens/typography.dsds.yaml): 
+- [Sanity UI](docs/tokens/color.dsds.yaml):
+- [Sanity UI](docs/tokens/container-widths.dsds.yaml):
+- [Sanity UI](docs/tokens/content.dsds.yaml):
+- [Sanity UI](docs/tokens/font-family.dsds.yaml):
+- [Sanity UI](docs/tokens/font-weight.dsds.yaml):
+- [Sanity UI](docs/tokens/radius.dsds.yaml):
+- [Sanity UI](docs/tokens/semantic.dsds.yaml):
+- [Sanity UI](docs/tokens/shadow.dsds.yaml):
+- [Sanity UI](docs/tokens/space.dsds.yaml):
+- [Sanity UI](docs/tokens/typography.dsds.yaml):
 
-## Guides
+## Generated prop docs
 
-- [Sanity UI 5 FAQ](docs/guides/faq.dsds.yaml): Anticipated questions about Sanity UI 5, with honest answers, covering migration timing, scope, stability, and where to get help.
+Prop docs are generated from the source at build time. Read the table for the component you are using. These files are in the package, not in `docs/`.
+
+- [Prop tables](dist/props-docs/): one markdown table per component, named `<id>.md`, such as `dist/props-docs/popover.md`. Lists props, types or values, required flags, composite expansions and native events.
+- [Prop docs as JSON](dist/props-docs/components.json): the same data as structured JSON.
+- [TypeScript types](dist/index.d.ts): the authoritative type for every prop.
 
 ## Skills
 
