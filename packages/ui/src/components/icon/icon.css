@@ -3,6 +3,10 @@
   color: var(--icon-color);
 }
 
+.sui-icon-trim {
+  margin: -0.2em;
+}
+
 .sui-Icon:where(.sui-text-muted) {
   --icon-color-muted: var(--foreground-low);
   color: var(--icon-color-muted);
