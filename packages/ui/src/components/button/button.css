@@ -90,7 +90,7 @@
 /**
   * Disabled
   */
-.sui-Button:disabled {
+.sui-Button[class*='sui-tone']:disabled {
   background-color: var(--inert-background);
   color: var(--inert-foreground);
   --border-color: transparent;
