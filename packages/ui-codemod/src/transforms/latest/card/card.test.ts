@@ -90,6 +90,7 @@ defineInlineTest(
   <>
     <Card padding={1} />
     <Card padding={4} radius={3} border />
+    <Card padding={4} radius={3} shadow={1} />
   </>
   `,
   `
@@ -97,6 +98,7 @@ defineInlineTest(
 
   <>
     <Box padding={1} />
+    <Card density="regular" />
     <Card density="regular" />
   </>
   `,
@@ -133,6 +135,19 @@ defineInlineTest(
   </Box>
   `,
   'replaces Card with Box and updates closing tag',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Card tone="caution" />
+  `,
+  `
+  // UI-CODEMOD TODO: Please double check the Box migration below. Nested typography components may require tone.
+  <Box tone="caution" />
+  `,
+  'replaces Card with Box and adds warning if tone is set',
 )
 
 defineInlineTest(

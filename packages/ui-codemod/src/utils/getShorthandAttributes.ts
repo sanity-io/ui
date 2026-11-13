@@ -34,7 +34,7 @@ export function getShorthandAttributes(
   for (const prop of mod.props) {
     const styleValue = getMappingValue(prop.mapping, expr)
 
-    if (styleValue === undefined) {
+    if (styleValue === undefined || styleValue === null) {
       continue
     }
 
