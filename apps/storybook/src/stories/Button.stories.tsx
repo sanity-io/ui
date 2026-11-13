@@ -114,13 +114,25 @@ export const Icons: Story = {
 export const Loading: Story = {
   render: (props) => {
     return (
-      <Button
-        {...props}
-        loading
-        iconStart={ArrowUpIcon}
-        iconEnd={ArrowDownIcon}
-        text="Save Content"
-      />
+      <>
+        <Button
+          {...props}
+          loading
+          onClick={() => window.alert('You should not be able to trigger this')}
+          iconStart={ArrowUpIcon}
+          iconEnd={ArrowDownIcon}
+          text="Save Content"
+        />
+        <Button
+          {...props}
+          tone="critical"
+          loading
+          onClick={() => window.alert('You should not be able to trigger this')}
+          iconStart={ArrowUpIcon}
+          iconEnd={ArrowDownIcon}
+          text="Destroy Content"
+        />
+      </>
     )
   },
   play: async ({canvas}) => {
