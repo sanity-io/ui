@@ -47,7 +47,13 @@ export function Button<T extends ElementType = 'button'>({
       aria-disabled={loading}
       aria-pressed={pressed}
       disabled={disabled}
-      onClick={loading ? undefined : onClick}
+      onClick={
+        loading
+          ? (e: Event) => {
+              e.preventDefault()
+            }
+          : onClick
+      }
       type={Component === 'button' ? 'button' : undefined}
       {...rest}
     >
