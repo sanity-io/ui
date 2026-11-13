@@ -17,7 +17,7 @@ const PerformanceList = (props: ComponentProps<typeof List>) => {
   return (
     <List {...props}>
       <List.Item>
-        <List.ItemText title="Title" subtitle="Subtitle" />
+        <List.ItemButton text="Title" subtext="Subtitle" />
       </List.Item>
     </List>
   )
@@ -45,53 +45,110 @@ export const Default: Story = {
   render: (props) => {
     return (
       <List {...props}>
-        <List.Item end={<Icon size={1} icon={EditIcon} />}>
-          <List.ItemImage src="https://placehold.co/600x400" alt="First item image" />
-          <List.ItemText title="First Item Title" subtitle="First item subtitle" />
-        </List.Item>
-
-        <List.Item end={<Icon size={1} icon={EditIcon} />}>
-          <List.ItemImage src="https://placehold.co/600x400" alt="Second item image" />
-          <List.ItemText title="Second Item Title" subtitle="Second item subtitle" />
-        </List.Item>
-
-        <List.Item end={<Icon size={1} icon={EditIcon} />}>
-          <List.ItemImage src="https://placehold.co/600x400" alt="Third item image" />
-          <List.ItemText title="Third Item Title" subtitle="Third item subtitle" />
-        </List.Item>
+        <List.Item>First Item</List.Item>
+        <List.Item>Second Item</List.Item>
+        <List.Item>Third Item</List.Item>
       </List>
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('First Item Title')).parentElement?.closest('[data-ui="List"]')
-        ?.tagName,
-    ).toBe('UL')
+    const firstItem = await canvas.findByText('First Item')
+    await expect(firstItem.tagName).toBe('LI')
+    await expect(firstItem.parentElement?.tagName).toBe('UL')
   },
 }
 
-export const Menu: Story = {
+export const WithButtons: Story = {
   render: (props) => {
     return (
-      <List {...props} gap={2}>
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={SparkleIcon} />}>
-          <List.ItemText title="Content Agent" />
-        </List.ButtonItem>
+      <List {...props}>
+        <List.Item>
+          <List.ItemButton
+            start={<List.ItemImage src="https://placehold.co/600x400" alt="First item image" />}
+            end={<Icon size={1} icon={EditIcon} />}
+            text="First Item Title"
+            subtext="Second item title"
+          ></List.ItemButton>
+        </List.Item>
 
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={ComposeIcon} />}>
-          <List.ItemText title="Canvas" />
-        </List.ButtonItem>
+        <List.Item>
+          <List.ItemButton
+            start={<List.ItemImage src="https://placehold.co/600x400" alt="Second item image" />}
+            end={<Icon size={1} icon={EditIcon} />}
+            text="Second Item Title"
+            subtext="Second item subtitle"
+          />
+        </List.Item>
 
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={ImageIcon} />} selected>
-          <List.ItemText title="Media Library" />
-        </List.ButtonItem>
+        <List.Item>
+          <List.ItemButton
+            start={<List.ItemImage src="https://placehold.co/600x400" alt="Third item image" />}
+            end={<Icon size={1} icon={EditIcon} />}
+            text="Third Item Title"
+            subtext="Third item subtitle"
+            disabled
+          />
+        </List.Item>
+
+        <List.Item>
+          <List.ItemButton
+            start={<List.ItemImage src="https://placehold.co/600x400" alt="Fourth item image" />}
+            end={<Icon size={1} icon={EditIcon} />}
+            text="Fourth Item Title"
+            subtext="Fourth item subtitle"
+            selected
+          />
+        </List.Item>
       </List>
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('Content Agent')).parentElement?.closest('[data-ui="List"]')
-        ?.tagName,
-    ).toBe('UL')
+    const thirdItem = (await canvas.findByText('Third Item Title')).parentElement?.closest(
+      '[data-ui="ListItemButton"]',
+    )
+    const fourthItem = (await canvas.findByText('Fourth Item Title')).parentElement?.closest(
+      '[data-ui="ListItemButton"]',
+    )
+    await expect((thirdItem as HTMLButtonElement).disabled).toBe(true)
+    await expect((fourthItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
+  },
+}
+
+export const AsMenu: Story = {
+  render: (props) => {
+    return (
+      <List {...props} gap={2}>
+        <List.Item>
+          <List.ItemButton
+            density="compact"
+            start={<Icon size={1} icon={SparkleIcon} />}
+            text="Content Agent"
+            selected
+          />
+        </List.Item>
+
+        <List.Item>
+          <List.ItemButton
+            density="compact"
+            start={<Icon size={1} icon={ComposeIcon} />}
+            text="Canvas"
+          />
+        </List.Item>
+
+        <List.Item>
+          <List.ItemButton
+            density="compact"
+            start={<Icon size={1} icon={ImageIcon} />}
+            text="Media Library"
+          />
+        </List.Item>
+      </List>
+    )
+  },
+  play: async ({canvas}) => {
+    const firstItem = (await canvas.findByText('Content Agent')).parentElement?.closest(
+      '[data-ui="ListItemButton"]',
+    )
+    await expect((firstItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
   },
 }
