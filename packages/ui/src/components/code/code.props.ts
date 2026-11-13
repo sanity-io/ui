@@ -1,10 +1,11 @@
-import {marginProps} from '../../props/margin'
+import {marginProps, type MarginProps} from '../../props/margin'
 import {type TypographyProps, typographyProps} from '../../props/typography'
 import {CODE_SIZE, type CodeSize} from '../../types/Code'
 import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
-interface CodeBaseProps extends Omit<TypographyProps, 'align' | 'truncate' | 'tone' | 'weight'> {
+interface CodeBaseProps
+  extends MarginProps, Omit<TypographyProps, 'align' | 'truncate' | 'weight'> {
   /**
    * Refractor language for syntax highlighting.
    */

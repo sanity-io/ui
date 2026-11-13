@@ -59,17 +59,18 @@ defineInlineTest(
   transform,
   {},
   `
-  <Label flex="auto" />
+  <Label flex="auto" weight="bold" />
   `,
   `
   <Eyebrow
     style={{
-      flex: "1 1 auto"
+      flex: "1 1 auto",
+      fontWeight: "var(--bold)"
     }}
     as="div"
     trim={true} />
   `,
-  'moves flex prop to style',
+  'moves deprecated props to style',
 )
 
 defineInlineTest(

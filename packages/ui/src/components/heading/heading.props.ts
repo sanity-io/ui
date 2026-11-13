@@ -1,12 +1,13 @@
-import {marginProps} from '../../props/margin'
-import {toneProps} from '../../props/tone'
+import {marginProps, type MarginProps} from '../../props/margin'
+import {toneProps, type ToneProps} from '../../props/tone'
 import {type TypographyProps, typographyProps} from '../../props/typography'
 import {HEADING_SIZE, HEADING_TAG, type HeadingSize, type HeadingTag} from '../../types/Heading'
 import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface HeadingProps extends Omit<TypographyProps, 'muted' | 'weight'> {
+export interface HeadingProps
+  extends MarginProps, ToneProps, Omit<TypographyProps, 'muted' | 'weight'> {
   /**
    * Semantic heading element to render.
    */

@@ -2,11 +2,9 @@ import {FONT_WEIGHT, type FontWeight} from '../types/FontWeight'
 import {type PropDef} from '../types/PropDef'
 import type {Responsive} from '../types/Responsive'
 import {TEXT_ALIGN, type TextAlign} from '../types/TextAlign'
-import {type MarginProps, marginProps} from './margin'
-import {type ToneProps, toneProps} from './tone'
 
 /** @public */
-export interface TypographyProps extends MarginProps, ToneProps {
+export interface TypographyProps {
   /** CSS **text-align** property */
   align?: Responsive<TextAlign>
   /** CSS **color** property */
@@ -57,6 +55,4 @@ export const typographyProps: Record<string, PropDef> = {
     className: 'weight',
     values: FONT_WEIGHT,
   },
-  ...marginProps,
-  ...toneProps,
 }
