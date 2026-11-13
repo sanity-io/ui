@@ -5,6 +5,12 @@ import {getElementMatchNames} from './getElementMatchNames'
 import {removeUnusedImport} from './removeUnusedImport'
 import {transformImportAlias} from './transformImportAlias'
 
+/**
+ * Rewrites the base component in `styled(Base)` call expressions from `from.element`
+ * to `to`, and updates imports when the binding matches `from.element`.
+ * If `localNames` is omitted, matches `from.element`.
+ * Returns whether the AST was updated.
+ */
 export function replaceStyledComponent(
   j: API['jscodeshift'],
   root: ReturnType<API['jscodeshift']>,
@@ -13,9 +19,10 @@ export function replaceStyledComponent(
     localNames?: Iterable<string>
   },
   to: string,
-): void {
+): boolean {
   const names = getElementMatchNames(from.element, from.localNames)
 
+  let hasChanges = false
   let needsDefaultImportUpdate = false
   const aliases = new Set<string>()
 
@@ -32,26 +39,41 @@ export function replaceStyledComponent(
 
       if (arg.name !== from.element && arg.name !== to) {
         if (!aliases.has(arg.name)) {
-          transformImportAlias(
-            j,
-            root,
-            from.element,
-            to,
-            arg.name,
-            `Consider renaming ${arg.name} to ${to}`,
-          )
+          if (
+            transformImportAlias(
+              j,
+              root,
+              from.element,
+              to,
+              arg.name,
+              `Consider renaming ${arg.name} to ${to}`,
+            )
+          ) {
+            hasChanges = true
+          }
+
           aliases.add(arg.name)
         }
 
         return
       }
 
-      arg.name = to
-      needsDefaultImportUpdate = true
+      if (arg.name !== to) {
+        arg.name = to
+        hasChanges = true
+        needsDefaultImportUpdate = true
+      }
     })
 
   if (needsDefaultImportUpdate) {
-    addImportSpecifier(j, root, from.element, to)
-    removeUnusedImport(j, root, from.element)
+    if (addImportSpecifier(j, root, from.element, to)) {
+      hasChanges = true
+    }
+
+    if (removeUnusedImport(j, root, from.element)) {
+      hasChanges = true
+    }
   }
+
+  return hasChanges
 }

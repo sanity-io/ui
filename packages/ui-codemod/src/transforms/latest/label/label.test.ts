@@ -115,6 +115,22 @@ defineInlineTest(
   'moves width props to style and updates mapped value',
 )
 
+defineInlineTest(
+  transform,
+  {},
+  `
+  import {Label} from '@sanity/ui'
+
+  const RootLabel = styled(Label)(({theme}) => ({}))
+  `,
+  `
+  import {Eyebrow} from '@sanity/ui'
+
+  const RootLabel = styled(Eyebrow)(({theme}) => ({}))
+  `,
+  'replaces styled(Label) with styled(Eyebrow)',
+)
+
 defineCrossFileTest(
   transform,
   {},
