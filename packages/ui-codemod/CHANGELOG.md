@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- b01f42b: add weight to label mods and muted and weight to heading mods
+
 ## 1.0.0-alpha.16
 
 ### Patch Changes
