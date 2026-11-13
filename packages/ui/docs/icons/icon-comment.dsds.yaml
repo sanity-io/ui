@@ -1,0 +1,38 @@
+kind: component
+id: icon-comment
+name: CommentIcon
+description: To represent comments, discussions, or threads.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Message
+    - Feedback
+    - Discussion
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/comment.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To demarcate comment sections
+      - level: should
+        statement: To show comments within the UI
+      - level: should
+        statement: To use as a visual indicator for the number of comments
+      - level: should-not
+        statement: For creating new comments. Use AddCommentIcon instead.
+        alternatives:
+          - to: icon-add-comment
+      - level: should-not
+        statement: For referencing or soliciting feedback. Use FeedbackIcon instead.
+        alternatives:
+          - to: icon-feedback

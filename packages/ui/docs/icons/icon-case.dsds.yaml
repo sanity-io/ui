@@ -1,0 +1,18 @@
+kind: component
+id: icon-case
+name: CaseIcon
+description: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Briefcase
+    - Portfolio
+    - Business
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/case.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true

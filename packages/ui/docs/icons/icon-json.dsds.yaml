@@ -1,0 +1,36 @@
+kind: component
+id: icon-json
+name: JsonIcon
+description: To represent JSON data.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Data
+    - JSON Format
+    - Code
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/json.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For JSON editors
+      - level: should
+        statement: For JSON data display
+      - level: should-not
+        statement: To represent inline code. Use CodeIcon instead.
+        alternatives:
+          - to: icon-code
+      - level: should-not
+        statement: To represent a code blocks. Use CodeBlockIcon instead.
+        alternatives:
+          - to: icon-code-block

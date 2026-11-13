@@ -1,0 +1,36 @@
+kind: component
+id: icon-folder
+name: FolderIcon
+description: To represent folders or directories.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Directory
+    - Collection
+    - Group
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/folder.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For folder navigation or representing directory structures.
+      - level: should
+        statement: For grouping items in the context of a file system.
+      - level: should-not
+        statement: For individual files. Use DocumentIcon instead.
+        alternatives:
+          - to: icon-document
+      - level: should-not
+        statement: For representing packages or collections. Use PackageIcon instead.
+        alternatives:
+          - to: icon-package

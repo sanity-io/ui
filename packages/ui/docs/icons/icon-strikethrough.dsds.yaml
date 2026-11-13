@@ -1,0 +1,28 @@
+kind: component
+id: icon-strikethrough
+name: StrikethroughIcon
+description: Strikethrough text formatting.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Crossed
+    - Deleted Text
+    - Strike
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/strikethrough.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For toggling text as striked within a text editing feature.
+      - level: should-not
+        statement: Outside text editing. This icon is intended for formatting toolsets.

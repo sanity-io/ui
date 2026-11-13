@@ -275,241 +275,232 @@ shared:
 refs:
   - href: ./components/avatar.dsds.yaml
     rel: file
-    role: Avatar (component)
+    role: Avatar
   - href: ./components/avatar-counter.dsds.yaml
     rel: file
-    role: AvatarCounter (component)
+    role: AvatarCounter
   - href: ./components/avatar-stack.dsds.yaml
     rel: file
-    role: AvatarStack (component)
+    role: AvatarStack
   - href: ./components/badge.dsds.yaml
     rel: file
-    role: Badge (component)
+    role: Badge
   - href: ./components/box.dsds.yaml
     rel: file
-    role: Box (component)
+    role: Box
   - href: ./components/button.dsds.yaml
     rel: file
-    role: Button (component)
+    role: Button
   - href: ./components/card.dsds.yaml
     rel: file
-    role: Card (component)
+    role: Card
   - href: ./components/checkbox.dsds.yaml
     rel: file
-    role: Checkbox (component)
+    role: Checkbox
   - href: ./components/code.dsds.yaml
     rel: file
-    role: Code (component)
+    role: Code
   - href: ./components/container.dsds.yaml
     rel: file
-    role: Container (component)
+    role: Container
   - href: ./components/dialog.dsds.yaml
     rel: file
-    role: Dialog (component)
+    role: Dialog
   - href: ./components/divider.dsds.yaml
     rel: file
-    role: Divider (component)
+    role: Divider
   - href: ./components/eyebrow.dsds.yaml
     rel: file
-    role: Eyebrow (component)
+    role: Eyebrow
   - href: ./components/flex.dsds.yaml
     rel: file
-    role: Flex (component)
+    role: Flex
   - href: ./components/grid.dsds.yaml
     rel: file
-    role: Grid (component)
+    role: Grid
   - href: ./components/h-stack.dsds.yaml
     rel: file
-    role: HStack (component)
+    role: HStack
   - href: ./components/heading.dsds.yaml
     rel: file
-    role: Heading (component)
+    role: Heading
   - href: ./components/hotkeys.dsds.yaml
     rel: file
-    role: Hotkeys (component)
+    role: Hotkeys
   - href: ./components/icon-button.dsds.yaml
     rel: file
-    role: IconButton (component)
+    role: IconButton
   - href: ./components/icon.dsds.yaml
     rel: file
-    role: Icon (component)
+    role: Icon
   - href: ./components/indicator-stack.dsds.yaml
     rel: file
-    role: IndicatorStack (component)
+    role: IndicatorStack
   - href: ./components/indicator.dsds.yaml
     rel: file
-    role: Indicator (component)
+    role: Indicator
   - href: ./components/inline.dsds.yaml
     rel: file
-    role: Inline (component)
+    role: Inline
   - href: ./components/kbd.dsds.yaml
     rel: file
-    role: KBD (component)
+    role: KBD
   - href: ./components/link.dsds.yaml
     rel: file
-    role: Link (component)
+    role: Link
   - href: ./components/list-button-item.dsds.yaml
     rel: file
-    role: List.ButtonItem (component)
+    role: List.ButtonItem
   - href: ./components/list-item-image.dsds.yaml
     rel: file
-    role: List.ItemImage (component)
+    role: List.ItemImage
   - href: ./components/list-item-text.dsds.yaml
     rel: file
-    role: List.ItemText (component)
+    role: List.ItemText
   - href: ./components/list-item.dsds.yaml
     rel: file
-    role: List.Item (component)
+    role: List.Item
   - href: ./components/list.dsds.yaml
     rel: file
-    role: List (component)
+    role: List
   - href: ./components/popover.dsds.yaml
     rel: file
-    role: Popover (component)
+    role: Popover
   - href: ./components/press-area.dsds.yaml
     rel: file
-    role: PressArea (component)
+    role: PressArea
   - href: ./components/radio.dsds.yaml
     rel: file
-    role: Radio (component)
+    role: Radio
   - href: ./components/select.dsds.yaml
     rel: file
-    role: Select (component)
+    role: Select
   - href: ./components/skip-to-content.dsds.yaml
     rel: file
-    role: SkipToContent (component)
+    role: SkipToContent
   - href: ./components/spinner.dsds.yaml
     rel: file
-    role: Spinner (component)
+    role: Spinner
   - href: ./components/switch.dsds.yaml
     rel: file
-    role: Switch (component)
+    role: Switch
   - href: ./components/tabs.dsds.yaml
     rel: file
-    role: Tabs (component family)
+    role: Tabs
   - href: ./components/tab.dsds.yaml
     rel: file
-    role: Tabs.Tab (component)
+    role: Tabs.Tab
   - href: ./components/tabs-list.dsds.yaml
     rel: file
-    role: Tabs.List (component)
+    role: Tabs.List
   - href: ./components/tabs-panel.dsds.yaml
     rel: file
-    role: Tabs.Panel (component)
+    role: Tabs.Panel
   - href: ./components/text.dsds.yaml
     rel: file
-    role: Text (component)
+    role: Text
   - href: ./components/text-area.dsds.yaml
     rel: file
-    role: TextArea (component)
+    role: TextArea
   - href: ./components/text-input.dsds.yaml
     rel: file
-    role: TextInput (component)
+    role: TextInput
   - href: ./components/tooltip-group.dsds.yaml
     rel: file
-    role: TooltipGroup (component)
+    role: TooltipGroup
   - href: ./components/tooltip.dsds.yaml
     rel: file
-    role: Tooltip (component)
+    role: Tooltip
   - href: ./components/v-stack.dsds.yaml
     rel: file
-    role: VStack (component)
+    role: VStack
   - href: ./components/visually-hidden.dsds.yaml
     rel: file
-    role: VisuallyHidden (component)
+    role: VisuallyHidden
   - href: ./foundations/accessibility-guidelines.dsds.yaml
     rel: file
-    role: Accessibility guidelines (sanity.foundation)
+    role: Accessibility guidelines
   - href: ./foundations/color-guidelines.dsds.yaml
     rel: file
-    role: Color guidelines (sanity.foundation)
+    role: Color guidelines
   - href: ./foundations/content-guidelines.dsds.yaml
     rel: file
-    role: Content guidelines (sanity.foundation)
+    role: Content guidelines
   - href: ./foundations/semantics.dsds.yaml
     rel: file
-    role: Semantics (sanity.foundation)
+    role: Semantics
   - href: ./foundations/spacing-guidelines.dsds.yaml
     rel: file
-    role: Spacing guidelines (sanity.foundation)
+    role: Spacing guidelines
   - href: ./foundations/typography-guidelines.dsds.yaml
     rel: file
-    role: Typography guidelines (sanity.foundation)
+    role: Typography guidelines
   - href: ./overview/component-reference.dsds.yaml
     rel: file
-    role: Component reference (sanity.guide)
-  - href: ./overview/designer-contribution-model.dsds.yaml
-    rel: file
-    role: Sanity Design System's design contribution model (sanity.guide)
-  - href: ./overview/developer-contribution-model.dsds.yaml
-    rel: file
-    role: Developer contribution model (sanity.guide)
+    role: Component reference
   - href: ./overview/api-essentials.dsds.yaml
     rel: file
-    role: API essentials (sanity.guide)
+    role: API essentials
   - href: ./overview/installation.dsds.yaml
     rel: file
-    role: Installation (sanity.guide)
+    role: Installation
   - href: ./overview/quick-start.dsds.yaml
     rel: file
-    role: Quick start (sanity.guide)
+    role: Quick start
   - href: ./patterns/confirmation-dialogs.dsds.yaml
     rel: file
-    role: Confirmation & action dialogs (sanity.pattern)
+    role: Confirmation & action dialogs
   - href: ./patterns/error-messaging.dsds.yaml
     rel: file
-    role: Error messaging (sanity.pattern)
+    role: Error messaging
   - href: ./patterns/forms.dsds.yaml
     rel: file
-    role: Forms and form copy (sanity.pattern)
+    role: Forms and form copy
   - href: ./patterns/layouts.dsds.yaml
     rel: file
-    role: Layout guidelines (sanity.pattern)
+    role: Layout guidelines
   - href: ./patterns/loading-states.dsds.yaml
     rel: file
-    role: Loading states (sanity.pattern)
+    role: Loading states
   - href: ./patterns/messaging.dsds.yaml
     rel: file
-    role: Messaging (sanity.pattern)
+    role: Messaging
   - href: ./patterns/navigation.dsds.yaml
     rel: file
-    role: Sidebar navigation pattern (sanity.pattern)
+    role: Sidebar navigation pattern
   - href: ./patterns/responsive.dsds.yaml
     rel: file
-    role: Responsive (sanity.pattern)
+    role: Responsive
   - href: ./tokens/color.dsds.yaml
     rel: file
-    role: Color palette (entry)
+    role: Color palette
   - href: ./tokens/container-widths.dsds.yaml
     rel: file
-    role: Container widths (entry)
+    role: Container widths
   - href: ./tokens/content.dsds.yaml
     rel: file
-    role: Content tokens (demo) (entry)
+    role: Content tokens (demo)
   - href: ./tokens/font-family.dsds.yaml
     rel: file
-    role: Font families (entry)
+    role: Font families
   - href: ./tokens/font-weight.dsds.yaml
     rel: file
-    role: Font weights (entry)
+    role: Font weights
   - href: ./tokens/radius.dsds.yaml
     rel: file
-    role: Radius scale (entry)
+    role: Radius scale
   - href: ./tokens/semantic.dsds.yaml
     rel: file
-    role: Semantic tokens (entry)
+    role: Semantic tokens
   - href: ./tokens/shadow.dsds.yaml
     rel: file
-    role: Shadow scale (entry)
+    role: Shadow scale
   - href: ./tokens/space.dsds.yaml
     rel: file
-    role: Space scale (entry)
+    role: Space scale
   - href: ./tokens/typography.dsds.yaml
     rel: file
-    role: Typography styles (entry)
-  - href: ./overview/resources.dsds.yaml
-    rel: file
-    role: Resources (sanity.guide)
+    role: Typography styles
   - href: ./icons.dsds.yaml
     rel: file
     role: Sanity icon library (@sanity/icons)

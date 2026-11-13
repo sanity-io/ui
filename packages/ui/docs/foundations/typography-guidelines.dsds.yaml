@@ -11,7 +11,7 @@ metadata:
     - readability
     - heading
     - text
-    - label
+    - eyebrow
     - code
     - weight
     - alignment
@@ -197,7 +197,7 @@ sections:
           | `3` | {body-3} | Display body — intros and lead paragraphs |
           | `4` | {body-4} | Display body — hero and empty-state text |
       - title: Eyebrow and Code scale
-        body: '`Code` runs sizes `0` through `4`, defaulting to `2`: {code-0}, {code-1}, {code-2}, {code-3} and {code-4}. `Eyebrow` runs sizes `0` through `4`: {label-0}, {label-1}, {label-2}, {label-3} and {label-4}.'
+        body: '`Code` runs sizes `0` through `4`, defaulting to `2`: {code-0}, {code-1}, {code-2}, {code-3} and {code-4}. `Eyebrow` runs sizes `0` through `4`: {eyebrow-0}, {eyebrow-1}, {eyebrow-2}, {eyebrow-3} and {eyebrow-4}.'
   - kind: section
     for: all
     freeform:
@@ -205,14 +205,14 @@ sections:
         body: 'Constrain body text to roughly 45–75 characters per line. Start with `max-inline-size: 66ch`. The `ch` unit approximates character count from the `0` glyph width, so treat 66ch as a target. Check that the rendered line lands in the 45–75 range, above all for `Code` or when the font changes. Outside this range, the return sweep fails and reading slows. Measure delivers more readability gain than any other single factor.'
       - title: Line height
         body: |-
-          Body text needs ample line height: 1.5×. This also gives the layout headroom for the WCAG 1.4.12 text-spacing override, where users force 1.5× line height (see Accessibility). Headings and eyebrows use a tighter 1.25× at every size. Longer lines need more leading.
+          Body text needs ample line height: 1.5×. This also gives the layout headroom for the WCAG 1.4.12 text-spacing override, where users force 1.5× line height (see Accessibility). Headings and eyebrows use a tighter 1.15× at every size. Longer lines need more leading.
 
           | Tokens | Components | Line height |
           | --- | --- | --- |
           | `body-0`–`body-4` | `Text` 0–4 | 1.5× |
           | `code-0`–`code-4` | `Code` 0–4 | 1.5× |
           | `heading-0`–`heading-5` | `Heading` 0–5 | 1.25× |
-          | `label-0`–`label-4` | `Eyebrow` 0–4 | 1.25× |
+          | `eyebrow-0`–`eyebrow-4` | `Eyebrow` 0–4 | 1.15× |
 
           The values come from `tokens/dtcg/json/typography.tokens.json`.
       - title: Alignment

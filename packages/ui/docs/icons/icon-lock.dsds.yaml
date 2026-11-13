@@ -1,0 +1,39 @@
+kind: component
+id: icon-lock
+name: LockIcon
+description: To represent locked or secured content.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Locked
+    - Secure
+    - Private
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/lock.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent locked content or an action to lock content.
+      - level: should
+        statement: To represent an action to gain access to private content.
+      - level: should
+        statement: To represent private content/items
+      - level: should
+        statement: To represent that content cannot be altered.
+      - level: should-not
+        statement: As a general toggle for locking/unlocking. Use UnlockIcon and LockIcon in conjunction.
+      - level: should-not
+        statement: To represent locking/docking of interface elements. For sidebar locking/docking use PanelLeftIcon or PanelRightIcon instead.
+        alternatives:
+          - to: icon-panel-left
+          - to: icon-panel-right

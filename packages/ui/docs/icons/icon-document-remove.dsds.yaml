@@ -1,0 +1,30 @@
+kind: component
+id: icon-document-remove
+name: DocumentRemoveIcon
+description: Removing or deleting a document.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Delete Document
+    - Remove File
+    - Discard
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-remove.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For document removal or deletion
+      - level: should-not
+        statement: For general removal. Use RemoveIcon instead.
+        alternatives:
+          - to: icon-remove

@@ -1,0 +1,40 @@
+kind: component
+id: icon-checkmark-circle
+name: CheckmarkCircleIcon
+description: Represents tasks in general, independent of completion state.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Success Circle
+    - Confirmed Circle
+    - Done Circle
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/checkmark-circle.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent general tasks independent of completion state.
+      - level: should
+        statement: To view/manage tasks.
+      - level: should-not
+        statement: For tasks with an explicitly defined deadline. Use TaskIcon instead.
+        alternatives:
+          - to: icon-task
+      - level: should-not
+        statement: To explicitly indicate an incomplete task. Use CircleIcon instead.
+        alternatives:
+          - to: icon-circle
+      - level: should-not
+        statement: To indicate success or a completed task. Use CheckmarkIcon instead.
+        alternatives:
+          - to: icon-checkmark

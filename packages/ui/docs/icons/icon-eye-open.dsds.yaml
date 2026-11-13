@@ -1,0 +1,38 @@
+kind: component
+id: icon-eye-open
+name: EyeOpenIcon
+description: To indicate that an item is visible or to make an item visible.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Visible
+    - Show
+    - View
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/eye-open.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For showing content in a view, such as passwords or content elements.
+      - level: should-not
+        statement: For opening new content, such as tabs, windows, previews or applications. Use LaunchIcon instead.
+        alternatives:
+          - to: icon-launch
+      - level: should-not
+        statement: For exposing UI elements. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down
+      - level: should-not
+        statement: To represent public content or making something public. Use EarthGlobeIcon instead.
+        alternatives:
+          - to: icon-earth-globe

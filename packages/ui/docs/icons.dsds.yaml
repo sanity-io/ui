@@ -1,2513 +1,768 @@
-kind: dsds.asset
-id: icons
+schemaVersion: 0.23.1
 name: Icons
-description: >-
-  Interface icons for actions, objects and status. The @sanity/icons package
-  ships 236 icons as React components and SVG files. Use these icons, and only
-  these icons, across Sanity products — never substitute emoji, third-party icon
-  sets, or hand-crafted SVG unless the icon is genuinely not in this set.
-metadata:
-  status:
-    status: stable
-assetType: icon
-source:
-  href: https://www.npmjs.com/package/@sanity/icons
-formats: [react, svg]
-license:
-  name: MIT
-  href: https://github.com/sanity-io/icons/blob/main/LICENSE
-sections:
-  - kind: definitions
-    for: all
-    title: Members
-    items:
-      - id: access-denied
-        term: AccessDeniedIcon
-        definition: Indicates access restrictions or permissions denial.
-        aliases: [access-denied, Forbidden, No Entry, Restricted]
-        usage: >-
-          Use when: - Use when a user lacks permission to access content or features Do not use: -
-          For errors that aren't related to user permissions. Use ErrorOutlineIcon or
-          ErrorFilledIcon instead.  - For warnings that aren't related to user permissions. Use
-          WarningOutlineIcon or WarningFilledIcon instead. - To represent an action to gain access.
-          Use LockIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/access-denied.svg
-            rel: source
-      - id: activity
-        term: ActivityIcon
-        definition: 'Represents activity feeds, monitoring, or diagnostics.'
-        aliases: [activity, Feed, Timeline, EKG]
-        usage: >-
-          Use when: - For activity logs or feeds.  - For performance or health checks. Do not use: -
-          For general analytics or data visualization tools. Use BarChartIcon instead. - To
-          represent usage or a general line chart. Use ChartUpwardIcon instead. - To represent a
-          trend in data. Use TrendUpwardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/activity.svg
-            rel: source
-      - id: add
-        term: AddIcon
-        definition: Adding a new or existing item to an element.
-        aliases: [add, Plus, Create, New]
-        usage: >-
-          Use when: - Adding/creating a new item that doesn't benefit from the specificity of an
-          icon with an "add" modifier  (example: add-document) - As a button for the primary
-          add/create action - As a button when only one type of content can be added - As a menu
-          button to display the options of what type of item to add Do not use: - When there are
-          multiple add actions on a page. Use a more specific icon is available like AddCommentIcon
-          for comments - To indicate showing UI columns/rows in the UI. Use split-horizontal or
-          split-vertical instead. - To indicate inviting people/members to an organization or group.
-          Use AddUserIcon instead. - For adding content in a list where position does matters. Use
-          InsertAboveIcon or InsertBelowIcon instead. Best practices: - Add a label with the icon
-          when space permits.   - When creating a new item, use "New [ITEM TYPE]". Example: "New
-          document"    - When adding an existing item, use "Add [ITEM TYPE ]". Example: "Add tag". -
-          In cases where a label is not used, add a tooltip.    - When creating a new item, use
-          "Create a new [ITEM TYPE]". Example: "Create a new document"    - When adding an existing
-          item, use "Add a [ITEM TYPE ]". Example: "Add a tag".
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add.svg
-            rel: source
-      - id: add-circle
-        term: AddCircleIcon
-        definition: '<!-- TODO: describe AddCircleIcon -->'
-        aliases: [add-circle]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add-circle.svg
-            rel: source
-      - id: add-comment
-        term: AddCommentIcon
-        definition: To provide an affordance for adding a comment or reply.
-        aliases: [add-comment, Comment Add, New Comment, Reply]
-        usage: >-
-          Use when: - To represent the ability to add a comment or reply to a thread. Especially
-          when commenting is a secondary action. Do not use: - To view comments. Use CommentIcon
-          instead. - When commenting is the primary action within a feature. Consider AddIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add-comment.svg
-            rel: source
-      - id: add-document
-        term: AddDocumentIcon
-        definition: Adding or creating a document.
-        aliases: [add-document, New document]
-        usage: >-
-          Use when: - For adding a document to a group/collection/list  - For creating a new
-          document as a secondary action Do not use: - When adding/creating a document is the
-          primary action. Use AddIcon instead. - For general adding or creation. Use AddIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add-document.svg
-            rel: source
-      - id: add-user
-        term: AddUserIcon
-        definition: To add a role or add/invite users to a group.
-        aliases: [add-user]
-        usage: >-
-          Use when: - For adding people to a user group or a team - To add people to a permissions
-          group - To add a role Do not use: - As a general action for sharing. Use ShareIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add-user.svg
-            rel: source
-      - id: api
-        term: ApiIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [api, Code Interface, Integration]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/api.svg
-            rel: source
-      - id: archive
-        term: ArchiveIcon
-        definition: Archiving or storing items for later reference.
-        aliases: [archive, Box, Storage, Deprecated]
-        usage: >-
-          Use when: - For archival actions - For stashing changes Do not use: - For removal actions.
-          Use RemoveIcon instead. - For delete actions. Use TrashIcon instead. - To represent adding
-          to a collection. Use PackageIcon instead. - To represent download or export actions. Use
-          DownloadIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/archive.svg
-            rel: source
-      - id: arrow-down
-        term: ArrowDownIcon
-        definition: Downward screen-level movement/scrolling.
-        aliases: [arrow-down, Down, Descend, Download Direction]
-        usage: >-
-          Use when: - Moving/scrolling down within a page Do not use: - As an indicator for
-          downloads. Use DownloadIcon for viewing instead. - To represent unpublish actions. Use
-          UnpublishIcon instead. - To move, transition or resize elements within a page. Use
-          ChevronDownIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-down.svg
-            rel: source
-      - id: arrow-left
-        term: ArrowLeftIcon
-        definition: Backward navigation across surfaces.
-        aliases: [arrow-left, Left, Back, Previous]
-        usage: >-
-          Use when: - Navigating back to a previous page - Paginating backward/previous Do not use:
-          - To move, resize or reveal elements within a page. Use ChevronLeftIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-left.svg
-            rel: source
-      - id: arrow-right
-        term: ArrowRightIcon
-        definition: Forward navigation across surfaces.
-        aliases: [arrow-right, Right, Forward, Next]
-        usage: >-
-          Use when: - Navigating forward to a new page - Paginating forward/next Do not use: - To
-          move, resize or reveal elements within a page. Use ChevronRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-right.svg
-            rel: source
-      - id: arrow-top-right
-        term: ArrowTopRightIcon
-        definition: To outside a link outside of the current application context.
-        aliases: [arrow-top-right, External, Open New, Diagonal Up Right]
-        usage: >-
-          Use when: - To open a link to another Studio or application - To open content from the
-          existing Studio/application in a new tab/window or preview Do not use: - To represent
-          opening an external link in a new window or tab. Use LaunchIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-top-right.svg
-            rel: source
-      - id: arrow-up
-        term: ArrowUpIcon
-        definition: Upward screen-level movement/scrolling.
-        aliases: [arrow-up, Up, Ascend, Upload Direction]
-        usage: >-
-          Use when: - Moving/scrolling up within a page - Scrolling back to the top of a page Do not
-          use: - To represent uploads. Use UploadIcon instead. - To represent publish actions. Use
-          PublishIcon instead. - To move, transition or resize elements within a page. Use
-          ChevronUpIcon instead. - To represent opening a new window or tab. Use LaunchIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-up.svg
-            rel: source
-      - id: asterisk
-        term: AsteriskIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [asterisk, Star Symbol, Required, Wildcard]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/asterisk.svg
-            rel: source
-      - id: bar-chart
-        term: BarChartIcon
-        definition: Analytics or general data visualization.
-        aliases: [bar-chart, Chart, Statistics, Analytics]
-        usage: >-
-          Use when: - For general analytics or data visualization tools - Displaying data as a bar
-          chart Do not use: - To represent activity or health metrics. Use ActivityIcon instead. -
-          To represent trends in data. Use TrendUpwardIcon instead. - To represent usage or a
-          general line chart. Use ChartUpwardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bar-chart.svg
-            rel: source
-      - id: basket
-        term: BasketIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [basket]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/basket.svg
-            rel: source
-      - id: bell
-        term: BellIcon
-        definition: 'Viewing, receiving, or managing notifications/alerts.'
-        aliases: [bell, Notification, Alert, Ring]
-        usage: >-
-          Use when: - For notifications, alerts, or reminders. Do not use: - For reminders related
-          to a task. Use TaskIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bell.svg
-            rel: source
-      - id: bill
-        term: BillIcon
-        definition: Financial information or invoices.
-        aliases: [bill, Invoice, Receipt, Payment]
-        usage: >-
-          Use when: - For billing information or invoice management. - To view payment history Do
-          not use: - For general documents. Use DocumentIcon instead. - For documentation. Use
-          BookIcon instead. - For payment actions. Use CreditCardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bill.svg
-            rel: source
-      - id: binary-document
-        term: BinaryDocumentIcon
-        definition: To represent binary or executable files.
-        aliases: [binary-document, Code File, Binary, Data File]
-        usage: >-
-          Use when: - As an indicator for a binary file or executable Do not use: - For general
-          documents or files. Use DocumentIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/binary-document.svg
-            rel: source
-      - id: block-content
-        term: BlockContentIcon
-        definition: Block-based content or structured text.
-        aliases: [block-content, Content Block, Rich Text, Structured Content]
-        usage: >-
-          Use when: - To represent a block of text, like a paragraph. - To indicate rich text
-          formatting. Do not use: - As a prompt for editing or composing content. Use EditIcon or
-          ComposeIcon respectively.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/block-content.svg
-            rel: source
-      - id: block-element
-        term: BlockElementIcon
-        definition: Block layout elements.
-        aliases: [block-element, Block, Container, Box]
-        usage: >-
-          Use when: - To represent content that is displayed as a block element (taking the full
-          width of its parent and starting a new line). Do not use: - To represent the size or
-          aspect ratio of an element. - For spliting a layout vertically. Use SplitVerticalIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/block-element.svg
-            rel: source
-      - id: blockquote
-        term: BlockquoteIcon
-        definition: Blockquote text formatting.
-        aliases: [blockquote, Quote, Citation, Excerpt]
-        usage: >-
-          Use when: - For toggling text as a blockquote within a text editing feature. Do not use: -
-          Outside text editing. This icon is intended for formatting toolsets. - To represent a
-          general text block. Use BlockContentIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/blockquote.svg
-            rel: source
-      - id: bold
-        term: BoldIcon
-        definition: Bold text formatting.
-        aliases: [bold, Strong, Emphasis, Heavy]
-        usage: >-
-          Use when: - For toggling text as bold within a text editing feature. Do not use: - Outside
-          text editing. This icon is intended for formatting toolsets.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bold.svg
-            rel: source
-      - id: bolt
-        term: BoltIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [bolt, Lightning, Fast, Energy]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bolt.svg
-            rel: source
-      - id: book
-        term: BookIcon
-        definition: Represent documentation or reading material.
-        aliases: [book, Documentation, Manual, Guide]
-        usage: >-
-          Use when: - To represent reading material–most notably documentation or learning guides.
-          Do not use: - For product tips or suggestions. Use BulbOutlineIcon instead. - To represent
-          help or support. Use HelpCircleIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/book.svg
-            rel: source
-      - id: bookmark
-        term: BookmarkIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [bookmark]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bookmark.svg
-            rel: source
-      - id: bookmark-filled
-        term: BookmarkFilledIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [bookmark-filled]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bookmark-filled.svg
-            rel: source
-      - id: bottle
-        term: BottleIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [bottle, Container, Liquid, Product]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bottle.svg
-            rel: source
-      - id: bug
-        term: BugIcon
-        definition: Code debugging.
-        aliases: [bug, Issue]
-        usage: >-
-          Use when: - To indicate a debugging action, mode, or process. Do not use: - To represent
-          user-facing errors. Use ErrorOutlineIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bug.svg
-            rel: source
-      - id: bulb-filled
-        term: BulbFilledIcon
-        definition: '<!-- TODO: describe BulbFilledIcon -->'
-        aliases: [bulb-filled]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bulb-filled.svg
-            rel: source
-      - id: bulb-outline
-        term: BulbOutlineIcon
-        definition: Product tips and suggestions.
-        aliases: [bulb-outline, Idea, Light, Suggestion]
-        usage: >-
-          Use when: - To represent product tips/suggestions for user onboarding or revealing new
-          features Do not use: - For deeper learning or to represent documentation. Use BookIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bulb-outline.svg
-            rel: source
-      - id: calendar
-        term: CalendarIcon
-        definition: Calendar or date selection.
-        aliases: [calendar, Date, Schedule, Event]
-        usage: >-
-          Use when: - To indicate date selection or scheduling. - To represent calendar views or
-          features. Do not use: - For time or duration. Use ClockIcon instead. - To represent a
-          collection of events. Use TimelineIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/calendar.svg
-            rel: source
-      - id: case
-        term: CaseIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [case, Briefcase, Portfolio, Business]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/case.svg
-            rel: source
-      - id: chart-upward
-        term: ChartUpwardIcon
-        definition: Product/feature usage or specific line chart data visualization.
-        aliases: [chart-upward, Growth, Trend, Increase]
-        usage: >-
-          Use when: - To represent usage reports for a product or feature - Displaying data as a
-          line chart Do not use: - For, general analytics, data visualization or charts. Use
-          BarChartIcon instead. - To represent activity or health metrics. Use ActivityIcon instead.
-          - To represent trends in data. Use TrendUpwardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chart-upward.svg
-            rel: source
-      - id: checkmark
-        term: CheckmarkIcon
-        definition: Success or selection.
-        aliases: [checkmark, Check, Done, Confirmed]
-        usage: >-
-          Use when: - To represent general positive outcomes - To indicate selection of an item - To
-          indicate success of a flow or operation Do not use: - To represent tasks. Use TaskIcon
-          instead. - As a interactive element for toggling an item. Use the Checkbox component
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/checkmark.svg
-            rel: source
-      - id: checkmark-circle
-        term: CheckmarkCircleIcon
-        definition: Represents tasks in general, independent of completion state.
-        aliases: [checkmark-circle, Success Circle, Confirmed Circle, Done Circle]
-        usage: >-
-          Use when: - To represent general tasks independent of completion state. - To view/manage
-          tasks. Do not use: - For tasks with an explicitly defined deadline. Use TaskIcon instead.
-          - To explicitly indicate an incomplete task. Use CircleIcon instead. - To indicate
-          success or a completed task. Use CheckmarkIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/checkmark-circle.svg
-            rel: source
-      - id: chevron-down
-        term: ChevronDownIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing an element in a downward direction.'
-        aliases: [chevron-down, Expand, Dropdown, More]
-        usage: >-
-          Use when: - As a general affordance for expanding content for an element when direction is
-          not explicitly known (example: a menu button) - For expanding an elements's content in a
-          top-to-bottom direction (example: accordions) - For collapsing an element in a bottom-to-
-          top direction (example: a fixed footer) Do not use: - As the trailing affordance for
-          Select inputs. Use SelectIcon instead. - Moving/resizing/revealing a group of elements.
-          Use DoubleChevronDownIcon instead. - To represent downloads or the download action. Use
-          DownloadIcon instead. - As an affordance to scroll down to an element. Use ArrowDownIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-down.svg
-            rel: source
-      - id: chevron-left
-        term: ChevronLeftIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing an element in a leftward direction.'
-        aliases: [chevron-left, Collapse Left, Previous]
-        usage: >-
-          Use when: - Drilling out through a column based hierarchical view - Moving backward in a
-          carousel view Do not use: - Expanding/collapsing sidebars. Use PanelLeftIcon or
-          PanelRightIcon instead - Moving/resizing/revealing a group of elements. Use
-          DoubleChevronLeftIcon instead. - Navigating backward to a previous surface. Use
-          ArrowLeftIcon instead. Best practices: - Consider RTL languages when using chevrons.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-left.svg
-            rel: source
-      - id: chevron-right
-        term: ChevronRightIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing an element in a rightward direction.'
-        aliases: [chevron-right, Expand Right, Next]
-        usage: >-
-          Use when: - Drilling out through a column based hierarchical view - Moving forward in a
-          carousel view Do not use: - Expanding/collapsing sidebars. Use PanelLeftIcon or
-          PanelRightIcon instead - Moving/resizing/revealing a group of elements. Use
-          DoubleChevronRightIcon instead. - Navigating to a new surface. Use ArrowRightIcon instead.
-          Best practices: - Consider RTL languages when using chevrons.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-right.svg
-            rel: source
-      - id: chevron-up
-        term: ChevronUpIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing an element in an upward direction.'
-        aliases: [chevron-up, Collapse, Hide, Less]
-        usage: >-
-          Use when: - As a general affordance for concealing additional content when direction is
-          not explicitly known (example: a menu button) - For collapsing an element's content in a
-          top-to-bottom direction (example: accordions) - For expanding an element in a bottom-to-
-          top direction (example: a fixed footer) Do not use: - Moving/resizing/revealing a group of
-          elements. Use DoubleChevronUpIcon instead. - For concealing a popover menu. Use Close
-          instead. - To represent uploads or the upload action. Use UploadIcon instead. instead. -
-          As an affordance to scroll up to an element or back to top. Use ArrowUpIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-up.svg
-            rel: source
-      - id: circle
-        term: CircleIcon
-        definition: Incompleted general tasks.
-        aliases: [circle, Dot Large, Point, Marker]
-        usage: >-
-          Use when: - To represent general tasks in an incompleted state. Do not use: - Explicitly
-          as a radio button or checkbox. Use actual components instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/circle.svg
-            rel: source
-      - id: clipboard
-        term: ClipboardIcon
-        definition: To represent pasting text from clipboard.
-        aliases: [clipboard, Copy, Paste, Buffer]
-        usage: >-
-          Use when: - For pasting from clipboard actions only. Do not use: - To represent copying or
-          copying to clipboard. Use CopyIcon instead. - To represent pasting an image from
-          clipboard. Use  ClipboardImageIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/clipboard.svg
-            rel: source
-      - id: clipboard-image
-        term: ClipboardImageIcon
-        definition: To represent pasting an image from clipboard.
-        aliases: [clipboard-image, Copy Image, Image Buffer, Screenshot]
-        usage: >-
-          Use when: - Specifically for pasting image data from the clipboard. Do not use: - For
-          general pasting actions. Use ClipboardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/clipboard-image.svg
-            rel: source
-      - id: clock
-        term: ClockIcon
-        definition: To represent time or duration.
-        aliases: [clock, Time, History]
-        usage: >-
-          Use when: - To indicate a time or duration based value - To represent a timestamp Do not
-          use: - To represent specific dates. Use CalendarIcon instead. - To view the history or
-          activity log of an item. Use RestoreIcon instead. - To represent time-zones. Use
-          EarthAmericasIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/clock.svg
-            rel: source
-      - id: close
-        term: CloseIcon
-        definition: Close or dismiss UI elements.
-        aliases: [close, X, Exit, Dismiss]
-        usage: >-
-          Use when: - Closing a menu or popover. - Dismissing a modal, panel, or sheet. - Removing a
-          Card from view. Do not use: - For deleting or removing items. Use RemoveIcon instead.  -
-          For errors. Use ErrorOutlineIcon instead.  - For permission issues. Use AccessDeniedIcon
-          instead. - For clearing content from an input. Use CloseCircleIcon instead. - Concealing a
-          panel. Use PanelLeftIcon/PanelRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/close.svg
-            rel: source
-      - id: close-circle
-        term: CloseCircleIcon
-        definition: '<!-- TODO: describe CloseCircleIcon -->'
-        aliases: [close-circle, Cancel Circle, Remove Circle, Exit Circle]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/close-circle.svg
-            rel: source
-      - id: code
-        term: CodeIcon
-        definition: General indicator of code or Inline code snippets.
-        aliases: [code, Programming, Markup, Syntax]
-        usage: >-
-          Use when: - To indicate something as code - Inline code formatting in rich text Do not
-          use: - To represent multiline code blocks. Use CodeBlockIcon instead. - For general API
-          references. Use PlugIcon instead. - To represent JSON. Use JsonIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/code.svg
-            rel: source
-      - id: code-block
-        term: CodeBlockIcon
-        definition: Multiline code blocks.
-        aliases: [code-block, Code Snippet, Pre, Programming Block]
-        usage: >-
-          Use when: - Code block formatting in rich text Do not use: - To represent inline code. Use
-          CodeIcon instead. - For general API references. Use PlugIcon instead. - To represent JSON.
-          Use JsonIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/code-block.svg
-            rel: source
-      - id: cog
-        term: CogIcon
-        definition: View or manage settings.
-        aliases: [cog, Settings, Configuration, Preferences]
-        usage: >-
-          Use when: - Use to indicate settings for an item or application Do not use: - For general
-          tools or maintenance. Use WrenchIcon instead. - To represent local computer settings. Use
-          DesktopIcon instead. - To indicate configurations. Use ControlsIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/cog.svg
-            rel: source
-      - id: collapse
-        term: CollapseIcon
-        definition: To exit the interface out of a maximized state or mode.
-        aliases: [collapse, Minimize, Contract, Fold]
-        usage: >-
-          Use when: - For exiting a full screen mode in the interface - For exiting a focus mode in
-          the interface Do not use: - For closing UI elements. Use CloseIcon instead. - For
-          collapsing UI elements. Use ChevronUpIcon instead. - For hiding UI elements. Use EyeClosedIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/collapse.svg
-            rel: source
-      - id: color-wheel
-        term: ColorWheelIcon
-        definition: 'Color collections, palettes, or themes.'
-        aliases: [color-wheel, Color Picker, Palette, Hue]
-        usage: >-
-          Use when: - To reference or represent a color theme or collection of colors. Do not use: -
-          For targeting an individual color or coloring an individual element. Use DropIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/color-wheel.svg
-            rel: source
-      - id: comment
-        term: CommentIcon
-        definition: 'To represent comments, discussions, or threads.'
-        aliases: [comment, Message, Feedback, Discussion]
-        usage: >-
-          Use when: - To demarcate comment sections  - To show comments within the UI - To use as a
-          visual indicator for the number of comments Do not use: - For creating new comments. Use
-          AddCommentIcon instead. - For referencing or soliciting feedback. Use FeedbackIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/comment.svg
-            rel: source
-      - id: component
-        term: ComponentIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [component, Module, Part, Building Block]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/component.svg
-            rel: source
-      - id: compose
-        term: ComposeIcon
-        definition: Creating new written content.
-        aliases: [compose, Edit, Write, Create Content]
-        usage: >-
-          Use when: - For creating new written content or documents. Do not use: - For AI-powered
-          creation of new written content. Use ComposeSparklesIcon instead. - For editing existing
-          written content. Use EditIcon instead. - For creating new general content. Use AddIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/compose.svg
-            rel: source
-      - id: compose-sparkles
-        term: ComposeSparklesIcon
-        definition: AI-powered creation of new written content.
-        aliases: [compose-sparkles, AI compose]
-        usage: >-
-          Use when: - For creating new written content or documents with AI assistance. Do not use:
-          - To represent an AI-powered feature. Use SparklesIcon instead. - To represent Sanity's
-          Content Agent feature. Use SparkleIcon instead. - For manual creation of new written
-          content. Use ComposeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/compose-sparkles.svg
-            rel: source
-      - id: confetti
-        term: ConfettiIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [confetti, Celebration, Party, Success]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/confetti.svg
-            rel: source
-      - id: controls
-        term: ControlsIcon
-        definition: Configuration or advanced controls.
-        aliases: [controls, Adjustments, Sliders, Tuning]
-        usage: >-
-          Use when: - To represent a configuration action or mode - To represent advanced
-          controls/actions (ex: Advanced search) Do not use: - To represent general settings. Use
-          CogIcon instead. - To represent configuring content filters. Use FilterIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/controls.svg
-            rel: source
-      - id: copy
-        term: CopyIcon
-        definition: Copying or duplicating actions.
-        aliases: [copy, Duplicate, Clone, Copy]
-        usage: >-
-          Use when: - For copying general text to clipboard - For duplicating items or cloning
-          operations Do not use: - For copying a link/URL to the clipboard. Use LinkIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/copy.svg
-            rel: source
-      - id: credit-card
-        term: CreditCardIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [credit-card, Payment, Card, Transaction]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/credit-card.svg
-            rel: source
-      - id: crop
-        term: CropIcon
-        definition: Image cropping or trimming.
-        aliases: [crop, Trim, Cut Image, Adjust]
-        usage: >-
-          Use when: - To represent image cropping or cropping tools Do not use: - For image resizing
-          - For broader image or video editing features. Use ControlsIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/crop.svg
-            rel: source
-      - id: cube
-        term: CubeIcon
-        definition: Generic data/metadata.
-        aliases: [cube, 3D, Box, Object]
-        usage: >-
-          Use when: - To represent an individual and general piece of data or metadata. - As a
-          fallback icon for data types that are too abstract to be represented with a more specific
-          icon. Do not use: - To represent a collection of data or items. Use PackageIcon instead. -
-          To represent unknown or unidentified data. Use UnknownIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/cube.svg
-            rel: source
-      - id: dashboard
-        term: DashboardIcon
-        definition: Dashboard pages/screens.
-        aliases: [dashboard, Overview, Home, Main]
-        usage: >-
-          Use when: - To represent pages/screens that act as a dashboard of information. Do not use:
-          - To represent Sanity's home page. Use HomeIcon instead. - To represent a gallery of
-          media. Use ImagesIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/dashboard.svg
-            rel: source
-      - id: database
-        term: DatabaseIcon
-        definition: Database or data storage.
-        aliases: [database, Storage, Data, Server]
-        usage: >-
-          Use when: - To represent general databases or database features - Data management or
-          storage settings Do not use: - For GROQ-specific features or queries. Use GroqIcon
-          instead. - To represent a collection of data or items. Use PackageIcon instead. - To
-          represent an individual and general piece of data or metadata. Use CubeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/database.svg
-            rel: source
-      - id: desktop
-        term: DesktopIcon
-        definition: To represent desktop devices or a person's local computer settings.
-        aliases: [desktop, Monitor, Screen]
-        usage: >-
-          Use when: - To represent a desktop when choosing between different device types - To
-          represent a a computer's system settings (example: system-level light/dark mode
-          preference) Do not use: - As an indicator for responsiveness. Use MobileDeviceIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/desktop.svg
-            rel: source
-      - id: diamond
-        term: DiamondIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [diamond, Gem, Premium, Value]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/diamond.svg
-            rel: source
-      - id: document
-        term: DocumentIcon
-        definition: To represent files or general documents.
-        aliases: [document, File, Doc, Paper]
-        usage: >-
-          Use when: - As an indicator for a file or general document Do not use: - To represent
-          specific document types when an icon exists - For binary files, use BinaryDocumentIcon
-          instead. - For PDF files, use DocumentPdfIcon instead. - For spreadsheets or tabular files
-          like CSV of TSV, use DocumentSheetIcon instead. - For purely text-based files like .txt or
-          Markdown use DocumentTextIcon instead. - For video files, use DocumentVideoIcon  instead.
-          - For compressed files like Zip or .tar, use DocumentZipIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document.svg
-            rel: source
-      - id: document-pdf
-        term: DocumentPdfIcon
-        definition: To specifically represent PDF documents.
-        aliases: [document-pdf, PDF, Portable Document, PDF File]
-        usage: >-
-          Use when: - As an indicator for a PDF document Do not use: - For general documents or
-          files. Use DocumentIcon instead. - To represent text-based documents. Use DocumentTextIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-pdf.svg
-            rel: source
-      - id: document-remove
-        term: DocumentRemoveIcon
-        definition: Removing or deleting a document.
-        aliases: [document-remove, Delete Document, Remove File, Discard]
-        usage: >-
-          Use when: - For document removal or deletion Do not use: - For general removal. Use
-          RemoveIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-remove.svg
-            rel: source
-      - id: documents
-        term: DocumentsIcon
-        definition: To represent multiple documents or a group of documents.
-        aliases: [documents, Multiple Files, Collection, Archive]
-        usage: >-
-          Use when: - To represent multiple documents or general files Do not use: - For single
-          documents. Use DocumentIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/documents.svg
-            rel: source
-      - id: document-sheet
-        term: DocumentSheetIcon
-        definition: Spreadsheet or tabular documents.
-        aliases: [document-sheet, Spreadsheet, Table, Grid]
-        usage: >-
-          Use when: - As an indicator for spreadsheet or tabular-data files, such as Excel, CSV, or
-          TSV Do not use: - For general documents or files. Use DocumentIcon instead. - For
-          representing tabular data. Use ThListIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-sheet.svg
-            rel: source
-      - id: document-text
-        term: DocumentTextIcon
-        definition: Text-based documents.
-        aliases: [document-text, Text File, Article, Written]
-        usage: >-
-          Use when: - As an indicator for text-based files, such as .txt, .rtf, or Markdown Do not
-          use: - Don't use for rich text. Use BlockContentIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-text.svg
-            rel: source
-      - id: document-video
-        term: DocumentVideoIcon
-        definition: Video files.
-        aliases: [document-video, Video File, Movie, Recording]
-        usage: >-
-          Use when: - As an indicator for a video file Do not use: - For representing video playback
-          or video in the interface. Use VideoIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-video.svg
-            rel: source
-      - id: document-word
-        term: DocumentWordIcon
-        definition: Word processor documents.
-        aliases: [document-word, Word Document, DOC, Text Processing]
-        usage: >-
-          Use when: - As an indicator for .doc, .docx, or other Word processor file formats Do not
-          use: - For general documents or files. Use DocumentIcon instead. - To represent a general
-          text-based document. Use DocumentTextIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-word.svg
-            rel: source
-      - id: document-zip
-        term: DocumentZipIcon
-        definition: Compressed or archived files.
-        aliases: [document-zip, Archive, Compressed, Package]
-        usage: >-
-          Use when: - As an indicator for .zip, .tar, /.gzip or other compression file formats Do
-          not use: - For general archives or archiving data. Use ArchiveIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-zip.svg
-            rel: source
-      - id: dot
-        term: DotIcon
-        definition: Minimal status indicator.
-        aliases: [dot, Point, Bullet, Marker Small]
-        usage: >-
-          Use when: - To visually highlight an item as updated  - To mark an item with a minimal
-          status indicator Do not use: - As a bullet for unordered lists. Use unicode characters
-          instead. - To mark items with a warning or error status. Use WarningOutlineIcon or
-          ErrorOutlineIcon respectively.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/dot.svg
-            rel: source
-      - id: double-chevron-down
-        term: DoubleChevronDownIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing a group of elements in a downward direction.'
-        aliases: [double-chevron-down, Fast Down, Jump Down, Scroll Bottom]
-        usage: >-
-          Use when: - As a general affordance for expanding content for a group of elements when
-          direction is not explicitly known - For expanding a group of elements' content in a top-
-          to-bottom direction (example: all accordion sections) - For collapsing a group of
-          elements' content in a bottom-to-top direction Do not use: - For moving, resizing, or
-          expanding/collapsing a single element. Use ChevronDownIcon instead. - To scroll down
-          within a page. Use ArrowDownIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-down.svg
-            rel: source
-      - id: double-chevron-left
-        term: DoubleChevronLeftIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing a group of elements in a leftward direction.'
-        aliases: [double-chevron-left, Fast Left, Jump Previous, Rewind]
-        usage: >-
-          Use when: - For expanding a group of elements' content in a right-to-left direction
-          (example: a leading floating panel) Do not use: - For moving, resizing, or
-          expanding/collapsing a single element. Use ChevronLeftIcon instead. - To navigate back to a
-          previous page. Use ArrowLeftIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-left.svg
-            rel: source
-      - id: double-chevron-right
-        term: DoubleChevronRightIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing a group of elements in a rightward direction.'
-        aliases: [double-chevron-right, Fast Right, Jump Next, Fast Forward]
-        usage: >-
-          Use when: - For expanding a group of elements' content in a left-to-right direction
-          (example: a trailing floating panel) Do not use: - For moving, resizing, or
-          expanding/collapsing a single element. Use ChevronRightIcon instead. - To navigate forward
-          to a new page. Use ArrowRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-right.svg
-            rel: source
-      - id: double-chevron-up
-        term: DoubleChevronUpIcon
-        definition: 'Moving, resizing, transitioning, or revealing/concealing a group of elements in an upward direction.'
-        aliases: [double-chevron-up, Fast Up, Jump Up, Scroll Top]
-        usage: >-
-          Use when: - For collapsing a group of elements' content in a top-to-bottom direction
-          (example: all accordion sections) - For expanding a group of elements' content in a
-          bottom-to-top direction Do not use: - For moving, resizing, or expanding/collapsing a
-          single element. Use ChevronUpIcon instead. - To scroll up within a page. Use ArrowUpIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-up.svg
-            rel: source
-      - id: double-quote
-        term: DoubleQuoteIcon
-        definition: '<!-- TODO: describe DoubleQuoteIcon -->'
-        aliases: [double-quote]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-quote.svg
-            rel: source
-      - id: download
-        term: DownloadIcon
-        definition: To represent downloading or exporting of content.
-        aliases: [download, Save, Get, Pull]
-        usage: >-
-          Use when: - To indicate downloads or downloading actions.  - To indicate exports or
-          exporting actions. Do not use: - For uploads or uploading actions. Use UploadIcon instead.
-          - For imports or importing actions. Use UploadIcon instead. - For actions associated with
-          publishing. Use UnpublishIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/download.svg
-            rel: source
-      - id: drag-handle
-        term: DragHandleIcon
-        definition: Reorder items in a group through drag and drop interactions.
-        aliases: [drag-handle, Grip, Reorder, Move]
-        usage: >-
-          Use when: - Used exclusively for sortable lists or draggable items Do not use: - For non-
-          draggable items.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/drag-handle.svg
-            rel: source
-      - id: drop
-        term: DropIcon
-        definition: Individual coloring of an element.
-        aliases: [drop, Liquid, Water, Fluid]
-        usage: >-
-          Use when: - To reference or represent the color of an individual element Do not use: - For
-          targeting a color theme or creating a color palette. Use ColorWheelIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/drop.svg
-            rel: source
-      - id: earth-americas
-        term: EarthAmericasIcon
-        definition: Representation of geo-region or time zones.
-        aliases: [earth-americas, Globe Americas, World, International]
-        usage: >-
-          Use when: - Representing geo-region (example: Asia, Europe, etc.) or time zones. Do not
-          use: - Representing specific geo-location. Use MarkerIcon instead. - Representing public
-          content. Use EarthGlobeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/earth-americas.svg
-            rel: source
-      - id: earth-globe
-        term: EarthGlobeIcon
-        definition: To represent global concepts or public features.
-        aliases: [earth-globe, World, Global, International]
-        usage: >-
-          Use when: - To represent public content Do not use: - To select a geo-region or timezone.
-          Use EarthAmericasIcon instead.  - To represent language. Use TranslateIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/earth-globe.svg
-            rel: source
-      - id: edit
-        term: EditIcon
-        definition: Edit or modify actions.
-        aliases: [edit, Modify, Change, Update]
-        usage: >-
-          Use when: - For editing, modifying or updating content. Do not use: - For creating new
-          general content. Use AddIcon instead. - For creating new written content. Use ComposeIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/edit.svg
-            rel: source
-      - id: ellipsis-horizontal
-        term: EllipsisHorizontalIcon
-        definition: Reveal additional actions in a menu.
-        aliases: [ellipsis-horizontal, More Options, Menu, Additional]
-        usage: >-
-          Use when: - Revealing additional options or actions in an overflow menu Do not use: - For
-          revealing a navigation menu. Use MenuIcon instead. - To indicate truncated text. Use
-          typographic ellipses instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ellipsis-horizontal.svg
-            rel: source
-      - id: ellipsis-vertical
-        term: EllipsisVerticalIcon
-        definition: '<!-- TODO: describe EllipsisVerticalIcon -->'
-        aliases: [ellipsis-vertical]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ellipsis-vertical.svg
-            rel: source
-      - id: empty
-        term: EmptyIcon
-        definition: To indicate that no results exist or that something is in a blank state.
-        aliases: [empty]
-        usage: >-
-          Use when: - To indicate that parent has no children - To show that there are no results or
-          instances of something   - To show that something isn't used Do not use: - To indicate
-          null values
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/empty.svg
-            rel: source
-      - id: enter
-        term: EnterIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [enter, Return, Submit, Go]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/enter.svg
-            rel: source
-      - id: enter-right
-        term: EnterRightIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [enter-right, Enter Direction, Go Right, Navigate In]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/enter-right.svg
-            rel: source
-      - id: envelope
-        term: EnvelopeIcon
-        definition: Email or email communication.
-        aliases: [envelope, Email, Mail, Message]
-        usage: >-
-          Use when: - Specifically for email-based communication/features Do not use: - For in-app
-          chat. Use CommentIcon instead. - For general feedback. Use FeedbackIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/envelope.svg
-            rel: source
-      - id: equal
-        term: EqualIcon
-        definition: '<!-- TODO: describe EqualIcon -->'
-        aliases: [equal]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/equal.svg
-            rel: source
-      - id: error-filled
-        term: ErrorFilledIcon
-        definition: '<!-- TODO: describe ErrorFilledIcon -->'
-        aliases: [error-filled]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/error-filled.svg
-            rel: source
-      - id: error-outline
-        term: ErrorOutlineIcon
-        definition: To represent a general error within the application.
-        aliases: [error-outline, Error, Alert, Failed]
-        usage: >-
-          Use when: - To represent a critical or blocking error - When an operation or process fails
-          - To visually demarcate an error message Do not use: - To represent issues that are
-          neither critical nor blocking. Use WarningOutlineIcon instead. - To represent issues
-          related to user permissions. Use AccessDeniedIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/error-outline.svg
-            rel: source
-      - id: error-screen
-        term: ErrorScreenIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [error-screen]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/error-screen.svg
-            rel: source
-      - id: expand
-        term: ExpandIcon
-        definition: To enter the interface into a maximized state or mode.
-        aliases: [expand, Maximize, Grow, Enlarge]
-        usage: >-
-          Use when: - For entering full screen mode in the interface - For entering focus mode in
-          the interface Do not use: - For expanding UI elements. Use ChevronDownIcon instead. - For
-          making UI elements visible. Use EyeOpenIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/expand.svg
-            rel: source
-      - id: eye-closed
-        term: EyeClosedIcon
-        definition: To indicate that an item is hidden from view or to make an item hidden from view.
-        aliases: [eye-closed, Hidden, Invisible, Off]
-        usage: >-
-          Use when: - For hiding content from view, such as passwords or content elements. Do not
-          use: - For hiding, closing or dismissing UI elements. Use CloseIcon instead.  - For
-          collapsing UI elements. Use ChevronUpIcon instead. - To represent private content or
-          making something private. Use LockIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/eye-closed.svg
-            rel: source
-      - id: eye-open
-        term: EyeOpenIcon
-        definition: To indicate that an item is visible or to make an item visible.
-        aliases: [eye-open, Visible, Show, View]
-        usage: >-
-          Use when: - For showing content in a view, such as passwords or content elements. Do not
-          use: - For opening new content, such as tabs, windows, previews or applications. Use
-          LaunchIcon instead. - For exposing UI elements. Use ChevronDownIcon instead. - To
-          represent public content or making something public. Use EarthGlobeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/eye-open.svg
-            rel: source
-      - id: face-happy
-        term: FaceHappyIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [face-happy]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/face-happy.svg
-            rel: source
-      - id: face-indifferent
-        term: FaceIndifferentIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [face-indifferent]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/face-indifferent.svg
-            rel: source
-      - id: face-sad
-        term: FaceSadIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [face-sad]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/face-sad.svg
-            rel: source
-      - id: feedback
-        term: FeedbackIcon
-        definition: To represent a feature or action to collect feedback from users.
-        aliases: [feedback]
-        usage: >-
-          Use when: - When asking for feedback or to indicate that a feature is open for feedback Do
-          not use: - To represent comments. Use CommentIcon instead. - To represent discussion
-          threads. Use CommentIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/feedback.svg
-            rel: source
-      - id: filter
-        term: FilterIcon
-        definition: Filtering or refine a group of items.
-        aliases: [filter, Funnel, Sort Options, Refine]
-        usage: >-
-          Use when: - To reveal a filter menu or a group of filters - To reveal a group of filters
-          and sort options. - To perform a filtering action Do not use: - For sorting or reordering
-          items. Use SortIcon instead. - To reveal a free-form text input filter. Use SearchIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/filter.svg
-            rel: source
-      - id: folder
-        term: FolderIcon
-        definition: To represent folders or directories.
-        aliases: [folder, Directory, Collection, Group]
-        usage: >-
-          Use when: - For folder navigation or representing directory structures.  - For grouping
-          items in the context of a file system. Do not use: - For individual files. Use
-          DocumentIcon instead. - For representing packages or collections. Use PackageIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/folder.svg
-            rel: source
-      - id: generate
-        term: GenerateIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [generate, AI, Create, Automatic]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/generate.svg
-            rel: source
-      - id: github
-        term: GithubIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [github]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/github.svg
-            rel: source
-      - id: groq
-        term: GroqIcon
-        definition: Sanity's GROQ query language.
-        aliases: [groq, Query, GROQ, Sanity Query]
-        usage: >-
-          Use when: - For GROQ queries or query builders - To represent Sanity-specific query
-          features Do not use: - Don't use outside Sanity context. For general representation of
-          data queries, use DatabaseIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/groq.svg
-            rel: source
-      - id: hash
-        term: HashIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [hash, Hashtag, Tag, Number]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/hash.svg
-            rel: source
-      - id: heart
-        term: HeartIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [heart, Favorite, Like, Love]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/heart.svg
-            rel: source
-      - id: heart-filled
-        term: HeartFilledIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [heart-filled, Favorite, Like, Love]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/heart-filled.svg
-            rel: source
-      - id: help-circle
-        term: HelpCircleIcon
-        definition: Help or support.
-        aliases: [help-circle, Question, Help, Support]
-        usage: >-
-          Use when: - For help sections - For links to Support  - For any link/affordance in which
-          the primary purpose is help Do not use: - For contextual information in UI. Use
-          InfoOutlineIcon instead. - For documentation. Use BookIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/help-circle.svg
-            rel: source
-      - id: highlight
-        term: HighlightIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [highlight, Mark, Emphasis, Note]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/highlight.svg
-            rel: source
-      - id: home
-        term: HomeIcon
-        definition: Home or main page.
-        aliases: [home, House, Main, Start]
-        usage: >-
-          Use when: - To provide a direct link to the top-most page of Sanity. Do not use: - To link
-          to the entry page of an individual application or plugin.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/home.svg
-            rel: source
-      - id: ice-cream
-        term: IceCreamIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [ice-cream, Treat, Dessert, Sweet]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ice-cream.svg
-            rel: source
-      - id: image
-        term: ImageIcon
-        definition: To represent a single image.
-        aliases: [image, Picture, Photo, Media]
-        usage: >-
-          Use when: - To represent an image or image file.  - As a placeholder for an image before
-          it's fully loaded Do not use: - To represent multiple images. Use ImagesIcon instead. - To
-          represent a video. Use VideoIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/image.svg
-            rel: source
-      - id: image-remove
-        term: ImageRemoveIcon
-        definition: Removing or deleting an image.
-        aliases: [image-remove, Delete Image, Remove Photo, Clear]
-        usage: >-
-          Use when: - For image removal or deletion Do not use: - For general removal. Use
-          RemoveIcon instead. - For any actions associated with image editing.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/image-remove.svg
-            rel: source
-      - id: images
-        term: ImagesIcon
-        definition: To represent a collection of images or a collection of mixed media formats.
-        aliases: [images, Gallery, Multiple Photos, Collection]
-        usage: >-
-          Use when: - To represent multiple images or media files Do not use: - To represent a
-          single image. Use ImageIcon instead. - To represent a general collection. Use PackageIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/images.svg
-            rel: source
-      - id: inbox
-        term: InboxIcon
-        definition: '<!-- TODO: describe InboxIcon -->'
-        aliases: [inbox]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/inbox.svg
-            rel: source
-      - id: info-filled
-        term: InfoFilledIcon
-        definition: '<!-- TODO: describe InfoFilledIcon -->'
-        aliases: [info-filled]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/info-filled.svg
-            rel: source
-      - id: info-outline
-        term: InfoOutlineIcon
-        definition: To represent additional information or details.
-        aliases: [info-outline, Information, Details, About]
-        usage: >-
-          Use when: - For informational tooltips  - Indicators for details or additional information
-          - To demarcate notifications that are for general information/context Do not use: - To
-          represent help/support. Use HelpCircleIcon instead. - To represent documentation. Use
-          BookIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/info-outline.svg
-            rel: source
-      - id: inline
-        term: InlineIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [inline, Inline Text, Continuous, Flow]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/inline.svg
-            rel: source
-      - id: inline-element
-        term: InlineElementIcon
-        definition: Inline layout elements.
-        aliases: [inline-element, Inline, Span, Text Element]
-        usage: >-
-          Use when: - To represent content that is displayed as an inline element (taking up as much
-          width as necessary for its content and flows within the current line without forcing a
-          line break). Do not use: - To represent the size or aspect ratio of an element. - For
-          spliting a layout horizontally. Use SplitHorizontalIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/inline-element.svg
-            rel: source
-      - id: insert-above
-        term: InsertAboveIcon
-        definition: Inserting content above an element in a vertical list.
-        aliases: [insert-above, Add Above, Insert Before, Up]
-        usage: >-
-          Use when: - For adding content above current position - For adding a preceding row in a
-          table Do not use: - For adding of content where position does not matter. Use AddIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/insert-above.svg
-            rel: source
-      - id: insert-below
-        term: InsertBelowIcon
-        definition: Inserting content below an element in a vertical list.
-        aliases: [insert-below, Add Below, Insert After, Down]
-        usage: >-
-          Use when: - For adding content below current position - For adding a proceeding row in a
-          table Do not use: - For adding of content where position does not matter. Use AddIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/insert-below.svg
-            rel: source
-      - id: italic
-        term: ItalicIcon
-        definition: Italic text formatting.
-        aliases: [italic, Emphasis, Slant, Italic Text]
-        usage: >-
-          Use when: - For toggling text as italic within a text editing feature. Do not use: -
-          Outside text editing. This icon is intended for formatting toolsets.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/italic.svg
-            rel: source
-      - id: joystick
-        term: JoystickIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [joystick, Game, Controller, Gaming]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/joystick.svg
-            rel: source
-      - id: json
-        term: JsonIcon
-        definition: To represent JSON data.
-        aliases: [json, Data, JSON Format, Code]
-        usage: >-
-          Use when: - For JSON editors - For JSON data display Do not use: - To represent inline
-          code. Use CodeIcon instead. - To represent a code blocks. Use CodeBlockIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/json.svg
-            rel: source
-      - id: launch
-        term: LaunchIcon
-        definition: To indicate a link external from Sanity.
-        aliases: [launch, Open, External, Start]
-        usage: >-
-          Use when: - To indicate an external link Do not use: - For internal navigation with the
-          current Studio or application. Use ArrowRightIcon instead. - For navigation to a different
-          Studio or application. Use ArrowTopRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/launch.svg
-            rel: source
-      - id: leave
-        term: LeaveIcon
-        definition: Leaving or exiting.
-        aliases: [leave, Exit, Logout, Sign Out]
-        usage: >-
-          Use when: - For logout or exiting actions Do not use: - For closing or dismissing views.
-          Use CloseIcon instead. - For toggling sidebars or panels. Use PanelLeftIcon or
-          PanelRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/leave.svg
-            rel: source
-      - id: lemon
-        term: LemonIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [lemon, Citrus, Fresh, Fruit]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/lemon.svg
-            rel: source
-      - id: link
-        term: LinkIcon
-        definition: Links or connections.
-        aliases: [link, Hyperlink, Connection, URL]
-        usage: >-
-          Use when: - To represent a link or copying a link to the clipboard - To represent linking
-          one item to another Do not use: - For unlinked items. Use LinkRemovedIcon instead. - For
-          broken links. Use UnlinkIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/link.svg
-            rel: source
-      - id: linkedin
-        term: LinkedinIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [linkedin]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/linkedin.svg
-            rel: source
-      - id: link-removed
-        term: LinkRemovedIcon
-        definition: To represent removing a link or a connection.
-        aliases: [link-removed, Broken Link, Disconnected, Unlinked]
-        usage: >-
-          Use when: - As an action to remove a link or disconnect two items Do not use: - To
-          represent a broken/missing link or disconnected state. Use UnlinkIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/link-removed.svg
-            rel: source
-      - id: list
-        term: ListIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [list]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/list.svg
-            rel: source
-      - id: lock
-        term: LockIcon
-        definition: To represent locked or secured content.
-        aliases: [lock, Locked, Secure, Private]
-        usage: >-
-          Use when: - To represent locked content or an action to lock content. - To represent an
-          action to gain access to private content. - To represent private content/items - To
-          represent that content cannot be altered. Do not use: - As a general toggle for
-          locking/unlocking. Use UnlockIcon and LockIcon in conjunction. - To represent
-          locking/docking of interface elements. For sidebar locking/docking use PanelLeftIcon or
-          PanelRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/lock.svg
-            rel: source
-      - id: logo-js
-        term: LogoJsIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [logo-js, JavaScript, JS, ECMAScript]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/logo-js.svg
-            rel: source
-      - id: logo-ts
-        term: LogoTsIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [logo-ts, TypeScript, TS, Type Script]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/logo-ts.svg
-            rel: source
-      - id: marker
-        term: MarkerIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [marker]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/marker.svg
-            rel: source
-      - id: marker-removed
-        term: MarkerRemovedIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [marker-removed]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/marker-removed.svg
-            rel: source
-      - id: master-detail
-        term: MasterDetailIcon
-        definition: To represent the Sanity Studio.
-        aliases: [master-detail, Split View, Layout, Detail Pane]
-        usage: >-
-          Use when: - Representing the Structure tool within Sanity Studio Do not use: - For any
-          purpose other than representing the Structure tool within Sanity Studio
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/master-detail.svg
-            rel: source
-      - id: menu
-        term: MenuIcon
-        definition: Reveal main navigation in a menu or panel.
-        aliases: [menu, Hamburger, Navigation, Drawer]
-        usage: >-
-          Use when: - To represent the main navigational menu. Do not use: - For any menu that is
-          not the primary navigation.  - For filter menus, use FilterIcon instead. - For options
-          menus, use EllipsisHorizontalIcon instead. - For secondary menus, use ChevronDown instead.
-          Best practices: - MenuIcon should be used once in a screen. Avoid multiple menu
-          affordances to represent different navigational elements.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/menu.svg
-            rel: source
-      - id: microphone
-        term: MicrophoneIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [microphone]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/microphone.svg
-            rel: source
-      - id: microphone-slash
-        term: MicrophoneSlashIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [microphone-slash]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/microphone-slash.svg
-            rel: source
-      - id: mobile-device
-        term: MobileDeviceIcon
-        definition: Mobile device or phone.
-        aliases: [mobile-device, Phone, Smartphone, Mobile]
-        usage: >-
-          Use when: - To represent a mobile device when choosing between different device types - To
-          represent general touch-based devices Do not use: - To represent tablets. Use
-          TabletDeviceIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/mobile-device.svg
-            rel: source
-      - id: moon
-        term: MoonIcon
-        definition: Dark mode setting.
-        aliases: [moon, Dark Mode, Night, Theme]
-        usage: >-
-          Use when: - For setting a color scheme to dark mode Do not use: - For light mode. Use
-          SunIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/moon.svg
-            rel: source
-      - id: number
-        term: NumberIcon
-        definition: Numeric data or Number type.
-        aliases: [number, Hash, Numeric, Count]
-        usage: >-
-          Use when: - To indicate that a numeric data or a Number type value Do not use: - To
-          represent underlined text style. Use UnderlineIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/number.svg
-            rel: source
-      - id: ok-hand
-        term: OkHandIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [ok-hand, Okay, Approved, Good]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ok-hand.svg
-            rel: source
-      - id: olist
-        term: OlistIcon
-        definition: Ordered/numbered lists.
-        aliases: [olist, Ordered List, Numbered, Sequence]
-        usage: >-
-          Use when: - To represent numbered lists - List formatting for ordered lists Do not use: -
-          To represent a general list. Use ListIcon instead. - For unordered lists. Use UlistIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/olist.svg
-            rel: source
-      - id: overage
-        term: OverageIcon
-        definition: Overage or exceeding limits.
-        aliases: [overage, Excess, Limit, Quota]
-        usage: >-
-          Use when: - For quota warnings, exceeded limit indicators, or overage alerts Do not use: -
-          For general warnings Use WarningOutlineIcon instead. - To represent usage or a general
-          line chart. Use ChartUpwardIcon instead. - To represent activity or health metrics. Use
-          ActivityIcon instead. - To represent trends in data. Use TrendUpwardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/overage.svg
-            rel: source
-      - id: package
-        term: PackageIcon
-        definition: 'Packages, or bundles, or collections.'
-        aliases: [package, Bundle, Module, Dependency]
-        usage: >-
-          Use when: - To represent package management, bundles, or collections of data. Do not use:
-          - For shipping general groups of documents. Use DocumentsIcon instead. - For
-          directories/folders of files. Use FolderIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/package.svg
-            rel: source
-      - id: panel-left
-        term: PanelLeftIcon
-        definition: Toggle the visibility of a left panel or sidebar.
-        aliases: [panel-left, Sidebar Left, Left Panel, West]
-        usage: >-
-          Use when: - Toggling the visibility, docking or locking a left sidebar/panel Do not use: -
-          Don't use for navigation. Use MenuIcon instead. - Don't use to indicate closing the
-          PanelRightIcon. Use PanelLeftIcon instead. Best practices: - Consider RTL languages when
-          using panel left/right. - Make sure to reinforce which toggle action will occur in the
-          label (ex: "Open the navigation panel")
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/panel-left.svg
-            rel: source
-      - id: panel-right
-        term: PanelRightIcon
-        definition: Toggle the visibility of a left panel or sidebar.
-        aliases: [panel-right, Sidebar Right, Right Panel, East]
-        usage: >-
-          Use when: - Toggling the visibility, docking or locking a right sidebar/panel Do not use:
-          - Don't use for navigation. Use MenuIcon instead. - Don't use to indicate closing the
-          PanelLeftIcon. Use PanelRightIcon instead. Best practices: - Consider RTL languages when
-          using panel left/right. - Consider RTL languages when using panel left/right. - Make sure
-          to reinforce which toggle action will occur in the label (ex: "Close the inspector panel")
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/panel-right.svg
-            rel: source
-      - id: pause
-        term: PauseIcon
-        definition: Pausing media playback or holding actions.
-        aliases: [pause, Stop, Hold, Wait]
-        usage: >-
-          Use when: - For pausing media playback  - For holding processes or actions Do not use: -
-          Don't use for stopping playback completely or terminating actions. Use StopIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pause.svg
-            rel: source
-      - id: pin
-        term: PinIcon
-        definition: To represent an item that can be pinned.
-        aliases: [pin, Unpinned]
-        usage: >-
-          Use when: - As an affordance for pinning an item to a view Do not use: - For representing
-          an actively pinned item. Use PinFilledIcon instead. - For favoriting or saving content.
-          Use StarIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pin.svg
-            rel: source
-      - id: pin-filled
-        term: PinFilledIcon
-        definition: To represent a pinned item.
-        aliases: [pin-filled, Pinned]
-        usage: >-
-          Use when: - To represent an item that has been pinned to a view Do not use: - To represent
-          favorited or saved content. Use StarFilledIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pin-filled.svg
-            rel: source
-      - id: pin-removed
-        term: PinRemovedIcon
-        definition: '<!-- TODO: describe PinRemovedIcon -->'
-        aliases: [pin-removed]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pin-removed.svg
-            rel: source
-      - id: play
-        term: PlayIcon
-        definition: Starting media playback or initiating actions.
-        aliases: [play, Start, Run, Begin]
-        usage: >-
-          Use when: - To represent media playback or starting media playback  - For initiating
-          processes or actions Do not use: - For toggling visibility of items within a tree view.
-          Use ToggleArrowRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/play.svg
-            rel: source
-      - id: plug
-        term: PlugIcon
-        definition: Represents API endpoints or integrations.
-        aliases: [plug, Plugin, Extension, Connection]
-        usage: >-
-          Use when: - Referencing API integrations, features, or endpoints Do not use: - For general
-          code references. Use CodeIcon or CodeBlockIcon instead. - For code inspection. Use
-          JsonIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/plug.svg
-            rel: source
-      - id: presentation
-        term: PresentationIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [presentation, Slideshow, Present, Display]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/presentation.svg
-            rel: source
-      - id: progress50
-        term: Progress50Icon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [progress50]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/progress50.svg
-            rel: source
-      - id: progress75
-        term: Progress75Icon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [progress75]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/progress75.svg
-            rel: source
-      - id: projects
-        term: ProjectsIcon
-        definition: '<!-- TODO: describe ProjectsIcon -->'
-        aliases: [projects]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/projects.svg
-            rel: source
-      - id: publish
-        term: PublishIcon
-        definition: Publishing or releasing.
-        aliases: [publish, Release, Deploy, Go Live]
-        usage: >-
-          Use when: - For publishing, deploying or releasing content. Do not use: - For unpublishing
-          content. Use UnpublishIcon instead. - For uploading content. Use UploadIcon instead. - For
-          collapsing content vertically. Use ChevronUpIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/publish.svg
-            rel: source
-      - id: read-only
-        term: ReadOnlyIcon
-        definition: Read-only or view-only state.
-        aliases: [read-only, View Only, Locked, No Edit]
-        usage: >-
-          Use when: - For read-only fields or to reinforce when content is not editable. - To
-          represent a view-only mode. Do not use: - For locked content. Use LockIcon instead. - For
-          content a user is not allowed to access. Use AccessDeniedIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/read-only.svg
-            rel: source
-      - id: redo
-        term: RedoIcon
-        definition: Redo or reapply actions.
-        aliases: [redo, Repeat, Forward, Reapply]
-        usage: >-
-          Use when: - For redo operations Do not use: - For retrying an operation. Use RetryIcon
-          instead. - For going forward in history. Use ArrowRightIcon instead. - For refreshing content.
-          Use RefreshIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/redo.svg
-            rel: source
-      - id: refresh
-        term: RefreshIcon
-        definition: Refresh or reload actions.
-        aliases: [refresh, Reload]
-        usage: >-
-          Use when: - For reloading or refreshing content - To mimic the browser's reload action Do
-          not use: - To represent syncing data or as an action to sync data. Use SyncIcon instead. -
-          To retry a process or operation. Use RetryIcon instead. - To redo or reapply an action.
-          Use RedoIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/refresh.svg
-            rel: source
-      - id: remove
-        term: RemoveIcon
-        definition: Non-permanent removal or subtraction of content/data.
-        aliases: [remove, Minus, Delete, Subtract]
-        usage: >-
-          Use when: - For removing items from a list, collection or view. Do not use: - For
-          permanent deletion of content/data. Use TrashIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/remove.svg
-            rel: source
-      - id: remove-circle
-        term: RemoveCircleIcon
-        definition: '<!-- TODO: describe RemoveCircleIcon -->'
-        aliases: [remove-circle]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/remove-circle.svg
-            rel: source
-      - id: reset
-        term: ResetIcon
-        definition: To reset an item to its original state or defaults.
-        aliases: [reset, Restart, Clear, Default]
-        usage: >-
-          Use when: - For resetting or clearing all saved values for an item. - For restoring an
-          item to its original state. Do not use: - For undo a single action. Use UndoIcon instead.
-          - To represent the history or activity log for an item. Use RestoreIcon instead. - To
-          represent an error in history. Use ErrorOutlineIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/reset.svg
-            rel: source
-      - id: restore
-        term: RestoreIcon
-        definition: To restore an item to a previous version.
-        aliases: [restore, Recover, Unarchive, Bring Back, Roll Back]
-        usage: >-
-          Use when: - To view the history or activity log of an item  - To see previous/recent
-          actions Do not use: - To represent time or duration. Use ClockIcon instead. - For undo a
-          single action. Use UndoIcon instead. - To indicate explicit versions. Use VersionsIcon
-          instead. - To reset to the original state. Use ResetIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/restore.svg
-            rel: source
-      - id: retrieve
-        term: RetrieveIcon
-        definition: '<!-- TODO: describe RetrieveIcon -->'
-        aliases: [retrieve]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/retrieve.svg
-            rel: source
-      - id: retry
-        term: RetryIcon
-        definition: '<!-- TODO: describe RetryIcon -->'
-        aliases: [retry]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/retry.svg
-            rel: source
-      - id: revert
-        term: RevertIcon
-        definition: '<!-- TODO: describe RevertIcon -->'
-        aliases: [revert]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/revert.svg
-            rel: source
-      - id: robot
-        term: RobotIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [robot, Bot, Automation]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/robot.svg
-            rel: source
-      - id: rocket
-        term: RocketIcon
-        definition: Launch or high performance.
-        aliases: [rocket, Launch, Fast, Performance]
-        usage: >-
-          Use when: - As an indicator for premium features–typically within the context of an upsell
-          Do not use: - To represent performance health metrics. Use ActivityIcon instead. - To
-          represent business metrics or performance. Use TrendUpwardIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/rocket.svg
-            rel: source
-      - id: schema
-        term: SchemaIcon
-        definition: 'Schema, data structure or hierarchical content.'
-        aliases: [schema, Structure, Model, Definition]
-        usage: >-
-          Use when: - For schema editors or data models - To represent general hierarchical
-          structure of content Do not use: - For general representation of data queries. Use
-          DatabaseIcon instead. - For GROQ-specific features or queries. Use GroqIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/schema.svg
-            rel: source
-      - id: search
-        term: SearchIcon
-        definition: Search/find content/information.
-        aliases: [search, Find, Magnify, Look]
-        usage: >-
-          Use when: - Used to represent any form of search or text-input filtering Do not use: - For
-          code inspection. Use JsonIcon instead. - For non-text-input filtering of list items or
-          table rows. Use FilterIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/search.svg
-            rel: source
-      - id: select
-        term: SelectIcon
-        definition: A visual affordance for select components.
-        aliases: [select, Choose, Pick, Cursor]
-        usage: >-
-          Use when: Exclusively within Select components to visually indicate the input has a menu.
-          Do not use: - For dropdowns, menus or popovers. Use ChevronDownIcon instead. - To indicate
-          sorting order. Use SortIcon instead. - To act as an affordance for reordering items in a
-          list. Use DragHandleIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/select.svg
-            rel: source
-      - id: share
-        term: ShareIcon
-        definition: Sharing or general social media.
-        aliases: [share, Export, Send, Distribute]
-        usage: >-
-          Use when: - For share action or general social media sharing Do not use: - For exporting
-          actions. Use DownloadIcon instead. - For sharing on a specific social media platform. Use
-          GithubIcon, LinkedinIcon, or TwitterIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/share.svg
-            rel: source
-      - id: sort
-        term: SortIcon
-        definition: Sorting or ordering a group of items.
-        aliases: [sort, Order, Arrange, Organize]
-        usage: >-
-          Use when: - For sorting items in a group - For toggling the sort order of items in a group
-          Do not use: - For filtering. Use FilterIcon instead. - When filter and sort actions are
-          combined. Use FilterIcon instead. - To indicate a transfer of information. Use
-          TransferIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sort.svg
-            rel: source
-      - id: sparkle
-        term: SparkleIcon
-        definition: Used exclusively to represent Sanity's branded Content Agent feature.
-        aliases: [sparkle, AI]
-        usage: >-
-          Use when: - To represent Sanity's Content Agent feature Do not use: - For any purpose
-          other than representing Sanity's Content Agent feature
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sparkle.svg
-            rel: source
-      - id: sparkles
-        term: SparklesIcon
-        definition: To represent AI or agentic features.
-        aliases: [sparkles, Magic, AI, Enhanced]
-        usage: >-
-          Use when: - As a general purpose representation for AI-powered features Do not use: - When
-          there are more specific AI icons. For AI-writing features, use ComposeSparklesIcon
-          instead. - For in-product celebrations or announcements. Use ConfettiIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sparkles.svg
-            rel: source
-      - id: spinner
-        term: SpinnerIcon
-        definition: To represent an active and indeterminate loading or processing states.
-        aliases: [spinner, Loading, Processing, Wait]
-        usage: >-
-          Use when: - For active and indeterminate loading indicators or processing states. Do not
-          use: - When progress is known. Use a progress bar for determinate loading instead. - To
-          represent an action related to beginning a loading or processing activity.  - To represent
-          syncing. Use SyncIcon instead. - To represent a reload/refresh process. Use RefreshIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/spinner.svg
-            rel: source
-      - id: split-horizontal
-        term: SplitHorizontalIcon
-        definition: Horizontal split layout.
-        aliases: [split-horizontal, Divide Horizontal, Split Panes Horizontal, Layout]
-        usage: >-
-          Use when: - As an action to horizontally split a layout. Do not use: - For vertical UI
-          splits. Use SplitVerticalIcon instead. - For displaying a sidebar/panel. Use PanelLeftIcon
-          or PanelRightIcon
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/split-horizontal.svg
-            rel: source
-      - id: split-vertical
-        term: SplitVerticalIcon
-        definition: Vertical split layout.
-        aliases: [split-vertical, Divide Vertical, Split Panes Vertical, Layout]
-        usage: >-
-          Use when: - As an action to vertically split a layout. Do not use: - For horizontal UI
-          splits. Use SplitVerticalIcon instead. - For displaying a sidebar/panel. Use PanelLeftIcon
-          or PanelRightIcon
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/split-vertical.svg
-            rel: source
-      - id: square
-        term: SquareIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [square, Box, Rectangle, Shape]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/square.svg
-            rel: source
-      - id: stack
-        term: StackIcon
-        definition: To represent general vertically stacked content at normal density.
-        aliases: [stack, List, Layers, Pile]
-        usage: >-
-          Use when: - To toggle a group of items to be vertically oriented - To set a normal viewing
-          density for a stack of items Do not use: - For compact/dense stacked views. Use
-          StackCompactIcon instead. - For collections of content. Use PackageIcon instead. - To
-          represent lists. Use ListIcon instead. - To represent files or documents or any form of
-          content. Use DocumentsIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/stack.svg
-            rel: source
-      - id: stack-compact
-        term: StackCompactIcon
-        definition: To represent general vertically stacked content at higher density.
-        aliases: [stack-compact, List Compact, Dense, Tight]
-        usage: >-
-          Use when: - To set a higher viewing density for a stack of items Do not use: - To
-          represent a stack with normal density. Use StackIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/stack-compact.svg
-            rel: source
-      - id: star
-        term: StarIcon
-        definition: To represent content that can be favorited.
-        aliases: [star, Unstarred, Favorite, Featured, Rating]
-        usage: >-
-          Use when: - View/managing favorites - Displaying that an item can be favorited - As a
-          toggle for adding an item to their favorites Do not use: - Showing that an item is set as
-          a favorite. Use StarFilledIcon instead. - Removing a favorite or toggling a favorite off.
-          Use StarFilledIcon instead.  - For new features. Use [TBD] instead. - For bookmarks. Use
-          BookmarkIcon instead. - For liking. Use HeartIcon instead. - For rating. Use [TBD]
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/star.svg
-            rel: source
-      - id: star-filled
-        term: StarFilledIcon
-        definition: To represent content that is currently set as a favorite.
-        aliases: [star-filled, Starred, Favorited, Rating]
-        usage: >-
-          Use when: - Displaying an item as being favorited - As a toggle for removing an item to
-          their favorites Do not use: - Showing that an item can be set as a favorite. Use StarIcon
-          instead. - Adding a favorite or toggling a favorite off. Use StarIcon instead.  - For new
-          features. Use [TBD] instead. - For bookmarks. Use BookmarkIcon instead. - For liking. Use
-          HeartIcon instead. - For rating. Use [TBD] instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/star-filled.svg
-            rel: source
-      - id: stop
-        term: StopIcon
-        definition: Stopping media playback or terminating actions.
-        aliases: [stop, End, Terminate, Cancel]
-        usage: >-
-          Use when: - For stopping media playback - For terminating processes or actions Do not use:
-          - Don't use for pausing playback temporarily or holding actions. Use PauseIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/stop.svg
-            rel: source
-      - id: strikethrough
-        term: StrikethroughIcon
-        definition: Strikethrough text formatting.
-        aliases: [strikethrough, Crossed, Deleted Text, Strike]
-        usage: >-
-          Use when: - For toggling text as striked within a text editing feature. Do not use: -
-          Outside text editing. This icon is intended for formatting toolsets.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/strikethrough.svg
-            rel: source
-      - id: string
-        term: StringIcon
-        definition: Text data or String type.
-        aliases: [string, Text, Characters, ABC]
-        usage: >-
-          Use when: - To reference or indicate text data or a String type value Do not use: - To
-          represent a link. Use LinkIcon instead. - To represent underlined text style. Use
-          UnderlineIcon instead. - To indicate general text. Use TextIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/string.svg
-            rel: source
-      - id: sun
-        term: SunIcon
-        definition: Light mode setting.
-        aliases: [sun, Light Mode, Day, Bright]
-        usage: >-
-          Use when: - For setting a color scheme to light mode Do not use: - For dark mode. Use
-          MoonIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sun.svg
-            rel: source
-      - id: sync
-        term: SyncIcon
-        definition: Synchronization or bi-directional sync.
-        aliases: [sync, Synchronize]
-        usage: >-
-          Use when: - For bi-directional syncing of content/information. Do not use: - For general
-          refreshing of information. Use RefreshIcon instead. - For transferring information from
-          one location to another. Use TransferIcon instead. - To represent loading content. Use
-          SpinnerIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sync.svg
-            rel: source
-      - id: tablet-device
-        term: TabletDeviceIcon
-        definition: Tablet device.
-        aliases: [tablet-device, Tablet, iPad, Device]
-        usage: >-
-          Use when: - To represent a tablet device when choosing between different device types Do
-          not use: - To represent general touch-based devices. Use MobileDeviceIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/tablet-device.svg
-            rel: source
-      - id: tag
-        term: TagIcon
-        definition: 'Single tag, label or keyword.'
-        aliases: [tag, Label, Category, Keyword]
-        usage: >-
-          Use when: - To represent the action of adding a tag.  - To indicate text as a tag or
-          keyword Do not use: - To represent multiple tags. Use TagsIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/tag.svg
-            rel: source
-      - id: tags
-        term: TagsIcon
-        definition: 'Multiple tags, labels or keywords.'
-        aliases: [tags, Labels, Categories, Keywords]
-        usage: >-
-          Use when: - To indicate multiple tags or keywords exist for an item - To indicate editing
-          a groupd of keywords/tags. Do not use: - For a single tag or keyword. Use TagIcon instead.
-          - To represent adding a tag. Use TagIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/tags.svg
-            rel: source
-      - id: target
-        term: TargetIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [target]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/target.svg
-            rel: source
-      - id: task
-        term: TaskIcon
-        definition: For indicating one or more tasks with a deadline.
-        aliases: [task, Todo, Checklist, Assignment]
-        usage: >-
-          Use when: - To represent tasks with a explicitly defined deadline. Do not use: - As a
-          general representation for tasks. Use CheckmarkCircleIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/task.svg
-            rel: source
-      - id: terminal
-        term: TerminalIcon
-        definition: Command line tools and output.
-        aliases: [terminal, Console, Command Line, Shell]
-        usage: >-
-          Use when: - For CLI features/tools or console access Do not use: - For general code or
-          code editing. Use CodeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/terminal.svg
-            rel: source
-      - id: text
-        term: TextIcon
-        definition: Representation of general text content.
-        aliases: [text, Typography, Font, Letters]
-        usage: >-
-          Use when: - As an indicator for setting font size or family.  - To represent general text
-          content. Do not use: - To represent text data or a String type value. Use StringIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/text.svg
-            rel: source
-      - id: th-large
-        term: ThLargeIcon
-        definition: To present a grid or tile view.
-        aliases: [th-large, Grid Large, Tiles, Gallery]
-        usage: >-
-          Use when: - To represent grid views or tile layouts Do not use: - For tables or tabular
-          data lists. Use ThListIcon instead. - For general lists. Use ListIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/th-large.svg
-            rel: source
-      - id: th-list
-        term: ThListIcon
-        definition: To represent a table view.
-        aliases: [th-list, List View, Rows, Table]
-        usage: >-
-          Use when: - To represent a table view or tabular data Do not use: - To represent a general
-          list. Use ListIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/th-list.svg
-            rel: source
-      - id: thumbs-down
-        term: ThumbsDownIcon
-        definition: Providing a negative vote on yes/no questions.
-        aliases: [thumbs-down, Unlike, Dislike]
-        usage: >-
-          Use when: - To represent a negative vote on a yes/no question. Do not use: - For any
-          purpose other than a negative vote on a yes/no question.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/thumbs-down.svg
-            rel: source
-      - id: thumbs-up
-        term: ThumbsUpIcon
-        definition: Providing a positive vote on yes/no questions.
-        aliases: [thumbs-up, Like]
-        usage: >-
-          Use when: - To represent a positive vote on a yes/no question. Do not use: - For any
-          purpose other than a positive vote on a yes/no question. - To favorite/save content. Use
-          StarIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/thumbs-up.svg
-            rel: source
-      - id: tiers
-        term: TiersIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [tiers, Levels, Hierarchy, Pricing]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/tiers.svg
-            rel: source
-      - id: timeline
-        term: TimelineIcon
-        definition: A sequence or timeline of events.
-        aliases: [timeline, Gantt chart]
-        usage: >-
-          Use when: - To represent a sequence or timeline of events Do not use: - To represent
-          tasks. Use TaskIcon instead. - To represent general dates. Use CalendarIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/timeline.svg
-            rel: source
-      - id: toggle-arrow-right
-        term: ToggleArrowRightIcon
-        definition: A visual affordance for expanding/collapsing items within a hierarchical tree view.
-        aliases: [toggle-arrow-right, Switch Right, Navigate Toggle, Expand]
-        usage: >-
-          Use when: - For expanding/collapsing items within a hierarchical tree view. Do not use: -
-          To expand or collapse content within an accordion view. Use ChevronUpIcon and
-          ChevronDownIcon instead. - For playing media or starting a process. Use PlayIcon instead.
-          - For navigating forward to a new page or drilling in through nested content in a column
-          view. Use ChevronRightIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/toggle-arrow-right.svg
-            rel: source
-      - id: token
-        term: TokenIcon
-        definition: To represent AI tokens.
-        aliases: [token, Key, Authentication, API Key]
-        usage: >-
-          Use when: - Exclusively to represent AI token counts Do not use: - To represent API or
-          access tokens. Use PlugIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/token.svg
-            rel: source
-      - id: transfer
-        term: TransferIcon
-        definition: Transfer or swapping of items or data.
-        aliases: [transfer, Move, Exchange, Swap]
-        usage: >-
-          Use when: - For transferring items or data to different locations. Do not use: - For bi-
-          directional syncing of content/information. Use SyncIcon instead. - To represent general
-          direction or movement. Use arrow icons instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/transfer.svg
-            rel: source
-      - id: translate
-        term: TranslateIcon
-        definition: Translation or language features.
-        aliases: [translate, Language, Localization, Interpret]
-        usage: >-
-          Use when: - For representing translation or localization features. - For language
-          settings/switching. Do not use: - For representing global or international concepts. Use
-          EarthGlobeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/translate.svg
-            rel: source
-      - id: trash
-        term: TrashIcon
-        definition: Permanent deletion of content/data.
-        aliases: [trash, Delete, Remove, Discard]
-        usage: >-
-          Use when: - For permanent deletion/removal actions. Do not use: - For archiving of
-          content. Use ArchiveIcon instead. - For any form of non-destructive deletion. Use
-          RemoveIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/trash.svg
-            rel: source
-      - id: trend-upward
-        term: TrendUpwardIcon
-        definition: Trends in data.
-        aliases: [trend-upward, Growth, Increase, Rising]
-        usage: >-
-          Use when: - For representing trending indicators in data. Do not use: - To represent a
-          general data visualization or a line chart. Use BarChartIcon instead. - To represent usage
-          or a general line chart. Use ChartUpwardIcon instead. - To represent usage overages. Use
-          OverageIcon instead. - To represent activity or health metrics. Use ActivityIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/trend-upward.svg
-            rel: source
-      - id: triangle-outline
-        term: TriangleOutlineIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [triangle-outline, Triangle, Shape, Pointer]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/triangle-outline.svg
-            rel: source
-      - id: trolley
-        term: TrolleyIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [trolley, Cart, Shopping, E-Commerce]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/trolley.svg
-            rel: source
-      - id: truncate
-        term: TruncateIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [truncate, Cut, Shorten, Ellipsis]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/truncate.svg
-            rel: source
-      - id: twitter
-        term: TwitterIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [twitter, Social, X, Tweet]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/twitter.svg
-            rel: source
-      - id: ulist
-        term: UlistIcon
-        definition: Unordered/bulleted lists.
-        aliases: [ulist, Unordered List, Bullets, Items]
-        usage: >-
-          Use when: - To represent bulleted lists - List formatting for unordered lists Do not use:
-          - To represent a general list. Use ListIcon instead. - For numbered lists. Use OlistIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ulist.svg
-            rel: source
-      - id: unarchive
-        term: UnarchiveIcon
-        definition: Moving items out of an archived/stashed state.
-        aliases: [unarchive, Box]
-        usage: >-
-          Use when: - For restoring items from an archive Do not use: - To represent removing from a
-          collection. Use RemoveIcon instead. - To represent upload or import actions. Use
-          UploadIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unarchive.svg
-            rel: source
-      - id: underline
-        term: UnderlineIcon
-        definition: Underline text formatting.
-        aliases: [underline, Underlined, Emphasis, U]
-        usage: >-
-          Use when: For toggling text as underlined within a text editing feature. Do not use: -
-          Outside text editing. This icon is intended for formatting toolsets.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/underline.svg
-            rel: source
-      - id: undo
-        term: UndoIcon
-        definition: To undo the last user action.
-        aliases: [undo, Revert, Back, Cancel]
-        usage: >-
-          Use when: - For undo operations Do not use: - For reverting changes. Use RevertIcon
-          instead. - For going backward in history. Use ArrowLeftIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/undo.svg
-            rel: source
-      - id: unknown
-        term: UnknownIcon
-        definition: An unknown/undefined thing or state.
-        aliases: [unknown, Question, Mystery, Undefined]
-        usage: >-
-          Use when: - For unknown types or undefined states  - As a fallback icon for contents that
-          are unspecified Do not use: - To represent help or support. Use HelpCircleIcon instead -
-          To represent something that is empty or unused. Use EmptyIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unknown.svg
-            rel: source
-      - id: unlink
-        term: UnlinkIcon
-        definition: Broken/missing links or disconnected items.
-        aliases: [unlink, Broken Link, Disconnected, Unlinked]
-        usage: >-
-          Use when: - To represent a broken or missing web link. - To represent a disconnected state
-          between two previously connected items Do not use: - To represent the action of removing a
-          link or disconnecting two items. Use LinkRemovedIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unlink.svg
-            rel: source
-      - id: unlock
-        term: UnlockIcon
-        definition: Unlocked or open state.
-        aliases: [unlock, Unlocked, Open, Public]
-        usage: >-
-          Use when: - To represent unlock content or an action to unlock content. - To represent
-          content/items that the user can access but is not publicly available. - To explicitly
-          represent that content can be altered. Do not use: - As a general toggle for
-          locking/unlocking. Use UnlockIcon and LockIcon in conjunction. - To represent
-          unlocking/undocking of interface elements. For sidebar locking/docking use PanelLeftIcon
-          or PanelRightIcon instead. - To represent public content. Use EarthGlobeIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unlock.svg
-            rel: source
-      - id: unpublish
-        term: UnpublishIcon
-        definition: Unpublishing or reverting content to a draft.
-        aliases: [unpublish, Retract, Take Down, Draft]
-        usage: >-
-          Use when: - For unpublishing or taking content offline Do not use: - For publishing
-          content. Use PublishIcon instead. - For downloading content. Use DownloadIcon instead. -
-          For expanding content vertically. Use ChevronDownIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unpublish.svg
-            rel: source
-      - id: upload
-        term: UploadIcon
-        definition: To represent uploading or importing of content.
-        aliases: [upload, Send, Push, Import]
-        usage: >-
-          Use when: - To indicate uploads or uploading actions.  - To indicate imports or importing
-          actions. Do not use: - For downloads or downloading actions. Use DownloadIcon instead. -
-          For exports or exporting actions. Use DownloadIcon instead. - For actions associated with
-          publishing. Use PublishIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/upload.svg
-            rel: source
-      - id: user
-        term: UserIcon
-        definition: To represent an individual person.
-        aliases: [user, Person, Profile, Account]
-        usage: >-
-          Use when: - To represent a person, role or profile Do not use: - To represent multiple
-          users, a group, or a team. Use UsersIcon instead. - To add a user. Use AddUserIcon
-          instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/user.svg
-            rel: source
-      - id: users
-        term: UsersIcon
-        definition: 'To represent multiple people, or group, or a team.'
-        aliases: [users, People, Team, Group]
-        usage: >-
-          Use when: - To represent people, a group, or a team. Do not use: - To represent a single
-          user. Use UserIcon instead. - To add a user. Use AddUserIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/users.svg
-            rel: source
-      - id: versions
-        term: VersionsIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [versions]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/versions.svg
-            rel: source
-      - id: video
-        term: VideoIcon
-        definition: To represent a single video.
-        aliases: [video]
-        usage: >-
-          Use when: - To represent a video - As a placeholder for an video before it's loaded Do not
-          use: - To represent a video file. Use DocumentVideoIcon instead. - To represent playback.
-          Use PlayIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/video.svg
-            rel: source
-      - id: warning-filled
-        term: WarningFilledIcon
-        definition: '<!-- TODO: describe WarningFilledIcon -->'
-        aliases: [warning-filled]
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/warning-filled.svg
-            rel: source
-      - id: warning-outline
-        term: WarningOutlineIcon
-        definition: To represent a general warning within the application.
-        aliases: [warning-outline, Caution, Alert, Warning]
-        usage: >-
-          Use when: - To represent issues that are neither critical nor blocking. - When an
-          operation or process needs attention, but has not failed - To visually demarcate a warning
-          message Do not use: - To represent issues that are either critical or blocking. Use
-          ErrorOutlineIcon instead. - To represent issues related to user permissions. Use
-          AccessDeniedIcon instead.
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/warning-outline.svg
-            rel: source
-      - id: wrench
-        term: WrenchIcon
-        definition: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
-        aliases: [wrench, Tool, Maintenance, Fix]
-        usage: 'Use when: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.'
-        refs:
-          - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/wrench.svg
-            rel: source
-  - kind: guidelines
-    for: all
-    title: Accessibility
-    tags: [accessibility]
-    items:
-      - id: icon-accessible-name
-        level: must
-        statement: >-
-          Give every meaningful icon an accessible name. A meaningful icon is one that conveys
-          information or triggers an action with no visible text label beside it. Put
-          aria-label on the interactive element around it (IconButton, Button, PressArea), or
-          pass aria-label to Icon when it stands alone.
-        checkedBy: manual
-      - id: icon-decorative-hidden
-        level: must
-        statement: >-
-          Hide decorative icons from assistive technology. When an icon accompanies a visible
-          text label that already names the action, the icon adds no information. Icon, and a
-          component's icon prop such as Button's `iconStart`, hide the icon on their own unless
-          it has an aria-label. A raw icon component from @sanity/icons rendered by itself does
-          not: give it aria-hidden.
-        checkedBy: manual
-  - kind: guidelines
-    for: all
-    title: Usage
-    items:
-      - id: icon-with-label
-        level: should
-        statement: >-
-          Pair icons with a visible label in unfamiliar or high-stakes contexts. An icon alone
-          is faster to scan but demands recognition — use labels wherever the audience or
-          context is uncertain.
-      - id: icon-only-when-recognised
-        level: must
-        statement: >-
-          Use icons within IconButton only for universally recognised actions (close, search, add)
-          and in toolbars where space is constrained. Add a Tooltip for sighted users. The Tooltip
-          does not name the control, so it doesn't replace the aria-label.
-        refs:
-          - to: shared-foundations#icon-only-control-needs-name
-            rel: same-as
-      - id: icon-size-in-ui
-        level: should
-        statement: >-
-          Size an icon to the text beside it. Icon's `size` is a step, not a pixel value, and
-          each step is built to sit beside the Text step of the same number: write
-          `<Icon size={1}>` next to `<Text size={1}>`. Each step renders a little taller than
-          the text it pairs with, and the default is 2. A raw icon component from
-          @sanity/icons renders at 1em, the text's font size, which is smaller than Icon's
-          matching step; use Icon when it should line up with Icon elsewhere.
-      - id: icon-no-substitute
-        level: must-not
-        statement: >-
-          Do not substitute emoji, third-party icon sets, or hand-crafted SVGs for icons
-          from @sanity/icons. This set is the single source of truth for Sanity product
-          iconography.
-        checkedBy: manual
+entries:
+  - kind: entry
+    id: icons
+    name: Icons
+    description: Interface icons for actions, objects and status. The @sanity/icons package ships 236 icons as React components and SVG files. Use these icons, and only these icons, across Sanity products — never substitute emoji, third-party icon sets, or hand-crafted SVG unless the icon is genuinely not in this set.
+    metadata:
+      status:
+        status: stable
+    refs:
+      - href: https://www.npmjs.com/package/@sanity/icons
+        rel: source
+        role: '@sanity/icons on npm'
+      - href: https://github.com/sanity-io/icons/blob/main/LICENSE
+        rel: relates-to
+        role: MIT license
+    $extensions:
+      com.sanity.ui:
+        assetType: icon
+        formats:
+          - react
+          - svg
+        license: MIT
+    sections:
+      - kind: guidelines
+        for: all
+        title: Accessibility
+        tags:
+          - accessibility
+        items:
+          - id: icon-accessible-name
+            level: must
+            statement: Give every meaningful icon an accessible name. A meaningful icon is one that conveys information or triggers an action with no visible text label beside it. Put aria-label on the interactive element around it (IconButton, Button, PressArea), or pass aria-label to Icon when it stands alone.
+            checkedBy: manual
+          - id: icon-decorative-hidden
+            level: must
+            statement: "Hide decorative icons from assistive technology. When an icon accompanies a visible text label that already names the action, the icon adds no information. Icon, and a component's icon prop such as Button's `iconStart`, hide the icon on their own unless it has an aria-label. A raw icon component from @sanity/icons rendered by itself does not: give it aria-hidden."
+            checkedBy: manual
+      - kind: guidelines
+        for: all
+        title: Usage
+        items:
+          - id: icon-with-label
+            level: should
+            statement: Pair icons with a visible label in unfamiliar or high-stakes contexts. An icon alone is faster to scan but demands recognition — use labels wherever the audience or context is uncertain.
+          - id: icon-only-when-recognised
+            level: must
+            statement: Use icons within IconButton only for universally recognised actions (close, search, add) and in toolbars where space is constrained. Add a Tooltip for sighted users. The Tooltip does not name the control, so it doesn't replace the aria-label.
+            refs:
+              - to: shared-foundations#icon-only-control-needs-name
+                rel: same-as
+          - id: icon-size-in-ui
+            level: should
+            statement: "Size an icon to the text beside it. Icon's `size` is a step, not a pixel value, and each step is built to sit beside the Text step of the same number: write `<Icon size={1}>` next to `<Text size={1}>`. Each step renders a little taller than the text it pairs with, and the default is 2. A raw icon component from @sanity/icons renders at 1em, the text's font size, which is smaller than Icon's matching step; use Icon when it should line up with Icon elsewhere."
+          - id: icon-no-substitute
+            level: must-not
+            statement: Do not substitute emoji, third-party icon sets, or hand-crafted SVGs for icons from @sanity/icons. This set is the single source of truth for Sanity product iconography.
+            checkedBy: manual
+refs:
+  - href: ./icons/icon-access-denied.dsds.yaml
+    rel: file
+    role: AccessDeniedIcon
+  - href: ./icons/icon-activity.dsds.yaml
+    rel: file
+    role: ActivityIcon
+  - href: ./icons/icon-add.dsds.yaml
+    rel: file
+    role: AddIcon
+  - href: ./icons/icon-add-circle.dsds.yaml
+    rel: file
+    role: AddCircleIcon
+  - href: ./icons/icon-add-comment.dsds.yaml
+    rel: file
+    role: AddCommentIcon
+  - href: ./icons/icon-add-document.dsds.yaml
+    rel: file
+    role: AddDocumentIcon
+  - href: ./icons/icon-add-user.dsds.yaml
+    rel: file
+    role: AddUserIcon
+  - href: ./icons/icon-api.dsds.yaml
+    rel: file
+    role: ApiIcon
+  - href: ./icons/icon-archive.dsds.yaml
+    rel: file
+    role: ArchiveIcon
+  - href: ./icons/icon-arrow-down.dsds.yaml
+    rel: file
+    role: ArrowDownIcon
+  - href: ./icons/icon-arrow-left.dsds.yaml
+    rel: file
+    role: ArrowLeftIcon
+  - href: ./icons/icon-arrow-right.dsds.yaml
+    rel: file
+    role: ArrowRightIcon
+  - href: ./icons/icon-arrow-top-right.dsds.yaml
+    rel: file
+    role: ArrowTopRightIcon
+  - href: ./icons/icon-arrow-up.dsds.yaml
+    rel: file
+    role: ArrowUpIcon
+  - href: ./icons/icon-asterisk.dsds.yaml
+    rel: file
+    role: AsteriskIcon
+  - href: ./icons/icon-bar-chart.dsds.yaml
+    rel: file
+    role: BarChartIcon
+  - href: ./icons/icon-basket.dsds.yaml
+    rel: file
+    role: BasketIcon
+  - href: ./icons/icon-bell.dsds.yaml
+    rel: file
+    role: BellIcon
+  - href: ./icons/icon-bill.dsds.yaml
+    rel: file
+    role: BillIcon
+  - href: ./icons/icon-binary-document.dsds.yaml
+    rel: file
+    role: BinaryDocumentIcon
+  - href: ./icons/icon-block-content.dsds.yaml
+    rel: file
+    role: BlockContentIcon
+  - href: ./icons/icon-block-element.dsds.yaml
+    rel: file
+    role: BlockElementIcon
+  - href: ./icons/icon-blockquote.dsds.yaml
+    rel: file
+    role: BlockquoteIcon
+  - href: ./icons/icon-bold.dsds.yaml
+    rel: file
+    role: BoldIcon
+  - href: ./icons/icon-bolt.dsds.yaml
+    rel: file
+    role: BoltIcon
+  - href: ./icons/icon-book.dsds.yaml
+    rel: file
+    role: BookIcon
+  - href: ./icons/icon-bookmark.dsds.yaml
+    rel: file
+    role: BookmarkIcon
+  - href: ./icons/icon-bookmark-filled.dsds.yaml
+    rel: file
+    role: BookmarkFilledIcon
+  - href: ./icons/icon-bottle.dsds.yaml
+    rel: file
+    role: BottleIcon
+  - href: ./icons/icon-bug.dsds.yaml
+    rel: file
+    role: BugIcon
+  - href: ./icons/icon-bulb-filled.dsds.yaml
+    rel: file
+    role: BulbFilledIcon
+  - href: ./icons/icon-bulb-outline.dsds.yaml
+    rel: file
+    role: BulbOutlineIcon
+  - href: ./icons/icon-calendar.dsds.yaml
+    rel: file
+    role: CalendarIcon
+  - href: ./icons/icon-case.dsds.yaml
+    rel: file
+    role: CaseIcon
+  - href: ./icons/icon-chart-upward.dsds.yaml
+    rel: file
+    role: ChartUpwardIcon
+  - href: ./icons/icon-checkmark.dsds.yaml
+    rel: file
+    role: CheckmarkIcon
+  - href: ./icons/icon-checkmark-circle.dsds.yaml
+    rel: file
+    role: CheckmarkCircleIcon
+  - href: ./icons/icon-chevron-down.dsds.yaml
+    rel: file
+    role: ChevronDownIcon
+  - href: ./icons/icon-chevron-left.dsds.yaml
+    rel: file
+    role: ChevronLeftIcon
+  - href: ./icons/icon-chevron-right.dsds.yaml
+    rel: file
+    role: ChevronRightIcon
+  - href: ./icons/icon-chevron-up.dsds.yaml
+    rel: file
+    role: ChevronUpIcon
+  - href: ./icons/icon-circle.dsds.yaml
+    rel: file
+    role: CircleIcon
+  - href: ./icons/icon-clipboard.dsds.yaml
+    rel: file
+    role: ClipboardIcon
+  - href: ./icons/icon-clipboard-image.dsds.yaml
+    rel: file
+    role: ClipboardImageIcon
+  - href: ./icons/icon-clock.dsds.yaml
+    rel: file
+    role: ClockIcon
+  - href: ./icons/icon-close.dsds.yaml
+    rel: file
+    role: CloseIcon
+  - href: ./icons/icon-close-circle.dsds.yaml
+    rel: file
+    role: CloseCircleIcon
+  - href: ./icons/icon-code.dsds.yaml
+    rel: file
+    role: CodeIcon
+  - href: ./icons/icon-code-block.dsds.yaml
+    rel: file
+    role: CodeBlockIcon
+  - href: ./icons/icon-cog.dsds.yaml
+    rel: file
+    role: CogIcon
+  - href: ./icons/icon-collapse.dsds.yaml
+    rel: file
+    role: CollapseIcon
+  - href: ./icons/icon-color-wheel.dsds.yaml
+    rel: file
+    role: ColorWheelIcon
+  - href: ./icons/icon-comment.dsds.yaml
+    rel: file
+    role: CommentIcon
+  - href: ./icons/icon-component.dsds.yaml
+    rel: file
+    role: ComponentIcon
+  - href: ./icons/icon-compose.dsds.yaml
+    rel: file
+    role: ComposeIcon
+  - href: ./icons/icon-compose-sparkles.dsds.yaml
+    rel: file
+    role: ComposeSparklesIcon
+  - href: ./icons/icon-confetti.dsds.yaml
+    rel: file
+    role: ConfettiIcon
+  - href: ./icons/icon-controls.dsds.yaml
+    rel: file
+    role: ControlsIcon
+  - href: ./icons/icon-copy.dsds.yaml
+    rel: file
+    role: CopyIcon
+  - href: ./icons/icon-credit-card.dsds.yaml
+    rel: file
+    role: CreditCardIcon
+  - href: ./icons/icon-crop.dsds.yaml
+    rel: file
+    role: CropIcon
+  - href: ./icons/icon-cube.dsds.yaml
+    rel: file
+    role: CubeIcon
+  - href: ./icons/icon-dashboard.dsds.yaml
+    rel: file
+    role: DashboardIcon
+  - href: ./icons/icon-database.dsds.yaml
+    rel: file
+    role: DatabaseIcon
+  - href: ./icons/icon-desktop.dsds.yaml
+    rel: file
+    role: DesktopIcon
+  - href: ./icons/icon-diamond.dsds.yaml
+    rel: file
+    role: DiamondIcon
+  - href: ./icons/icon-document.dsds.yaml
+    rel: file
+    role: DocumentIcon
+  - href: ./icons/icon-document-pdf.dsds.yaml
+    rel: file
+    role: DocumentPdfIcon
+  - href: ./icons/icon-document-remove.dsds.yaml
+    rel: file
+    role: DocumentRemoveIcon
+  - href: ./icons/icon-documents.dsds.yaml
+    rel: file
+    role: DocumentsIcon
+  - href: ./icons/icon-document-sheet.dsds.yaml
+    rel: file
+    role: DocumentSheetIcon
+  - href: ./icons/icon-document-text.dsds.yaml
+    rel: file
+    role: DocumentTextIcon
+  - href: ./icons/icon-document-video.dsds.yaml
+    rel: file
+    role: DocumentVideoIcon
+  - href: ./icons/icon-document-word.dsds.yaml
+    rel: file
+    role: DocumentWordIcon
+  - href: ./icons/icon-document-zip.dsds.yaml
+    rel: file
+    role: DocumentZipIcon
+  - href: ./icons/icon-dot.dsds.yaml
+    rel: file
+    role: DotIcon
+  - href: ./icons/icon-double-chevron-down.dsds.yaml
+    rel: file
+    role: DoubleChevronDownIcon
+  - href: ./icons/icon-double-chevron-left.dsds.yaml
+    rel: file
+    role: DoubleChevronLeftIcon
+  - href: ./icons/icon-double-chevron-right.dsds.yaml
+    rel: file
+    role: DoubleChevronRightIcon
+  - href: ./icons/icon-double-chevron-up.dsds.yaml
+    rel: file
+    role: DoubleChevronUpIcon
+  - href: ./icons/icon-double-quote.dsds.yaml
+    rel: file
+    role: DoubleQuoteIcon
+  - href: ./icons/icon-download.dsds.yaml
+    rel: file
+    role: DownloadIcon
+  - href: ./icons/icon-drag-handle.dsds.yaml
+    rel: file
+    role: DragHandleIcon
+  - href: ./icons/icon-drop.dsds.yaml
+    rel: file
+    role: DropIcon
+  - href: ./icons/icon-earth-americas.dsds.yaml
+    rel: file
+    role: EarthAmericasIcon
+  - href: ./icons/icon-earth-globe.dsds.yaml
+    rel: file
+    role: EarthGlobeIcon
+  - href: ./icons/icon-edit.dsds.yaml
+    rel: file
+    role: EditIcon
+  - href: ./icons/icon-ellipsis-horizontal.dsds.yaml
+    rel: file
+    role: EllipsisHorizontalIcon
+  - href: ./icons/icon-ellipsis-vertical.dsds.yaml
+    rel: file
+    role: EllipsisVerticalIcon
+  - href: ./icons/icon-empty.dsds.yaml
+    rel: file
+    role: EmptyIcon
+  - href: ./icons/icon-enter.dsds.yaml
+    rel: file
+    role: EnterIcon
+  - href: ./icons/icon-enter-right.dsds.yaml
+    rel: file
+    role: EnterRightIcon
+  - href: ./icons/icon-envelope.dsds.yaml
+    rel: file
+    role: EnvelopeIcon
+  - href: ./icons/icon-equal.dsds.yaml
+    rel: file
+    role: EqualIcon
+  - href: ./icons/icon-error-filled.dsds.yaml
+    rel: file
+    role: ErrorFilledIcon
+  - href: ./icons/icon-error-outline.dsds.yaml
+    rel: file
+    role: ErrorOutlineIcon
+  - href: ./icons/icon-error-screen.dsds.yaml
+    rel: file
+    role: ErrorScreenIcon
+  - href: ./icons/icon-expand.dsds.yaml
+    rel: file
+    role: ExpandIcon
+  - href: ./icons/icon-eye-closed.dsds.yaml
+    rel: file
+    role: EyeClosedIcon
+  - href: ./icons/icon-eye-open.dsds.yaml
+    rel: file
+    role: EyeOpenIcon
+  - href: ./icons/icon-face-happy.dsds.yaml
+    rel: file
+    role: FaceHappyIcon
+  - href: ./icons/icon-face-indifferent.dsds.yaml
+    rel: file
+    role: FaceIndifferentIcon
+  - href: ./icons/icon-face-sad.dsds.yaml
+    rel: file
+    role: FaceSadIcon
+  - href: ./icons/icon-feedback.dsds.yaml
+    rel: file
+    role: FeedbackIcon
+  - href: ./icons/icon-filter.dsds.yaml
+    rel: file
+    role: FilterIcon
+  - href: ./icons/icon-folder.dsds.yaml
+    rel: file
+    role: FolderIcon
+  - href: ./icons/icon-generate.dsds.yaml
+    rel: file
+    role: GenerateIcon
+  - href: ./icons/icon-github.dsds.yaml
+    rel: file
+    role: GithubIcon
+  - href: ./icons/icon-groq.dsds.yaml
+    rel: file
+    role: GroqIcon
+  - href: ./icons/icon-hash.dsds.yaml
+    rel: file
+    role: HashIcon
+  - href: ./icons/icon-heart.dsds.yaml
+    rel: file
+    role: HeartIcon
+  - href: ./icons/icon-heart-filled.dsds.yaml
+    rel: file
+    role: HeartFilledIcon
+  - href: ./icons/icon-help-circle.dsds.yaml
+    rel: file
+    role: HelpCircleIcon
+  - href: ./icons/icon-highlight.dsds.yaml
+    rel: file
+    role: HighlightIcon
+  - href: ./icons/icon-home.dsds.yaml
+    rel: file
+    role: HomeIcon
+  - href: ./icons/icon-ice-cream.dsds.yaml
+    rel: file
+    role: IceCreamIcon
+  - href: ./icons/icon-image.dsds.yaml
+    rel: file
+    role: ImageIcon
+  - href: ./icons/icon-image-remove.dsds.yaml
+    rel: file
+    role: ImageRemoveIcon
+  - href: ./icons/icon-images.dsds.yaml
+    rel: file
+    role: ImagesIcon
+  - href: ./icons/icon-inbox.dsds.yaml
+    rel: file
+    role: InboxIcon
+  - href: ./icons/icon-info-filled.dsds.yaml
+    rel: file
+    role: InfoFilledIcon
+  - href: ./icons/icon-info-outline.dsds.yaml
+    rel: file
+    role: InfoOutlineIcon
+  - href: ./icons/icon-inline.dsds.yaml
+    rel: file
+    role: InlineIcon
+  - href: ./icons/icon-inline-element.dsds.yaml
+    rel: file
+    role: InlineElementIcon
+  - href: ./icons/icon-insert-above.dsds.yaml
+    rel: file
+    role: InsertAboveIcon
+  - href: ./icons/icon-insert-below.dsds.yaml
+    rel: file
+    role: InsertBelowIcon
+  - href: ./icons/icon-italic.dsds.yaml
+    rel: file
+    role: ItalicIcon
+  - href: ./icons/icon-joystick.dsds.yaml
+    rel: file
+    role: JoystickIcon
+  - href: ./icons/icon-json.dsds.yaml
+    rel: file
+    role: JsonIcon
+  - href: ./icons/icon-launch.dsds.yaml
+    rel: file
+    role: LaunchIcon
+  - href: ./icons/icon-leave.dsds.yaml
+    rel: file
+    role: LeaveIcon
+  - href: ./icons/icon-lemon.dsds.yaml
+    rel: file
+    role: LemonIcon
+  - href: ./icons/icon-link.dsds.yaml
+    rel: file
+    role: LinkIcon
+  - href: ./icons/icon-linkedin.dsds.yaml
+    rel: file
+    role: LinkedinIcon
+  - href: ./icons/icon-link-removed.dsds.yaml
+    rel: file
+    role: LinkRemovedIcon
+  - href: ./icons/icon-list.dsds.yaml
+    rel: file
+    role: ListIcon
+  - href: ./icons/icon-lock.dsds.yaml
+    rel: file
+    role: LockIcon
+  - href: ./icons/icon-logo-js.dsds.yaml
+    rel: file
+    role: LogoJsIcon
+  - href: ./icons/icon-logo-ts.dsds.yaml
+    rel: file
+    role: LogoTsIcon
+  - href: ./icons/icon-marker.dsds.yaml
+    rel: file
+    role: MarkerIcon
+  - href: ./icons/icon-marker-removed.dsds.yaml
+    rel: file
+    role: MarkerRemovedIcon
+  - href: ./icons/icon-master-detail.dsds.yaml
+    rel: file
+    role: MasterDetailIcon
+  - href: ./icons/icon-menu.dsds.yaml
+    rel: file
+    role: MenuIcon
+  - href: ./icons/icon-microphone.dsds.yaml
+    rel: file
+    role: MicrophoneIcon
+  - href: ./icons/icon-microphone-slash.dsds.yaml
+    rel: file
+    role: MicrophoneSlashIcon
+  - href: ./icons/icon-mobile-device.dsds.yaml
+    rel: file
+    role: MobileDeviceIcon
+  - href: ./icons/icon-moon.dsds.yaml
+    rel: file
+    role: MoonIcon
+  - href: ./icons/icon-number.dsds.yaml
+    rel: file
+    role: NumberIcon
+  - href: ./icons/icon-ok-hand.dsds.yaml
+    rel: file
+    role: OkHandIcon
+  - href: ./icons/icon-olist.dsds.yaml
+    rel: file
+    role: OlistIcon
+  - href: ./icons/icon-overage.dsds.yaml
+    rel: file
+    role: OverageIcon
+  - href: ./icons/icon-package.dsds.yaml
+    rel: file
+    role: PackageIcon
+  - href: ./icons/icon-panel-left.dsds.yaml
+    rel: file
+    role: PanelLeftIcon
+  - href: ./icons/icon-panel-right.dsds.yaml
+    rel: file
+    role: PanelRightIcon
+  - href: ./icons/icon-pause.dsds.yaml
+    rel: file
+    role: PauseIcon
+  - href: ./icons/icon-pin.dsds.yaml
+    rel: file
+    role: PinIcon
+  - href: ./icons/icon-pin-filled.dsds.yaml
+    rel: file
+    role: PinFilledIcon
+  - href: ./icons/icon-pin-removed.dsds.yaml
+    rel: file
+    role: PinRemovedIcon
+  - href: ./icons/icon-play.dsds.yaml
+    rel: file
+    role: PlayIcon
+  - href: ./icons/icon-plug.dsds.yaml
+    rel: file
+    role: PlugIcon
+  - href: ./icons/icon-presentation.dsds.yaml
+    rel: file
+    role: PresentationIcon
+  - href: ./icons/icon-progress50.dsds.yaml
+    rel: file
+    role: Progress50Icon
+  - href: ./icons/icon-progress75.dsds.yaml
+    rel: file
+    role: Progress75Icon
+  - href: ./icons/icon-projects.dsds.yaml
+    rel: file
+    role: ProjectsIcon
+  - href: ./icons/icon-publish.dsds.yaml
+    rel: file
+    role: PublishIcon
+  - href: ./icons/icon-read-only.dsds.yaml
+    rel: file
+    role: ReadOnlyIcon
+  - href: ./icons/icon-redo.dsds.yaml
+    rel: file
+    role: RedoIcon
+  - href: ./icons/icon-refresh.dsds.yaml
+    rel: file
+    role: RefreshIcon
+  - href: ./icons/icon-remove.dsds.yaml
+    rel: file
+    role: RemoveIcon
+  - href: ./icons/icon-remove-circle.dsds.yaml
+    rel: file
+    role: RemoveCircleIcon
+  - href: ./icons/icon-reset.dsds.yaml
+    rel: file
+    role: ResetIcon
+  - href: ./icons/icon-restore.dsds.yaml
+    rel: file
+    role: RestoreIcon
+  - href: ./icons/icon-retrieve.dsds.yaml
+    rel: file
+    role: RetrieveIcon
+  - href: ./icons/icon-retry.dsds.yaml
+    rel: file
+    role: RetryIcon
+  - href: ./icons/icon-revert.dsds.yaml
+    rel: file
+    role: RevertIcon
+  - href: ./icons/icon-robot.dsds.yaml
+    rel: file
+    role: RobotIcon
+  - href: ./icons/icon-rocket.dsds.yaml
+    rel: file
+    role: RocketIcon
+  - href: ./icons/icon-schema.dsds.yaml
+    rel: file
+    role: SchemaIcon
+  - href: ./icons/icon-search.dsds.yaml
+    rel: file
+    role: SearchIcon
+  - href: ./icons/icon-select.dsds.yaml
+    rel: file
+    role: SelectIcon
+  - href: ./icons/icon-share.dsds.yaml
+    rel: file
+    role: ShareIcon
+  - href: ./icons/icon-sort.dsds.yaml
+    rel: file
+    role: SortIcon
+  - href: ./icons/icon-sparkle.dsds.yaml
+    rel: file
+    role: SparkleIcon
+  - href: ./icons/icon-sparkles.dsds.yaml
+    rel: file
+    role: SparklesIcon
+  - href: ./icons/icon-spinner.dsds.yaml
+    rel: file
+    role: SpinnerIcon
+  - href: ./icons/icon-split-horizontal.dsds.yaml
+    rel: file
+    role: SplitHorizontalIcon
+  - href: ./icons/icon-split-vertical.dsds.yaml
+    rel: file
+    role: SplitVerticalIcon
+  - href: ./icons/icon-square.dsds.yaml
+    rel: file
+    role: SquareIcon
+  - href: ./icons/icon-stack.dsds.yaml
+    rel: file
+    role: StackIcon
+  - href: ./icons/icon-stack-compact.dsds.yaml
+    rel: file
+    role: StackCompactIcon
+  - href: ./icons/icon-star.dsds.yaml
+    rel: file
+    role: StarIcon
+  - href: ./icons/icon-star-filled.dsds.yaml
+    rel: file
+    role: StarFilledIcon
+  - href: ./icons/icon-stop.dsds.yaml
+    rel: file
+    role: StopIcon
+  - href: ./icons/icon-strikethrough.dsds.yaml
+    rel: file
+    role: StrikethroughIcon
+  - href: ./icons/icon-string.dsds.yaml
+    rel: file
+    role: StringIcon
+  - href: ./icons/icon-sun.dsds.yaml
+    rel: file
+    role: SunIcon
+  - href: ./icons/icon-sync.dsds.yaml
+    rel: file
+    role: SyncIcon
+  - href: ./icons/icon-tablet-device.dsds.yaml
+    rel: file
+    role: TabletDeviceIcon
+  - href: ./icons/icon-tag.dsds.yaml
+    rel: file
+    role: TagIcon
+  - href: ./icons/icon-tags.dsds.yaml
+    rel: file
+    role: TagsIcon
+  - href: ./icons/icon-target.dsds.yaml
+    rel: file
+    role: TargetIcon
+  - href: ./icons/icon-task.dsds.yaml
+    rel: file
+    role: TaskIcon
+  - href: ./icons/icon-terminal.dsds.yaml
+    rel: file
+    role: TerminalIcon
+  - href: ./icons/icon-text.dsds.yaml
+    rel: file
+    role: TextIcon
+  - href: ./icons/icon-th-large.dsds.yaml
+    rel: file
+    role: ThLargeIcon
+  - href: ./icons/icon-th-list.dsds.yaml
+    rel: file
+    role: ThListIcon
+  - href: ./icons/icon-thumbs-down.dsds.yaml
+    rel: file
+    role: ThumbsDownIcon
+  - href: ./icons/icon-thumbs-up.dsds.yaml
+    rel: file
+    role: ThumbsUpIcon
+  - href: ./icons/icon-tiers.dsds.yaml
+    rel: file
+    role: TiersIcon
+  - href: ./icons/icon-timeline.dsds.yaml
+    rel: file
+    role: TimelineIcon
+  - href: ./icons/icon-toggle-arrow-right.dsds.yaml
+    rel: file
+    role: ToggleArrowRightIcon
+  - href: ./icons/icon-token.dsds.yaml
+    rel: file
+    role: TokenIcon
+  - href: ./icons/icon-transfer.dsds.yaml
+    rel: file
+    role: TransferIcon
+  - href: ./icons/icon-translate.dsds.yaml
+    rel: file
+    role: TranslateIcon
+  - href: ./icons/icon-trash.dsds.yaml
+    rel: file
+    role: TrashIcon
+  - href: ./icons/icon-trend-upward.dsds.yaml
+    rel: file
+    role: TrendUpwardIcon
+  - href: ./icons/icon-triangle-outline.dsds.yaml
+    rel: file
+    role: TriangleOutlineIcon
+  - href: ./icons/icon-trolley.dsds.yaml
+    rel: file
+    role: TrolleyIcon
+  - href: ./icons/icon-truncate.dsds.yaml
+    rel: file
+    role: TruncateIcon
+  - href: ./icons/icon-twitter.dsds.yaml
+    rel: file
+    role: TwitterIcon
+  - href: ./icons/icon-ulist.dsds.yaml
+    rel: file
+    role: UlistIcon
+  - href: ./icons/icon-unarchive.dsds.yaml
+    rel: file
+    role: UnarchiveIcon
+  - href: ./icons/icon-underline.dsds.yaml
+    rel: file
+    role: UnderlineIcon
+  - href: ./icons/icon-undo.dsds.yaml
+    rel: file
+    role: UndoIcon
+  - href: ./icons/icon-unknown.dsds.yaml
+    rel: file
+    role: UnknownIcon
+  - href: ./icons/icon-unlink.dsds.yaml
+    rel: file
+    role: UnlinkIcon
+  - href: ./icons/icon-unlock.dsds.yaml
+    rel: file
+    role: UnlockIcon
+  - href: ./icons/icon-unpublish.dsds.yaml
+    rel: file
+    role: UnpublishIcon
+  - href: ./icons/icon-upload.dsds.yaml
+    rel: file
+    role: UploadIcon
+  - href: ./icons/icon-user.dsds.yaml
+    rel: file
+    role: UserIcon
+  - href: ./icons/icon-users.dsds.yaml
+    rel: file
+    role: UsersIcon
+  - href: ./icons/icon-versions.dsds.yaml
+    rel: file
+    role: VersionsIcon
+  - href: ./icons/icon-video.dsds.yaml
+    rel: file
+    role: VideoIcon
+  - href: ./icons/icon-warning-filled.dsds.yaml
+    rel: file
+    role: WarningFilledIcon
+  - href: ./icons/icon-warning-outline.dsds.yaml
+    rel: file
+    role: WarningOutlineIcon
+  - href: ./icons/icon-wrench.dsds.yaml
+    rel: file
+    role: WrenchIcon

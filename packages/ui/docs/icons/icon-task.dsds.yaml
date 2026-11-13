@@ -1,0 +1,30 @@
+kind: component
+id: icon-task
+name: TaskIcon
+description: For indicating one or more tasks with a deadline.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Todo
+    - Checklist
+    - Assignment
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/task.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent tasks with a explicitly defined deadline.
+      - level: should-not
+        statement: As a general representation for tasks. Use CheckmarkCircleIcon instead.
+        alternatives:
+          - to: icon-checkmark-circle

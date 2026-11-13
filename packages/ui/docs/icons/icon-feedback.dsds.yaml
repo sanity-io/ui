@@ -1,0 +1,30 @@
+kind: component
+id: icon-feedback
+name: FeedbackIcon
+description: To represent a feature or action to collect feedback from users.
+metadata:
+  status:
+    status: stable
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/feedback.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: When asking for feedback or to indicate that a feature is open for feedback
+      - level: should-not
+        statement: To represent comments. Use CommentIcon instead.
+        alternatives:
+          - to: icon-comment
+      - level: should-not
+        statement: To represent discussion threads. Use CommentIcon instead.
+        alternatives:
+          - to: icon-comment

@@ -1,0 +1,32 @@
+kind: component
+id: icon-crop
+name: CropIcon
+description: Image cropping or trimming.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Trim
+    - Cut Image
+    - Adjust
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/crop.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent image cropping or cropping tools
+      - level: should-not
+        statement: For image resizing
+      - level: should-not
+        statement: For broader image or video editing features. Use ControlsIcon instead.
+        alternatives:
+          - to: icon-controls

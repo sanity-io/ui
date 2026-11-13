@@ -1,0 +1,34 @@
+kind: component
+id: icon-th-large
+name: ThLargeIcon
+description: To present a grid or tile view.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Grid Large
+    - Tiles
+    - Gallery
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/th-large.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent grid views or tile layouts
+      - level: should-not
+        statement: For tables or tabular data lists. Use ThListIcon instead.
+        alternatives:
+          - to: icon-th-list
+      - level: should-not
+        statement: For general lists. Use ListIcon instead.
+        alternatives:
+          - to: icon-list

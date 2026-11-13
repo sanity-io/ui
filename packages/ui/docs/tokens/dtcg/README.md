@@ -9,11 +9,13 @@ The files are a copy of `dist/json` and `dist/css` from [sanity-labs/design-toke
 | Field   | Value                            |
 | ------- | -------------------------------- |
 | Package | `@sanity-labs/design-tokens`     |
-| Version | `0.0.2-alpha.6`                  |
+| Version | `0.0.2-alpha.11`                 |
 | Commit  | Not recorded in the npm package  |
-| Copied  | 2026-10-05, from the npm package |
+| Copied  | 2026-11-13, from the npm package |
 
-Sanity UI 5 alpha.14 depends on this version. Keep the copy on the version Sanity UI pins.
+This is the highest version published on npm, and the version `packages/ui/package.json` pins. Keep the copy on the version Sanity UI pins.
+
+`shadow.tokens.json` and `shadow.css` are not in `0.0.2-alpha.11`. They are still the copies from `0.0.2-alpha.6`, and they are kept because the shadow docs depend on them.
 
 ## The semantic file
 

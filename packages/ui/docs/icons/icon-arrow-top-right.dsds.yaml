@@ -1,0 +1,32 @@
+kind: component
+id: icon-arrow-top-right
+name: ArrowTopRightIcon
+description: To outside a link outside of the current application context.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - External
+    - Open New
+    - Diagonal Up Right
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-top-right.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To open a link to another Studio or application
+      - level: should
+        statement: To open content from the existing Studio/application in a new tab/window or preview
+      - level: should-not
+        statement: To represent opening an external link in a new window or tab. Use LaunchIcon instead.
+        alternatives:
+          - to: icon-launch

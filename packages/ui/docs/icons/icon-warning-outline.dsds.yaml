@@ -1,0 +1,38 @@
+kind: component
+id: icon-warning-outline
+name: WarningOutlineIcon
+description: To represent a general warning within the application.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Caution
+    - Alert
+    - Warning
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/warning-outline.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent issues that are neither critical nor blocking.
+      - level: should
+        statement: When an operation or process needs attention, but has not failed
+      - level: should
+        statement: To visually demarcate a warning message
+      - level: should-not
+        statement: To represent issues that are either critical or blocking. Use ErrorOutlineIcon instead.
+        alternatives:
+          - to: icon-error-outline
+      - level: should-not
+        statement: To represent issues related to user permissions. Use AccessDeniedIcon instead.
+        alternatives:
+          - to: icon-access-denied

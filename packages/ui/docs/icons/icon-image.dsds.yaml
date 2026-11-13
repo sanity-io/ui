@@ -1,0 +1,36 @@
+kind: component
+id: icon-image
+name: ImageIcon
+description: To represent a single image.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Picture
+    - Photo
+    - Media
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/image.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent an image or image file.
+      - level: should
+        statement: As a placeholder for an image before it's fully loaded
+      - level: should-not
+        statement: To represent multiple images. Use ImagesIcon instead.
+        alternatives:
+          - to: icon-images
+      - level: should-not
+        statement: To represent a video. Use VideoIcon instead.
+        alternatives:
+          - to: icon-video

@@ -1,0 +1,57 @@
+kind: component
+id: icon-add
+name: AddIcon
+description: Adding a new or existing item to an element.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Plus
+    - Create
+    - New
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'Adding/creating a new item that doesn''t benefit from the specificity of an icon with an "add" modifier (example: add-document)'
+      - level: should
+        statement: As a button for the primary add/create action
+      - level: should
+        statement: As a button when only one type of content can be added
+      - level: should
+        statement: As a menu button to display the options of what type of item to add
+      - level: should-not
+        statement: When there are multiple add actions on a page. Use a more specific icon is available like AddCommentIcon for comments
+      - level: should-not
+        statement: To indicate showing UI columns/rows in the UI. Use split-horizontal or split-vertical instead.
+      - level: should-not
+        statement: To indicate inviting people/members to an organization or group. Use AddUserIcon instead.
+        alternatives:
+          - to: icon-add-user
+      - level: should-not
+        statement: 'For adding content in a list where position does matters. Use InsertAboveIcon or InsertBelowIcon instead. Best practices:'
+        alternatives:
+          - to: icon-insert-above
+          - to: icon-insert-below
+      - level: should-not
+        statement: Add a label with the icon when space permits.
+      - level: should-not
+        statement: 'When creating a new item, use "New [ITEM TYPE]". Example: "New document"'
+      - level: should-not
+        statement: 'When adding an existing item, use "Add [ITEM TYPE ]". Example: "Add tag".'
+      - level: should-not
+        statement: In cases where a label is not used, add a tooltip.
+      - level: should-not
+        statement: 'When creating a new item, use "Create a new [ITEM TYPE]". Example: "Create a new document"'
+      - level: should-not
+        statement: 'When adding an existing item, use "Add a [ITEM TYPE ]". Example: "Add a tag".'

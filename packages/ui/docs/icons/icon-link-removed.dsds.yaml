@@ -1,0 +1,30 @@
+kind: component
+id: icon-link-removed
+name: LinkRemovedIcon
+description: To represent removing a link or a connection.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Broken Link
+    - Disconnected
+    - Unlinked
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/link-removed.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an action to remove a link or disconnect two items
+      - level: should-not
+        statement: To represent a broken/missing link or disconnected state. Use UnlinkIcon instead.
+        alternatives:
+          - to: icon-unlink

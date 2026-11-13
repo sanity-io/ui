@@ -1,0 +1,30 @@
+kind: component
+id: icon-terminal
+name: TerminalIcon
+description: Command line tools and output.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Console
+    - Command Line
+    - Shell
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/terminal.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For CLI features/tools or console access
+      - level: should-not
+        statement: For general code or code editing. Use CodeIcon instead.
+        alternatives:
+          - to: icon-code

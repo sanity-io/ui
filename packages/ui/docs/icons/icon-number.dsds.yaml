@@ -1,0 +1,30 @@
+kind: component
+id: icon-number
+name: NumberIcon
+description: Numeric data or Number type.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Hash
+    - Numeric
+    - Count
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/number.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate that a numeric data or a Number type value
+      - level: should-not
+        statement: To represent underlined text style. Use UnderlineIcon instead.
+        alternatives:
+          - to: icon-underline

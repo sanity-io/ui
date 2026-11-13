@@ -1,0 +1,36 @@
+kind: component
+id: icon-checkmark
+name: CheckmarkIcon
+description: Success or selection.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Check
+    - Done
+    - Confirmed
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/checkmark.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent general positive outcomes
+      - level: should
+        statement: To indicate selection of an item
+      - level: should
+        statement: To indicate success of a flow or operation
+      - level: should-not
+        statement: To represent tasks. Use TaskIcon instead.
+        alternatives:
+          - to: icon-task
+      - level: should-not
+        statement: As a interactive element for toggling an item. Use the Checkbox component instead.

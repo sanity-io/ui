@@ -1,0 +1,34 @@
+kind: component
+id: icon-double-chevron-left
+name: DoubleChevronLeftIcon
+description: Moving, resizing, transitioning, or revealing/concealing a group of elements in a leftward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Fast Left
+    - Jump Previous
+    - Rewind
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-left.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "For expanding a group of elements' content in a right-to-left direction (example: a leading floating panel)"
+      - level: should-not
+        statement: For moving, resizing, or expanding/collapsing a single element. Use ChevronLeftIcon instead.
+        alternatives:
+          - to: icon-chevron-left
+      - level: should-not
+        statement: To navigate back to a previous page. Use ArrowLeftIcon instead.
+        alternatives:
+          - to: icon-arrow-left

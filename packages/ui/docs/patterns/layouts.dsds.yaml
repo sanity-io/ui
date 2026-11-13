@@ -82,7 +82,7 @@ sections:
         statement: Use `level="primary"`/`level="secondary"`/`level="tertiary"` on the Button component to express action hierarchy, with only one primary action per action area.
         tags: [development]
       - level: must
-        statement: Use `loading={true}` only for processes that consistently take longer than 200ms, keep the button disabled and its label unchanged while loading, and show a confirmation message on completion for processes over three seconds.
+        statement: Use `loading={true}` only for processes that consistently take longer than 200ms. Show a confirmation message on completion for processes over three seconds.
         tags: [interaction]
       - level: must
         statement: 'Require explicit confirmation before executing a destructive action — a confirmation dialog stating what will happen, with a cancel option, whose confirm button repeats the destructive action''s name (for example, "Delete 3 items") and uses `level="primary" tone="critical"` — confirming is the dialog''s most important action, so it is not demoted for being destructive.'

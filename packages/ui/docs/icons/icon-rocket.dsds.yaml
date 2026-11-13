@@ -1,0 +1,34 @@
+kind: component
+id: icon-rocket
+name: RocketIcon
+description: Launch or high performance.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Launch
+    - Fast
+    - Performance
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/rocket.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an indicator for premium features–typically within the context of an upsell
+      - level: should-not
+        statement: To represent performance health metrics. Use ActivityIcon instead.
+        alternatives:
+          - to: icon-activity
+      - level: should-not
+        statement: To represent business metrics or performance. Use TrendUpwardIcon instead.
+        alternatives:
+          - to: icon-trend-upward

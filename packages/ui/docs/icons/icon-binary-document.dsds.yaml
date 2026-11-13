@@ -1,0 +1,30 @@
+kind: component
+id: icon-binary-document
+name: BinaryDocumentIcon
+description: To represent binary or executable files.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Code File
+    - Binary
+    - Data File
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/binary-document.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an indicator for a binary file or executable
+      - level: should-not
+        statement: For general documents or files. Use DocumentIcon instead.
+        alternatives:
+          - to: icon-document

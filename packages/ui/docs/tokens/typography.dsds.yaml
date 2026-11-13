@@ -178,8 +178,8 @@ entries:
     source:
       href: ./dtcg/json/typography.tokens.json#heading-5
   - kind: token
-    id: label-0
-    name: label-0
+    id: eyebrow-0
+    name: eyebrow-0
     description: Fine print labels.
     metadata:
       status:
@@ -187,10 +187,10 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-0
+      href: ./dtcg/json/typography.tokens.json#eyebrow-0
   - kind: token
-    id: label-1
-    name: label-1
+    id: eyebrow-1
+    name: eyebrow-1
     description: Compact form and UI labels.
     metadata:
       status:
@@ -198,10 +198,10 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-1
+      href: ./dtcg/json/typography.tokens.json#eyebrow-1
   - kind: token
-    id: label-2
-    name: label-2
+    id: eyebrow-2
+    name: eyebrow-2
     description: Small labels.
     metadata:
       status:
@@ -209,10 +209,10 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-2
+      href: ./dtcg/json/typography.tokens.json#eyebrow-2
   - kind: token
-    id: label-3
-    name: label-3
+    id: eyebrow-3
+    name: eyebrow-3
     description: Standard labels.
     metadata:
       status:
@@ -220,10 +220,10 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-3
+      href: ./dtcg/json/typography.tokens.json#eyebrow-3
   - kind: token
-    id: label-4
-    name: label-4
+    id: eyebrow-4
+    name: eyebrow-4
     description: Larger labels.
     metadata:
       status:
@@ -231,10 +231,10 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-4
+      href: ./dtcg/json/typography.tokens.json#eyebrow-4
   - kind: token
-    id: label-5
-    name: label-5
+    id: eyebrow-5
+    name: eyebrow-5
     description: Largest labels.
     metadata:
       status:
@@ -242,13 +242,13 @@ entries:
       group: typography
     tokenType: typography
     source:
-      href: ./dtcg/json/typography.tokens.json#label-5
+      href: ./dtcg/json/typography.tokens.json#eyebrow-5
   - kind: entry
     id: typography
     name: Typography styles
-    description: Composite text styles for body, code, heading, and label roles, each binding a family, size, weight, and line height.
+    description: Composite text styles for body, code, heading, and eyebrow roles, each binding a family, size, weight, and line height.
     metadata:
-      tags: [typography, type, text, heading, label, code, scale, line-height]
+      tags: [typography, type, text, heading, eyebrow, code, scale, line-height]
       status:
         status: stable
       group: typography
@@ -277,7 +277,7 @@ entries:
         freeform:
           - title: Overview
             body: |-
-              Each typography token bundles a font family, size, weight, and line height into one style. The set covers four roles: `body`, `code`, `heading`, and `label`. Every token carries the regular weight; the rendered weight comes from the component's `weight` prop (see Font weights).
+              Each typography token bundles a font family, size, weight, and line height into one style. The set covers four roles: `body`, `code`, `heading`, and `eyebrow`. Every token carries the regular weight; the rendered weight comes from the component's `weight` prop (see Font weights).
           - title: Roles and components
             body: |-
               | Token role | Component | Family | Default size |
@@ -285,19 +285,19 @@ entries:
               | `body` | Text | `sans` | `2` |
               | `code` | Code | `mono` | `2` |
               | `heading` | Heading | `sans` | `2` |
-              | `label` | Eyebrow | `sans` | — |
+              | `eyebrow` | Eyebrow | `sans` | — |
 
-              `heading` runs `0`–`5`, and Heading's `size` accepts all six steps. `body` and `code` run `0`–`4`. `label` runs `0`–`5`, and Eyebrow's `size` uses steps `0`–`4`. The `label` role belongs to Eyebrow.
+              `heading` runs `0`–`5`, and Heading's `size` accepts all six steps. `body` and `code` run `0`–`4`. `eyebrow` runs `0`–`5`, and Eyebrow's `size` uses steps `0`–`4`. The `eyebrow` role belongs to Eyebrow.
           - title: Sizes
             body: |-
-              Each step is one token, named by role and step: `body-2`, `heading-4`, `label-1`. The size, line height and letter spacing of each live in `docs/tokens/dtcg/json/typography.tokens.json`. Read a role, such as `heading`, to see a whole ramp. Larger heading steps carry negative letter spacing.
+              Each step is one token, named by role and step: `body-2`, `heading-4`, `eyebrow-1`. The size, line height and letter spacing of each live in `docs/tokens/dtcg/json/typography.tokens.json`. Read a role, such as `heading`, to see a whole ramp. Larger heading steps carry negative letter spacing.
 
               | Role | Steps | Tokens |
               | --- | --- | --- |
               | `body` | `0`–`4` | `body-0` … `body-4` |
               | `code` | `0`–`4` | `code-0` … `code-4` |
               | `heading` | `0`–`5` | `heading-0` … `heading-5` |
-              | `label` | `0`–`5` | `label-0` … `label-5` |
+              | `eyebrow` | `0`–`5` | `eyebrow-0` … `eyebrow-5` |
 
               Run large steps (`heading` `4`–`5`, `body`/`code` `3`–`4`) tighter where needed.
           - title: Related

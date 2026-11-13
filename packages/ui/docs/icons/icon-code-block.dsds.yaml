@@ -1,0 +1,38 @@
+kind: component
+id: icon-code-block
+name: CodeBlockIcon
+description: Multiline code blocks.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Code Snippet
+    - Pre
+    - Programming Block
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/code-block.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Code block formatting in rich text
+      - level: should-not
+        statement: To represent inline code. Use CodeIcon instead.
+        alternatives:
+          - to: icon-code
+      - level: should-not
+        statement: For general API references. Use PlugIcon instead.
+        alternatives:
+          - to: icon-plug
+      - level: should-not
+        statement: To represent JSON. Use JsonIcon instead.
+        alternatives:
+          - to: icon-json

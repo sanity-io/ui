@@ -1,0 +1,34 @@
+kind: component
+id: icon-search
+name: SearchIcon
+description: Search/find content/information.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Find
+    - Magnify
+    - Look
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/search.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Used to represent any form of search or text-input filtering
+      - level: should-not
+        statement: For code inspection. Use JsonIcon instead.
+        alternatives:
+          - to: icon-json
+      - level: should-not
+        statement: For non-text-input filtering of list items or table rows. Use FilterIcon instead.
+        alternatives:
+          - to: icon-filter

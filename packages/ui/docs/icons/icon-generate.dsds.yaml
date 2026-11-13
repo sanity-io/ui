@@ -1,0 +1,18 @@
+kind: component
+id: icon-generate
+name: GenerateIcon
+description: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - AI
+    - Create
+    - Automatic
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/generate.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true

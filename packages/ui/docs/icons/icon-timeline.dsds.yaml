@@ -1,0 +1,32 @@
+kind: component
+id: icon-timeline
+name: TimelineIcon
+description: A sequence or timeline of events.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Gantt chart
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/timeline.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a sequence or timeline of events
+      - level: should-not
+        statement: To represent tasks. Use TaskIcon instead.
+        alternatives:
+          - to: icon-task
+      - level: should-not
+        statement: To represent general dates. Use CalendarIcon instead.
+        alternatives:
+          - to: icon-calendar

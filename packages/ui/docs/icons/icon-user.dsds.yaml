@@ -1,0 +1,34 @@
+kind: component
+id: icon-user
+name: UserIcon
+description: To represent an individual person.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Person
+    - Profile
+    - Account
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/user.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a person, role or profile
+      - level: should-not
+        statement: To represent multiple users, a group, or a team. Use UsersIcon instead.
+        alternatives:
+          - to: icon-users
+      - level: should-not
+        statement: To add a user. Use AddUserIcon instead.
+        alternatives:
+          - to: icon-add-user
