@@ -1,0 +1,38 @@
+kind: component
+id: icon-compose
+name: ComposeIcon
+description: Creating new written content.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Edit
+    - Write
+    - Create Content
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/compose.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For creating new written content or documents.
+      - level: should-not
+        statement: For AI-powered creation of new written content. Use ComposeSparklesIcon instead.
+        alternatives:
+          - to: icon-compose-sparkles
+      - level: should-not
+        statement: For editing existing written content. Use EditIcon instead.
+        alternatives:
+          - to: icon-edit
+      - level: should-not
+        statement: For creating new general content. Use AddIcon instead.
+        alternatives:
+          - to: icon-add

@@ -52,7 +52,7 @@ sections:
       - level: must-not
         statement: Don't open more than one Popover at a time.
       - level: must-not
-        statement: Do not use Popover for gating content. Use Dialog instead.
+        statement: Don't use Popover for gating content. Use Dialog instead.
   - kind: guidelines
     for: agent
     framing: how-to-use
@@ -80,7 +80,7 @@ sections:
             href: ../examples/popover-2.tsx
             rel: source
       - level: should
-        statement: The content box has its own padding, {space-2} across and {space-1} down, with radius {radius-2} and shadow {shadow-2}. Put the content straight inside; a padded wrapper doubles the padding.
+        statement: The content box has its own padding. Put the content straight inside; a padded wrapper doubles the padding.
       - level: should
         statement: Set portal only when an ancestor clips or misplaces the content.
       - level: may
@@ -166,6 +166,12 @@ traits:
       ancestor with transform, filter, or contain creates a containing block
       that breaks anchor positioning. Portalled content does not render during
       server-side rendering.
+  - traitType: variant
+    kind: boolean
+    id: fullBleed
+    description: >-
+      Removes the content box padding, so the content reaches the edges of the
+      floating layer. Use for setting custom spacing within Popover or content that should take up the entire space, such as an image. Padding is on by default.
 $extensions:
   com.sanity.ui:
     implementationStatus:

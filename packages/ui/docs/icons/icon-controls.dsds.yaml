@@ -1,0 +1,36 @@
+kind: component
+id: icon-controls
+name: ControlsIcon
+description: Configuration or advanced controls.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Adjustments
+    - Sliders
+    - Tuning
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/controls.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a configuration action or mode
+      - level: should
+        statement: 'To represent advanced controls/actions (ex: Advanced search)'
+      - level: should-not
+        statement: To represent general settings. Use CogIcon instead.
+        alternatives:
+          - to: icon-cog
+      - level: should-not
+        statement: To represent configuring content filters. Use FilterIcon instead.
+        alternatives:
+          - to: icon-filter

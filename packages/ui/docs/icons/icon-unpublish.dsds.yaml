@@ -1,0 +1,38 @@
+kind: component
+id: icon-unpublish
+name: UnpublishIcon
+description: Unpublishing or reverting content to a draft.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Retract
+    - Take Down
+    - Draft
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unpublish.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For unpublishing or taking content offline
+      - level: should-not
+        statement: For publishing content. Use PublishIcon instead.
+        alternatives:
+          - to: icon-publish
+      - level: should-not
+        statement: For downloading content. Use DownloadIcon instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: For expanding content vertically. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down

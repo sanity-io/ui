@@ -1,0 +1,36 @@
+kind: component
+id: icon-double-chevron-up
+name: DoubleChevronUpIcon
+description: Moving, resizing, transitioning, or revealing/concealing a group of elements in an upward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Fast Up
+    - Jump Up
+    - Scroll Top
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-up.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "For collapsing a group of elements' content in a top-to-bottom direction (example: all accordion sections)"
+      - level: should
+        statement: For expanding a group of elements' content in a bottom-to-top direction
+      - level: should-not
+        statement: For moving, resizing, or expanding/collapsing a single element. Use ChevronUpIcon instead.
+        alternatives:
+          - to: icon-chevron-up
+      - level: should-not
+        statement: To scroll up within a page. Use ArrowUpIcon instead.
+        alternatives:
+          - to: icon-arrow-up

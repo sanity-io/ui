@@ -1,0 +1,41 @@
+kind: component
+id: icon-unlock
+name: UnlockIcon
+description: Unlocked or open state.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Unlocked
+    - Open
+    - Public
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unlock.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent unlock content or an action to unlock content.
+      - level: should
+        statement: To represent content/items that the user can access but is not publicly available.
+      - level: should
+        statement: To explicitly represent that content can be altered.
+      - level: should-not
+        statement: As a general toggle for locking/unlocking. Use UnlockIcon and LockIcon in conjunction.
+      - level: should-not
+        statement: To represent unlocking/undocking of interface elements. For sidebar locking/docking use PanelLeftIcon or PanelRightIcon instead.
+        alternatives:
+          - to: icon-panel-left
+          - to: icon-panel-right
+      - level: should-not
+        statement: To represent public content. Use EarthGlobeIcon instead.
+        alternatives:
+          - to: icon-earth-globe

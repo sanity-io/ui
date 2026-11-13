@@ -1,0 +1,42 @@
+kind: component
+id: icon-chevron-right
+name: ChevronRightIcon
+description: Moving, resizing, transitioning, or revealing/concealing an element in a rightward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Expand Right
+    - Next
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-right.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Drilling out through a column based hierarchical view
+      - level: should
+        statement: Moving forward in a carousel view
+      - level: should-not
+        statement: Expanding/collapsing sidebars. Use PanelLeftIcon or PanelRightIcon instead
+        alternatives:
+          - to: icon-panel-left
+          - to: icon-panel-right
+      - level: should-not
+        statement: Moving/resizing/revealing a group of elements. Use DoubleChevronRightIcon instead.
+        alternatives:
+          - to: icon-double-chevron-right
+      - level: should-not
+        statement: 'Navigating to a new surface. Use ArrowRightIcon instead. Best practices:'
+        alternatives:
+          - to: icon-arrow-right
+      - level: should-not
+        statement: Consider RTL languages when using chevrons.

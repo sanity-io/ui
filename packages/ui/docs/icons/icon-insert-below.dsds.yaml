@@ -1,0 +1,32 @@
+kind: component
+id: icon-insert-below
+name: InsertBelowIcon
+description: Inserting content below an element in a vertical list.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Add Below
+    - Insert After
+    - Down
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/insert-below.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For adding content below current position
+      - level: should
+        statement: For adding a proceeding row in a table
+      - level: should-not
+        statement: For adding of content where position does not matter. Use AddIcon instead.
+        alternatives:
+          - to: icon-add

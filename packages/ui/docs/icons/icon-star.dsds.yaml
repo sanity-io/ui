@@ -1,0 +1,51 @@
+kind: component
+id: icon-star
+name: StarIcon
+description: To represent content that can be favorited.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Unstarred
+    - Favorite
+    - Featured
+    - Rating
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/star.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: View/managing favorites
+      - level: should
+        statement: Displaying that an item can be favorited
+      - level: should
+        statement: As a toggle for adding an item to their favorites
+      - level: should-not
+        statement: Showing that an item is set as a favorite. Use StarFilledIcon instead.
+        alternatives:
+          - to: icon-star-filled
+      - level: should-not
+        statement: Removing a favorite or toggling a favorite off. Use StarFilledIcon instead.
+        alternatives:
+          - to: icon-star-filled
+      - level: should-not
+        statement: For new features. Use [TBD] instead.
+      - level: should-not
+        statement: For bookmarks. Use BookmarkIcon instead.
+        alternatives:
+          - to: icon-bookmark
+      - level: should-not
+        statement: For liking. Use HeartIcon instead.
+        alternatives:
+          - to: icon-heart
+      - level: should-not
+        statement: For rating. Use [TBD] instead.

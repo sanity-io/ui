@@ -1,0 +1,34 @@
+kind: component
+id: icon-launch
+name: LaunchIcon
+description: To indicate a link external from Sanity.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Open
+    - External
+    - Start
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/launch.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate an external link
+      - level: should-not
+        statement: For internal navigation with the current Studio or application. Use ArrowRightIcon instead.
+        alternatives:
+          - to: icon-arrow-right
+      - level: should-not
+        statement: For navigation to a different Studio or application. Use ArrowTopRightIcon instead.
+        alternatives:
+          - to: icon-arrow-top-right

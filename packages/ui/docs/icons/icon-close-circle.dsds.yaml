@@ -1,0 +1,18 @@
+kind: component
+id: icon-close-circle
+name: CloseCircleIcon
+description: The close circle icon from the Sanity icon set.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Cancel Circle
+    - Remove Circle
+    - Exit Circle
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/close-circle.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: false

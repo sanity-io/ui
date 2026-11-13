@@ -1,0 +1,38 @@
+kind: component
+id: icon-panel-left
+name: PanelLeftIcon
+description: Toggle the visibility of a left panel or sidebar.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Sidebar Left
+    - Left Panel
+    - West
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/panel-left.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Toggling the visibility, docking or locking a left sidebar/panel
+      - level: should-not
+        statement: Don't use for navigation. Use MenuIcon instead.
+        alternatives:
+          - to: icon-menu
+      - level: should-not
+        statement: "Don't use to indicate closing the PanelRightIcon. Use PanelLeftIcon instead. Best practices:"
+        alternatives:
+          - to: icon-panel-right
+      - level: should-not
+        statement: Consider RTL languages when using panel left/right.
+      - level: should-not
+        statement: 'Make sure to reinforce which toggle action will occur in the label (ex: "Open the navigation panel")'

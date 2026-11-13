@@ -1,0 +1,32 @@
+kind: component
+id: icon-block-element
+name: BlockElementIcon
+description: Block layout elements.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Block
+    - Container
+    - Box
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/block-element.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent content that is displayed as a block element (taking the full width of its parent and starting a new line).
+      - level: should-not
+        statement: To represent the size or aspect ratio of an element.
+      - level: should-not
+        statement: For spliting a layout vertically. Use SplitVerticalIcon instead.
+        alternatives:
+          - to: icon-split-vertical

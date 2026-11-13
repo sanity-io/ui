@@ -1,0 +1,38 @@
+kind: component
+id: icon-string
+name: StringIcon
+description: Text data or String type.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Text
+    - Characters
+    - ABC
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/string.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To reference or indicate text data or a String type value
+      - level: should-not
+        statement: To represent a link. Use LinkIcon instead.
+        alternatives:
+          - to: icon-link
+      - level: should-not
+        statement: To represent underlined text style. Use UnderlineIcon instead.
+        alternatives:
+          - to: icon-underline
+      - level: should-not
+        statement: To indicate general text. Use TextIcon instead.
+        alternatives:
+          - to: icon-text

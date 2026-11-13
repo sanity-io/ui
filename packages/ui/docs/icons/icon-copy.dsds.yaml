@@ -1,0 +1,31 @@
+kind: component
+id: icon-copy
+name: CopyIcon
+description: Copying or duplicating actions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Duplicate
+    - Clone
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/copy.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For copying general text to clipboard
+      - level: should
+        statement: For duplicating items or cloning operations
+      - level: should-not
+        statement: For copying a link/URL to the clipboard. Use LinkIcon instead.
+        alternatives:
+          - to: icon-link

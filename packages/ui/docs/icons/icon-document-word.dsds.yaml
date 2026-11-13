@@ -1,0 +1,34 @@
+kind: component
+id: icon-document-word
+name: DocumentWordIcon
+description: Word processor documents.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Word Document
+    - DOC
+    - Text Processing
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-word.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an indicator for .doc, .docx, or other Word processor file formats
+      - level: should-not
+        statement: For general documents or files. Use DocumentIcon instead.
+        alternatives:
+          - to: icon-document
+      - level: should-not
+        statement: To represent a general text-based document. Use DocumentTextIcon instead.
+        alternatives:
+          - to: icon-document-text

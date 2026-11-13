@@ -1,0 +1,30 @@
+kind: component
+id: icon-clipboard-image
+name: ClipboardImageIcon
+description: To represent pasting an image from clipboard.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Copy Image
+    - Image Buffer
+    - Screenshot
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/clipboard-image.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Specifically for pasting image data from the clipboard.
+      - level: should-not
+        statement: For general pasting actions. Use ClipboardIcon instead.
+        alternatives:
+          - to: icon-clipboard

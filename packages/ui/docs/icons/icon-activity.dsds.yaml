@@ -1,0 +1,40 @@
+kind: component
+id: icon-activity
+name: ActivityIcon
+description: Represents activity feeds, monitoring, or diagnostics.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Feed
+    - Timeline
+    - EKG
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/activity.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For activity logs or feeds.
+      - level: should
+        statement: For performance or health checks.
+      - level: should-not
+        statement: For general analytics or data visualization tools. Use BarChartIcon instead.
+        alternatives:
+          - to: icon-bar-chart
+      - level: should-not
+        statement: To represent usage or a general line chart. Use ChartUpwardIcon instead.
+        alternatives:
+          - to: icon-chart-upward
+      - level: should-not
+        statement: To represent a trend in data. Use TrendUpwardIcon instead.
+        alternatives:
+          - to: icon-trend-upward

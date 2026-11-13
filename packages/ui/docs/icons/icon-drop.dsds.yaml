@@ -1,0 +1,30 @@
+kind: component
+id: icon-drop
+name: DropIcon
+description: Individual coloring of an element.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Liquid
+    - Water
+    - Fluid
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/drop.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To reference or represent the color of an individual element
+      - level: should-not
+        statement: For targeting a color theme or creating a color palette. Use ColorWheelIcon instead.
+        alternatives:
+          - to: icon-color-wheel

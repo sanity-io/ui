@@ -1,0 +1,30 @@
+kind: component
+id: icon-sun
+name: SunIcon
+description: Light mode setting.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Light Mode
+    - Day
+    - Bright
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sun.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For setting a color scheme to light mode
+      - level: should-not
+        statement: For dark mode. Use MoonIcon instead.
+        alternatives:
+          - to: icon-moon

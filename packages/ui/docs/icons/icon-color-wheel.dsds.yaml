@@ -1,0 +1,30 @@
+kind: component
+id: icon-color-wheel
+name: ColorWheelIcon
+description: Color collections, palettes, or themes.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Color Picker
+    - Palette
+    - Hue
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/color-wheel.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To reference or represent a color theme or collection of colors.
+      - level: should-not
+        statement: For targeting an individual color or coloring an individual element. Use DropIcon instead.
+        alternatives:
+          - to: icon-drop

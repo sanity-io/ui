@@ -1,0 +1,45 @@
+kind: component
+id: icon-restore
+name: RestoreIcon
+description: To restore an item to a previous version.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Recover
+    - Unarchive
+    - Bring Back
+    - Roll Back
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/restore.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To view the history or activity log of an item
+      - level: should
+        statement: To see previous/recent actions
+      - level: should-not
+        statement: To represent time or duration. Use ClockIcon instead.
+        alternatives:
+          - to: icon-clock
+      - level: should-not
+        statement: For undo a single action. Use UndoIcon instead.
+        alternatives:
+          - to: icon-undo
+      - level: should-not
+        statement: To indicate explicit versions. Use VersionsIcon instead.
+        alternatives:
+          - to: icon-versions
+      - level: should-not
+        statement: To reset to the original state. Use ResetIcon instead.
+        alternatives:
+          - to: icon-reset

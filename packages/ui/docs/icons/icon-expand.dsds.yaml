@@ -1,0 +1,36 @@
+kind: component
+id: icon-expand
+name: ExpandIcon
+description: To enter the interface into a maximized state or mode.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Maximize
+    - Grow
+    - Enlarge
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/expand.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For entering full screen mode in the interface
+      - level: should
+        statement: For entering focus mode in the interface
+      - level: should-not
+        statement: For expanding UI elements. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down
+      - level: should-not
+        statement: For making UI elements visible. Use EyeOpenIcon instead.
+        alternatives:
+          - to: icon-eye-open

@@ -1,0 +1,38 @@
+kind: component
+id: icon-double-chevron-down
+name: DoubleChevronDownIcon
+description: Moving, resizing, transitioning, or revealing/concealing a group of elements in a downward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Fast Down
+    - Jump Down
+    - Scroll Bottom
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-chevron-down.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As a general affordance for expanding content for a group of elements when direction is not explicitly known
+      - level: should
+        statement: "For expanding a group of elements' content in a top- to-bottom direction (example: all accordion sections)"
+      - level: should
+        statement: For collapsing a group of elements' content in a bottom-to-top direction
+      - level: should-not
+        statement: For moving, resizing, or expanding/collapsing a single element. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down
+      - level: should-not
+        statement: To scroll down within a page. Use ArrowDownIcon instead.
+        alternatives:
+          - to: icon-arrow-down

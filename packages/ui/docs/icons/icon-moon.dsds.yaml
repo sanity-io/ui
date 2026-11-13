@@ -1,0 +1,30 @@
+kind: component
+id: icon-moon
+name: MoonIcon
+description: Dark mode setting.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Dark Mode
+    - Night
+    - Theme
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/moon.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For setting a color scheme to dark mode
+      - level: should-not
+        statement: For light mode. Use SunIcon instead.
+        alternatives:
+          - to: icon-sun

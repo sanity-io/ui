@@ -1,0 +1,39 @@
+kind: component
+id: icon-toggle-arrow-right
+name: ToggleArrowRightIcon
+description: A visual affordance for expanding/collapsing items within a hierarchical tree view.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Switch Right
+    - Navigate Toggle
+    - Expand
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/toggle-arrow-right.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For expanding/collapsing items within a hierarchical tree view.
+      - level: should-not
+        statement: To expand or collapse content within an accordion view. Use ChevronUpIcon and ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-up
+          - to: icon-chevron-down
+      - level: should-not
+        statement: For playing media or starting a process. Use PlayIcon instead.
+        alternatives:
+          - to: icon-play
+      - level: should-not
+        statement: For navigating forward to a new page or drilling in through nested content in a column view. Use ChevronRightIcon instead.
+        alternatives:
+          - to: icon-chevron-right
