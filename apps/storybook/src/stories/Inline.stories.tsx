@@ -4,6 +4,7 @@ import {Inline as InlineV3} from 'ui3'
 
 import {Inline} from '../../../../packages/ui/src/components/inline/Inline'
 import {inlineProps} from '../../../../packages/ui/src/components/inline/inline.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
@@ -35,9 +36,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Inline {...props}>
-        <Square>Child 1</Square>
-        <Square>Child 2</Square>
-        <Square>Child 3</Square>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
       </Inline>
     )
   },

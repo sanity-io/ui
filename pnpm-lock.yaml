@@ -399,6 +399,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^4.1.1
         version: 4.1.1(@vitest/browser@4.1.1(vite@8.2.2(@types/node@24.12.0)(esbuild@0.28.1)(jiti@2.6.1)(terser@5.46.1)(tsx@4.23.5)(yaml@2.8.3))(vitest@4.1.1))(vitest@4.1.1)
+      lightningcss:
+        specifier: ^1.33.0
+        version: 1.33.0
       oxc-transform-react:
         specifier: 'catalog:'
         version: 0.149.0

@@ -3,6 +3,7 @@ import {expect} from 'storybook/test'
 
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {SPACE_INHERIT} from '../../../../packages/ui/src/types/Space'
 import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
@@ -40,9 +41,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <HStack {...props}>
-        <Square>Child 1</Square>
-        <Square>Child 2</Square>
-        <Square>Child 3</Square>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
       </HStack>
     )
   },
@@ -58,9 +65,15 @@ export const Inherit: Story = {
     return (
       <Card density="regular">
         <HStack {...props} gap="inherit">
-          <Square>Child 1</Square>
-          <Square>Child 2</Square>
-          <Square>Child 3</Square>
+          <Square>
+            <Text>Child 1</Text>
+          </Square>
+          <Square>
+            <Text>Child 2</Text>
+          </Square>
+          <Square>
+            <Text>Child 3</Text>
+          </Square>
         </HStack>
       </Card>
     )
