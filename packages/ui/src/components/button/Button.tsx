@@ -22,7 +22,6 @@ export function Button<T extends ElementType = 'button'>({
     as,
     children,
     className,
-    disabled,
     style,
     iconStart: IconStart,
     iconEnd: IconEnd,
@@ -46,7 +45,6 @@ export function Button<T extends ElementType = 'button'>({
       aria-busy={loading}
       aria-disabled={loading}
       aria-pressed={pressed}
-      disabled={disabled}
       onClick={
         loading
           ? (e: Event) => {
