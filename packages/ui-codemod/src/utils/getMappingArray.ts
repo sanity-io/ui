@@ -25,8 +25,18 @@ export function getMappingArray(
 
     const mappingValue = getMappingValue(mapping, el)
 
-    if (!mappingValue && !allowUndefined) {
-      return null
+    if (mappingValue === undefined) {
+      if (!allowUndefined) {
+        return null
+      }
+
+      output.push(j.identifier('undefined'))
+      continue
+    }
+
+    if (mappingValue === null) {
+      output.push(j.identifier('undefined'))
+      continue
     }
 
     output.push(getMappingExpression(j, mappingValue))

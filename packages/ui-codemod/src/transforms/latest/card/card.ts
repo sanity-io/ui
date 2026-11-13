@@ -50,6 +50,7 @@ export default function transform(
       const muted = getAttribute(attrs, 'muted')
       const scheme = getAttribute(attrs, 'scheme')
       const border = getAttribute(attrs, 'border')
+      const shadow = getStaticAttributeExpression(j, attrs, 'shadow')
       const padding = getStaticAttributeExpression(j, attrs, 'padding')
       const radius = getStaticAttributeExpression(j, attrs, 'radius')
 
@@ -57,9 +58,9 @@ export default function transform(
         density ||
         muted ||
         scheme ||
-        (border && padding === 3 && radius == 2) ||
-        (border && padding === 4 && radius == 3) ||
-        (border && padding === 5 && radius == 4)
+        ((border || shadow === 1) && padding === 3 && radius == 2) ||
+        ((border || shadow === 1) && padding === 4 && radius == 3) ||
+        ((border || shadow === 1) && padding === 5 && radius == 4)
       )
     }
 
@@ -75,7 +76,20 @@ export default function transform(
         },
         {
           element: 'Box',
-          callback: (path) => transformAttributes(j, path, BOX_MODS, BOX_TODO_WARNING),
+          callback: (path) =>
+            transformAttributes(
+              j,
+              path,
+              {
+                ...BOX_MODS,
+                tone: {
+                  type: 'warn-only',
+                  warning:
+                    'Please double check the Box migration below. Nested typography components may require tone.',
+                },
+              },
+              BOX_TODO_WARNING,
+            ),
         },
       )
     ) {

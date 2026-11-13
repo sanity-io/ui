@@ -5,6 +5,7 @@ import {addAttribute} from '../../../utils/addAttribute'
 import {getComponentLocalNames} from '../../../utils/getComponentLocalNames'
 import {getStyledComponentAliases} from '../../../utils/getStyledComponentAliases'
 import {replaceElement} from '../../../utils/replaceElement'
+import {replaceStyledComponent} from '../../../utils/replaceStyledComponent'
 import {shouldTransformComponent} from '../../../utils/shouldTransformComponent'
 import {transformAttributes} from '../../../utils/transformAttributes'
 import {transformComponent} from '../../../utils/transformComponent'
@@ -72,6 +73,10 @@ export default function transform(
         },
       )
     ) {
+      markChanged()
+    }
+
+    if (replaceStyledComponent(j, root, {element: 'Label', localNames}, 'Eyebrow')) {
       markChanged()
     }
 

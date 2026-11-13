@@ -37,6 +37,10 @@ export function transformImportAlias(
       spec.imported.name = toExport
       updated = true
 
+      if (spec.local?.type === 'Identifier' && spec.local.name === toExport) {
+        spec.local = null
+      }
+
       if (warning) {
         insertTodoWarning(j, path, warning)
       }

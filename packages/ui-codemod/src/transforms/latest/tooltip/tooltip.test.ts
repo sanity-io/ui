@@ -21,25 +21,49 @@ defineInlineTest(
 
 defineInlineTest(
   transform,
-  {},
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
   `
-  <Tooltip
-    allowedPlacements={['bottom']}
-    animate
-    arrow
-    boundaryElement={ref}
-    delay={100}
-    fallbackPlacements={['bottom']}
-    padding={1}
-    radius={1}
-    scheme="light"
-    shadow={1}
-    onActivate={() => {}}
-    zOffset={1}
-  />
+  import {Tooltip, TooltipDelayGroupProvider} from '@legacy/ui'
+
+  <TooltipDelayGroupProvider>
+    <Tooltip />
+  </TooltipDelayGroupProvider>
   `,
   `
-  <Tooltip />
+  import {Tooltip, TooltipGroup} from "@sanity/ui"
+
+  <TooltipGroup>
+    <Tooltip />
+  </TooltipGroup>
+  `,
+  'updates Tooltip and TooltipGroup imports path based on fromPackage and toPackage',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <TooltipDelayGroupProvider delay={400}>
+    <Tooltip
+      allowedPlacements={['bottom']}
+      animate
+      arrow
+      boundaryElement={ref}
+      delay={100}
+      fallbackPlacements={['bottom']}
+      padding={1}
+      radius={1}
+      scheme="light"
+      shadow={1}
+      onActivate={() => {}}
+      zOffset={1}
+    />
+  </TooltipDelayGroupProvider>
+  `,
+  `
+  <TooltipGroup>
+    <Tooltip />
+  </TooltipGroup>
   `,
   'removes deprecated props',
 )
@@ -70,6 +94,22 @@ defineInlineTest(
   'warns for all content',
 )
 
+defineInlineTest(
+  transform,
+  {},
+  `
+  import {TooltipDelayGroupProvider} from '@sanity/ui'
+
+  const RootTooltipGroup = styled(TooltipDelayGroupProvider)(({theme}) => ({}))
+  `,
+  `
+  import {TooltipGroup} from '@sanity/ui'
+
+  const RootTooltipGroup = styled(TooltipGroup)(({theme}) => ({}))
+  `,
+  'replaces TooltipGroup styled() base',
+)
+
 defineCrossFileTest(
   transform,
   {},
@@ -81,7 +121,7 @@ defineCrossFileTest(
   `
     import {RootTooltip} from './Component.styled'
 
-    export function RootAvatar() {
+    export function Component() {
       return <RootTooltip animate />
     }
   `,
