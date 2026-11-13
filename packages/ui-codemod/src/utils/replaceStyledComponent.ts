@@ -62,6 +62,15 @@ export function replaceStyledComponent(
         arg.name = to
         hasChanges = true
         needsDefaultImportUpdate = true
+        return
+      }
+
+      if (!aliases.has(arg.name)) {
+        if (transformImportAlias(j, root, from.element, to, arg.name)) {
+          hasChanges = true
+        }
+
+        aliases.add(arg.name)
       }
     })
 
