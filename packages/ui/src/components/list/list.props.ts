@@ -34,6 +34,10 @@ export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
    */
   as?: InteractiveAs<T>
   /**
+   * Marks the row as the current selection.
+   */
+  current?: boolean
+  /**
    * Sets horizontal padding, gap, and minimum row height together.
    */
   density?: Responsive<Density>
@@ -45,10 +49,6 @@ export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
    * Slot at the right edge of the row.
    */
   end?: React.ReactNode
-  /**
-   * Marks the row as the current selection.
-   */
-  current?: boolean
   /**
    * Main label.
    */
@@ -62,6 +62,9 @@ export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
 export const listButtonProps: Record<string, PropDef> = {
   as: {
     type: 'string',
+  },
+  current: {
+    type: 'boolean',
   },
   density: {
     type: 'composite',
@@ -98,9 +101,6 @@ export const listButtonProps: Record<string, PropDef> = {
   },
   start: {
     type: 'string',
-  },
-  selected: {
-    type: 'boolean',
   },
   text: {
     type: 'string',
