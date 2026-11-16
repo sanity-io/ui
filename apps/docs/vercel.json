@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "mkdir -p /tmp/pnpm-bin && corepack enable --install-directory /tmp/pnpm-bin && PATH=/tmp/pnpm-bin:$PATH pnpm install --frozen-lockfile",
+  "buildCommand": "PATH=/tmp/pnpm-bin:$PATH pnpm build"
+}
