@@ -5,12 +5,15 @@
 .sui-ListItem,
 .sui-ListItemButton {
   --list-color: var(--foreground-high);
+  --list-color-muted: var(--foreground-low);
+  --press-area-color: var(--list-color);
+  --press-area-color-muted: var(--list-color-muted);
   color: var(--list-color);
 }
 
 .sui-ListItemButton {
   --background-color: transparent;
-  background: var(--background-color);
+  background: var(--background-color);x
 }
 
 .sui-ListItemButton:hover,
@@ -20,11 +23,13 @@
 
 .sui-ListItemButton:disabled {
   --list-color: var(--inert-foreground);
+  --list-color-muted: var(--inert-foreground);
 }
 
 .sui-ListItemButton[aria-pressed="true"] {
   --background-color: var(--active-background-emphasized);
   --list-color: var(--active-foreground-emphasized);
+  --list-color-muted: var(--active-background-normal);
 }
 
 .sui-ListItemImage {

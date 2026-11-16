@@ -39,14 +39,6 @@
   ],
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "source": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./polyfills": {
-      "source": "./src/polyfills.ts",
-      "default": "./dist/polyfills.js"
-    },
     "./package.json": "./package.json",
     "./styles.css": {
       "types": "./src/styles.css.d.ts",
@@ -58,8 +50,6 @@
   },
   "publishConfig": {
     "exports": {
-      ".": "./dist/index.js",
-      "./polyfills": "./dist/polyfills.js",
       "./package.json": "./package.json",
       "./styles.css": {
         "types": "./src/styles.css.d.ts",
