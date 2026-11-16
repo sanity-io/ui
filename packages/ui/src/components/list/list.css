@@ -13,7 +13,7 @@
 
 .sui-ListItemButton {
   --background-color: transparent;
-  background: var(--background-color);x
+  background: var(--background-color);
 }
 
 .sui-ListItemButton:hover,
