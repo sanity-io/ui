@@ -6,6 +6,7 @@ linkWorkspacePackages: deep
 strictPeerDependencies: false
 autoDedupe: true
 lockfile:
+  format: v13
   includeResolutionSettings: true
 
 # `pnpm add` writes `catalog:` when the requested version is covered by an
