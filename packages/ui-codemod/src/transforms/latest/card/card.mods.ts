@@ -538,7 +538,7 @@ export const CARD_MODS: AttributeMods = {
     style: 'boxShadow',
     mapping: {
       0: 'var(--shadow-0)',
-      1: 'var(--shadow-1)',
+      1: null,
       2: 'var(--shadow-2)',
       3: 'var(--shadow-3)',
       4: 'var(--shadow-4)',

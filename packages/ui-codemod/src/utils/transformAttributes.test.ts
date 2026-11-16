@@ -81,6 +81,13 @@ const MODS: AttributeMods = {
       border: 'border-box',
     },
   },
+  shadow: {
+    type: 'style-mapped',
+    style: 'boxShadow',
+    mapping: {
+      1: null,
+    },
+  },
   textAlign: {
     type: 'style-only',
     style: 'textAlign',
@@ -249,6 +256,18 @@ defineInlineTest(
   }} />
   `,
   'moves prop to style and updates mapped value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div shadow={1} />
+  `,
+  `
+  <div />
+  `,
+  'removes mapped prop when mapping value is null',
 )
 
 defineInlineTest(

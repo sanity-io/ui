@@ -1,4 +1,4 @@
-export type AttributeMapping = Record<string | number, string | boolean | number>
+export type AttributeMapping = Record<string | number, string | boolean | number | null>
 export type CompositeAttributeMapping = Record<string, Record<string, string | number | boolean>>
 
 export type AttributeMod =
