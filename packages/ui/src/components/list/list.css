@@ -6,6 +6,10 @@
 .sui-ListItemButton {
   --list-color: var(--foreground-high);
   --list-color-muted: var(--foreground-low);
+  /* 
+   * ListItemButton uses PressArea under the hood and can hook into
+   * its variables to set Text and Icon colors
+   */
   --press-area-color: var(--list-color);
   --press-area-color-muted: var(--list-color-muted);
   color: var(--list-color);
