@@ -123,7 +123,7 @@ export const AsMenu: Story = {
             density="compact"
             start={<Icon size={1} icon={SparkleIcon} />}
             text="Content Agent"
-            selected
+            current
           />
         </List.Item>
 
