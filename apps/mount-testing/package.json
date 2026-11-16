@@ -21,7 +21,7 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "oxc-transform-react": "catalog:",
-    "playwright": "1.58.2",
+    "playwright": "catalog:",
     "react-is": "^19.2.5",
     "styled-components": "^6.4.0",
     "typescript": "~6.0.2",
