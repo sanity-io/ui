@@ -1,0 +1,36 @@
+kind: component
+id: icon-read-only
+name: ReadOnlyIcon
+description: Read-only or view-only state.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - View Only
+    - Locked
+    - No Edit
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/read-only.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For read-only fields or to reinforce when content is not editable.
+      - level: should
+        statement: To represent a view-only mode.
+      - level: should-not
+        statement: For locked content. Use LockIcon instead.
+        alternatives:
+          - to: icon-lock
+      - level: should-not
+        statement: For content a user is not allowed to access. Use AccessDeniedIcon instead.
+        alternatives:
+          - to: icon-access-denied

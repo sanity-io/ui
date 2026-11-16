@@ -1,0 +1,30 @@
+kind: component
+id: icon-bulb-outline
+name: BulbOutlineIcon
+description: Product tips and suggestions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Idea
+    - Light
+    - Suggestion
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/bulb-outline.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent product tips/suggestions for user onboarding or revealing new features
+      - level: should-not
+        statement: For deeper learning or to represent documentation. Use BookIcon instead.
+        alternatives:
+          - to: icon-book

@@ -1,0 +1,28 @@
+kind: component
+id: icon-drag-handle
+name: DragHandleIcon
+description: Reorder items in a group through drag and drop interactions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Grip
+    - Reorder
+    - Move
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/drag-handle.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Used exclusively for sortable lists or draggable items
+      - level: should-not
+        statement: For non- draggable items.

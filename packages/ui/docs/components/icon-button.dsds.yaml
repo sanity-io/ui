@@ -28,6 +28,9 @@ sections:
         statement: In dialogs or confirmation prompts. Use Button with a visible label.
         alternatives:
           - to: button
+      - refs:
+          - to: forms#no-pressed-for-form-values
+            rel: relates-to
   - kind: guidelines
     for: all
     framing: how-to-use
@@ -191,7 +194,7 @@ traits:
   - traitType: state
     kind: boolean
     id: loading
-    description: Button action is in progress. Button is also disabled while loading. Use for tasks over 200ms. For tasks over three seconds, show a confirmation message when the task completes.
+    description: Button action is in progress. Sets aria-busy and aria-disabled, hides the icon behind a spinner, and ignores clicks. The button stays focusable. Use for tasks over 200ms. For tasks over three seconds, show a confirmation message when the task completes.
   - traitType: state
     kind: boolean
     id: enabled
@@ -202,8 +205,12 @@ traits:
     description: Cursor is resting over the button.
   - traitType: state
     kind: boolean
+    id: active
+    description: Button is being pressed down (:active). Not the same as the pressed prop.
+  - traitType: variant
+    kind: boolean
     id: pressed
-    description: Button is being pressed.
+    description: Toggle state for a button that switches a view, filter, or option on and off. Sets aria-pressed to the given value and shows the pressed style.
   - traitType: state
     kind: boolean
     id: focused

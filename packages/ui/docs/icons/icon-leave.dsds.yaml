@@ -1,0 +1,35 @@
+kind: component
+id: icon-leave
+name: LeaveIcon
+description: Leaving or exiting.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Exit
+    - Logout
+    - Sign Out
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/leave.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For logout or exiting actions
+      - level: should-not
+        statement: For closing or dismissing views. Use CloseIcon instead.
+        alternatives:
+          - to: icon-close
+      - level: should-not
+        statement: For toggling sidebars or panels. Use PanelLeftIcon or PanelRightIcon instead.
+        alternatives:
+          - to: icon-panel-left
+          - to: icon-panel-right

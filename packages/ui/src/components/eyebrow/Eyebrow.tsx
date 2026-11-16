@@ -10,10 +10,9 @@ const eyebrowClassName = suffixClassName('sui-Eyebrow')
 /** @public */
 export function Eyebrow<T extends ElementType = 'span'>({
   size = 2,
-  weight = 'semibold',
   ...props
 }: EyebrowProps<T> & Omit<ComponentPropsWithRef<T>, keyof EyebrowProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, eyebrowProps)
+  const {as, children, className, style, ...rest} = getProps({size, ...props}, eyebrowProps)
   const Component = as || 'span'
 
   if (props.truncate && props.trim) {
@@ -22,6 +21,7 @@ export function Eyebrow<T extends ElementType = 'span'>({
         className={clsx(
           eyebrowClassName,
           className?.replace('sui-line-clamp', '').replace('sui-text-overflow', ''),
+          'sui-weight-semibold',
         )}
         style={style}
         data-ui="Eyebrow"
@@ -41,7 +41,12 @@ export function Eyebrow<T extends ElementType = 'span'>({
 
   return (
     <Component
-      className={clsx(eyebrowClassName, props.truncate && 'sui-overflow-hidden', className)}
+      className={clsx(
+        eyebrowClassName,
+        props.truncate && 'sui-overflow-hidden',
+        'sui-weight-semibold',
+        className,
+      )}
       style={style}
       data-ui="Eyebrow"
       {...rest}

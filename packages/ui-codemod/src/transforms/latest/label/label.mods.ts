@@ -52,6 +52,16 @@ export const LABEL_MODS: AttributeMods = {
       clip: 1,
     },
   },
+  weight: {
+    type: 'style-mapped',
+    style: 'fontWeight',
+    mapping: {
+      regular: 'var(--regular)',
+      medium: 'var(--medium)',
+      semibold: 'var(--semibold)',
+      bold: 'var(--bold)',
+    },
+  },
   width: {
     type: 'style-mapped',
     style: 'width',

@@ -1,0 +1,31 @@
+kind: component
+id: icon-desktop
+name: DesktopIcon
+description: To represent desktop devices or a person's local computer settings.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Monitor
+    - Screen
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/desktop.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a desktop when choosing between different device types
+      - level: should
+        statement: "To represent a a computer's system settings (example: system-level light/dark mode preference)"
+      - level: should-not
+        statement: As an indicator for responsiveness. Use MobileDeviceIcon instead.
+        alternatives:
+          - to: icon-mobile-device

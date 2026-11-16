@@ -1,0 +1,30 @@
+kind: component
+id: icon-document-zip
+name: DocumentZipIcon
+description: Compressed or archived files.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Archive
+    - Compressed
+    - Package
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document-zip.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an indicator for .zip, .tar, /.gzip or other compression file formats
+      - level: should-not
+        statement: For general archives or archiving data. Use ArchiveIcon instead.
+        alternatives:
+          - to: icon-archive

@@ -1,0 +1,36 @@
+kind: component
+id: icon-calendar
+name: CalendarIcon
+description: Calendar or date selection.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Date
+    - Schedule
+    - Event
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/calendar.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate date selection or scheduling.
+      - level: should
+        statement: To represent calendar views or features.
+      - level: should-not
+        statement: For time or duration. Use ClockIcon instead.
+        alternatives:
+          - to: icon-clock
+      - level: should-not
+        statement: To represent a collection of events. Use TimelineIcon instead.
+        alternatives:
+          - to: icon-timeline

@@ -1,0 +1,40 @@
+kind: component
+id: icon-download
+name: DownloadIcon
+description: To represent downloading or exporting of content.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Save
+    - Get
+    - Pull
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/download.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate downloads or downloading actions.
+      - level: should
+        statement: To indicate exports or exporting actions.
+      - level: should-not
+        statement: For uploads or uploading actions. Use UploadIcon instead.
+        alternatives:
+          - to: icon-upload
+      - level: should-not
+        statement: For imports or importing actions. Use UploadIcon instead.
+        alternatives:
+          - to: icon-upload
+      - level: should-not
+        statement: For actions associated with publishing. Use UnpublishIcon instead.
+        alternatives:
+          - to: icon-unpublish

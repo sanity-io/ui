@@ -1,0 +1,44 @@
+kind: component
+id: icon-chevron-up
+name: ChevronUpIcon
+description: Moving, resizing, transitioning, or revealing/concealing an element in an upward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Collapse
+    - Hide
+    - Less
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-up.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'As a general affordance for concealing additional content when direction is not explicitly known (example: a menu button)'
+      - level: should
+        statement: "For collapsing an element's content in a top-to-bottom direction (example: accordions)"
+      - level: should
+        statement: 'For expanding an element in a bottom-to- top direction (example: a fixed footer)'
+      - level: should-not
+        statement: Moving/resizing/revealing a group of elements. Use DoubleChevronUpIcon instead.
+        alternatives:
+          - to: icon-double-chevron-up
+      - level: should-not
+        statement: For concealing a popover menu. Use Close instead.
+      - level: should-not
+        statement: To represent uploads or the upload action. Use UploadIcon instead. instead.
+        alternatives:
+          - to: icon-upload
+      - level: should-not
+        statement: As an affordance to scroll up to an element or back to top. Use ArrowUpIcon instead.
+        alternatives:
+          - to: icon-arrow-up

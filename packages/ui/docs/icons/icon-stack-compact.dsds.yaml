@@ -1,0 +1,30 @@
+kind: component
+id: icon-stack-compact
+name: StackCompactIcon
+description: To represent general vertically stacked content at higher density.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - List Compact
+    - Dense
+    - Tight
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/stack-compact.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To set a higher viewing density for a stack of items
+      - level: should-not
+        statement: To represent a stack with normal density. Use StackIcon instead.
+        alternatives:
+          - to: icon-stack

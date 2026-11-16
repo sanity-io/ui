@@ -45,6 +45,9 @@ sections:
         alternatives:
           - to: switch
           - to: checkbox
+      - refs:
+          - to: forms#no-pressed-for-form-values
+            rel: relates-to
       - id: buttons-only-display-icon-text
         level: must-not
         statement: For buttons that only display an icon with no text label. Use IconButton instead.
@@ -99,12 +102,14 @@ sections:
       - level: should
         statement: Use iconStart in Button for visual emphasis. Only when it doesn't hurt scannability. Keep icon/text button pairing to one button per group.
       - level: must-not
-        statement: '**Disabled strategy.** Never place a tooltip on a disabled button. Button uses HTML `disabled`, which removes it from the tab order, so keyboard users cannot reach the tooltip. When users need to find a disabled control, use `aria-disabled="true"` instead to keep it focusable while blocking action (WCAG 2.1.1 A).'
+        statement: '**Disabled strategy.** Never place a tooltip on a disabled button. The `disabled` prop uses HTML `disabled`, which removes it from the tab order, so keyboard users cannot reach the tooltip. When users need to find a disabled control, use `aria-disabled="true"` instead to keep it focusable while blocking action (WCAG 2.1.1 A). `loading={true}` also sets `aria-disabled`, so a loading button stays focusable.'
         tags: [accessibility]
         refines:
           - to: accessibility-guidelines#disabled-control-no-tooltip
       - level: must-not
         statement: Don't use Button without a text label. Button relies on the text label to describe its purpose. Use IconButton in cases where the icon is the only visual indicator.
+      - level: must
+        statement: Button defaults to `type="button"`. To submit a form, set `type="submit"` explicitly.
       - level: must-not
         statement: Don't disable buttons as a blocking function for incomplete form fields. People may not know what caused the button to be disabled. Allow submission and show feedback instead.
       - level: must-not
@@ -208,8 +213,8 @@ traits:
     description: Visual cue that the cursor is resting over the button.
   - traitType: state
     kind: boolean
-    id: pressed
-    description: Visual cue that the button is being pressed.
+    id: active
+    description: Momentary visual cue while the button is pressed down (:active). Not the same as the pressed prop.
   - traitType: state
     kind: boolean
     id: focused
@@ -219,16 +224,23 @@ traits:
     id: disabled
     description: >-
       Blocks the user from using the button. Removed from the tab order via HTML
-      disabled. Use only when performing the action could be harmful, or while
-      loading={true}. Let people know why it's disabled and how to fix it with
-      visible text or a status message next to the button.
+      disabled. Use only when performing the action could be harmful. Let people
+      know why it's disabled and how to fix it with visible text or a status
+      message next to the button.
   - traitType: state
     kind: boolean
     id: loading
     description: >-
-      Shows the action is in progress. The button is also disabled while
-      loading. Use only for processes consistently longer than 200ms. For
+      Shows the action is in progress. Sets aria-busy and aria-disabled, hides
+      the label and icons behind a spinner, and ignores clicks. The button stays
+      focusable. Use only for processes consistently longer than 200ms. For
       processes over three seconds, show a confirmation message when the action completes.
+  - traitType: variant
+    kind: boolean
+    id: pressed
+    description: >-
+      Toggle state for a button that switches a view, filter, or option on and
+      off. Sets aria-pressed to the given value and shows the pressed style.
   - traitType: variant
     kind: enum
     id: level
@@ -263,15 +275,15 @@ traits:
   - traitType: variant
     kind: enum
     id: density
-    description: Composite prop setting padding and gap together.
+    description: Composite prop setting padding, gap, and minimum size together.
     values:
       - id: regular
-        description: Gap 2 and padding 2. Default spacing.
+        description: Gap 2, padding 2, and a minimum size of 25px. Default spacing.
       - id: loose
-        description: Gap 3 and padding 3. For spacious contexts.
+        description: Gap 3, padding 3, and a minimum size of 33px. For spacious contexts.
   - traitType: variant
     kind: boolean
-    id: fullwidth
+    id: fullWidth
     description: Sets CSS width to 100% to fill the container.
 $extensions:
   com.sanity.ui:

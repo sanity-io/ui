@@ -1,0 +1,36 @@
+kind: component
+id: icon-compose-sparkles
+name: ComposeSparklesIcon
+description: AI-powered creation of new written content.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - AI compose
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/compose-sparkles.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For creating new written content or documents with AI assistance.
+      - level: should-not
+        statement: To represent an AI-powered feature. Use SparklesIcon instead.
+        alternatives:
+          - to: icon-sparkles
+      - level: should-not
+        statement: To represent Sanity's Content Agent feature. Use SparkleIcon instead.
+        alternatives:
+          - to: icon-sparkle
+      - level: should-not
+        statement: For manual creation of new written content. Use ComposeIcon instead.
+        alternatives:
+          - to: icon-compose

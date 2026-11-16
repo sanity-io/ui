@@ -1,0 +1,34 @@
+kind: component
+id: icon-book
+name: BookIcon
+description: Represent documentation or reading material.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Documentation
+    - Manual
+    - Guide
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/book.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent reading material–most notably documentation or learning guides.
+      - level: should-not
+        statement: For product tips or suggestions. Use BulbOutlineIcon instead.
+        alternatives:
+          - to: icon-bulb-outline
+      - level: should-not
+        statement: To represent help or support. Use HelpCircleIcon instead.
+        alternatives:
+          - to: icon-help-circle

@@ -1,0 +1,36 @@
+kind: component
+id: icon-cube
+name: CubeIcon
+description: Generic data/metadata.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - 3D
+    - Box
+    - Object
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/cube.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent an individual and general piece of data or metadata.
+      - level: should
+        statement: As a fallback icon for data types that are too abstract to be represented with a more specific icon.
+      - level: should-not
+        statement: To represent a collection of data or items. Use PackageIcon instead.
+        alternatives:
+          - to: icon-package
+      - level: should-not
+        statement: To represent unknown or unidentified data. Use UnknownIcon instead.
+        alternatives:
+          - to: icon-unknown

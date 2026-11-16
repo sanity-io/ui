@@ -1,0 +1,34 @@
+kind: component
+id: icon-sparkles
+name: SparklesIcon
+description: To represent AI or agentic features.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Magic
+    - AI
+    - Enhanced
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sparkles.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As a general purpose representation for AI-powered features
+      - level: should-not
+        statement: When there are more specific AI icons. For AI-writing features, use ComposeSparklesIcon instead.
+        alternatives:
+          - to: icon-compose-sparkles
+      - level: should-not
+        statement: For in-product celebrations or announcements. Use ConfettiIcon instead.
+        alternatives:
+          - to: icon-confetti

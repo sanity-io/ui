@@ -1,0 +1,28 @@
+kind: component
+id: icon-empty
+name: EmptyIcon
+description: To indicate that no results exist or that something is in a blank state.
+metadata:
+  status:
+    status: stable
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/empty.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate that parent has no children
+      - level: should
+        statement: To show that there are no results or instances of something
+      - level: should
+        statement: To show that something isn't used
+      - level: should-not
+        statement: To indicate null values

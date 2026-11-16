@@ -1,0 +1,38 @@
+kind: component
+id: icon-redo
+name: RedoIcon
+description: Redo or reapply actions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Repeat
+    - Forward
+    - Reapply
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/redo.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For redo operations
+      - level: should-not
+        statement: For retrying an operation. Use RetryIcon instead.
+        alternatives:
+          - to: icon-retry
+      - level: should-not
+        statement: For going forward in history. Use ArrowRightIcon instead.
+        alternatives:
+          - to: icon-arrow-right
+      - level: should-not
+        statement: For refreshing content. Use RefreshIcon instead.
+        alternatives:
+          - to: icon-refresh

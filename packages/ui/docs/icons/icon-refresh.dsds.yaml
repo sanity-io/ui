@@ -1,0 +1,38 @@
+kind: component
+id: icon-refresh
+name: RefreshIcon
+description: Refresh or reload actions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Reload
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/refresh.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For reloading or refreshing content
+      - level: should
+        statement: To mimic the browser's reload action
+      - level: should-not
+        statement: To represent syncing data or as an action to sync data. Use SyncIcon instead.
+        alternatives:
+          - to: icon-sync
+      - level: should-not
+        statement: To retry a process or operation. Use RetryIcon instead.
+        alternatives:
+          - to: icon-retry
+      - level: should-not
+        statement: To redo or reapply an action. Use RedoIcon instead.
+        alternatives:
+          - to: icon-redo

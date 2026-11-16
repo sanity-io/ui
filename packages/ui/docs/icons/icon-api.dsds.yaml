@@ -1,0 +1,17 @@
+kind: component
+id: icon-api
+name: ApiIcon
+description: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Code Interface
+    - Integration
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/api.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true

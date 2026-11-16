@@ -1,0 +1,46 @@
+kind: component
+id: icon-chevron-down
+name: ChevronDownIcon
+description: Moving, resizing, transitioning, or revealing/concealing an element in a downward direction.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Expand
+    - Dropdown
+    - More
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chevron-down.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'As a general affordance for expanding content for an element when direction is not explicitly known (example: a menu button)'
+      - level: should
+        statement: "For expanding an elements's content in a top-to-bottom direction (example: accordions)"
+      - level: should
+        statement: 'For collapsing an element in a bottom-to- top direction (example: a fixed footer)'
+      - level: should-not
+        statement: As the trailing affordance for Select inputs. Use SelectIcon instead.
+        alternatives:
+          - to: icon-select
+      - level: should-not
+        statement: Moving/resizing/revealing a group of elements. Use DoubleChevronDownIcon instead.
+        alternatives:
+          - to: icon-double-chevron-down
+      - level: should-not
+        statement: To represent downloads or the download action. Use DownloadIcon instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: As an affordance to scroll down to an element. Use ArrowDownIcon instead.
+        alternatives:
+          - to: icon-arrow-down

@@ -1,0 +1,40 @@
+kind: component
+id: icon-sort
+name: SortIcon
+description: Sorting or ordering a group of items.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Order
+    - Arrange
+    - Organize
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sort.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For sorting items in a group
+      - level: should
+        statement: For toggling the sort order of items in a group
+      - level: should-not
+        statement: For filtering. Use FilterIcon instead.
+        alternatives:
+          - to: icon-filter
+      - level: should-not
+        statement: When filter and sort actions are combined. Use FilterIcon instead.
+        alternatives:
+          - to: icon-filter
+      - level: should-not
+        statement: To indicate a transfer of information. Use TransferIcon instead.
+        alternatives:
+          - to: icon-transfer

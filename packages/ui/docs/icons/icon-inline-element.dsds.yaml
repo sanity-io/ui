@@ -1,0 +1,32 @@
+kind: component
+id: icon-inline-element
+name: InlineElementIcon
+description: Inline layout elements.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Inline
+    - Span
+    - Text Element
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/inline-element.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent content that is displayed as an inline element (taking up as much width as necessary for its content and flows within the current line without forcing a line break).
+      - level: should-not
+        statement: To represent the size or aspect ratio of an element.
+      - level: should-not
+        statement: For spliting a layout horizontally. Use SplitHorizontalIcon instead.
+        alternatives:
+          - to: icon-split-horizontal

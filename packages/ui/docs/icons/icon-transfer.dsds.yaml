@@ -1,0 +1,32 @@
+kind: component
+id: icon-transfer
+name: TransferIcon
+description: Transfer or swapping of items or data.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Move
+    - Exchange
+    - Swap
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/transfer.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For transferring items or data to different locations.
+      - level: should-not
+        statement: For bi- directional syncing of content/information. Use SyncIcon instead.
+        alternatives:
+          - to: icon-sync
+      - level: should-not
+        statement: To represent general direction or movement. Use arrow icons instead.

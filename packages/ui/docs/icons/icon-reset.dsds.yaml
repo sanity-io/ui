@@ -1,0 +1,40 @@
+kind: component
+id: icon-reset
+name: ResetIcon
+description: To reset an item to its original state or defaults.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Restart
+    - Clear
+    - Default
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/reset.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For resetting or clearing all saved values for an item.
+      - level: should
+        statement: For restoring an item to its original state.
+      - level: should-not
+        statement: For undo a single action. Use UndoIcon instead.
+        alternatives:
+          - to: icon-undo
+      - level: should-not
+        statement: To represent the history or activity log for an item. Use RestoreIcon instead.
+        alternatives:
+          - to: icon-restore
+      - level: should-not
+        statement: To represent an error in history. Use ErrorOutlineIcon instead.
+        alternatives:
+          - to: icon-error-outline

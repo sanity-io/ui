@@ -1,0 +1,14 @@
+kind: component
+id: icon-double-quote
+name: DoubleQuoteIcon
+description: The double quote icon from the Sanity icon set.
+metadata:
+  status:
+    status: stable
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/double-quote.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: false

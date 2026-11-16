@@ -1,0 +1,31 @@
+kind: component
+id: icon-groq
+name: GroqIcon
+description: Sanity's GROQ query language.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Query
+    - Sanity Query
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/groq.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For GROQ queries or query builders
+      - level: should
+        statement: To represent Sanity-specific query features
+      - level: should-not
+        statement: Don't use outside Sanity context. For general representation of data queries, use DatabaseIcon instead.
+        alternatives:
+          - to: icon-database

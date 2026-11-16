@@ -1,0 +1,44 @@
+kind: component
+id: icon-stack
+name: StackIcon
+description: To represent general vertically stacked content at normal density.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - List
+    - Layers
+    - Pile
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/stack.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To toggle a group of items to be vertically oriented
+      - level: should
+        statement: To set a normal viewing density for a stack of items
+      - level: should-not
+        statement: For compact/dense stacked views. Use StackCompactIcon instead.
+        alternatives:
+          - to: icon-stack-compact
+      - level: should-not
+        statement: For collections of content. Use PackageIcon instead.
+        alternatives:
+          - to: icon-package
+      - level: should-not
+        statement: To represent lists. Use ListIcon instead.
+        alternatives:
+          - to: icon-list
+      - level: should-not
+        statement: To represent files or documents or any form of content. Use DocumentsIcon instead.
+        alternatives:
+          - to: icon-documents

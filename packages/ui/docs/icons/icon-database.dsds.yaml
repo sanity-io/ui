@@ -1,0 +1,40 @@
+kind: component
+id: icon-database
+name: DatabaseIcon
+description: Database or data storage.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Storage
+    - Data
+    - Server
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/database.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent general databases or database features
+      - level: should
+        statement: Data management or storage settings
+      - level: should-not
+        statement: For GROQ-specific features or queries. Use GroqIcon instead.
+        alternatives:
+          - to: icon-groq
+      - level: should-not
+        statement: To represent a collection of data or items. Use PackageIcon instead.
+        alternatives:
+          - to: icon-package
+      - level: should-not
+        statement: To represent an individual and general piece of data or metadata. Use CubeIcon instead.
+        alternatives:
+          - to: icon-cube

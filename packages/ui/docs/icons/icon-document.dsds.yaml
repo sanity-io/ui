@@ -1,0 +1,52 @@
+kind: component
+id: icon-document
+name: DocumentIcon
+description: To represent files or general documents.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - File
+    - Doc
+    - Paper
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/document.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an indicator for a file or general document
+      - level: should-not
+        statement: To represent specific document types when an icon exists
+      - level: should-not
+        statement: For binary files, use BinaryDocumentIcon instead.
+        alternatives:
+          - to: icon-binary-document
+      - level: should-not
+        statement: For PDF files, use DocumentPdfIcon instead.
+        alternatives:
+          - to: icon-document-pdf
+      - level: should-not
+        statement: For spreadsheets or tabular files like CSV of TSV, use DocumentSheetIcon instead.
+        alternatives:
+          - to: icon-document-sheet
+      - level: should-not
+        statement: For purely text-based files like .txt or Markdown use DocumentTextIcon instead.
+        alternatives:
+          - to: icon-document-text
+      - level: should-not
+        statement: For video files, use DocumentVideoIcon instead.
+        alternatives:
+          - to: icon-document-video
+      - level: should-not
+        statement: For compressed files like Zip or .tar, use DocumentZipIcon instead.
+        alternatives:
+          - to: icon-document-zip

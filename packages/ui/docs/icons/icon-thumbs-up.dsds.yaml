@@ -1,0 +1,30 @@
+kind: component
+id: icon-thumbs-up
+name: ThumbsUpIcon
+description: Providing a positive vote on yes/no questions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Like
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/thumbs-up.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a positive vote on a yes/no question.
+      - level: should-not
+        statement: For any purpose other than a positive vote on a yes/no question.
+      - level: should-not
+        statement: To favorite/save content. Use StarIcon instead.
+        alternatives:
+          - to: icon-star

@@ -1,0 +1,40 @@
+kind: component
+id: icon-chart-upward
+name: ChartUpwardIcon
+description: Product/feature usage or specific line chart data visualization.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Growth
+    - Trend
+    - Increase
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/chart-upward.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent usage reports for a product or feature
+      - level: should
+        statement: Displaying data as a line chart
+      - level: should-not
+        statement: For, general analytics, data visualization or charts. Use BarChartIcon instead.
+        alternatives:
+          - to: icon-bar-chart
+      - level: should-not
+        statement: To represent activity or health metrics. Use ActivityIcon instead.
+        alternatives:
+          - to: icon-activity
+      - level: should-not
+        statement: To represent trends in data. Use TrendUpwardIcon instead.
+        alternatives:
+          - to: icon-trend-upward
