@@ -26,7 +26,7 @@
   --list-color-muted: var(--inert-foreground);
 }
 
-.sui-ListItemButton[aria-pressed="true"] {
+.sui-ListItemButton[aria-current="true"] {
   --background-color: var(--active-background-emphasized);
   --list-color: var(--active-foreground-emphasized);
   --list-color-muted: var(--active-background-normal);

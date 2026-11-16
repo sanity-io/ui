@@ -110,7 +110,7 @@ export const WithButtons: Story = {
       '[data-ui="ListItemButton"]',
     )
     await expect((thirdItem as HTMLButtonElement).disabled).toBe(true)
-    await expect((fourthItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
+    await expect((fourthItem as HTMLButtonElement).getAttribute('aria-current')).toBe('true')
   },
 }
 

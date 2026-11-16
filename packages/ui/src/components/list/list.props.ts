@@ -48,7 +48,7 @@ export interface ListItemButtonProps<T extends React.ElementType = 'button'> ext
   /**
    * Marks the row as the current selection.
    */
-  selected?: boolean
+  current?: boolean
   /**
    * Main label.
    */

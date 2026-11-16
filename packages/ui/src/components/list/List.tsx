@@ -55,7 +55,7 @@ function ListItemButton<T extends ElementType = 'button'>({
   density = 'regular',
   ...props
 }: ListItemButtonProps<T> & Omit<ComponentPropsWithRef<T>, keyof ListItemButtonProps<T>>) {
-  const {as, children, className, style, text, subtext, end, start, selected, ...rest} = getProps(
+  const {as, children, className, style, text, subtext, end, start, current, ...rest} = getProps(
     {density, ...props},
     listButtonProps,
   )
@@ -71,7 +71,7 @@ function ListItemButton<T extends ElementType = 'button'>({
       )}
       style={style}
       data-ui="ListItemButton"
-      aria-pressed={selected}
+      aria-current={current}
       {...rest}
     >
       {start}
