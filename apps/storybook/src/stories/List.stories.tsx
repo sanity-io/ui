@@ -96,7 +96,7 @@ export const WithButtons: Story = {
             end={<Icon size={1} icon={EditIcon} />}
             text="Fourth Item Title"
             subtext="Fourth item subtitle"
-            selected
+            current
           />
         </List.Item>
       </List>
