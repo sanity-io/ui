@@ -28,7 +28,7 @@ export const listProps: Record<string, PropDef> = {
 export interface ListItemProps extends React.ComponentProps<'li'> {}
 
 /** @beta */
-export interface ListItemButtonProps<T extends React.ElementType = 'button'> extends ListItemProps {
+export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
   /**
    * Element or component to render for the press target.
    */

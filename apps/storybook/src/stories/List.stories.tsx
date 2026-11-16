@@ -149,6 +149,6 @@ export const AsMenu: Story = {
     const firstItem = (await canvas.findByText('Content Agent')).parentElement?.closest(
       '[data-ui="ListItemButton"]',
     )
-    await expect((firstItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
+    await expect((firstItem as HTMLButtonElement).getAttribute('aria-current')).toBe('true')
   },
 }
