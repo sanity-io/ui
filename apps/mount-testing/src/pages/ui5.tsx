@@ -315,8 +315,12 @@ export default function Ui5() {
       <Profiler id="List" onRender={handleOnRender}>
         {iterator.map((i) => (
           <List key={i}>
-            <List.Item end={<Icon size={1} icon={EditIcon} />}>
-              <List.ItemText title="Item title" subtitle="Item subtitle" />
+            <List.Item>
+              <List.ItemButton
+                end={<Icon size={1} icon={EditIcon} />}
+                text="Item title"
+                subtext="Item subtitle"
+              />
             </List.Item>
           </List>
         ))}

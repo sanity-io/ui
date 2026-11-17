@@ -1,0 +1,32 @@
+kind: component
+id: icon-play
+name: PlayIcon
+description: Starting media playback or initiating actions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Start
+    - Run
+    - Begin
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/play.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent media playback or starting media playback
+      - level: should
+        statement: For initiating processes or actions
+      - level: should-not
+        statement: For toggling visibility of items within a tree view. Use ToggleArrowRightIcon instead.
+        alternatives:
+          - to: icon-toggle-arrow-right

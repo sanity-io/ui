@@ -1,0 +1,30 @@
+kind: component
+id: icon-documents
+name: DocumentsIcon
+description: To represent multiple documents or a group of documents.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Multiple Files
+    - Collection
+    - Archive
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/documents.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent multiple documents or general files
+      - level: should-not
+        statement: For single documents. Use DocumentIcon instead.
+        alternatives:
+          - to: icon-document

@@ -96,7 +96,7 @@ export const WithButtons: Story = {
             end={<Icon size={1} icon={EditIcon} />}
             text="Fourth Item Title"
             subtext="Fourth item subtitle"
-            selected
+            current
           />
         </List.Item>
       </List>
@@ -110,7 +110,7 @@ export const WithButtons: Story = {
       '[data-ui="ListItemButton"]',
     )
     await expect((thirdItem as HTMLButtonElement).disabled).toBe(true)
-    await expect((fourthItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
+    await expect((fourthItem as HTMLButtonElement).getAttribute('aria-current')).toBe('true')
   },
 }
 
@@ -123,7 +123,7 @@ export const AsMenu: Story = {
             density="compact"
             start={<Icon size={1} icon={SparkleIcon} />}
             text="Content Agent"
-            selected
+            current
           />
         </List.Item>
 
@@ -149,6 +149,6 @@ export const AsMenu: Story = {
     const firstItem = (await canvas.findByText('Content Agent')).parentElement?.closest(
       '[data-ui="ListItemButton"]',
     )
-    await expect((firstItem as HTMLButtonElement).getAttribute('aria-pressed')).toBe('true')
+    await expect((firstItem as HTMLButtonElement).getAttribute('aria-current')).toBe('true')
   },
 }

@@ -1,0 +1,38 @@
+kind: component
+id: icon-cog
+name: CogIcon
+description: View or manage settings.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Settings
+    - Configuration
+    - Preferences
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/cog.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Use to indicate settings for an item or application
+      - level: should-not
+        statement: For general tools or maintenance. Use WrenchIcon instead.
+        alternatives:
+          - to: icon-wrench
+      - level: should-not
+        statement: To represent local computer settings. Use DesktopIcon instead.
+        alternatives:
+          - to: icon-desktop
+      - level: should-not
+        statement: To indicate configurations. Use ControlsIcon instead.
+        alternatives:
+          - to: icon-controls

@@ -1,0 +1,38 @@
+kind: component
+id: icon-filter
+name: FilterIcon
+description: Filtering or refine a group of items.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Funnel
+    - Sort Options
+    - Refine
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/filter.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To reveal a filter menu or a group of filters
+      - level: should
+        statement: To reveal a group of filters and sort options.
+      - level: should
+        statement: To perform a filtering action
+      - level: should-not
+        statement: For sorting or reordering items. Use SortIcon instead.
+        alternatives:
+          - to: icon-sort
+      - level: should-not
+        statement: To reveal a free-form text input filter. Use SearchIcon instead.
+        alternatives:
+          - to: icon-search

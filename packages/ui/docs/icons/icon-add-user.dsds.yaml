@@ -1,0 +1,30 @@
+kind: component
+id: icon-add-user
+name: AddUserIcon
+description: To add a role or add/invite users to a group.
+metadata:
+  status:
+    status: stable
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/add-user.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For adding people to a user group or a team
+      - level: should
+        statement: To add people to a permissions group
+      - level: should
+        statement: To add a role
+      - level: should-not
+        statement: As a general action for sharing. Use ShareIcon instead.
+        alternatives:
+          - to: icon-share

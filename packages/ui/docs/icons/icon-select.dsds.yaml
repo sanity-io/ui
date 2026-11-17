@@ -1,0 +1,38 @@
+kind: component
+id: icon-select
+name: SelectIcon
+description: A visual affordance for select components.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Choose
+    - Pick
+    - Cursor
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/select.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Exclusively within Select components to visually indicate the input has a menu.
+      - level: should-not
+        statement: For dropdowns, menus or popovers. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down
+      - level: should-not
+        statement: To indicate sorting order. Use SortIcon instead.
+        alternatives:
+          - to: icon-sort
+      - level: should-not
+        statement: To act as an affordance for reordering items in a list. Use DragHandleIcon instead.
+        alternatives:
+          - to: icon-drag-handle

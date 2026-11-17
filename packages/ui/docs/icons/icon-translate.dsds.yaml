@@ -1,0 +1,32 @@
+kind: component
+id: icon-translate
+name: TranslateIcon
+description: Translation or language features.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Language
+    - Localization
+    - Interpret
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/translate.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For representing translation or localization features.
+      - level: should
+        statement: For language settings/switching.
+      - level: should-not
+        statement: For representing global or international concepts. Use EarthGlobeIcon instead.
+        alternatives:
+          - to: icon-earth-globe

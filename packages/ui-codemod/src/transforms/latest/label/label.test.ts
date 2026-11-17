@@ -59,17 +59,18 @@ defineInlineTest(
   transform,
   {},
   `
-  <Label flex="auto" />
+  <Label flex="auto" weight="bold" />
   `,
   `
   <Eyebrow
     style={{
-      flex: "1 1 auto"
+      flex: "1 1 auto",
+      fontWeight: "var(--bold)"
     }}
     as="div"
     trim={true} />
   `,
-  'moves flex prop to style',
+  'moves deprecated props to style',
 )
 
 defineInlineTest(
@@ -112,6 +113,22 @@ defineInlineTest(
     trim={true} />
   `,
   'moves width props to style and updates mapped value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  import {Label} from '@sanity/ui'
+
+  const RootLabel = styled(Label)(({theme}) => ({}))
+  `,
+  `
+  import {Eyebrow} from '@sanity/ui'
+
+  const RootLabel = styled(Eyebrow)(({theme}) => ({}))
+  `,
+  'replaces styled(Label) with styled(Eyebrow)',
 )
 
 defineCrossFileTest(

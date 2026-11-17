@@ -68,6 +68,22 @@ defineInlineTest(
 
 defineInlineTest(
   transform,
+  {setLocalNames: true},
+  `
+  import {Card as Box} from '@sanity/ui'
+
+  const RootCard = styled(Box)(({theme}) => {})
+  `,
+  `
+  import {Box} from '@sanity/ui'
+
+  const RootCard = styled(Box)(({theme}) => {})
+  `,
+  'rewrites import when styled base is already aliased to target',
+)
+
+defineInlineTest(
+  transform,
   {unsetLocalNames: true},
   `
   import {Card} from '@sanity/ui'

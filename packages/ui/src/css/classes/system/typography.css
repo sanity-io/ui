@@ -18,10 +18,10 @@
   .sui-text-heading4 { font: var(--heading-4); }
   .sui-text-heading5 { font: var(--heading-5); }
 
-  .sui-text-eyebrow0 { font: var(--label-0); }
-  .sui-text-eyebrow1 { font: var(--label-1); }
-  .sui-text-eyebrow2 { font: var(--label-2); }
-  .sui-text-eyebrow3 { font: var(--label-3); }
-  .sui-text-eyebrow4 { font: var(--label-4); }
-  .sui-text-eyebrow5 { font: var(--label-5); }
+  .sui-text-eyebrow0 { font: var(--eyebrow-0); }
+  .sui-text-eyebrow1 { font: var(--eyebrow-1); }
+  .sui-text-eyebrow2 { font: var(--eyebrow-2); }
+  .sui-text-eyebrow3 { font: var(--eyebrow-3); }
+  .sui-text-eyebrow4 { font: var(--eyebrow-4); }
+  .sui-text-eyebrow5 { font: var(--eyebrow-5); }
 }

@@ -1,0 +1,26 @@
+kind: component
+id: icon-sparkle
+name: SparkleIcon
+description: Used exclusively to represent Sanity's branded Content Agent feature.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - AI
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/sparkle.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent Sanity's Content Agent feature
+      - level: should-not
+        statement: For any purpose other than representing Sanity's Content Agent feature

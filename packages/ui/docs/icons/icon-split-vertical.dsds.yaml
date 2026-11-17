@@ -1,0 +1,30 @@
+kind: component
+id: icon-split-vertical
+name: SplitVerticalIcon
+description: Vertical split layout.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Divide Vertical
+    - Split Panes Vertical
+    - Layout
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/split-vertical.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As an action to vertically split a layout.
+      - level: should-not
+        statement: For horizontal UI splits. Use SplitVerticalIcon instead.
+      - level: should-not
+        statement: For displaying a sidebar/panel. Use PanelLeftIcon or PanelRightIcon

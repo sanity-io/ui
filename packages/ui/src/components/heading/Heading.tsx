@@ -21,6 +21,7 @@ export function Heading<T extends ElementType = 'h2'>({
         className={clsx(
           headingClassName,
           className?.replace('sui-line-clamp', '').replace('sui-text-overflow', ''),
+          'sui-weight-bold',
         )}
         style={style}
         data-ui="Heading"
@@ -29,7 +30,6 @@ export function Heading<T extends ElementType = 'h2'>({
         <span
           className={clsx(
             'sui-overflow-hidden',
-            'sui-weight-bold',
             props.truncate === 1 ? 'sui-text-overflow' : 'sui-line-clamp',
           )}
         >

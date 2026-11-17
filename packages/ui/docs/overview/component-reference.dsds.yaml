@@ -152,11 +152,9 @@ sections:
           - to: dialog
             rel: relates-to
             role: beta
-            note: Shipped as `Modal` in 5.0.0-alpha.5, renamed to `Dialog` in 5.0.0-alpha.7. No `Modal` alias.
           - to: popover
             rel: relates-to
             role: beta
-            note: Ships in v5 — exported from the root barrel and present in 5.0.0-alpha.10.
       - title: Discovery
         body: Provides a way to find relevant content. No components confirmed in the source taxonomy yet.
       - title: Navigation

@@ -45,6 +45,10 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
    */
   loading?: boolean
   /**
+   * Visually styles the button in a pressed state, and sets aria-pressed to the provided value
+   */
+  pressed?: boolean
+  /**
    * Sets Button's text label.
    */
   text?: string

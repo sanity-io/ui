@@ -1,0 +1,32 @@
+kind: component
+id: icon-tag
+name: TagIcon
+description: Single tag, label or keyword.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Label
+    - Category
+    - Keyword
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/tag.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent the action of adding a tag.
+      - level: should
+        statement: To indicate text as a tag or keyword
+      - level: should-not
+        statement: To represent multiple tags. Use TagsIcon instead.
+        alternatives:
+          - to: icon-tags

@@ -1,0 +1,30 @@
+kind: component
+id: icon-block-content
+name: BlockContentIcon
+description: Block-based content or structured text.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Content Block
+    - Rich Text
+    - Structured Content
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/block-content.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a block of text, like a paragraph.
+      - level: should
+        statement: To indicate rich text formatting.
+      - level: should-not
+        statement: As a prompt for editing or composing content. Use EditIcon or ComposeIcon respectively.

@@ -1,0 +1,51 @@
+kind: component
+id: icon-close
+name: CloseIcon
+description: Close or dismiss UI elements.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - X
+    - Exit
+    - Dismiss
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/close.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Closing a menu or popover.
+      - level: should
+        statement: Dismissing a modal, panel, or sheet.
+      - level: should
+        statement: Removing a Card from view.
+      - level: should-not
+        statement: For deleting or removing items. Use RemoveIcon instead.
+        alternatives:
+          - to: icon-remove
+      - level: should-not
+        statement: For errors. Use ErrorOutlineIcon instead.
+        alternatives:
+          - to: icon-error-outline
+      - level: should-not
+        statement: For permission issues. Use AccessDeniedIcon instead.
+        alternatives:
+          - to: icon-access-denied
+      - level: should-not
+        statement: For clearing content from an input. Use CloseCircleIcon instead.
+        alternatives:
+          - to: icon-close-circle
+      - level: should-not
+        statement: Concealing a panel. Use PanelLeftIcon/PanelRightIcon instead.
+        alternatives:
+          - to: icon-panel-left
+          - to: icon-panel-right

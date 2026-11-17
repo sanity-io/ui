@@ -57,14 +57,6 @@ sections:
           - to: text
             note: Set as='label' and link it with htmlFor.
   - kind: guidelines
-    for: agent
-    framing: how-to-use
-    items:
-      - level: must
-        statement: weight and tone take a single value. Only size, align, truncate, and the margin props accept responsive arrays.
-      - level: must-not
-        statement: Do not use Eyebrow without an adjacent Heading — its purpose is to introduce one.
-  - kind: guidelines
     for: all
     title: Content
     tags: [content]
@@ -122,19 +114,6 @@ traits:
         description: Large. Above a prominent, large-size Heading.
       - id: '4'
         description: Extra large. Rare — hero sections with a large Heading below.
-  - traitType: variant
-    kind: enum
-    id: weight
-    description: Font weight.
-    values:
-      - id: regular
-        description: Rare. A deliberately quieter eyebrow next to a heavy heading.
-      - id: medium
-        description: A softer alternative to the default.
-      - id: semibold
-        description: Standard weight (default). Reads as a label at a glance.
-      - id: bold
-        description: Rare. Extra emphasis when the eyebrow must compete with its heading.
   - traitType: variant
     kind: enum
     id: tone
@@ -196,12 +175,14 @@ $extensions:
         | — (default `as="div"`) | `as="div"` | The codemod sets this explicitly, since `Eyebrow` defaults to `"span"`. |
         | — | `trim` | The codemod sets `trim={true}` to match v3's vertical spacing. |
         | — | `margin*` | New. `Eyebrow` accepts margin props directly. |
-        | `align`, `muted`, `size`, `weight` | Same | Carry over unchanged. |
+        | `align`, `muted`, `size` | Same | Carry over unchanged. |
+        | `weight` | — | Removed. `Eyebrow` always renders at semibold. Use `Text` for another weight. |
 
         ### Breaking changes
 
         - `accent` prop removed. The v3 component's accent has no `Eyebrow` boolean equivalent — use `tone="suggest"`.
         - `textOverflow` prop removed. The v3 `textOverflow="ellipsis"` does nothing on `Eyebrow`. Use `<Eyebrow truncate={1}>`.
+        - `weight` prop removed. `Eyebrow` always renders at semibold. Use `Text` for another weight.
         - `flex`, `width`, and `maxWidth` props removed. `Eyebrow` accepts no layout props — move them to a wrapping `Box`.
         - `styled-components` no longer used. Custom styled-components extensions of the v3 component will not work on `Eyebrow`.
         - The default rendered element changes from `<div>` to `<span>` unless `as="div"` is set explicitly.

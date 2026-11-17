@@ -1,0 +1,36 @@
+kind: component
+id: icon-unknown
+name: UnknownIcon
+description: An unknown/undefined thing or state.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Question
+    - Mystery
+    - Undefined
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unknown.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For unknown types or undefined states
+      - level: should
+        statement: As a fallback icon for contents that are unspecified
+      - level: should-not
+        statement: To represent help or support. Use HelpCircleIcon instead
+        alternatives:
+          - to: icon-help-circle
+      - level: should-not
+        statement: To represent something that is empty or unused. Use EmptyIcon instead.
+        alternatives:
+          - to: icon-empty

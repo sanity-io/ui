@@ -1,0 +1,38 @@
+kind: component
+id: icon-spinner
+name: SpinnerIcon
+description: To represent an active and indeterminate loading or processing states.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Loading
+    - Processing
+    - Wait
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/spinner.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For active and indeterminate loading indicators or processing states.
+      - level: should-not
+        statement: When progress is known. Use a progress bar for determinate loading instead.
+      - level: should-not
+        statement: To represent an action related to beginning a loading or processing activity.
+      - level: should-not
+        statement: To represent syncing. Use SyncIcon instead.
+        alternatives:
+          - to: icon-sync
+      - level: should-not
+        statement: To represent a reload/refresh process. Use RefreshIcon instead.
+        alternatives:
+          - to: icon-refresh

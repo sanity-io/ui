@@ -1,0 +1,36 @@
+kind: component
+id: icon-share
+name: ShareIcon
+description: Sharing or general social media.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Export
+    - Send
+    - Distribute
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/share.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For share action or general social media sharing
+      - level: should-not
+        statement: For exporting actions. Use DownloadIcon instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: For sharing on a specific social media platform. Use GithubIcon, LinkedinIcon, or TwitterIcon instead.
+        alternatives:
+          - to: icon-github
+          - to: icon-linkedin
+          - to: icon-twitter

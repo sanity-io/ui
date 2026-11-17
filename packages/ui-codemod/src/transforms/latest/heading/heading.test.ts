@@ -35,17 +35,19 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading as="h1" flex="auto" />
+  <Heading as="h1" flex="auto" muted weight="bold" />
   `,
   `
   <Heading
     as="h1"
     style={{
-      flex: "1 1 auto"
+      flex: "1 1 auto",
+      color: "var(--foreground-low)",
+      fontWeight: "var(--bold)"
     }}
     trim={true} />
   `,
-  'moves flex prop to style',
+  'moves deprecated props to style',
 )
 
 defineInlineTest(

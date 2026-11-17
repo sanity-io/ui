@@ -27,7 +27,7 @@ sections:
       - level: must
         statement: Show a skeleton or "Loading…" on initial load once the wait passes about 200ms and no content is available yet. Below that, show nothing — an indicator that flashes and vanishes reads as noise. Hold empty-state copy until the load fails or returns nothing.
       - level: must
-        statement: For a pending action on a Button, such as a form mid-submit, set `loading={true}`. It shows progress and disables the button, so a second click does nothing. Keep the button's label unchanged while it loads.
+        statement: For a pending action on a Button, such as a form mid-submit, set `loading={true}`. The button keeps its size.
       - level: should
         statement: On in-place refresh when content is already shown, keep the content visible and show progress — not a full-screen message.
       - level: should

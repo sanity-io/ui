@@ -1,0 +1,27 @@
+kind: component
+id: icon-thumbs-down
+name: ThumbsDownIcon
+description: Providing a negative vote on yes/no questions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Unlike
+    - Dislike
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/thumbs-down.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent a negative vote on a yes/no question.
+      - level: should-not
+        statement: For any purpose other than a negative vote on a yes/no question.

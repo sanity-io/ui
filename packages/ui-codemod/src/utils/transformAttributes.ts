@@ -138,6 +138,11 @@ export function transformAttributes(
         continue
       }
 
+      if (styleValue === null) {
+        removeIdxs.push(i)
+        continue
+      }
+
       const merged = mergeStyle(j, attrs, mod.style, getMappingExpression(j, styleValue))
 
       if (merged) {
@@ -246,6 +251,11 @@ export function transformAttributes(
           hasChanges = true
         }
 
+        continue
+      }
+
+      if (styleValue === null) {
+        removeIdxs.push(i)
         continue
       }
 

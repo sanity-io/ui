@@ -1,0 +1,30 @@
+kind: component
+id: icon-remove
+name: RemoveIcon
+description: Non-permanent removal or subtraction of content/data.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Minus
+    - Delete
+    - Subtract
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/remove.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For removing items from a list, collection or view.
+      - level: should-not
+        statement: For permanent deletion of content/data. Use TrashIcon instead.
+        alternatives:
+          - to: icon-trash

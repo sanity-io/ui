@@ -1,0 +1,38 @@
+kind: component
+id: icon-help-circle
+name: HelpCircleIcon
+description: Help or support.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Question
+    - Help
+    - Support
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/help-circle.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For help sections
+      - level: should
+        statement: For links to Support
+      - level: should
+        statement: For any link/affordance in which the primary purpose is help
+      - level: should-not
+        statement: For contextual information in UI. Use InfoOutlineIcon instead.
+        alternatives:
+          - to: icon-info-outline
+      - level: should-not
+        statement: For documentation. Use BookIcon instead.
+        alternatives:
+          - to: icon-book

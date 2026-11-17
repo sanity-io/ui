@@ -1,0 +1,30 @@
+kind: component
+id: icon-token
+name: TokenIcon
+description: To represent AI tokens.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Key
+    - Authentication
+    - API Key
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/token.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Exclusively to represent AI token counts
+      - level: should-not
+        statement: To represent API or access tokens. Use PlugIcon instead.
+        alternatives:
+          - to: icon-plug

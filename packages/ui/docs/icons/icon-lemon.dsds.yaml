@@ -1,0 +1,18 @@
+kind: component
+id: icon-lemon
+name: LemonIcon
+description: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Citrus
+    - Fresh
+    - Fruit
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/lemon.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true

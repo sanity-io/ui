@@ -1,0 +1,32 @@
+kind: component
+id: icon-pause
+name: PauseIcon
+description: Pausing media playback or holding actions.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Stop
+    - Hold
+    - Wait
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pause.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For pausing media playback
+      - level: should
+        statement: For holding processes or actions
+      - level: should-not
+        statement: Don't use for stopping playback completely or terminating actions. Use StopIcon instead.
+        alternatives:
+          - to: icon-stop

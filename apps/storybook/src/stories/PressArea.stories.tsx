@@ -4,6 +4,7 @@ import {expect} from 'storybook/test'
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {PressArea} from '../../../../packages/ui/src/components/press-area/PressArea'
 import {pressAreaProps} from '../../../../packages/ui/src/components/press-area/pressArea.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(pressAreaProps)
@@ -30,7 +31,9 @@ export const Default: Story = {
   render: (props) => {
     return (
       <PressArea {...props}>
-        <Card tone="neutral">Press Area Content</Card>
+        <Card tone="neutral">
+          Press Area Content <Text muted>Press Area Content test</Text>
+        </Card>
       </PressArea>
     )
   },

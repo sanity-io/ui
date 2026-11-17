@@ -1,0 +1,40 @@
+kind: component
+id: icon-collapse
+name: CollapseIcon
+description: To exit the interface out of a maximized state or mode.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Minimize
+    - Contract
+    - Fold
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/collapse.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For exiting a full screen mode in the interface
+      - level: should
+        statement: For exiting a focus mode in the interface
+      - level: should-not
+        statement: For closing UI elements. Use CloseIcon instead.
+        alternatives:
+          - to: icon-close
+      - level: should-not
+        statement: For collapsing UI elements. Use ChevronUpIcon instead.
+        alternatives:
+          - to: icon-chevron-up
+      - level: should-not
+        statement: For hiding UI elements. Use EyeClosedIcon instead.
+        alternatives:
+          - to: icon-eye-closed

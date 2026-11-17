@@ -30,7 +30,7 @@
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
     "oxc-transform-react": "catalog:",
-    "playwright": "^1.58.2",
+    "playwright": "catalog:",
     "storybook": "^10.3.3",
     "storybook-dark-mode": "^5.0.0",
     "typescript": "~5.9.3",

@@ -1,0 +1,39 @@
+kind: component
+id: icon-clock
+name: ClockIcon
+description: To represent time or duration.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Time
+    - History
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/clock.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate a time or duration based value
+      - level: should
+        statement: To represent a timestamp
+      - level: should-not
+        statement: To represent specific dates. Use CalendarIcon instead.
+        alternatives:
+          - to: icon-calendar
+      - level: should-not
+        statement: To view the history or activity log of an item. Use RestoreIcon instead.
+        alternatives:
+          - to: icon-restore
+      - level: should-not
+        statement: To represent time-zones. Use EarthAmericasIcon instead.
+        alternatives:
+          - to: icon-earth-americas

@@ -11,7 +11,7 @@
     "test:e2e": "playwright test --reporter=list"
   },
   "devDependencies": {
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "catalog:",
     "@types/node": "^25.7.0"
   },
   "packageManager": "pnpm@10.17.0"

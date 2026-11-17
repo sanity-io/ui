@@ -1,0 +1,40 @@
+kind: component
+id: icon-upload
+name: UploadIcon
+description: To represent uploading or importing of content.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Send
+    - Push
+    - Import
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/upload.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To indicate uploads or uploading actions.
+      - level: should
+        statement: To indicate imports or importing actions.
+      - level: should-not
+        statement: For downloads or downloading actions. Use DownloadIcon instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: For exports or exporting actions. Use DownloadIcon instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: For actions associated with publishing. Use PublishIcon instead.
+        alternatives:
+          - to: icon-publish

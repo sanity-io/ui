@@ -1,5 +1,14 @@
 # @sanity/ui
 
+## 5.0.0-alpha.24
+
+### Patch Changes
+
+- b01f42b: update tokens and remove weight on eyebrow component
+- 4e28b3f: various design updates and fixes for Button
+- d7964f3: add fullBleed prop and update styling in popover
+- 0f32566: updates to various colour tokens deriving from design reviews
+
 ## 5.0.0-alpha.23
 
 ### Patch Changes

@@ -3,7 +3,7 @@ import type React from 'react'
 import {type GapProps, gapProps} from '../../props/gap'
 import {heightProps} from '../../props/height'
 import {paddingProps} from '../../props/padding'
-import {DENSITY_NONE, type DensityNone} from '../../types/Density'
+import {DENSITY, type Density} from '../../types/Density'
 import type {InteractiveAs} from '../../types/Interactive'
 import type {ListTag} from '../../types/List'
 import {type PropDef} from '../../types/PropDef'
@@ -28,15 +28,19 @@ export const listProps: Record<string, PropDef> = {
 export interface ListItemProps extends React.ComponentProps<'li'> {}
 
 /** @beta */
-export interface ListItemButtonProps<T extends React.ElementType = 'button'> extends ListItemProps {
+export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
   /**
    * Element or component to render for the press target.
    */
   as?: InteractiveAs<T>
   /**
+   * Marks the row as the current selection.
+   */
+  current?: boolean
+  /**
    * Sets horizontal padding, gap, and minimum row height together.
    */
-  density?: Responsive<DensityNone>
+  density?: Responsive<Density>
   /**
    * Slot at the left edge of the row.
    */
@@ -45,10 +49,6 @@ export interface ListItemButtonProps<T extends React.ElementType = 'button'> ext
    * Slot at the right edge of the row.
    */
   end?: React.ReactNode
-  /**
-   * Marks the row as the current selection.
-   */
-  selected?: boolean
   /**
    * Main label.
    */
@@ -63,14 +63,16 @@ export const listButtonProps: Record<string, PropDef> = {
   as: {
     type: 'string',
   },
+  current: {
+    type: 'boolean',
+  },
   density: {
     type: 'composite',
-    values: DENSITY_NONE,
+    values: DENSITY,
     composition: {
       gap: {
         propDef: gapProps['gap'] as PropDef,
         mapping: {
-          none: undefined,
           compact: 2,
           regular: 2,
           loose: 3,
@@ -79,7 +81,6 @@ export const listButtonProps: Record<string, PropDef> = {
       minHeight: {
         propDef: heightProps['minHeight'] as PropDef,
         mapping: {
-          none: undefined,
           compact: '33px',
           regular: '37px',
           loose: '45px',
@@ -88,7 +89,6 @@ export const listButtonProps: Record<string, PropDef> = {
       paddingX: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {
-          none: undefined,
           compact: 1,
           regular: 2,
           loose: 3,
@@ -101,9 +101,6 @@ export const listButtonProps: Record<string, PropDef> = {
   },
   start: {
     type: 'string',
-  },
-  selected: {
-    type: 'boolean',
   },
   text: {
     type: 'string',

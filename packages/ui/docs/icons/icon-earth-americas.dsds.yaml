@@ -1,0 +1,34 @@
+kind: component
+id: icon-earth-americas
+name: EarthAmericasIcon
+description: Representation of geo-region or time zones.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Globe Americas
+    - World
+    - International
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/earth-americas.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'Representing geo-region (example: Asia, Europe, etc.) or time zones.'
+      - level: should-not
+        statement: Representing specific geo-location. Use MarkerIcon instead.
+        alternatives:
+          - to: icon-marker
+      - level: should-not
+        statement: Representing public content. Use EarthGlobeIcon instead.
+        alternatives:
+          - to: icon-earth-globe

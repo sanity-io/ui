@@ -1,0 +1,28 @@
+kind: component
+id: icon-pin-filled
+name: PinFilledIcon
+description: To represent a pinned item.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Pinned
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/pin-filled.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent an item that has been pinned to a view
+      - level: should-not
+        statement: To represent favorited or saved content. Use StarFilledIcon instead.
+        alternatives:
+          - to: icon-star-filled

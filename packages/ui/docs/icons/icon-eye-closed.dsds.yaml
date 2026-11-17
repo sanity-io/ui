@@ -1,0 +1,38 @@
+kind: component
+id: icon-eye-closed
+name: EyeClosedIcon
+description: To indicate that an item is hidden from view or to make an item hidden from view.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Hidden
+    - Invisible
+    - false
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/eye-closed.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For hiding content from view, such as passwords or content elements.
+      - level: should-not
+        statement: For hiding, closing or dismissing UI elements. Use CloseIcon instead.
+        alternatives:
+          - to: icon-close
+      - level: should-not
+        statement: For collapsing UI elements. Use ChevronUpIcon instead.
+        alternatives:
+          - to: icon-chevron-up
+      - level: should-not
+        statement: To represent private content or making something private. Use LockIcon instead.
+        alternatives:
+          - to: icon-lock

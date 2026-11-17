@@ -1,0 +1,38 @@
+kind: component
+id: icon-arrow-down
+name: ArrowDownIcon
+description: Downward screen-level movement/scrolling.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Down
+    - Descend
+    - Download Direction
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/arrow-down.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Moving/scrolling down within a page
+      - level: should-not
+        statement: As an indicator for downloads. Use DownloadIcon for viewing instead.
+        alternatives:
+          - to: icon-download
+      - level: should-not
+        statement: To represent unpublish actions. Use UnpublishIcon instead.
+        alternatives:
+          - to: icon-unpublish
+      - level: should-not
+        statement: To move, transition or resize elements within a page. Use ChevronDownIcon instead.
+        alternatives:
+          - to: icon-chevron-down

@@ -1,0 +1,14 @@
+kind: component
+id: icon-basket
+name: BasketIcon
+description: DECORATIVE. USE WITH DISCRETION. ONLY USE IF ANOTHER ICON DOES NOT FIT THE NEED.
+metadata:
+  status:
+    status: stable
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/basket.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true

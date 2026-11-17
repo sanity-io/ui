@@ -1,0 +1,32 @@
+kind: component
+id: icon-unarchive
+name: UnarchiveIcon
+description: Moving items out of an archived/stashed state.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - Box
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/unarchive.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For restoring items from an archive
+      - level: should-not
+        statement: To represent removing from a collection. Use RemoveIcon instead.
+        alternatives:
+          - to: icon-remove
+      - level: should-not
+        statement: To represent upload or import actions. Use UploadIcon instead.
+        alternatives:
+          - to: icon-upload

@@ -118,10 +118,23 @@ sections:
       - title: 'New project: install React 19.2 first'
         description: |-
           Start with React 19.2:
-          ```shell npm install react@^19.2 react-dom@^19.2 ``` Then add Sanity UI (pin the `alpha` tag — `@sanity/ui`'s `latest` npm tag is the pre-v5 line):
-          ```shell npm install @sanity/ui@alpha ```
+
+          ```shell
+          npm install react@^19.2 react-dom@^19.2
+          ```
+
+          Then add Sanity UI (pin the `alpha` tag — `@sanity/ui`'s `latest` npm tag is the pre-v5 line):
+
+          ```shell
+          npm install @sanity/ui@alpha
+          ```
+
           `@sanity/ui` depends on `@sanity/icons` and `react-refractor` directly — both install on their own. Add `@sanity/icons` to your own `package.json` if your app code imports icons directly. That keeps it from being a hidden transitive dependency:
-          ```shell npm install @sanity/icons ```
+
+          ```shell
+          npm install @sanity/icons
+          ```
+
           Sanity UI 5 has no `styled-components` dependency and no theme provider. Skip both.
       - title: 'Existing project with React 18: add npm overrides'
         description: |-
@@ -234,5 +247,8 @@ sections:
       - title: Package version note
         body: |-
           These docs track the current `@sanity/ui` v5 alpha line. The package is pre-1.0 and still changing. The docs may describe components or props that your installed copy does not yet export. To list what your copy ships:
-          ```shell node -e "console.log(Object.keys(require('@sanity/ui')))" ```
+          ```shell
+          node -e "console.log(Object.keys(require('@sanity/ui')))"
+          ```
+
           When a doc and your installed package disagree, the package wins. Treat the docs as forward-looking.

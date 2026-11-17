@@ -1,0 +1,32 @@
+kind: component
+id: icon-ellipsis-horizontal
+name: EllipsisHorizontalIcon
+description: Reveal additional actions in a menu.
+metadata:
+  status:
+    status: stable
+  aliases:
+    - More Options
+    - Menu
+    - Additional
+refs:
+  - href: https://github.com/sanity-io/icons/blob/main/packages/icons/src/ellipsis-horizontal.svg
+    rel: source
+$extensions:
+  com.sanity.ui:
+    iconOf: icons
+    described: true
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Revealing additional options or actions in an overflow menu
+      - level: should-not
+        statement: For revealing a navigation menu. Use MenuIcon instead.
+        alternatives:
+          - to: icon-menu
+      - level: should-not
+        statement: To indicate truncated text. Use typographic ellipses instead.
