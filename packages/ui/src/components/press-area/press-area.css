@@ -1,4 +1,4 @@
-.sui-PressArea {
+:where(.sui-PressArea) {
   background: none;
   font: inherit;
   color: inherit;
@@ -16,7 +16,13 @@
   pointer-events: none;
 }
 
-.sui-PressArea .sui-Text,
+.sui-PressArea .sui-Text {
+  --press-area-color: inherit;
+  color: var(--press-area-color); 
+}
+
+.sui-PressArea .sui-Text:where(.sui-text-muted),
 .sui-PressArea [data-sanity-icon] {
-  color: inherit;
+  --press-area-color-muted: inherit;
+  color: var(--press-area-color-muted); 
 }
