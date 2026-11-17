@@ -1,0 +1,4 @@
+.sui-MenuButton:hover, .sui-MenuButton:focus {
+  background: var(--active-background-emphasized);
+  color: var(--active-foreground-emphasized);
+}

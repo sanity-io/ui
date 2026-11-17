@@ -21,6 +21,7 @@
 @import './kbd/kbd.css';
 @import './link/link.css';
 @import './list/list.css';
+@import './menu/menu.css';
 @import './popover/popover.css';
 @import './press-area/press-area.css';
 @import './radio/radio.css';
