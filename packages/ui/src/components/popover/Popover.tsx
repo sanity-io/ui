@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {cloneElement, useId} from 'react'
+import {cloneElement, useId, useState} from 'react'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -25,16 +25,19 @@ function PopoverRoot({
     anchorName,
     content,
     portal,
+    onToggle: onToggleProp,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, fullBleed, ...props}, popoverProps)
+  const [open, setOpen] = useState(false)
   const reactId = useId()
   const id = idProp || reactId
   const isClient = useIsClient()
 
   const triggerProps = {
-    popoverTarget: id,
-    style: {anchorName: `--anchor-${anchorName || id}`},
+    'popoverTarget': id,
+    'style': {anchorName: `--anchor-${anchorName || id}`},
+    'aria-expanded': open,
   }
 
   const trigger = children.type.forwardsTriggerProps
@@ -59,6 +62,10 @@ function PopoverRoot({
           data-ui="Popover"
           popover="auto"
           id={id}
+          onToggle={(e) => {
+            setOpen(e.newState === 'open')
+            onToggleProp?.(e)
+          }}
           {...rest}
         >
           {content}

@@ -14,6 +14,7 @@
 }
 
 .sui-Button[aria-pressed="true"],
+.sui-Button[aria-expanded="true"],
 .sui-Button:hover {
   background: color-mix(
     in srgb,
@@ -55,6 +56,7 @@
 }
 
 .sui-Button.sui-button-level-primary[aria-pressed="true"],
+.sui-Button.sui-button-level-primary[aria-expanded="true"],
 .sui-Button.sui-button-level-primary:hover {
   color: var(--foreground-low-emphasized);
 }

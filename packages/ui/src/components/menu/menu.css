@@ -1,4 +1,18 @@
-.sui-MenuButton:hover, .sui-MenuButton:focus {
-  background: var(--active-background-emphasized);
-  color: var(--active-foreground-emphasized);
+.sui-MenuButton {
+  --menu-color: var(--foreground-high);
+  --menu-color-muted: var(--foreground-low);
+  /* 
+   * MenuButton uses ListItemButton under the hood and can hook into
+   * its variables to set Text and Icon colors
+   */
+  --list-color: var(--menu-color);
+  --list-color-muted: var(--menu-color-muted);
+  color: var(--menu-color);
+}
+
+.sui-MenuButton:hover,
+.sui-MenuButton:focus {
+  --background-color: var(--active-background-emphasized);
+  --menu-color: var(--active-foreground-emphasized);
+  --menu-color-muted: var(--active-background-normal);
 }

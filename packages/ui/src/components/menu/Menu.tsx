@@ -99,12 +99,13 @@ const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 function MenuRoot({menu, children, className, ...props}: MenuProps) {
   return (
     <Popover
+      className={clsx(menuClassName, className)}
       data-ui="Menu"
       content={menu}
-      className={clsx(menuClassName, className)}
       fullBleed
       triggerProps={{
-        onKeyDown: handleOpenKeyDown,
+        'aria-haspopup': 'menu',
+        'onKeyDown': handleOpenKeyDown,
       }}
       onKeyDown={(e) => {
         handleFocusKeyDown(e, '[role="menuitem"]', 'vertical')
@@ -126,9 +127,9 @@ function MenuContent(props: MenuContentProps) {
 function MenuButton({className, ...props}: MenuButtonProps) {
   return (
     <List.ItemButton
+      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', className)}
       data-ui="MenuButton"
       role="menuitem"
-      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', className)}
       tabIndex={-1}
       density="compact"
       {...props}
@@ -145,19 +146,20 @@ function MenuSubmenu({
 }: MenuSubmenuProps) {
   return (
     <Popover
+      className={clsx(menuSubmenuClassName, className)}
       data-ui="MenuSubmenu"
       content={menu}
       portal
       fullBleed
-      className={clsx(menuSubmenuClassName, className)}
       placement={placement}
       triggerProps={{
-        onPointerEnter: handlePointerEnter,
-        onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
+        'aria-haspopup': 'menu',
+        'onPointerEnter': handlePointerEnter,
+        'onKeyDown': (e: KeyboardEvent<HTMLButtonElement>) => {
           handleOpenKeyDown(e, 'horizontal')
         },
-        onClick: handleClick,
-        end: <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
+        'onClick': handleClick,
+        'end': <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
       }}
       onKeyDown={(e) => {
         e.stopPropagation()
