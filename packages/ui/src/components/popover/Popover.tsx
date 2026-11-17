@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {cloneElement, useId} from 'react'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -30,12 +30,7 @@ function PopoverRoot({
   } = getProps({placement, fullBleed, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
-  const [open, setOpen] = useState(false)
   const isClient = useIsClient()
-
-  const handleToggle = (e: ToggleEvent) => {
-    setOpen(e.newState === 'open')
-  }
 
   const triggerProps = {
     popoverTarget: id,
@@ -51,26 +46,23 @@ function PopoverRoot({
       {trigger}
 
       {renderPortal(
-        <Activity mode={open ? 'visible' : 'hidden'}>
-          <div
-            className={clsx(
-              popoverClassName,
-              'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
-              className,
-            )}
-            style={{
-              ...style,
-              positionAnchor: `--anchor-${anchorName || id}`,
-            }}
-            data-ui="Popover"
-            popover="auto"
-            id={id}
-            onToggle={handleToggle}
-            {...rest}
-          >
-            {content}
-          </div>
-        </Activity>,
+        <div
+          className={clsx(
+            popoverClassName,
+            'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
+            className,
+          )}
+          style={{
+            ...style,
+            positionAnchor: `--anchor-${anchorName || id}`,
+          }}
+          data-ui="Popover"
+          popover="auto"
+          id={id}
+          {...rest}
+        >
+          {content}
+        </div>,
         isClient,
         portal,
       )}
