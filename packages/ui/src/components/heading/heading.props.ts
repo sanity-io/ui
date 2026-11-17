@@ -7,7 +7,7 @@ import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export type HeadingProps<T extends HeadingTag = 'h2'> = Polymorphic<
+export type HeadingProps<T extends HeadingTag = HeadingTag> = Polymorphic<
   T,
   MarginProps &
     ToneProps &
