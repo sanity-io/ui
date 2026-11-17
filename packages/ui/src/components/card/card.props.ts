@@ -1,24 +1,30 @@
+import type {ElementType} from 'react'
+
 import {borderProps} from '../../props/border'
 import {gapProps} from '../../props/gap'
 import {type MarginProps, marginProps} from '../../props/margin'
 import {paddingProps} from '../../props/padding'
 import {toneWithDefaultProps, type ToneWithDefaultProps} from '../../props/tone'
 import {DENSITY, type Density} from '../../types/Density'
-import {type PropDef} from '../../types/PropDef'
-import {type Responsive} from '../../types/Responsive'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
+import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface CardProps<T extends React.ElementType = 'div'>
-  extends MarginProps, ToneWithDefaultProps {
-  /**
-   * HTML element or component to render.
-   */
-  as?: T
-  /**
-   * Sets padding, gap, and border-radius together to specify size. This prop is used in place of separate `padding`, `gap`, and `border-radius` props.
-   */
-  density?: Responsive<Density>
-}
+export type CardProps<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  MarginProps &
+    ToneWithDefaultProps & {
+      /**
+       * HTML element or component to render.
+       */
+      as?: T
+      /**
+       * Sets padding, gap, and border-radius together to specify size. This prop is used in place of separate `padding`, `gap`, and `border-radius` props.
+       */
+      density?: Responsive<Density>
+    }
+>
 
 export const cardProps: Record<string, PropDef> = {
   as: {

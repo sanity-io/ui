@@ -1,15 +1,17 @@
+import type {ReactNode, ElementType} from 'react'
+
 import {type ToneProps, toneProps} from '../../props/tone'
-import {type Polymorphic} from '../../types/Polymorphic'
-import {type PropDef} from '../../types/PropDef'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export type BadgeProps<T extends React.ElementType = 'span'> = Polymorphic<
+export type BadgeProps<T extends ElementType = 'span'> = Polymorphic<
   T,
   ToneProps & {
     /** HTML element to render. */
     as?: T
     /** Shows an icon in the start position (left side in left-to-right languages). */
-    iconStart?: React.ElementType | React.ReactNode
+    iconStart?: ElementType | ReactNode
     /** Sets Badge's text label. Use instead of children unless you have a special use case. */
     text?: string
   }

@@ -1,3 +1,5 @@
+import type {ReactNode, ElementType} from 'react'
+
 import {gapProps} from '../../props/gap'
 import {heightProps} from '../../props/height'
 import {paddingProps} from '../../props/padding'
@@ -11,52 +13,56 @@ import {
   type ButtonTone,
 } from '../../types/Button'
 import type {InteractiveAs} from '../../types/Interactive'
-import {type PropDef} from '../../types/PropDef'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface ButtonProps<T extends React.ElementType = 'button'> {
-  /**
-   * HTML element to render.
-   */
-  as?: InteractiveAs<T>
-  /**
-   * Sets padding and gap together to specify size.
-   */
-  density?: ButtonDensity
-  /**
-   * Sets Button to fill the width of its container.
-   */
-  fullWidth?: Responsive<boolean>
-  /**
-   * Shows an icon in the start position (left side in left-to-right languages).
-   */
-  iconStart?: React.ElementType | React.ReactNode
-  /**
-   * Shows an icon in the end position (right side in left-to-right languages).
-   */
-  iconEnd?: React.ElementType | React.ReactNode
-  /**
-   * Sets the importance of Button's action.
-   */
-  level?: ButtonLevel
-  /**
-   * Places Button into a loading state.
-   */
-  loading?: boolean
-  /**
-   * Visually styles the button in a pressed state, and sets aria-pressed to the provided value
-   */
-  pressed?: boolean
-  /**
-   * Sets Button's text label.
-   */
-  text?: string
-  /**
-   * Sets Button's semantic meaning and related color.
-   */
-  tone?: ButtonTone
-}
+export type ButtonProps<T extends ElementType = 'button'> = Polymorphic<
+  T,
+  {
+    /**
+     * HTML element to render.
+     */
+    as?: InteractiveAs<T>
+    /**
+     * Sets padding and gap together to specify size.
+     */
+    density?: ButtonDensity
+    /**
+     * Sets Button to fill the width of its container.
+     */
+    fullWidth?: Responsive<boolean>
+    /**
+     * Shows an icon in the start position (left side in left-to-right languages).
+     */
+    iconStart?: ElementType | ReactNode
+    /**
+     * Shows an icon in the end position (right side in left-to-right languages).
+     */
+    iconEnd?: ElementType | ReactNode
+    /**
+     * Sets the importance of Button's action.
+     */
+    level?: ButtonLevel
+    /**
+     * Places Button into a loading state.
+     */
+    loading?: boolean
+    /**
+     * Visually styles the button in a pressed state, and sets aria-pressed to the provided value
+     */
+    pressed?: boolean
+    /**
+     * Sets Button's text label.
+     */
+    text?: string
+    /**
+     * Sets Button's semantic meaning and related color.
+     */
+    tone?: ButtonTone
+  }
+>
 
 export const buttonProps: Record<string, PropDef> = {
   as: {

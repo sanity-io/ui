@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
 
+import {type HeadingTag} from '../../types/Heading'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type HeadingProps, headingProps} from './heading.props'
@@ -8,10 +8,7 @@ import {type HeadingProps, headingProps} from './heading.props'
 const headingClassName = suffixClassName('sui-Heading')
 
 /** @public */
-export function Heading<T extends ElementType = 'h2'>({
-  size = 2,
-  ...props
-}: HeadingProps & Omit<ComponentPropsWithRef<T>, keyof HeadingProps>) {
+export function Heading<T extends HeadingTag = 'h2'>({size = 2, ...props}: HeadingProps<T>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, headingProps)
   const Component = as || 'h2'
 

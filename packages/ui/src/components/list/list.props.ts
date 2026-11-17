@@ -1,4 +1,4 @@
-import type React from 'react'
+import type {ComponentProps, ReactNode, ElementType} from 'react'
 
 import {type GapProps, gapProps} from '../../props/gap'
 import {heightProps} from '../../props/height'
@@ -6,16 +6,20 @@ import {paddingProps} from '../../props/padding'
 import {DENSITY, type Density} from '../../types/Density'
 import type {InteractiveAs} from '../../types/Interactive'
 import type {ListTag} from '../../types/List'
-import {type PropDef} from '../../types/PropDef'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface ListProps<T extends ListTag = 'ul'> extends Pick<GapProps, 'gap'> {
-  /**
-   * HTML element to render.
-   */
-  as?: T
-}
+export type ListProps<T extends ListTag = 'ul'> = Polymorphic<
+  T,
+  Pick<GapProps, 'gap'> & {
+    /**
+     * HTML element to render.
+     */
+    as?: T
+  }
+>
 
 export const listProps: Record<string, PropDef> = {
   as: {
@@ -25,39 +29,42 @@ export const listProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListItemProps extends React.ComponentProps<'li'> {}
+export interface ListItemProps extends ComponentProps<'li'> {}
 
 /** @beta */
-export interface ListItemButtonProps<T extends React.ElementType = 'button'> {
-  /**
-   * Element or component to render for the press target.
-   */
-  as?: InteractiveAs<T>
-  /**
-   * Marks the row as the current selection.
-   */
-  current?: boolean
-  /**
-   * Sets horizontal padding, gap, and minimum row height together.
-   */
-  density?: Responsive<Density>
-  /**
-   * Slot at the left edge of the row.
-   */
-  start?: React.ReactNode
-  /**
-   * Slot at the right edge of the row.
-   */
-  end?: React.ReactNode
-  /**
-   * Main label.
-   */
-  text?: React.ReactNode
-  /**
-   * Text below the title.
-   */
-  subtext?: React.ReactNode
-}
+export type ListItemButtonProps<T extends ElementType = 'button'> = Polymorphic<
+  T,
+  {
+    /**
+     * Element or component to render for the press target.
+     */
+    as?: InteractiveAs<T>
+    /**
+     * Marks the row as the current selection.
+     */
+    current?: boolean
+    /**
+     * Sets horizontal padding, gap, and minimum row height together.
+     */
+    density?: Responsive<Density>
+    /**
+     * Slot at the left edge of the row.
+     */
+    start?: ReactNode
+    /**
+     * Slot at the right edge of the row.
+     */
+    end?: ReactNode
+    /**
+     * Main label.
+     */
+    text?: ReactNode
+    /**
+     * Text below the title.
+     */
+    subtext?: ReactNode
+  }
+>
 
 export const listButtonProps: Record<string, PropDef> = {
   as: {
@@ -111,4 +118,4 @@ export const listButtonProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListImageProps extends React.ComponentProps<'img'> {}
+export interface ListImageProps extends ComponentProps<'img'> {}

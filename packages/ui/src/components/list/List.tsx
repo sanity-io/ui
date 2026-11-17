@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import type {ListTag} from '../../types/List'
 import {getProps} from '../../utils/getProps'
@@ -22,9 +22,7 @@ const listItemClassName = suffixClassName('sui-ListItem')
 const listButtonClassName = suffixClassName('sui-ListItemButton')
 const listItemImageClassName = suffixClassName('sui-ListItemImage')
 
-function ListRoot<T extends ListTag = 'ul'>(
-  props: ListProps<T> & Omit<ComponentPropsWithRef<T>, keyof ListProps<T>>,
-) {
+function ListRoot<T extends ListTag = 'ul'>(props: ListProps<T>) {
   const {as, children, className, style, ...rest} = getProps(props, listProps)
   const Component = as || 'ul'
 
@@ -54,7 +52,7 @@ function ListItem({className, ...rest}: ListItemProps) {
 function ListItemButton<T extends ElementType = 'button'>({
   density = 'regular',
   ...props
-}: ListItemButtonProps<T> & Omit<ComponentPropsWithRef<T>, keyof ListItemButtonProps<T>>) {
+}: ListItemButtonProps<T>) {
   const {as, children, className, style, text, subtext, end, start, current, ...rest} = getProps(
     {density, ...props},
     listButtonProps,

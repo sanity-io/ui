@@ -1,9 +1,11 @@
+import type {ComponentProps, ReactNode, ElementType} from 'react'
+
 import type {LayoutProps} from '../../props/layout'
 import {toneProps, type ToneProps} from '../../props/tone'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface TabsProps extends React.ComponentProps<'div'> {
+export interface TabsProps extends ComponentProps<'div'> {
   /** The `value` of the active Tabs.Tab */
   value: string
   /** An updater function to set `value` - will be invoked with the `value` of the selected Tabs.Tab */
@@ -22,17 +24,15 @@ type TabsListLabelProps =
   | {'aria-label': string; 'aria-labelledby'?: never}
 
 /** @public */
-export type TabsListProps = Omit<React.ComponentProps<'div'>, 'id' | 'role'> & TabsListLabelProps
+export type TabsListProps = Omit<ComponentProps<'div'>, 'id' | 'role'> & TabsListLabelProps
 
 export const tabsListProps: Record<string, PropDef> = {}
 
 /** @public */
 export interface TabProps
-  extends
-    Omit<React.ComponentProps<'button'>, 'aria-disabled' | 'disabled' | 'id' | 'role'>,
-    ToneProps {
+  extends Omit<ComponentProps<'button'>, 'aria-disabled' | 'disabled' | 'id' | 'role'>, ToneProps {
   /** Optional icon for the tab */
-  icon?: React.ElementType | React.ReactNode
+  icon?: ElementType | ReactNode
   /** Text label to display in the tab */
   label: string
   /** Unique string used to identify this tab and its matching Tabs.Panel */
@@ -53,8 +53,7 @@ export const tabProps: Record<string, PropDef> = {
 }
 
 /** @public */
-export interface TabsPanelProps
-  extends Omit<React.ComponentProps<'div'>, 'id' | 'role'>, LayoutProps {
+export interface TabsPanelProps extends Omit<ComponentProps<'div'>, 'id' | 'role'>, LayoutProps {
   /** Unique string used to identify this panel and its matching Tabs.Tab */
   value: string
 }

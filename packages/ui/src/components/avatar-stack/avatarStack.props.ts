@@ -1,8 +1,10 @@
+import type {ComponentProps} from 'react'
+
 import {AVATAR_SIZE, type AvatarSize} from '../../types/Avatar'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface AvatarStackProps extends React.ComponentProps<'ul'> {
+export interface AvatarStackProps extends ComponentProps<'ul'> {
   /** Max number of avatars to display */
   maxLength?: number
   /** Avatar and AvatarCounter size */

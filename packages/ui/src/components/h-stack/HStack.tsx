@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {type ComponentProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -9,10 +9,7 @@ import {type HStackProps} from './hStack.props'
 const hStackClassName = suffixClassName('sui-HStack')
 
 /** @public */
-export function HStack<T extends ElementType = 'div'>({
-  className,
-  ...props
-}: HStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof HStackProps<T>>) {
+export function HStack<T extends ElementType = 'div'>({className, ...props}: HStackProps<T>) {
   return (
     <Flex
       className={clsx(hStackClassName, className)}

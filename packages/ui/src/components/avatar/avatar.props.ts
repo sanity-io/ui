@@ -1,11 +1,13 @@
+import type {ComponentProps} from 'react'
+
 import {heightProps} from '../../props/height'
 import {AVATAR_COLOR, AVATAR_SIZE, type AvatarColor, type AvatarSize} from '../../types/Avatar'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
-export interface AvatarProps extends React.ComponentProps<'figure'> {
+export interface AvatarProps extends ComponentProps<'figure'> {
   /** Avatar color */
   color?: AvatarColor
   /** Avatar name, only first letter will be displayed */

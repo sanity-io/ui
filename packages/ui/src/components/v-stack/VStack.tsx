@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import type {ComponentProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -9,10 +9,7 @@ import {type VStackProps} from './vStack.props'
 const vStackClassName = suffixClassName('sui-VStack')
 
 /** @public */
-export function VStack<T extends ElementType = 'div'>({
-  className,
-  ...props
-}: VStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof VStackProps<T>>) {
+export function VStack<T extends ElementType = 'div'>({className, ...props}: VStackProps<T>) {
   return (
     <Flex
       className={clsx(vStackClassName, className)}

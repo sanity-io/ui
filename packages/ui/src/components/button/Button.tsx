@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'react'
+import {type ElementType, isValidElement} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -17,7 +17,7 @@ export function Button<T extends ElementType = 'button'>({
   level = 'primary',
   tone = 'neutral',
   ...props
-}: ButtonProps<T> & Omit<ComponentPropsWithRef<T>, keyof ButtonProps<T>>) {
+}: ButtonProps<T>) {
   const {
     as,
     children,

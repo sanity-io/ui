@@ -1,16 +1,22 @@
-import {type PropDef} from '../../types/PropDef'
+import type {ElementType} from 'react'
+
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface VisuallyHiddenProps<T extends React.ElementType = 'span'> {
-  /**
-   * HTML element to render.
-   */
-  as?: T
-  /**
-   * If true, the element becomes visible on `:focus-visible`.
-   */
-  visibleOnFocus?: boolean
-}
+export type VisuallyHiddenProps<T extends ElementType = 'span'> = Polymorphic<
+  T,
+  {
+    /**
+     * HTML element to render.
+     */
+    as?: T
+    /**
+     * If true, the element becomes visible on `:focus-visible`.
+     */
+    visibleOnFocus?: boolean
+  }
+>
 
 export const visuallyHiddenProps: Record<string, PropDef> = {
   as: {

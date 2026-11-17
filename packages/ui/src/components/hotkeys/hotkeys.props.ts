@@ -1,7 +1,9 @@
-import {type PropDef} from '../../types/PropDef'
+import type {ComponentProps} from 'react'
+
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface HotkeysProps extends React.ComponentProps<'kbd'> {
+export interface HotkeysProps extends ComponentProps<'kbd'> {
   /**
    * The keys in the shortcut, in order. Each one renders as a KBD.
    */

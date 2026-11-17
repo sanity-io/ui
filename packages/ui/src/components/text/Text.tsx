@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,10 +8,7 @@ import {type TextProps, textProps} from './text.props'
 const textClassName = suffixClassName('sui-Text')
 
 /** @public */
-export function Text<T extends ElementType = 'span'>({
-  size = 2,
-  ...props
-}: TextProps<T> & Omit<ComponentPropsWithRef<T>, keyof TextProps<T>>) {
+export function Text<T extends ElementType = 'span'>({size = 2, ...props}: TextProps<T>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, textProps)
   const Component = as || 'span'
 
