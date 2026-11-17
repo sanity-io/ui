@@ -45,3 +45,9 @@ export const dialogProps: Record<string, PropDef> = {
     variable: '--top-anchor',
   },
 }
+
+/** @beta */
+export interface DialogContentProps extends ComponentProps<'div'> {}
+
+/** @beta */
+export interface DialogFooterProps extends ComponentProps<'div'> {}

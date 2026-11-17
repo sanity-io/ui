@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons/Close'
 import clsx from 'clsx'
-import {type ComponentProps, useEffect, useId, useRef} from 'react'
+import {useEffect, useId, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,7 +8,12 @@ import {Box} from '../box/Box'
 import {Flex} from '../flex/Flex'
 import {Heading} from '../heading/Heading'
 import {IconButton} from '../icon-button/IconButton'
-import {type DialogProps, dialogProps} from './dialog.props'
+import {
+  type DialogContentProps,
+  type DialogFooterProps,
+  type DialogProps,
+  dialogProps,
+} from './dialog.props'
 
 const dialogClassName = suffixClassName('sui-Dialog')
 const dialogContentClassName = suffixClassName('sui-DialogContent')
@@ -84,7 +89,7 @@ function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
   )
 }
 
-function DialogContent(props: ComponentProps<'div'>) {
+function DialogContent(props: DialogContentProps) {
   const {children, className, style, ...rest} = getProps(props, {})
 
   return (
@@ -101,7 +106,7 @@ function DialogContent(props: ComponentProps<'div'>) {
   )
 }
 
-function DialogFooter(props: ComponentProps<'div'>) {
+function DialogFooter(props: DialogFooterProps) {
   const {children, className, style, ...rest} = getProps(props, {})
 
   return (
@@ -136,4 +141,4 @@ export const Dialog = DialogRoot
 DialogRoot.Content = DialogContent
 DialogRoot.Footer = DialogFooter
 
-export type {DialogProps}
+export type {DialogProps, DialogContentProps, DialogFooterProps}
