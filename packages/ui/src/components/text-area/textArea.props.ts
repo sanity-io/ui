@@ -1,13 +1,12 @@
+import type {ComponentProps} from 'react'
+
 import {formElementDensityProps, type FormElementDensityProps} from '../../props/formElement'
 import {type HeightProps, heightProps} from '../../props/height'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface TextAreaProps
-  extends
-    React.ComponentProps<'textarea'>,
-    FormElementDensityProps,
-    Pick<HeightProps, 'maxHeight'> {
+  extends ComponentProps<'textarea'>, FormElementDensityProps, Pick<HeightProps, 'maxHeight'> {
   /**
    * Sizes the textarea to its content via the CSS `field-sizing` property.
    */

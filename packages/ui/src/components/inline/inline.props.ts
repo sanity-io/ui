@@ -1,21 +1,27 @@
+import type {ElementType} from 'react'
+
 import {marginProps} from '../../props/margin'
 import {type PaddingProps, paddingProps} from '../../props/padding'
-import {type PropDef} from '../../types/PropDef'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 import {SPACE, type SpaceInherit} from '../../types/Space'
 
 /** @deprecated Use HStack component instead */
 /** @public */
-export interface InlineProps<T extends React.ElementType = 'div'> extends PaddingProps {
-  /**
-   * HTML element or component to render.
-   */
-  as?: T
-  /**
-   * Space between children.
-   */
-  gap?: Responsive<SpaceInherit>
-}
+export type InlineProps<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  PaddingProps & {
+    /**
+     * HTML element or component to render.
+     */
+    as?: T
+    /**
+     * Space between children.
+     */
+    gap?: Responsive<SpaceInherit>
+  }
+>
 
 export const inlineProps: Record<string, PropDef> = {
   as: {

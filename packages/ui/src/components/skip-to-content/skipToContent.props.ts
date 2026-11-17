@@ -1,7 +1,9 @@
-import {type PropDef} from '../../types/PropDef'
+import type {ComponentProps} from 'react'
+
+import type {PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface SkipToContentProps extends React.ComponentProps<'a'> {
+export interface SkipToContentProps extends ComponentProps<'a'> {
   /**
    * Same-page fragment to jump to.
    * @remarks Note: The hash character # is required for proper linking.

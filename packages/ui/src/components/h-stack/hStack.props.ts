@@ -1,7 +1,10 @@
+import type {ElementType} from 'react'
+
+import type {Polymorphic} from '../../types/Polymorphic'
 import type {FlexProps} from '../flex/flex.props'
 
 /** @public */
-export interface HStackProps<T extends React.ElementType = 'div'> extends Pick<
-  FlexProps<T>,
-  'as' | 'gap'
-> {}
+export type HStackProps<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  Pick<FlexProps<T>, 'as' | 'gap'>
+>

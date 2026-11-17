@@ -1,8 +1,10 @@
+import type {ComponentProps} from 'react'
+
 import {formElementDensityProps, type FormElementDensityProps} from '../../props/formElement'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface SelectProps extends React.ComponentProps<'select'>, FormElementDensityProps {
+export interface SelectProps extends ComponentProps<'select'>, FormElementDensityProps {
   /**
    * Used to trigger styling for invalid states.
    * @remarks Use when form validation fails. Pair with a visible error message.

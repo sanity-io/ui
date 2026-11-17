@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {type ComponentPropsWithRef, type ElementType, useRef, useState} from 'react'
+import {type ElementType, useRef, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,9 +8,7 @@ import {type TooltipGroupProps, tooltipGroupProps} from './tooltipGroup.props'
 const tooltipGroupClassName = suffixClassName('sui-TooltipGroup')
 
 /** @public */
-export function TooltipGroup<T extends ElementType = 'div'>(
-  props: TooltipGroupProps<T> & Omit<ComponentPropsWithRef<T>, keyof TooltipGroupProps<T>>,
-) {
+export function TooltipGroup<T extends ElementType = 'div'>(props: TooltipGroupProps<T>) {
   const {as, children, className, style, ...rest} = getProps(props, tooltipGroupProps)
   const Component = as || 'div'
   const ref = useRef<HTMLElement>(null)

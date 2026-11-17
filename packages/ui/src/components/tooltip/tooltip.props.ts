@@ -1,21 +1,23 @@
+import type {ComponentProps, ReactElement, ReactNode} from 'react'
+
 import {type PlacementProps, placementProps} from '../../props/placement'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface TooltipProps
-  extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
+  extends Omit<ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
   /**
    * Shared anchor identifier.
    */
-  anchorName?: React.ReactNode
+  anchorName?: ReactNode
   /**
    * The trigger element.
    */
-  children: React.ReactElement<Record<string, unknown>>
+  children: ReactElement<Record<string, unknown>>
   /**
    * The tooltip label.
    */
-  content?: React.ReactNode
+  content?: ReactNode
   /**
    * Renders the label into `document.body` through a React portal instead of inline.
    */

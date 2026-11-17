@@ -1,7 +1,9 @@
-import {type PropDef} from '../../types/PropDef'
+import type {ComponentProps} from 'react'
+
+import type {PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface CheckboxProps extends React.ComponentProps<'input'> {
+export interface CheckboxProps extends ComponentProps<'input'> {
   /**
    * Applies error styling to the checkbox mark for invalid states.
    * @remarks Use when form validation fails. Pair with a visible error message.

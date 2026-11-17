@@ -1,9 +1,11 @@
+import type {ComponentProps} from 'react'
+
 import {ICON_SIZE, type IconSize} from '../../types/Icon'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface SpinnerProps extends React.ComponentProps<'svg'> {
+export interface SpinnerProps extends ComponentProps<'svg'> {
   /**
    * Size of the spinner icon.
    */

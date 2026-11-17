@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,10 +8,7 @@ import {type EyebrowProps, eyebrowProps} from './eyebrow.props'
 const eyebrowClassName = suffixClassName('sui-Eyebrow')
 
 /** @public */
-export function Eyebrow<T extends ElementType = 'span'>({
-  size = 2,
-  ...props
-}: EyebrowProps<T> & Omit<ComponentPropsWithRef<T>, keyof EyebrowProps<T>>) {
+export function Eyebrow<T extends ElementType = 'span'>({size = 2, ...props}: EyebrowProps<T>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, eyebrowProps)
   const Component = as || 'span'
 

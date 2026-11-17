@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -9,9 +9,7 @@ import {type IndicatorStackProps, indicatorStackProps} from './indicatorStack.pr
 const indicatorStackClassName = suffixClassName('sui-IndicatorStack')
 
 /** @public */
-export function IndicatorStack<T extends ElementType = 'div'>(
-  props: IndicatorStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof IndicatorStackProps<T>>,
-) {
+export function IndicatorStack<T extends ElementType = 'div'>(props: IndicatorStackProps<T>) {
   const {as, children, className, style, ...rest} = getProps(props, indicatorStackProps)
   const Component = as || 'div'
 

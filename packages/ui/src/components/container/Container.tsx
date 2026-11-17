@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -12,7 +12,7 @@ export function Container<T extends ElementType = 'div'>({
   marginX = 'auto',
   size = 2,
   ...props
-}: ContainerProps<T> & Omit<ComponentPropsWithRef<T>, keyof ContainerProps<T>>) {
+}: ContainerProps<T>) {
   const {as, children, className, style, ...rest} = getProps(
     {marginX, size, ...props},
     containerProps,

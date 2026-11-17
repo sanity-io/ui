@@ -1,9 +1,11 @@
+import type {ComponentProps, ReactEventHandler} from 'react'
+
 import {CONTAINER_SIZE, type ContainerSize} from '../../types/Container'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface DialogProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
+export interface DialogProps extends Omit<ComponentProps<'dialog'>, 'open'> {
   /**
    * Text for the dialog heading.
    * @remarks Recommended for accessibility. The component sets `aria-labelledby` to the heading when you give this prop.
@@ -13,7 +15,7 @@ export interface DialogProps extends Omit<React.ComponentProps<'dialog'>, 'open'
    * A function to call alongside the native `close` event.
    * @remarks Use it to set `open` back to `false`. It runs for every close cause: the Escape key, a backdrop click, the close button, or a programmatic close.
    */
-  onClose: React.ReactEventHandler<HTMLDialogElement>
+  onClose: ReactEventHandler<HTMLDialogElement>
   /**
    * Toggles the dialog's open state.
    * @remarks `true` calls `showModal()` on the element. `false` calls `close()`.
@@ -43,3 +45,9 @@ export const dialogProps: Record<string, PropDef> = {
     variable: '--top-anchor',
   },
 }
+
+/** @beta */
+export interface DialogContentProps extends ComponentProps<'div'> {}
+
+/** @beta */
+export interface DialogFooterProps extends ComponentProps<'div'> {}
