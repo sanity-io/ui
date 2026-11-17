@@ -1,10 +1,12 @@
+import type {ComponentProps} from 'react'
+
 import {heightProps} from '../../props/height'
 import {AVATAR_SIZE, type AvatarSize} from '../../types/Avatar'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
-export interface AvatarCounterProps extends React.ComponentProps<'figure'> {
+export interface AvatarCounterProps extends ComponentProps<'figure'> {
   /** Count */
   count: number
   /** Composite prop for setting height and font size */

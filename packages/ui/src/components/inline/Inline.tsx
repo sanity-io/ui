@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {Children, type ComponentPropsWithRef, type ElementType} from 'react'
+import {Children, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -11,7 +11,7 @@ const inlineClassName = suffixClassName('sui-Inline')
 /** @public */
 export function Inline<T extends ElementType = 'div'>(
   // oxlint-disable-next-line no-deprecated
-  props: InlineProps<T> & Omit<ComponentPropsWithRef<T>, keyof InlineProps<T>>,
+  props: InlineProps<T>,
 ) {
   const {as, children: childrenProp, className, style, ...rest} = getProps(props, inlineProps)
   const {className: childrenClassName} = getProps(props, inlineChildrenProps)

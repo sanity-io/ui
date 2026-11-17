@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -12,7 +12,7 @@ export function Card<T extends ElementType = 'div'>({
   density = 'regular',
   tone = 'default',
   ...props
-}: CardProps<T> & Omit<ComponentPropsWithRef<T>, keyof CardProps<T>>) {
+}: CardProps<T>) {
   const {as, children, className, style, ...rest} = getProps({density, tone, ...props}, cardProps)
   const Component = as || 'div'
 

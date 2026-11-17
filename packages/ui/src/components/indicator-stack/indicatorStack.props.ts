@@ -1,12 +1,18 @@
-import {type PropDef} from '../../types/PropDef'
+import type {ElementType} from 'react'
+
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface IndicatorStackProps<T extends React.ElementType = 'div'> {
-  /**
-   * HTML element to render.
-   */
-  as?: T
-}
+export type IndicatorStackProps<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  {
+    /**
+     * HTML element to render.
+     */
+    as?: T
+  }
+>
 
 export const indicatorStackProps: Record<string, PropDef> = {
   as: {

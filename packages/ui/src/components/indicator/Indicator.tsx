@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -12,7 +12,7 @@ const indicatorClassName = suffixClassName('sui-Indicator')
 export function Indicator<T extends ElementType = 'span'>({
   tone = 'neutral',
   ...props
-}: IndicatorProps<T> & Omit<ComponentPropsWithRef<T>, keyof IndicatorProps<T>>) {
+}: IndicatorProps<T>) {
   const {as, children, className, style, label, ...rest} = getProps(
     {tone, ...props},
     indicatorProps,

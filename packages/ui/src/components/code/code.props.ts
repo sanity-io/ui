@@ -1,7 +1,9 @@
+import type {ComponentPropsWithRef} from 'react'
+
 import {marginProps, type MarginProps} from '../../props/margin'
 import {type TypographyProps, typographyProps} from '../../props/typography'
 import {CODE_SIZE, type CodeSize} from '../../types/Code'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 interface CodeBaseProps
@@ -24,10 +26,10 @@ export type CodeProps =
        * @remarks Block code is wrapped in a `<pre>` tag.
        */
       inline?: false
-    } & Omit<React.ComponentPropsWithRef<'pre'>, keyof CodeBaseProps>)
+    } & Omit<ComponentPropsWithRef<'pre'>, keyof CodeBaseProps>)
   | (CodeBaseProps & {
       inline: true
-    } & Omit<React.ComponentPropsWithRef<'span'>, keyof CodeBaseProps>)
+    } & Omit<ComponentPropsWithRef<'span'>, keyof CodeBaseProps>)
 
 export const codeProps: Record<string, PropDef> = {
   inline: {

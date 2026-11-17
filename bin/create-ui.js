@@ -67,7 +67,7 @@ function getName(name, isCapitalized) {
 
 function getComponentFile(componentName, propsName) {
   return `import clsx from 'clsx'
-import type {ComponentPropsWithRef, ElementType} from 'react'
+import type {ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -76,9 +76,7 @@ import {type ${componentName}Props, ${propsName}Props} from './${propsName}.prop
 const ${propsName}ClassName = suffixClassName('sui-${componentName}')
 
 /** @public */
-export function ${componentName}<T extends ElementType = 'div'>(
-  props: ${componentName}Props<T> & Omit<ComponentPropsWithRef<T>, keyof ${componentName}Props<T>>,
-) {
+export function ${componentName}<T extends ElementType = 'div'>(props: ${componentName}Props<T>) {
   const {as, children, className, style, ...rest} = getProps(props, ${propsName}Props)
   const Component = as || 'div'
 
@@ -98,13 +96,19 @@ export type {${componentName}Props}\n`
 }
 
 function getPropsFile(componentName, propsName) {
-  return `import {type PropDef} from '../../types/PropDef'
+  return `import type {ElementType} from 'react'
+
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface ${componentName}Props<T extends React.ElementType = 'div'> {
-  /** Element to render */
-  as?: T
-}
+export type ${componentName}Props<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  {
+    /** Element to render */
+    as?: T
+  }
+>
 
 export const ${propsName}Props: Record<string, PropDef> = {
   as: {

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {isValidElement, type ComponentPropsWithRef, type ElementType} from 'react'
+import {isValidElement, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -10,10 +10,7 @@ import {type BadgeProps, badgeProps} from './badge.props'
 const badgeClassName = suffixClassName('sui-Badge')
 
 /** @public */
-export function Badge<T extends ElementType = 'span'>({
-  tone = 'neutral',
-  ...props
-}: BadgeProps<T> & Omit<ComponentPropsWithRef<T>, keyof BadgeProps<T>>) {
+export function Badge<T extends ElementType = 'span'>({tone = 'neutral', ...props}: BadgeProps<T>) {
   const {
     as,
     children,

@@ -1,22 +1,29 @@
+import type {ElementType} from 'react'
+
 import {type FlexParentProps, flexParentProps} from '../../props/flexParent'
 import {type GapProps, gapProps} from '../../props/gap'
 import {type LayoutProps, layoutProps} from '../../props/layout'
 import {DISPLAY_FLEX, type DisplayFlex} from '../../types/Display'
-import {type PropDef} from '../../types/PropDef'
+import type {Polymorphic} from '../../types/Polymorphic'
+import type {PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface FlexProps<T extends React.ElementType = 'div'>
-  extends FlexParentProps, GapProps, LayoutProps {
-  /**
-   * HTML element or component to render.
-   */
-  as?: T
-  /**
-   * CSS `display` property.
-   */
-  display?: Responsive<DisplayFlex>
-}
+export type FlexProps<T extends ElementType = 'div'> = Polymorphic<
+  T,
+  FlexParentProps &
+    GapProps &
+    LayoutProps & {
+      /**
+       * HTML element or component to render.
+       */
+      as?: T
+      /**
+       * CSS `display` property.
+       */
+      display?: Responsive<DisplayFlex>
+    }
+>
 
 export const flexProps: Record<string, PropDef> = {
   as: {

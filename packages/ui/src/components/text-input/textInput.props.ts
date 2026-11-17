@@ -1,5 +1,7 @@
+import type {ComponentProps, HTMLInputTypeAttribute} from 'react'
+
 import {formElementDensityProps, type FormElementDensityProps} from '../../props/formElement'
-import {type PropDef} from '../../types/PropDef'
+import type {PropDef} from '../../types/PropDef'
 
 export const TEXT_INPUT_EXCLUDED_TYPES = [
   'button',
@@ -18,11 +20,11 @@ export const TEXT_INPUT_EXCLUDED_TYPES = [
 export type TextInputExcludedTypes = (typeof TEXT_INPUT_EXCLUDED_TYPES)[number]
 
 /** @public */
-export type TextInputType = Exclude<React.HTMLInputTypeAttribute, TextInputExcludedTypes>
+export type TextInputType = Exclude<HTMLInputTypeAttribute, TextInputExcludedTypes>
 
 /** @public */
 export interface TextInputProps
-  extends Omit<React.ComponentProps<'input'>, 'type'>, FormElementDensityProps {
+  extends Omit<ComponentProps<'input'>, 'type'>, FormElementDensityProps {
   /**
    * Used to trigger styling for invalid states.
    * @remarks Use when form validation fails. Pair with a visible error message.
