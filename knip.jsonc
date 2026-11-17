@@ -1,7 +1,14 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
-    ".": {},
+    ".": {
+      "ignoreDependencies": [
+        // Never imported or run by a script: oxlint spawns its `tsrs-lint`
+        // binary as the type-aware backend, and oxlint does not declare it as a
+        // peer dependency the way it does oxlint-tsgolint
+        "tsrs",
+      ],
+    },
     "apps/docs": {},
     "apps/storybook": {
       "ignoreDependencies": [
