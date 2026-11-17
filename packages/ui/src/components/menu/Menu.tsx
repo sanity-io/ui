@@ -120,7 +120,15 @@ function MenuRoot({menu, children, className, ...props}: MenuProps) {
 
 function MenuContent(props: MenuContentProps) {
   return (
-    <Flex data-ui="MenuContent" role="menu" flexDirection="column" padding={1} gap={1} {...props} />
+    <Flex
+      data-ui="MenuContent"
+      role="menu"
+      aria-orientation="vertical"
+      flexDirection="column"
+      padding={1}
+      gap={1}
+      {...props}
+    />
   )
 }
 

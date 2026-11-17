@@ -8,7 +8,11 @@ export interface MenuProps extends Omit<PopoverProps, 'content'> {
 }
 
 /** @beta */
-export interface MenuContentProps extends React.ComponentProps<'div'> {}
+export type MenuContentProps = Omit<React.ComponentProps<'div'>, 'role'> &
+  (
+    | {'aria-labelledby': string; 'aria-label'?: never}
+    | {'aria-label': string; 'aria-labelledby'?: never}
+  )
 
 /** @beta */
 export interface MenuButtonProps extends ListItemButtonProps {}
