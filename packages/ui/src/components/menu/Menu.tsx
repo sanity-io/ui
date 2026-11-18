@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import clsx from 'clsx'
-import {type KeyboardEvent, type MouseEvent, type PointerEvent} from 'react'
+import {type ElementType, type KeyboardEvent, type MouseEvent, type PointerEvent} from 'react'
 
 import {handleFocusKeyDown} from '../../utils/handleFocusKeyDown'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -19,7 +19,15 @@ const menuClassName = suffixClassName('sui-Menu')
 const menuButtonClassName = suffixClassName('sui-MenuButton')
 const menuSubmenuClassName = suffixClassName('sui-MenuSubmenu')
 
-const handleOpenKeyDown = (
+function getTrigger(menu: HTMLElement) {
+  for (const el of document.querySelectorAll<HTMLButtonElement>('[popovertarget]')) {
+    if (el.popoverTargetElement === menu) return el
+  }
+
+  return null
+}
+
+const handleKeyDownOpen = (
   e: KeyboardEvent<HTMLButtonElement>,
   orientation: 'horizontal' | 'vertical' = 'vertical',
 ) => {
@@ -27,8 +35,7 @@ const handleOpenKeyDown = (
     return
   }
 
-  const menu = e.currentTarget.popoverTargetElement as HTMLElement
-  const items = Array.from(menu!.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+  const menu = e.currentTarget.popoverTargetElement
 
   if (!(menu instanceof HTMLElement) || menu.matches(':popover-open')) {
     return
@@ -38,47 +45,46 @@ const handleOpenKeyDown = (
     e.key === 'Enter' ||
     e.key === ' ' ||
     (orientation === 'horizontal' && e.key === 'ArrowRight') ||
-    (orientation === 'vertical' && e.key === 'ArrowDown')
+    (orientation === 'vertical' && e.key === 'ArrowDown') ||
+    (orientation === 'vertical' && e.key === 'ArrowUp')
   ) {
     e.preventDefault()
-    menu?.showPopover({source: e.currentTarget})
-    items[0]?.focus()
-  }
+    menu.showPopover({source: e.currentTarget})
 
-  if (orientation === 'vertical' && e.key === 'ArrowUp') {
-    e.preventDefault()
-    menu?.showPopover({source: e.currentTarget})
-    items[items.length - 1]?.focus()
+    const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+    const focusIndex = e.key === 'ArrowUp' ? items.length - 1 : 0
+    items[focusIndex]?.focus()
   }
 }
 
-const handleCloseKeyDown = (
-  e: KeyboardEvent<HTMLElement>,
+const handleKeyDownClose = (
+  e: KeyboardEvent<HTMLDivElement>,
   orientation: 'horizontal' | 'vertical' = 'vertical',
 ) => {
   const menu = e.currentTarget
 
-  if (!(menu instanceof HTMLElement) || !menu.matches(':popover-open')) {
+  if (!menu.matches(':popover-open')) {
     return
   }
 
   if (orientation === 'horizontal' && e.key === 'ArrowLeft') {
     e.preventDefault()
-    const trigger = document.querySelector(`[popovertarget=${e.currentTarget.id}]`) as HTMLElement
-    trigger?.focus()
-    menu?.hidePopover()
+    getTrigger(menu)?.focus()
+    menu.hidePopover()
   }
 
   if (e.key === 'Tab') {
-    e.preventDefault()
-
-    document.querySelectorAll('[popover]:popover-open').forEach((popover) => {
-      ;(popover as HTMLElement).hidePopover()
-    })
+    for (
+      let popover: HTMLElement | null = menu;
+      popover?.matches(':popover-open');
+      popover = getTrigger(popover)?.closest<HTMLElement>('[popover]:popover-open') || null
+    ) {
+      popover.hidePopover()
+    }
   }
 }
 
-const handlePointerEnter = (e: PointerEvent<HTMLButtonElement>) => {
+const handlePointerEnterOpen = (e: PointerEvent<HTMLButtonElement>) => {
   const menu = e.currentTarget.popoverTargetElement
 
   if (!(menu instanceof HTMLElement) || menu.matches(':popover-open')) {
@@ -89,9 +95,18 @@ const handlePointerEnter = (e: PointerEvent<HTMLButtonElement>) => {
 }
 
 const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault()
   const menu = e.currentTarget.popoverTargetElement
-  const items = Array.from(menu!.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+
+  if (!(menu instanceof HTMLElement)) {
+    return
+  }
+
+  if (!menu.matches(':popover-open')) {
+    e.preventDefault()
+    menu.showPopover({source: e.currentTarget})
+  }
+
+  const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
   items[0]?.focus()
   // need to remove focus on hover
 }
@@ -105,11 +120,11 @@ function MenuRoot({menu, children, className, ...props}: MenuProps) {
       fullBleed
       triggerProps={{
         'aria-haspopup': 'menu',
-        'onKeyDown': handleOpenKeyDown,
+        'onKeyDown': handleKeyDownOpen,
       }}
       onKeyDown={(e) => {
         handleFocusKeyDown(e, '[role="menuitem"]', 'vertical')
-        handleCloseKeyDown(e)
+        handleKeyDownClose(e)
       }}
       {...props}
     >
@@ -132,10 +147,10 @@ function MenuContent(props: MenuContentProps) {
   )
 }
 
-function MenuButton({className, ...props}: MenuButtonProps) {
+function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>) {
   return (
-    <List.ItemButton
-      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', className)}
+    <List.ItemButton<T>
+      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', props['className'])}
       data-ui="MenuButton"
       role="menuitem"
       tabIndex={-1}
@@ -161,10 +176,11 @@ function MenuSubmenu({
       fullBleed
       placement={placement}
       triggerProps={{
+        'popoverTargetAction': 'show',
         'aria-haspopup': 'menu',
-        'onPointerEnter': handlePointerEnter,
+        'onPointerEnter': handlePointerEnterOpen,
         'onKeyDown': (e: KeyboardEvent<HTMLButtonElement>) => {
-          handleOpenKeyDown(e, 'horizontal')
+          handleKeyDownOpen(e, 'horizontal')
         },
         'onClick': handleClick,
         'end': <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
@@ -172,7 +188,7 @@ function MenuSubmenu({
       onKeyDown={(e) => {
         e.stopPropagation()
         handleFocusKeyDown(e, '[role="menuitem"]')
-        handleCloseKeyDown(e, 'horizontal')
+        handleKeyDownClose(e, 'horizontal')
       }}
       {...props}
     >

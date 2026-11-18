@@ -1,3 +1,5 @@
+import type {ElementType} from 'react'
+
 import type {ListItemButtonProps} from '../list/list.props'
 import type {PopoverProps} from '../popover/popover.props'
 
@@ -15,7 +17,7 @@ export type MenuContentProps = Omit<React.ComponentProps<'div'>, 'role'> &
   )
 
 /** @beta */
-export interface MenuButtonProps extends ListItemButtonProps {}
+export type MenuButtonProps<T extends ElementType = 'button'> = ListItemButtonProps<T>
 
 /** @beta */
 export interface MenuSubmenuProps extends MenuProps {}

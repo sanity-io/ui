@@ -28,7 +28,7 @@ export const Default: Story = {
       <Menu
         {...props}
         menu={
-          <Menu.Content>
+          <Menu.Content aria-label="Default Menu">
             {Array.from({length: 5}, (_value, i) => (
               <Menu.Button key={i} text={`Menu Item ${i + 1}`} />
             ))}
@@ -50,13 +50,13 @@ export const WithSubmenus: Story = {
       <Menu
         {...props}
         menu={
-          <Menu.Content>
+          <Menu.Content aria-label="With Submenus Menu">
             {Array.from({length: 3}, (_value, i) => (
               <Menu.Button key={i} text={`Menu Item ${i + 1}`} />
             ))}
             <Menu.Submenu
               menu={
-                <Menu.Content>
+                <Menu.Content aria-label="Submenu Menu">
                   {Array.from({length: 10}, (_value, i) => (
                     <Menu.Button key={i} text={`Menu Submenu Item ${i + 1}`} />
                   ))}
@@ -64,6 +64,17 @@ export const WithSubmenus: Story = {
               }
             >
               <Menu.Button text="Menu Submenu" />
+            </Menu.Submenu>
+            <Menu.Submenu
+              menu={
+                <Menu.Content aria-label="Submenu Menu 2">
+                  {Array.from({length: 10}, (_value, i) => (
+                    <Menu.Button key={i} text={`Menu Submenu 2 Item ${i + 1}`} />
+                  ))}
+                </Menu.Content>
+              }
+            >
+              <Menu.Button text="Menu Submenu 2" />
             </Menu.Submenu>
           </Menu.Content>
         }

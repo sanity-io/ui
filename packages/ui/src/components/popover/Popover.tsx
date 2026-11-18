@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {cloneElement, useId, useState} from 'react'
+import {cloneElement, useId, useState, type ToggleEvent} from 'react'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -29,10 +29,15 @@ function PopoverRoot({
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, fullBleed, ...props}, popoverProps)
-  const [open, setOpen] = useState(false)
   const reactId = useId()
   const id = idProp || reactId
+  const [open, setOpen] = useState(false)
   const isClient = useIsClient()
+
+  const handleToggle = (e: ToggleEvent) => {
+    setOpen(e.newState === 'open')
+    onToggleProp?.(e)
+  }
 
   const triggerProps = {
     'popoverTarget': id,
@@ -62,10 +67,7 @@ function PopoverRoot({
           data-ui="Popover"
           popover="auto"
           id={id}
-          onToggle={(e) => {
-            setOpen(e.newState === 'open')
-            onToggleProp?.(e)
-          }}
+          onToggle={handleToggle}
           {...rest}
         >
           {content}
