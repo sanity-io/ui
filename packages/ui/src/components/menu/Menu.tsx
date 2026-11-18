@@ -114,14 +114,18 @@ function handlePointerEnterClose(e: PointerEvent<HTMLButtonElement>) {
   }
 }
 
-function handlePointerLeaveFocus(e: PointerEvent<HTMLButtonElement>) {
+function handlePointerEnterFocus(e: PointerEvent<HTMLButtonElement>) {
   const menu = e.currentTarget.closest('[role="menu"]')
 
-  if (!(menu instanceof HTMLElement) || document.activeElement !== e.currentTarget) {
+  if (!(menu instanceof HTMLElement)) {
     return
   }
 
-  menu.focus({focusVisible: false})
+  const active = document.activeElement
+
+  if (active !== menu && active instanceof HTMLElement && menu.contains(active)) {
+    menu.focus({focusVisible: false})
+  }
 }
 
 const handleClickFocus = (e: MouseEvent<HTMLButtonElement>) => {
@@ -188,11 +192,8 @@ function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>)
       {...props}
       onPointerEnter={(e: PointerEvent<HTMLButtonElement>) => {
         handlePointerEnterClose(e)
+        handlePointerEnterFocus(e)
         props['onPointerEnter']?.(e)
-      }}
-      onPointerLeave={(e: PointerEvent<HTMLButtonElement>) => {
-        handlePointerLeaveFocus(e)
-        props['onPointerLeave']?.(e)
       }}
     />
   )
