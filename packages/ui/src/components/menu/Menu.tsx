@@ -94,7 +94,37 @@ const handlePointerEnterOpen = (e: PointerEvent<HTMLButtonElement>) => {
   menu.showPopover({source: e.currentTarget})
 }
 
-const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+function handlePointerEnterClose(e: PointerEvent<HTMLButtonElement>) {
+  const menu = e.currentTarget.closest('[role="menu"]')
+
+  if (!(menu instanceof HTMLElement)) {
+    return
+  }
+
+  for (const trigger of menu.querySelectorAll<HTMLButtonElement>('[popovertarget]')) {
+    if (trigger === e.currentTarget) {
+      continue
+    }
+
+    const popover = trigger.popoverTargetElement
+
+    if (popover instanceof HTMLElement && popover.matches(':popover-open')) {
+      popover.hidePopover()
+    }
+  }
+}
+
+function handlePointerLeaveFocus(e: PointerEvent<HTMLButtonElement>) {
+  const menu = e.currentTarget.closest('[role="menu"]')
+
+  if (!(menu instanceof HTMLElement) || document.activeElement !== e.currentTarget) {
+    return
+  }
+
+  menu.focus({focusVisible: false})
+}
+
+const handleClickFocus = (e: MouseEvent<HTMLButtonElement>) => {
   const menu = e.currentTarget.popoverTargetElement
 
   if (!(menu instanceof HTMLElement)) {
@@ -108,7 +138,6 @@ const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 
   const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
   items[0]?.focus()
-  // need to remove focus on hover
 }
 
 function MenuRoot({menu, children, className, ...props}: MenuProps) {
@@ -142,6 +171,7 @@ function MenuContent(props: MenuContentProps) {
       flexDirection="column"
       padding={1}
       gap={1}
+      tabIndex={-1}
       {...props}
     />
   )
@@ -156,6 +186,14 @@ function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>)
       tabIndex={-1}
       density="compact"
       {...props}
+      onPointerEnter={(e: PointerEvent<HTMLButtonElement>) => {
+        handlePointerEnterClose(e)
+        props['onPointerEnter']?.(e)
+      }}
+      onPointerLeave={(e: PointerEvent<HTMLButtonElement>) => {
+        handlePointerLeaveFocus(e)
+        props['onPointerLeave']?.(e)
+      }}
     />
   )
 }
@@ -165,6 +203,7 @@ function MenuSubmenu({
   children,
   className,
   placement = 'right-start',
+  onKeyDown,
   ...props
 }: MenuSubmenuProps) {
   return (
@@ -182,13 +221,14 @@ function MenuSubmenu({
         'onKeyDown': (e: KeyboardEvent<HTMLButtonElement>) => {
           handleKeyDownOpen(e, 'horizontal')
         },
-        'onClick': handleClick,
+        'onClick': handleClickFocus,
         'end': <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
       }}
       onKeyDown={(e) => {
         e.stopPropagation()
         handleFocusKeyDown(e, '[role="menuitem"]')
         handleKeyDownClose(e, 'horizontal')
+        onKeyDown?.(e)
       }}
       {...props}
     >

@@ -11,7 +11,8 @@
 }
 
 .sui-MenuButton:hover,
-.sui-MenuButton:focus {
+.sui-MenuButton:focus,
+.sui-MenuButton[aria-expanded="true"] {
   --background-color: var(--active-background-emphasized);
   --menu-color: var(--active-foreground-emphasized);
   --menu-color-muted: var(--active-background-normal);
