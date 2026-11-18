@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.25
+
+### Patch Changes
+
+- 3e152aa: ensure polymorphic component prop type exports include default props
+
 ## 5.0.0-alpha.24
 
 ### Patch Changes
