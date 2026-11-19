@@ -124,10 +124,28 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('generates responsive className with undefined values and style based on strings', () => {
+    const result = getProps({width: ['100px', undefined, '300px']}, layoutProps)
+    expect(result.className).toBe('sui-width sui-width-bp-2')
+    expect(result.style).toEqual({
+      '--width': '100px',
+      '--width-bp-2': '300px',
+    })
+  })
+
   it('generates responsive className with null values', () => {
     const result = getProps({padding: [1, 2, null, 3]}, layoutProps)
     expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')
     expect(result.style).toEqual({})
+  })
+
+  it('generates responsive className with null values and style based on strings', () => {
+    const result = getProps({width: ['100px', null, '300px']}, layoutProps)
+    expect(result.className).toBe('sui-width sui-width-bp-2')
+    expect(result.style).toEqual({
+      '--width': '100px',
+      '--width-bp-2': '300px',
+    })
   })
 
   it('generates responsive className without unsupported values', () => {
