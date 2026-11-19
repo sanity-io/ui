@@ -1,3 +1,7 @@
+html body {
+  background: light-dark(var(--white), var(--black));
+}
+
 html.dark body {
   color-scheme: dark;
 }

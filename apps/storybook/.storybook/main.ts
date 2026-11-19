@@ -1,4 +1,5 @@
 import type {StorybookConfig} from '@storybook/react-vite'
+import {Features} from 'lightningcss'
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -15,6 +16,18 @@ const config: StorybookConfig = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
     },
+  },
+  async viteFinal(viteConfig) {
+    return {
+      ...viteConfig,
+      css: {
+        ...viteConfig.css,
+        lightningcss: {
+          ...viteConfig.css?.lightningcss,
+          exclude: Features.LightDark,
+        },
+      },
+    }
   },
 }
 export default config

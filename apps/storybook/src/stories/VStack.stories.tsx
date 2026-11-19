@@ -3,6 +3,7 @@ import {expect} from 'storybook/test'
 import {Stack as StackV3} from 'ui3'
 
 import {Card} from '../../../../packages/ui/src/components/card/Card'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {SPACE_INHERIT} from '../../../../packages/ui/src/types/Space'
 import {Square} from '../components/Square'
@@ -42,9 +43,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <VStack {...props}>
-        <Square>Child 1</Square>
-        <Square>Child 2</Square>
-        <Square>Child 3</Square>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
       </VStack>
     )
   },
@@ -60,9 +67,15 @@ export const Inherit: Story = {
     return (
       <Card density="regular">
         <VStack {...props} gap="inherit">
-          <Square>Child 1</Square>
-          <Square>Child 2</Square>
-          <Square>Child 3</Square>
+          <Square>
+            <Text>Child 1</Text>
+          </Square>
+          <Square>
+            <Text>Child 2</Text>
+          </Square>
+          <Square>
+            <Text>Child 3</Text>
+          </Square>
         </VStack>
       </Card>
     )
