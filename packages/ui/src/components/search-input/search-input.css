@@ -83,7 +83,7 @@
 }
 
 /**
-  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  * Hover - uses relative border/background colours to darken/lighten
   */
 .sui-SearchInput:hover {
   border-color: light-dark(
