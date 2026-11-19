@@ -48,6 +48,22 @@ export const Default: Story = {
   },
 }
 
+export const Disabled: Story = {
+  render: (props) => (
+    <SearchInput
+      {...props}
+      id="disabled-search-input"
+      aria-label="Disabled search input"
+      disabled
+    />
+  ),
+  play: async ({canvas}) => {
+    await expect(
+      await canvas.findByRole('searchbox', {name: 'Disabled search input'}),
+    ).toBeDisabled()
+  },
+}
+
 // Checks rendering of non-default props
 // Runs only with Vitest, not surfaced in Storybook
 export const Rendering: Story = {
