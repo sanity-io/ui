@@ -3,6 +3,7 @@ import SearchIcon from '@sanity/icons/Search'
 import clsx from 'clsx'
 import {useId, useRef} from 'react'
 
+import {composeRefs} from '../../utils/composeRefs'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Icon} from '../icon/Icon'
@@ -16,6 +17,7 @@ export function SearchInput({
   density = 'regular',
   // A non-null placeholder to ensure that, if no placeholder is passed, the custom clear button's display logic still works (see search-input.css)
   placeholder = ' ',
+  ref,
   ...props
 }: SearchInputProps) {
   const {className, style, ...rest} = getProps({density, ...props}, searchInputProps)
@@ -53,7 +55,7 @@ export function SearchInput({
         placeholder={placeholder}
         type="search"
         data-ui="SearchInput"
-        ref={inputRef}
+        ref={composeRefs(inputRef, ref)}
       />
       <div className={iconClasses} data-ui="Search-clear" style={{positionAnchor: anchorName}}>
         <PressArea
