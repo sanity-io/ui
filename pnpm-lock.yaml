@@ -440,7 +440,7 @@ importers:
         specifier: 0.0.2-alpha.11
         version: 0.0.2-alpha.11
       '@sanity/icons':
-        specifier: 'catalog:'
+        specifier: ^5.2.1
         version: 5.2.2(react@19.2.6)
       clsx:
         specifier: ^2.1.1
