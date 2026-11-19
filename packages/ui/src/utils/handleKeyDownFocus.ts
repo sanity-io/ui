@@ -1,6 +1,6 @@
 import type {KeyboardEvent} from 'react'
 
-export function handleFocusKeyDown(
+export function handleKeyDownFocus(
   e: KeyboardEvent<HTMLDivElement>,
   selector: string,
   orientation: 'horizontal' | 'vertical' = 'vertical',

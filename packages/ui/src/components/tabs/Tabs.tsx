@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import {createContext, isValidElement, useContext, useId} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {handleFocusKeyDown} from '../../utils/handleFocusKeyDown'
+import {handleKeyDownFocus} from '../../utils/handleKeyDownFocus'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {HStack} from '../h-stack/HStack'
@@ -67,7 +67,7 @@ function TabsList(props: TabsListProps) {
       style={style}
       data-ui="Tabs.List"
       gap={1}
-      onKeyDown={(e) => handleFocusKeyDown(e, '[role="tab"]', 'horizontal')}
+      onKeyDown={(e) => handleKeyDownFocus(e, '[role="tab"]', 'horizontal')}
     >
       {children}
     </HStack>

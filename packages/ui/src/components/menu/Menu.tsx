@@ -2,7 +2,7 @@ import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import clsx from 'clsx'
 import {type ElementType, type KeyboardEvent, type MouseEvent, type PointerEvent} from 'react'
 
-import {handleFocusKeyDown} from '../../utils/handleFocusKeyDown'
+import {handleKeyDownFocus} from '../../utils/handleKeyDownFocus'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Icon} from '../icon/Icon'
@@ -156,7 +156,7 @@ function MenuRoot({menu, children, className, ...props}: MenuProps) {
         'onKeyDown': handleKeyDownOpen,
       }}
       onKeyDown={(e) => {
-        handleFocusKeyDown(e, '[role="menuitem"]', 'vertical')
+        handleKeyDownFocus(e, '[role="menuitem"]', 'vertical')
         handleKeyDownClose(e)
       }}
       {...props}
@@ -227,7 +227,7 @@ function MenuSubmenu({
       }}
       onKeyDown={(e) => {
         e.stopPropagation()
-        handleFocusKeyDown(e, '[role="menuitem"]')
+        handleKeyDownFocus(e, '[role="menuitem"]')
         handleKeyDownClose(e, 'horizontal')
         onKeyDown?.(e)
       }}
