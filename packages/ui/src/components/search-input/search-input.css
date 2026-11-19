@@ -24,34 +24,34 @@
 /**
   * Search icon
   */
-[data-ui="Search-icon"] {
+[data-ui="Search-Icon"] {
   pointer-events: none;
   top: calc(anchor(top));
   bottom: calc(anchor(bottom));
   left: calc(anchor(left) + 1px);
 }
 
-[data-ui="Search-icon"] svg {
+[data-ui="Search-Icon"] svg {
   --background-color: var(--backdrop);
   background-color: var(--background-color);
 }
 
 /* Shift search icon's left inset when SearchInput uses loose density */
-.sui-SearchInput.sui-px3 + [data-ui="Search-clear"] + [data-ui="Search-icon"] {
+.sui-SearchInput.sui-px3 + [data-ui="Search-Clear"] + [data-ui="Search-Icon"] {
   left: calc(anchor(left) + 3px);
 }
 
 /**
   * Custom clear button
   */
-[data-ui="Search-clear"] {
+[data-ui="Search-Clear"] {
   top: calc(anchor(top));
   bottom: calc(anchor(bottom));
   right: calc(anchor(right) - 3px);
 }
 
 /* Hide clear button when SearchInput has no value (placeholder shown) or is read-only */
-.sui-SearchInput:is(:placeholder-shown, :read-only) + [data-ui="Search-clear"] {
+.sui-SearchInput:is(:placeholder-shown, :read-only) + [data-ui="Search-Clear"] {
   display: none;
 }
 
@@ -61,23 +61,23 @@
   padding-right: 25px;
 }
 
-[data-ui="Search-clear"] [data-ui="PressArea"] {
+[data-ui="Search-Clear"] [data-ui="PressArea"] {
   inline-size: 25px;
   aspect-ratio: 1;
   border-radius: var(--radius-1);
 }
 
-[data-ui="Search-clear"] [data-ui="PressArea"] svg {
+[data-ui="Search-Clear"] [data-ui="PressArea"] svg {
   --background-color: var(--backdrop);
   background-color: var(--background-color);
   border-radius: var(--radius-2);
 }
 
-[data-ui="Search-clear"] [data-ui="PressArea"]:hover svg {
+[data-ui="Search-Clear"] [data-ui="PressArea"]:hover svg {
   --background-color: var(--background-high);
 }
 
-[data-ui="Search-clear"] [data-ui="PressArea"]:focus-visible {
+[data-ui="Search-Clear"] [data-ui="PressArea"]:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
 }
@@ -104,7 +104,7 @@
   --color: var(--inert-foreground);
 }
 
-.sui-SearchInput:is(:disabled, :read-only) + [data-ui="Search-clear"] + [data-ui="Search-icon"] svg {
+.sui-SearchInput:is(:disabled, :read-only) + [data-ui="Search-Clear"] + [data-ui="Search-Icon"] svg {
   --background-color: transparent;
   color: var(--inert-foreground);
 }

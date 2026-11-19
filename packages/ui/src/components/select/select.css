@@ -8,14 +8,14 @@
   color: var(--color);
 }
 
-[data-ui="Select-icon"] {
+[data-ui="Select-Icon"] {
   pointer-events: none;
   top: calc(anchor(top));
   bottom: calc(anchor(bottom));
   right: calc(anchor(right) + 2px);
 }
 
-[data-ui="Select-icon"] svg {
+[data-ui="Select-Icon"] svg {
   --background-color: var(--backdrop);
   background-color: var(--background-color);
 }
@@ -27,7 +27,7 @@
   --color: var(--error-foreground);
 }
 
-.sui-Select[aria-invalid="true"] + [data-ui="Select-icon"] svg {
+.sui-Select[aria-invalid="true"] + [data-ui="Select-Icon"] svg {
   color: var(--error-foreground);
 }
 
@@ -51,11 +51,11 @@
   pointer-events: none;
 }
 
-.sui-Select:disabled + [data-ui="Select-icon"] svg {
+.sui-Select:disabled + [data-ui="Select-Icon"] svg {
   --background-color: transparent;
 }
 
-.sui-Select:disabled + [data-ui="Select-icon"] svg {
+.sui-Select:disabled + [data-ui="Select-Icon"] svg {
   color: var(--inert-foreground);
 }
 

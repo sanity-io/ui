@@ -31,7 +31,7 @@ export function Select({density = 'regular', hasError = false, ...props}: Select
       >
         {children}
       </select>
-      <div className={iconClasses} data-ui="Select-icon" style={{positionAnchor: anchorName}}>
+      <div className={iconClasses} data-ui="Select-Icon" style={{positionAnchor: anchorName}}>
         <Icon icon={SelectIcon} size={1} />
       </div>
     </>

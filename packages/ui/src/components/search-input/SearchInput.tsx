@@ -57,7 +57,7 @@ export function SearchInput({
         data-ui="SearchInput"
         ref={composeRefs(inputRef, ref)}
       />
-      <div className={iconClasses} data-ui="Search-clear" style={{positionAnchor: anchorName}}>
+      <div className={iconClasses} data-ui="Search-Clear" style={{positionAnchor: anchorName}}>
         <PressArea
           type="button"
           onClick={handleClear}
@@ -67,7 +67,7 @@ export function SearchInput({
           <Icon icon={CloseIcon} size={0} />
         </PressArea>
       </div>
-      <div className={iconClasses} data-ui="Search-icon" style={{positionAnchor: anchorName}}>
+      <div className={iconClasses} data-ui="Search-Icon" style={{positionAnchor: anchorName}}>
         <Icon icon={SearchIcon} size={1} />
       </div>
     </>

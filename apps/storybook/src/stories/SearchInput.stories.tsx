@@ -43,7 +43,7 @@ export const Default: Story = {
     await expect(input.classList).toContain('sui-px2')
     await expect(input.classList).toContain('sui-py1')
 
-    const searchIcon = canvasElement.querySelector('[data-ui="Search-icon"] svg')
+    const searchIcon = canvasElement.querySelector('[data-ui="Search-Icon"] svg')
     await expect(searchIcon).toHaveAttribute('aria-hidden', 'true')
   },
 }
