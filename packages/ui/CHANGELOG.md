@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 5.0.0-alpha.26
+
+### Patch Changes
+
+- 978a60c: adds new SearchInput component
+- f0d8652: fixes for visually hidden visibleOnFocus prop styling, tone with default types, and generating classnames for responsive arrays that include null or undefined
+
 ## 5.0.0-alpha.25
 
 ### Patch Changes
