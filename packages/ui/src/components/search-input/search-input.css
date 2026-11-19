@@ -37,7 +37,7 @@
 }
 
 /* Shift search icon's left inset when SearchInput uses loose density */
-.sui-SearchInput.sui-px3 ~ [data-ui="Search-icon"] {
+.sui-SearchInput.sui-px3 + [data-ui="Search-clear"] + [data-ui="Search-icon"] {
   left: calc(anchor(left) + 3px);
 }
 
@@ -104,7 +104,7 @@
   --color: var(--inert-foreground);
 }
 
-.sui-SearchInput:is(:disabled, :read-only) ~ [data-ui="Search-icon"] svg {
+.sui-SearchInput:is(:disabled, :read-only) + [data-ui="Search-clear"] + [data-ui="Search-icon"] svg {
   --background-color: transparent;
   color: var(--inert-foreground);
 }
