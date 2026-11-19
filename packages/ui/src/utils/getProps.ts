@@ -18,7 +18,8 @@ export function getProps(
   const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
   const restProps: ComponentProps = {}
   let className = componentProps?.className || ''
-  let style = componentProps?.style || {}
+  const style = (componentProps?.style ? {...componentProps.style} : {}) as React.CSSProperties &
+    Record<string, string | number | undefined>
 
   for (const key in allComponentProps) {
     const propDef = allPropDefs?.[key]
@@ -32,28 +33,34 @@ export function getProps(
     }
 
     if (Array.isArray(propValue)) {
-      // @TODO: consider fixing this O(n^2) time complexity
-      // oxlint-disable-next-line no-accumulating-spread
       for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
         const resolvedPropDef = getResolvedPropDef(propValue[i], propDef)
 
-        if (!resolvedPropDef) {
+        if (!resolvedPropDef || propValue[i] === null || propValue[i] === undefined) {
           continue
         }
 
         className = clsx(className, getClassName(propValue[i], resolvedPropDef, i))
-        style = {...style, ...getStyle(propValue[i], resolvedPropDef, i)}
+
+        const styleKey = getStyleKey(resolvedPropDef, i)
+        if (styleKey) {
+          style[styleKey] = propValue[i] as string | number
+        }
       }
     } else {
       const resolvedPropDef = getResolvedPropDef(propValue, propDef)
 
-      if (!resolvedPropDef) {
+      if (!resolvedPropDef || propValue === null || propValue === undefined) {
         restProps[key] = propValue
         continue
       }
 
       className = clsx(className, getClassName(propValue, resolvedPropDef))
-      style = {...style, ...getStyle(propValue, resolvedPropDef)}
+
+      const styleKey = getStyleKey(resolvedPropDef)
+      if (styleKey) {
+        style[styleKey] = propValue as string | number
+      }
     }
   }
 
@@ -97,14 +104,12 @@ function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   return ''
 }
 
-function getStyle(propValue: any, propDef: PropDef, bp?: number) {
+function getStyleKey(propDef: PropDef, bp?: number): string | undefined {
   if ((propDef.type === 'string' || propDef.type === 'number') && propDef.variable) {
-    return {
-      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: propValue,
-    }
+    return `${propDef.variable}${bp ? `-bp-${bp}` : ''}`
   }
 
-  return {}
+  return undefined
 }
 
 export function flattenCompositeProps(
