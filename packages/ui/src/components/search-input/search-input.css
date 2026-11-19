@@ -37,8 +37,15 @@
 }
 
 /* Shift search icon's left inset when SearchInput uses loose density */
-.sui-SearchInput.sui-px3 + .sui-SearchInput-Clear + .sui-SearchInput-Icon {
+.sui-SearchInput.sui-px3 + .sui-SearchInput-Icon {
   left: calc(anchor(left) + 3px);
+}
+
+/**
+  * Loading icon (replaces search icon in icon slot when loading)
+  */
+.sui-SearchInput[aria-busy="true"] + .sui-SearchInput-Icon svg {
+  background: transparent;
 }
 
 /**
@@ -51,7 +58,7 @@
 }
 
 /* Hide clear button when SearchInput has no value (placeholder shown) or is read-only */
-.sui-SearchInput:is(:placeholder-shown, :read-only) + .sui-SearchInput-Clear {
+.sui-SearchInput:is(:placeholder-shown, :read-only) + .sui-SearchInput-Icon + .sui-SearchInput-Clear {
   display: none;
 }
 
@@ -104,7 +111,7 @@
   --color: var(--inert-foreground);
 }
 
-.sui-SearchInput:is(:disabled, :read-only) + .sui-SearchInput-Clear + .sui-SearchInput-Icon svg {
+.sui-SearchInput:is(:disabled, :read-only) + .sui-SearchInput-Icon svg {
   --background-color: transparent;
   color: var(--inert-foreground);
 }

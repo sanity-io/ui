@@ -8,6 +8,7 @@ import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Icon} from '../icon/Icon'
 import {PressArea} from '../press-area/PressArea'
+import {Spinner} from '../spinner/Spinner'
 import {type SearchInputProps, searchInputProps} from './searchInput.props'
 
 const searchInputClassName = suffixClassName('sui-SearchInput')
@@ -17,6 +18,7 @@ const searchInputIconClassName = suffixClassName('sui-SearchInput-Icon')
 /** @public */
 export function SearchInput({
   density = 'regular',
+  loading,
   // A non-null placeholder to ensure that, if no placeholder is passed, the custom clear button's display logic still works (see search-input.css)
   placeholder = ' ',
   ref,
@@ -54,11 +56,19 @@ export function SearchInput({
         className={searchInputClasses}
         style={{anchorName, ...style}}
         {...rest}
-        placeholder={placeholder}
-        type="search"
+        aria-busy={loading}
         data-ui="SearchInput"
+        type="search"
+        placeholder={placeholder}
         ref={composeRefs(inputRef, ref)}
       />
+      <div
+        className={clsx(searchInputIconClassName, iconClasses)}
+        data-ui="Search-Icon"
+        style={{positionAnchor: anchorName}}
+      >
+        {loading ? <Spinner size={1} /> : <Icon icon={SearchIcon} size={1} />}
+      </div>
       <div
         className={clsx(searchInputClearClassName, iconClasses)}
         data-ui="Search-Clear"
@@ -72,13 +82,6 @@ export function SearchInput({
         >
           <Icon icon={CloseIcon} size={0} />
         </PressArea>
-      </div>
-      <div
-        className={clsx(searchInputIconClassName, iconClasses)}
-        data-ui="Search-Icon"
-        style={{positionAnchor: anchorName}}
-      >
-        <Icon icon={SearchIcon} size={1} />
       </div>
     </>
   )
