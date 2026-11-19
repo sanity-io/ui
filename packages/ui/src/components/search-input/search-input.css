@@ -1,0 +1,125 @@
+.sui-SearchInput {
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  --color: var(--foreground-high);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  font: var(--form-element-text);
+  color: var(--color);
+  /* Use text-indent to clear the search icon */
+  text-indent: var(--space-4);
+}
+
+.sui-SearchInput::placeholder {
+  color: oklch(from var(--color) l c h / var(--placeholder-opacity));
+}
+
+/* Hide webkit default clear button */
+.sui-SearchInput::-webkit-search-cancel-button,
+.sui-SearchInput::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/**
+  * Search icon
+  */
+.sui-SearchInput-Icon {
+  pointer-events: none;
+  top: calc(anchor(top));
+  bottom: calc(anchor(bottom));
+  left: calc(anchor(left) + 1px);
+}
+
+.sui-SearchInput-Icon svg {
+  --background-color: var(--backdrop);
+  background-color: var(--background-color);
+}
+
+/* Shift search icon's left inset when SearchInput uses loose density */
+.sui-SearchInput.sui-px3 + .sui-SearchInput-Icon {
+  left: calc(anchor(left) + 3px);
+}
+
+/**
+  * Loading icon (replaces search icon in icon slot when loading)
+  */
+.sui-SearchInput[aria-busy="true"] + .sui-SearchInput-Icon svg {
+  background: transparent;
+}
+
+/**
+  * Custom clear button
+  */
+.sui-SearchInput-Clear {
+  top: calc(anchor(top));
+  bottom: calc(anchor(bottom));
+  right: calc(anchor(right) - 3px);
+}
+
+/* Hide clear button when SearchInput has no value (placeholder shown) or is read-only */
+.sui-SearchInput:is(:placeholder-shown, :read-only) + .sui-SearchInput-Icon + .sui-SearchInput-Clear {
+  display: none;
+}
+
+/* Override SearchInput’s padding-right (set by the density prop) so input value clears
+ * the space occupied by the clear button when shown */
+.sui-SearchInput:not(:placeholder-shown, :read-only) {
+  padding-right: 25px;
+}
+
+.sui-SearchInput-Clear [data-ui="PressArea"] {
+  inline-size: 25px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-1);
+}
+
+.sui-SearchInput-Clear [data-ui="PressArea"] svg {
+  --background-color: var(--backdrop);
+  background-color: var(--background-color);
+  border-radius: var(--radius-2);
+}
+
+.sui-SearchInput-Clear [data-ui="PressArea"]:hover svg {
+  --background-color: var(--background-high);
+}
+
+.sui-SearchInput-Clear [data-ui="PressArea"]:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+/**
+  * Hover - uses relative border/background colours to darken/lighten
+  */
+.sui-SearchInput:hover {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Disabled, read only
+  */
+.sui-SearchInput:is(:disabled, :read-only) {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
+}
+
+.sui-SearchInput:disabled {
+  --color: var(--inert-foreground);
+}
+
+.sui-SearchInput:is(:disabled, :read-only) + .sui-SearchInput-Icon svg {
+  --background-color: transparent;
+  color: var(--inert-foreground);
+}
+
+/**
+  * Focus
+  */
+.sui-SearchInput:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}

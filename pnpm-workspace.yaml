@@ -9,6 +9,7 @@ allowBuilds:
 
 catalog:
   '@playwright/test': ^1.61.0
+  '@sanity/icons': ^5.2.1
   '@sanity/pkg-utils': ^10.8.2
   '@sanity/tsdown-config': ^0.28.0
   '@types/react': ^19.2.17

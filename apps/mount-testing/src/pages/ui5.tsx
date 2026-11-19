@@ -27,6 +27,7 @@ import {
   List,
   PressArea,
   Radio,
+  SearchInput,
   Select,
   SkipToContent,
   Spinner,
@@ -236,6 +237,13 @@ export default function Ui5() {
       <Profiler id="TextInput" onRender={handleOnRender}>
         {iterator.map((i) => (
           <TextInput key={i} aria-label="Text input" />
+        ))}
+      </Profiler>
+
+      <h2>{count} SearchInputs</h2>
+      <Profiler id="SearchInput" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <SearchInput key={i} aria-label="Search" />
         ))}
       </Profiler>
 

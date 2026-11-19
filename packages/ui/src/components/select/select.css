@@ -8,16 +8,17 @@
   color: var(--color);
 }
 
-[data-ui="Select-icon"] {
-  --background-color: var(--backdrop);
-  background-color: var(--background-color);
+.sui-Select-Icon {
   pointer-events: none;
-  /* reduce block size by 1px at each end and inset from right to not interrupt Select’s border */
-  top: calc(anchor(top) + 1px);
-  bottom: calc(anchor(bottom) + 1px);
+  top: calc(anchor(top));
+  bottom: calc(anchor(bottom));
   right: calc(anchor(right) + 2px);
 }
 
+.sui-Select-Icon svg {
+  --background-color: var(--backdrop);
+  background-color: var(--background-color);
+}
 /**
   * Error
   */
@@ -26,7 +27,7 @@
   --color: var(--error-foreground);
 }
 
-.sui-Select[aria-invalid="true"] + [data-ui="Select-icon"] svg {
+.sui-Select[aria-invalid="true"] + .sui-Select-Icon svg {
   color: var(--error-foreground);
 }
 
@@ -50,11 +51,8 @@
   pointer-events: none;
 }
 
-.sui-Select:disabled + [data-ui="Select-icon"] {
-  --background-color: var(--inert-background);
-}
-
-.sui-Select:disabled + [data-ui="Select-icon"] svg {
+.sui-Select:disabled + .sui-Select-Icon svg {
+  --background-color: transparent;
   color: var(--inert-foreground);
 }
 

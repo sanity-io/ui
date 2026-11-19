@@ -11,6 +11,7 @@ import {
   HStack,
   Link,
   Radio,
+  SearchInput,
   Switch,
   Tabs,
   Text,
@@ -54,6 +55,7 @@ function Ui5() {
             </Card>
             <Switch aria-label="Engage warp drive" />
             <TextInput aria-label="Set stardate" />
+            <SearchInput aria-label="Search the ship’s logs" />
           </VStack>
         </Container>
         <Divider marginY={4} />

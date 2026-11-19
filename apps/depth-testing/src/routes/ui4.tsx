@@ -1,4 +1,5 @@
 import 'ui4/styles.css'
+import {SearchIcon} from '@sanity/icons/Search'
 import {useState} from 'react'
 import {
   Badge,
@@ -90,6 +91,7 @@ function Ui4() {
                 </Text>
               </Inline>
               <TextInput aria-label="Set stardate" />
+              <TextInput aria-label="Search the ship’s logs" icon={SearchIcon} clearButton />
             </Stack>
           </Container>
           <Box marginY={4}>

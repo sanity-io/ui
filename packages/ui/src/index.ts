@@ -73,3 +73,4 @@ export type {Space, SpaceAuto, SpaceAutoNegative, SpaceInherit} from './types/Sp
 export type {TextSize} from './types/Text'
 export type {TextAlign} from './types/TextAlign'
 export type {Tone} from './types/Tone'
+export * from './components/search-input/SearchInput'

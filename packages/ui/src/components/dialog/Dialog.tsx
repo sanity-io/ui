@@ -2,6 +2,7 @@ import {CloseIcon} from '@sanity/icons/Close'
 import clsx from 'clsx'
 import {useEffect, useId, useRef} from 'react'
 
+import {composeRefs} from '../../utils/composeRefs'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
@@ -19,7 +20,7 @@ const dialogClassName = suffixClassName('sui-Dialog')
 const dialogContentClassName = suffixClassName('sui-DialogContent')
 const dialogFooterClassName = suffixClassName('sui-DialogFooter')
 
-function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
+function DialogRoot({open = false, size = 0, ref, ...props}: DialogProps) {
   const {children, className, style, header, onClose, ...rest} = getProps(
     {size, ...props},
     dialogProps,
@@ -61,7 +62,7 @@ function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
   return (
     <dialog
       {...rest}
-      ref={dialogRef}
+      ref={composeRefs(dialogRef, ref)}
       closedby="any"
       aria-labelledby={header ? headerId : undefined}
       onClose={onClose}
