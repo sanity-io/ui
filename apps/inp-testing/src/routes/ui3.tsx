@@ -1,3 +1,4 @@
+import {SearchIcon} from '@sanity/icons/Search'
 import {useState} from 'react'
 import {
   Avatar,
@@ -413,6 +414,30 @@ function TabSwitchSection() {
   )
 }
 
+/** Each keystroke updates a controlled search input. One click on the clear button empties it. */
+function SearchInputSection() {
+  const [query, setQuery] = useState('')
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          8. Search input
+        </Text>
+        <Text size={1}>Type to update the input. Click the clear button to empty it.</Text>
+        <TextInput
+          aria-label="Search"
+          icon={SearchIcon}
+          clearButton
+          value={query}
+          onChange={(event) => setQuery(event.currentTarget.value)}
+          onClear={() => setQuery('')}
+        />
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -428,6 +453,7 @@ function Ui3() {
         <BadgeToneToggleSection />
         <AvatarShuffleSection />
         <TabSwitchSection />
+        <SearchInputSection />
       </Stack>
     </ThemeProvider>
   )

@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@sanity-labs/design-tokens": "0.0.2-alpha.11",
-    "@sanity/icons": "^5.2.1",
+    "@sanity/icons": "catalog:",
     "clsx": "^2.1.1",
     "comment-json": "^5.0.0",
     "dialog-closedby-polyfill": "^1.3.0",

@@ -14,6 +14,7 @@ import {
   HStack,
   Popover,
   Radio,
+  SearchInput,
   Switch,
   Tabs,
   Text,
@@ -363,6 +364,27 @@ function TabSwitchSection() {
   )
 }
 
+/** Each keystroke updates a controlled search input. One click on the clear button empties it. */
+function SearchInputSection() {
+  const [query, setQuery] = useState('')
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          8. Search input
+        </Text>
+        <Text size={1}>Type to update the input. Click the clear button to empty it.</Text>
+        <SearchInput
+          aria-label="Search"
+          value={query}
+          onChange={(event) => setQuery(event.currentTarget.value)}
+        />
+      </VStack>
+    </Card>
+  )
+}
+
 function Ui5() {
   return (
     <VStack gap={4}>
@@ -377,6 +399,7 @@ function Ui5() {
       <BadgeToneToggleSection />
       <AvatarShuffleSection />
       <TabSwitchSection />
+      <SearchInputSection />
     </VStack>
   )
 }
