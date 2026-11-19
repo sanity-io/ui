@@ -11,6 +11,8 @@ import {PressArea} from '../press-area/PressArea'
 import {type SearchInputProps, searchInputProps} from './searchInput.props'
 
 const searchInputClassName = suffixClassName('sui-SearchInput')
+const searchInputClearClassName = suffixClassName('sui-SearchInput-Clear')
+const searchInputIconClassName = suffixClassName('sui-SearchInput-Icon')
 
 /** @public */
 export function SearchInput({
@@ -57,7 +59,11 @@ export function SearchInput({
         data-ui="SearchInput"
         ref={composeRefs(inputRef, ref)}
       />
-      <div className={iconClasses} data-ui="Search-Clear" style={{positionAnchor: anchorName}}>
+      <div
+        className={clsx(searchInputClearClassName, iconClasses)}
+        data-ui="Search-Clear"
+        style={{positionAnchor: anchorName}}
+      >
         <PressArea
           type="button"
           onClick={handleClear}
@@ -67,7 +73,11 @@ export function SearchInput({
           <Icon icon={CloseIcon} size={0} />
         </PressArea>
       </div>
-      <div className={iconClasses} data-ui="Search-Icon" style={{positionAnchor: anchorName}}>
+      <div
+        className={clsx(searchInputIconClassName, iconClasses)}
+        data-ui="Search-Icon"
+        style={{positionAnchor: anchorName}}
+      >
         <Icon icon={SearchIcon} size={1} />
       </div>
     </>
