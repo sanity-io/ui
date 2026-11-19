@@ -33,7 +33,7 @@ const CLEAR_BUTTON_NAME = 'Clear search query'
 
 export const Default: Story = {
   render: (props) => {
-    return <SearchInput {...props} id="search-input" />
+    return <SearchInput {...props} id="search-input" aria-label="Search" />
   },
   play: async ({canvas, canvasElement}) => {
     const input = await canvas.findByRole('searchbox')
