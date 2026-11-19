@@ -17,7 +17,7 @@ export function getProps(
 ): ComponentProps {
   const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
   const restProps: ComponentProps = {}
-  let className = componentProps?.className || ''
+  const classNames: string[] = []
   const style = (componentProps?.style ? {...componentProps.style} : {}) as React.CSSProperties &
     Record<string, string | number | undefined>
 
@@ -40,7 +40,10 @@ export function getProps(
           continue
         }
 
-        className = clsx(className, getClassName(propValue[i], resolvedPropDef, i))
+        const className = getClassName(propValue[i], resolvedPropDef, i)
+        if (className) {
+          classNames.push(className)
+        }
 
         const styleKey = getStyleKey(resolvedPropDef, i)
         if (styleKey) {
@@ -55,7 +58,10 @@ export function getProps(
         continue
       }
 
-      className = clsx(className, getClassName(propValue, resolvedPropDef))
+      const className = getClassName(propValue, resolvedPropDef)
+      if (className) {
+        classNames.push(className)
+      }
 
       const styleKey = getStyleKey(resolvedPropDef)
       if (styleKey) {
@@ -64,7 +70,11 @@ export function getProps(
     }
   }
 
-  return {...restProps, className, style}
+  return {
+    ...restProps,
+    className: clsx(componentProps?.className, ...classNames),
+    style,
+  }
 }
 
 function getResolvedPropDef(propValue: any, propDef?: PropDef) {
