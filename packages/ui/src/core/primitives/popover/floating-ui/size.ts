@@ -1,6 +1,74 @@
-import {detectOverflow, Middleware} from '@floating-ui/react-dom'
+import {detectOverflow, Middleware, MiddlewareState} from '@floating-ui/react-dom'
 
 import {PopoverMargins} from '../../../types/popover'
+
+const NATURAL_HEIGHT_MIDDLEWARE_NAME = '@sanity/ui/natural-height'
+// Rects are rounded while the caps keep their fractions
+const CAP_TOLERANCE_PX = 1
+
+interface ScrollPosition {
+  element: Element
+  left: number
+  top: number
+}
+
+function reachesCap(dimension: number, cap: string): boolean {
+  return cap === '' ? false : dimension >= Number.parseFloat(cap) - CAP_TOLERANCE_PX
+}
+
+function collectScrollPositions(root: HTMLElement): ScrollPosition[] {
+  return [root, ...root.querySelectorAll('*')]
+    .filter((element) => Math.abs(element.scrollTop) > 0 || Math.abs(element.scrollLeft) > 0)
+    .map((element) => ({element, left: element.scrollLeft, top: element.scrollTop}))
+}
+
+function restoreScrollPositions(positions: ScrollPosition[]): void {
+  positions.forEach(({element, left, top}) => {
+    element.scrollTo({behavior: 'instant', left, top})
+  })
+}
+
+async function measureWithoutMaxHeight(
+  floating: HTMLElement,
+  platform: MiddlewareState['platform'],
+): Promise<number> {
+  const {maxHeight} = floating.style
+  // Lifting the cap shrinks the scroll range of containers inside, which clamps their offset
+  const scrollPositions = collectScrollPositions(floating)
+
+  floating.style.maxHeight = ''
+
+  const {height} = await platform.getDimensions(floating)
+
+  floating.style.maxHeight = maxHeight
+  restoreScrollPositions(scrollPositions)
+
+  return height
+}
+
+/**
+ * Hands `flip` the floating element's height without the max height `size` set for the space on
+ * its current side, measured once per update. The max width stays, so content keeps its wrapping.
+ */
+export function naturalHeight(): Middleware {
+  return {
+    name: NATURAL_HEIGHT_MIDDLEWARE_NAME,
+    async fn({elements, middlewareData, platform, rects}) {
+      if (middlewareData[NATURAL_HEIGHT_MIDDLEWARE_NAME]?.measured) return {}
+
+      if (reachesCap(rects.floating.height, elements.floating.style.maxHeight)) {
+        const height = await measureWithoutMaxHeight(elements.floating, platform)
+
+        return {
+          data: {measured: true},
+          reset: {rects: {reference: rects.reference, floating: {...rects.floating, height}}},
+        }
+      }
+
+      return {}
+    },
+  }
+}
 
 export function size(options: {
   boundaryElement?: HTMLElement | null
