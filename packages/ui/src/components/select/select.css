@@ -51,8 +51,8 @@
   pointer-events: none;
 }
 
-.sui-Select:disabled + [data-ui="Select-icon"] {
-  --background-color: var(--inert-background);
+.sui-Select:disabled + [data-ui="Select-icon"] svg {
+  --background-color: transparent;
 }
 
 .sui-Select:disabled + [data-ui="Select-icon"] svg {
