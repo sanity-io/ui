@@ -51,9 +51,13 @@ export function getProps(
         }
       }
     } else {
+      if (propValue === null || propValue === undefined) {
+        continue
+      }
+
       const resolvedPropDef = getResolvedPropDef(propValue, propDef)
 
-      if (!resolvedPropDef || propValue === null || propValue === undefined) {
+      if (!resolvedPropDef) {
         restProps[key] = propValue
         continue
       }

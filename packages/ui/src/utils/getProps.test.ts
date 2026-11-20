@@ -118,6 +118,28 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('does not forward undefined known layout props', () => {
+    const result = getProps({width: undefined}, layoutProps)
+    expect(result).not.toHaveProperty('width')
+    expect(result.className).toBe('')
+    expect(result.style).toEqual({})
+  })
+
+  it('does not forward null known layout props', () => {
+    const result = getProps({width: null}, layoutProps)
+    expect(result).not.toHaveProperty('width')
+    expect(result.className).toBe('')
+    expect(result.style).toEqual({})
+  })
+
+  it('forwards keys without a prop def', () => {
+    const result = getProps({'id': 'test', 'data-testid': 'grid'}, layoutProps)
+    expect(result['id']).toEqual('test')
+    expect(result['data-testid']).toEqual('grid')
+    expect(result.className).toBe('')
+    expect(result.style).toEqual({})
+  })
+
   it('generates responsive className with undefined values', () => {
     const result = getProps({padding: [1, 2, undefined, 3]}, layoutProps)
     expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')
