@@ -4,6 +4,7 @@ import {type ElementType, type KeyboardEvent, type MouseEvent, type PointerEvent
 
 import {handleKeyDownFocus} from '../../utils/handleKeyDownFocus'
 import {suffixClassName} from '../../utils/suffixClassName'
+import {Divider} from '../divider/Divider'
 import {Flex} from '../flex/Flex'
 import {Icon} from '../icon/Icon'
 import {List} from '../list/List'
@@ -11,6 +12,7 @@ import {Popover} from '../popover/Popover'
 import {
   type MenuButtonProps,
   type MenuContentProps,
+  type MenuDividerProps,
   type MenuProps,
   type MenuSubmenuProps,
 } from './menu.props'
@@ -238,11 +240,16 @@ function MenuSubmenu({
   )
 }
 
+function MenuDivider(props: MenuDividerProps) {
+  return <Divider {...props} />
+}
+
 /** @beta */
 export const Menu = Object.assign(MenuRoot, {
   Content: MenuContent,
   Button: MenuButton,
   Submenu: MenuSubmenu,
+  Divider: MenuDivider,
 })
 
-export type {MenuProps, MenuContentProps, MenuButtonProps, MenuSubmenuProps}
+export type {MenuProps, MenuContentProps, MenuButtonProps, MenuSubmenuProps, MenuDividerProps}

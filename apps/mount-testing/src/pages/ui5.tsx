@@ -71,7 +71,7 @@ export default function Ui5() {
       <h2>{count} Boxes</h2>
       <Profiler id="Box" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Box key={i} padding={3} marginBottom={2}>
+          <Box key={i} padding={3} marginBottom={2} testing="hey">
             <span>Box content</span>
           </Box>
         ))}

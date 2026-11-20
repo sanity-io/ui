@@ -1,5 +1,6 @@
 import type {ElementType} from 'react'
 
+import type {DividerProps} from '../divider/divider.props'
 import type {ListItemButtonProps} from '../list/list.props'
 import type {PopoverProps} from '../popover/popover.props'
 
@@ -21,3 +22,6 @@ export type MenuButtonProps<T extends ElementType = 'button'> = ListItemButtonPr
 
 /** @beta */
 export interface MenuSubmenuProps extends MenuProps {}
+
+/** @beta */
+export type MenuDividerProps = Omit<DividerProps, 'margin'>
