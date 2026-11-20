@@ -34,8 +34,9 @@ function PopoverRoot({
   const [open, setOpen] = useState(false)
   const isClient = useIsClient()
 
-  const handleToggle = (e: ToggleEvent) => {
-    setOpen(e.newState === 'open')
+  const handleToggle = (e: ToggleEvent<HTMLDivElement>) => {
+    const popover = e.currentTarget
+    setOpen(popover.matches(':popover-open'))
     onToggleProp?.(e)
   }
 
