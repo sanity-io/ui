@@ -11,6 +11,7 @@ import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {Tabs} from '../../../../packages/ui/src/components/tabs/Tabs'
 import {type TabsProps, tabsProps} from '../../../../packages/ui/src/components/tabs/tabs.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(tabsProps)
@@ -45,9 +46,15 @@ function TabsDefaultStory(props: TabsProps) {
         <Tabs.Tab label="Third Tab" value="3" />
       </Tabs.List>
       <Box marginTop={3}>
-        <Tabs.Panel value="1">First tab panel</Tabs.Panel>
-        <Tabs.Panel value="2">Second tab panel</Tabs.Panel>
-        <Tabs.Panel value="3">Third tab panel</Tabs.Panel>
+        <Tabs.Panel value="1">
+          <Text>First tab panel</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="2">
+          <Text>Second tab panel</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="3">
+          <Text>Third tab panel</Text>
+        </Tabs.Panel>
       </Box>
     </Tabs>
   )
@@ -72,19 +79,29 @@ function TabsTonesAndIconsStory(props: TabsProps) {
       </Tabs.List>
       <Box marginTop={3}>
         <Tabs.Panel value="neutral">
-          <Card tone="neutral">Neutral Card in tab panel</Card>
+          <Card tone="neutral">
+            <Text>Neutral Card in tab panel</Text>
+          </Card>
         </Tabs.Panel>
         <Tabs.Panel value="positive">
-          <Card tone="positive">Positive Card in tab panel</Card>
+          <Card tone="positive">
+            <Text>Positive Card in tab panel</Text>
+          </Card>
         </Tabs.Panel>
         <Tabs.Panel value="suggest">
-          <Card tone="suggest">Suggest Card in tab panel</Card>
+          <Card tone="suggest">
+            <Text>Suggest Card in tab panel</Text>
+          </Card>
         </Tabs.Panel>
         <Tabs.Panel value="caution">
-          <Card tone="caution">Caution Card in tab panel</Card>
+          <Card tone="caution">
+            <Text>Caution Card in tab panel</Text>
+          </Card>
         </Tabs.Panel>
         <Tabs.Panel value="critical">
-          <Card tone="critical">Critical Card in tab panel</Card>
+          <Card tone="critical">
+            <Text>Critical Card in tab panel</Text>
+          </Card>
         </Tabs.Panel>
       </Box>
     </Tabs>
@@ -105,11 +122,9 @@ export const Default: Story = {
     await expect(canvas.getByText('First tab panel')).toBeVisible()
     await expect(canvas.getByText('Second tab panel')).not.toBeVisible()
 
-    await expect(canvas.getByText('First tab panel')).toHaveAttribute(
-      'aria-labelledby',
-      firstTab.id,
-    )
-    await expect(firstTab).toHaveAttribute('aria-controls', canvas.getByText('First tab panel').id)
+    const firstPanel = canvas.getByRole('tabpanel', {name: 'First Tab'})
+    await expect(firstPanel).toHaveAttribute('aria-labelledby', firstTab.id)
+    await expect(firstTab).toHaveAttribute('aria-controls', firstPanel.id)
   },
 }
 
@@ -217,7 +232,7 @@ export const Interactions: Story = {
         await expect(thirdTab).toHaveFocus()
 
         await userEvent.tab()
-        await expect(canvas.getByText('First tab panel')).toHaveFocus()
+        await expect(canvas.getByRole('tabpanel', {name: 'First Tab'})).toHaveFocus()
 
         await userEvent.tab({shift: true})
         await expect(firstTab).toHaveFocus()
