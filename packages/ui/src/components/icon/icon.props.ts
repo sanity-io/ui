@@ -18,6 +18,10 @@ export interface IconProps
    * Sets icon size.
    */
   size?: Responsive<IconSize>
+  /**
+   * Removes the icon's built-in padding.
+   */
+  trim?: boolean
 }
 
 export const iconProps: Record<string, PropDef> = {
@@ -30,6 +34,10 @@ export const iconProps: Record<string, PropDef> = {
     values: ICON_SIZE,
   },
   muted: typographyProps['muted'] as PropDef,
+  trim: {
+    type: 'boolean',
+    className: 'icon-trim',
+  },
   ...toneProps,
   ...marginProps,
 }
