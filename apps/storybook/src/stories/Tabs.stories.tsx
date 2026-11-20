@@ -122,11 +122,9 @@ export const Default: Story = {
     await expect(canvas.getByText('First tab panel')).toBeVisible()
     await expect(canvas.getByText('Second tab panel')).not.toBeVisible()
 
-    await expect(canvas.getByText('First tab panel')).toHaveAttribute(
-      'aria-labelledby',
-      firstTab.id,
-    )
-    await expect(firstTab).toHaveAttribute('aria-controls', canvas.getByText('First tab panel').id)
+    const firstPanel = canvas.getByRole('tabpanel', {name: 'First Tab'})
+    await expect(firstPanel).toHaveAttribute('aria-labelledby', firstTab.id)
+    await expect(firstTab).toHaveAttribute('aria-controls', firstPanel.id)
   },
 }
 
@@ -234,7 +232,7 @@ export const Interactions: Story = {
         await expect(thirdTab).toHaveFocus()
 
         await userEvent.tab()
-        await expect(canvas.getByText('First tab panel')).toHaveFocus()
+        await expect(canvas.getByRole('tabpanel', {name: 'First Tab'})).toHaveFocus()
 
         await userEvent.tab({shift: true})
         await expect(firstTab).toHaveFocus()
