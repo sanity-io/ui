@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 5.0.0-alpha.27
+
+### Patch Changes
+
+- f6623c2: fixes black token value and updates tab contrast
+- fae486b: Stop forwarding undefined and null layout props to the DOM.
+
 ## 5.0.0-alpha.26
 
 ### Patch Changes
