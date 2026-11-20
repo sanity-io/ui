@@ -64,6 +64,7 @@ export const WithButtons: Story = {
       <List {...props}>
         <List.Item>
           <List.ItemButton
+            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="First item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="First Item Title"
@@ -73,6 +74,7 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
+            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Second item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Second Item Title"
@@ -82,6 +84,7 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
+            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Third item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Third Item Title"
@@ -92,6 +95,7 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
+            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Fourth item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Fourth Item Title"

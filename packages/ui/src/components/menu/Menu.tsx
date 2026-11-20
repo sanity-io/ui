@@ -190,7 +190,6 @@ function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>)
       data-ui="MenuButton"
       role="menuitem"
       tabIndex={-1}
-      density="compact"
       {...props}
       onPointerEnter={(e: PointerEvent<HTMLButtonElement>) => {
         handlePointerEnterClose(e)

@@ -81,24 +81,21 @@ export const listButtonProps: Record<string, PropDef> = {
         propDef: gapProps['gap'] as PropDef,
         mapping: {
           compact: 2,
-          regular: 2,
-          loose: 3,
+          regular: 3,
         },
       },
       minHeight: {
         propDef: heightProps['minHeight'] as PropDef,
         mapping: {
-          compact: '33px',
-          regular: '37px',
-          loose: '45px',
+          compact: '25px',
+          regular: '33px',
         },
       },
       paddingX: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {
-          compact: 1,
-          regular: 2,
-          loose: 3,
+          compact: 2,
+          regular: 3,
         },
       },
     },
