@@ -28,6 +28,10 @@ export function Icon({icon, size = 2, ...props}: IconProps) {
 
   if (props.trim) {
     const hasMargin = Object.keys(props).findIndex((prop) => prop.startsWith('margin')) > -1
+    const elementProps = {
+      ...svgProps,
+      className: clsx(svgProps.className, 'sui-icon-trim'),
+    }
 
     if (hasMargin) {
       return (
@@ -36,30 +40,22 @@ export function Icon({icon, size = 2, ...props}: IconProps) {
           className={clsx(containerProps.className.replace('sui-icon-trim', ''))}
         >
           {iconElement
-            ? cloneElement(iconElement, {
-                ...svgProps,
-                className: clsx(svgProps.className, 'sui-icon-trim'),
-              })
-            : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, {
-                ...svgProps,
-                className: clsx(svgProps.className, 'sui-icon-trim'),
-              })}
+            ? cloneElement(iconElement, elementProps)
+            : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, elementProps)}
         </span>
       )
     }
   }
 
+  const elementProps = {
+    ...containerProps,
+    ...svgProps,
+    className: clsx(containerProps.className, svgProps.className),
+  }
+
   return iconElement
-    ? cloneElement(iconElement, {
-        ...containerProps,
-        ...svgProps,
-        className: clsx(containerProps.className, svgProps.className),
-      })
-    : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, {
-        ...containerProps,
-        ...svgProps,
-        className: clsx(containerProps.className, svgProps.className),
-      })
+    ? cloneElement(iconElement, elementProps)
+    : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, elementProps)
 }
 
 export type {IconProps}
