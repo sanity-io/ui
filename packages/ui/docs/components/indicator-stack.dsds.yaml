@@ -26,7 +26,7 @@ sections:
     for: all
     framing: how-to-use
     items:
-      - id: always-indicatorstack-placing-two-more
+      - id: indicatorstack-placement
         refs:
           - to: shared-foundations#indicator-stack-for-adjacent-dots
             rel: same-as

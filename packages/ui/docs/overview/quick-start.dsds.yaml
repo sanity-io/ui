@@ -35,6 +35,7 @@ sections:
       - level: must
         statement: Add `flexWrap="wrap"` to every `Flex` with two or more children to prevent overflow at 320px.
       - level: must
+        id: icon-only-aria-label
         statement: Add `aria-label` to every icon-only button. A tooltip does not set an accessible name.
       - level: should
         statement: Use `VStack` for simple vertical lists with even spacing. Use `Flex flexDirection="column"` when you need `flexGrow`, `overflow`, `minHeight`, or full flex control.

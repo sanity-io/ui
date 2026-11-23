@@ -1,0 +1,119 @@
+kind: component
+id: search-input
+name: SearchInput
+description: A single-line search field with a search icon, a clear button and a loading state.
+metadata:
+  tags: [search, input, form, search field, filter, query, loading, clear]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To find specific content by typed text, as a search or filter action.
+      - level: should-not
+        statement: For freeform text that is not used for search or filtering. Use TextInput instead.
+        alternatives:
+          - to: text-input
+      - level: should-not
+        statement: For choosing one value from a fixed set of options. Use Select instead.
+        alternatives:
+          - to: select
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: forms#pair-with-visible-label
+            rel: same-as
+      - level: must
+        statement: Give every SearchInput an accessible name, with a visible label or `aria-label`.
+      - refs:
+          - to: forms#placeholder-not-a-label
+            rel: same-as
+      - level: should
+        statement: Use `loading` while results for the current query are pending. It swaps the search icon for a spinner and sets `aria-busy="true"` on the input. Pass it only while a request is in flight.
+      - level: should
+        statement: Use `density="loose"` when searching requires more visual weight.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Handle the clear button through `onChange`. Clearing dispatches a native input event with an empty value, so `onChange` runs with `''`. Don't add a separate reset button for the same action.
+      - level: must-not
+        statement: Don't set `type` on SearchInput. It always renders `type="search"`, and the prop is removed from its type.
+      - level: must-not
+        statement: Don't rely on the default placeholder. It is a space, so it exists to keep the clear button's logic working, not to tell the user anything.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: The clear button is labelled "Clear search query" in English. The label is fixed and can't be changed through props, so use this component only where that English label is acceptable.
+      - level: should
+        statement: The clear button shows only when the field has a value and is editable. Don't expect it on an empty or read-only field.
+      - refs:
+          - to: forms#programmatic-name-required
+            rel: same-as
+  - kind: section
+    for: agent
+    freeform:
+      - title: Examples
+        body: |-
+          A labelled search field that follows a query:
+
+          ```tsx
+          import {SearchInput} from '@sanity/ui'
+
+          <SearchInput
+            aria-label="Search documents"
+            placeholder="Search documents"
+            value={query}
+            onChange={(event) => setQuery(event.currentTarget.value)}
+            loading={isSearching}
+          />
+          ```
+
+          The clear button does not need its own handler. Clearing the field runs `onChange` with an empty value.
+refs:
+  - to: text-input
+    rel: relates-to
+    note: Freeform single-line text that is not a search
+  - to: select
+    rel: relates-to
+    note: Choosing one value from a fixed set
+  - to: spinner
+    rel: relates-to
+    note: The loading indicator that replaces the search icon
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/search-input/SearchInput.tsx
+imports:
+  - platform: react
+    code: import { SearchInput } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: loading
+    description: Shows a spinner in place of the search icon and sets aria-busy on the input while results are pending.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Sets the field's density. Form fields accept regular and loose only.
+    values:
+      - id: regular
+        description: Default density.
+      - id: loose
+        description: Wider spacing, for forms with generous layouts.
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

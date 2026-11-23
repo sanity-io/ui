@@ -83,13 +83,10 @@ sections:
           - to: list-item
             rel: relates-to
             role: beta
-          - to: list-item-text
-            rel: relates-to
-            role: beta
           - to: list-item-image
             rel: relates-to
             role: beta
-          - to: list-button-item
+          - to: list-item-button
             rel: relates-to
             role: beta
           - to: avatar-stack
@@ -182,6 +179,9 @@ sections:
             rel: relates-to
             role: beta
           - to: text-input
+            rel: relates-to
+            role: beta
+          - to: search-input
             rel: relates-to
             role: beta
           - to: text-area

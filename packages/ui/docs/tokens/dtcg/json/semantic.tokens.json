@@ -179,36 +179,36 @@
   },
   "active-background-normal": {
     "$type": "color",
-    "$value": "{blue-50}",
+    "$value": "{gray-100}",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--blue-50), var(--blue-950))",
+        "css": "light-dark(var(--gray-100), var(--gray-900))",
         "modes": {
-          "dark": "{blue-950}"
+          "dark": "{gray-900}"
         }
       }
     }
   },
   "active-foreground-normal": {
     "$type": "color",
-    "$value": "{blue-800}",
+    "$value": "{gray-800}",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--blue-800), var(--blue-200))",
+        "css": "light-dark(var(--gray-800), var(--gray-200))",
         "modes": {
-          "dark": "{blue-200}"
+          "dark": "{gray-200}"
         }
       }
     }
   },
   "active-background-emphasized": {
     "$type": "color",
-    "$value": "{blue-600}",
+    "$value": "{gray-800}",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--blue-600), var(--blue-400))",
+        "css": "light-dark(var(--gray-800), var(--gray-200))",
         "modes": {
-          "dark": "{blue-400}"
+          "dark": "{gray-200}"
         }
       }
     }
@@ -218,9 +218,9 @@
     "$value": "{white}",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--white), var(--black))",
+        "css": "light-dark(var(--white), var(--gray-950))",
         "modes": {
-          "dark": "{black}"
+          "dark": "{gray-950}"
         }
       }
     }
@@ -263,10 +263,10 @@
   },
   "focus-outline": {
     "$type": "css",
-    "$value": "2px solid var(--blue-500)",
+    "$value": "2px solid light-dark(var(--blue-600), var(--blue-400))",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "2px solid var(--blue-500)"
+        "css": "2px solid light-dark(var(--blue-600), var(--blue-400))"
       }
     }
   },
@@ -301,14 +301,11 @@
     }
   },
   "inert-background": {
-    "$type": "color",
-    "$value": "{gray-50}",
+    "$type": "css",
+    "$value": "hsl(from var(--gray-500) h s l / 0.125)",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--gray-50), var(--gray-950))",
-        "modes": {
-          "dark": "{gray-950}"
-        }
+        "css": "hsl(from var(--gray-500) h s l / 0.125)"
       }
     }
   },
@@ -317,9 +314,9 @@
     "$value": "{gray-400}",
     "$extensions": {
       "com.sanity.ui": {
-        "css": "light-dark(var(--gray-400), var(--gray-600))",
+        "css": "light-dark(var(--gray-400), var(--gray-500))",
         "modes": {
-          "dark": "{gray-600}"
+          "dark": "{gray-500}"
         }
       }
     }

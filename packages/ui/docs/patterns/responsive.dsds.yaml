@@ -34,7 +34,7 @@ sections:
         statement: Add `flexWrap="wrap"` to every horizontal `Flex` row (toolbar, action bar, card actions) so layouts reflow at 320px without horizontal scrolling.
       - level: must
         statement: Add `minWidth="0"` to any flex child that contains text. Without it the child cannot shrink below its content size, causing overflow past the viewport.
-      - id: inside-scrollable-container-must-failure
+      - id: top-layer-in-scroll
         level: must
         statement: >-
           Tooltip and Popover render in the browser's top layer, so a scrollable or `overflow: hidden` ancestor does not clip them. Set their boolean `portal` prop only when an ancestor with `transform`, `filter` or `contain` breaks their positioning.

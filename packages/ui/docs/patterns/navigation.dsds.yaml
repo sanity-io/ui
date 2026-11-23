@@ -4,7 +4,7 @@ name: Sidebar navigation pattern
 description: >-
   Sanity UI has no built-in NavItem or SidebarLink component. This pattern shows
   the canonical way to build keyboard-accessible sidebar navigation by composing
-  List + List.ButtonItem, instead of hand-building nav items from a native
+  List + List.ItemButton, instead of hand-building nav items from a native
   button or Box as="button". Use this pattern for persistent sidebar navigation,
   not for a popover menu.
 metadata:
@@ -18,7 +18,7 @@ metadata:
     - badge
     - keyboard accessible
     - aria-current
-    - selected state
+    - current state
   status:
     status: stable
 sections:
@@ -37,19 +37,19 @@ sections:
     for: all
     framing: how-to-use
     items:
-      - id: plain-selectable-navigation-rows-prop
+      - id: nav-rows-list-item-button
         level: must
-        statement: Use `List.ButtonItem` for navigation rows.
+        statement: Use `List.ItemButton` inside a `List.Item` for navigation rows.
         tags: [development]
-      - id: prop-also-set-yourself-only
+      - id: current-marks-active-row
         level: must
-        statement: When using `List.ButtonItem`'s `selected` prop, also set `aria-current` yourself. `selected` only sets `data-selected`, a styling hook — it carries no accessibility signal on its own. Pass `selected` conditionally (`selected={isActive || undefined}`) and pair it with `aria-current` so assistive technology learns which item is active.
+        statement: Mark the active row with `List.ItemButton`'s `current` prop, as `current={isActive}`. It sets `aria-current="true"`, which the active style keys on. Don't set `aria-current` yourself.
         tags: [accessibility]
       - level: should
         statement: Verify the selected state's contrast in your theme, and consider marking the active item with a bold label or a left border accent instead of relying on a selected background alone. Confirm the result meets WCAG AA in whichever theme is active.
         tags: [visual-design]
       - level: must-not
-        statement: Never use a native `<button>` or `<Box as="button">` with inline styles for navigation items. Hand-built nav items are the single most common source of unnecessary inline styles in test runs — agents create 10–12 CSS properties per nav item to replicate what Sanity UI's List/List.ButtonItem already provide.
+        statement: Never use a native `<button>` or `<Box as="button">` with inline styles for navigation items. Hand-built nav items are the single most common source of unnecessary inline styles in test runs — agents create 10–12 CSS properties per nav item to replicate what Sanity UI's List/List.ItemButton already provide.
         tags: [development]
       - level: must-not
         statement: Don't use `Box as="button">` for a navigation item. It inherits browser button defaults (border, background, cursor) with no prop-based reset available.
@@ -83,7 +83,7 @@ sections:
       - level: must-not
         statement: 'Don''t give every node `tabIndex={0}` inside a `role="tree"`. That makes the tree as many tab stops as it has rows, which is the cost the single-tab-stop pattern exists to remove. Exactly one node carries `tabIndex={0}`; the rest carry `tabIndex={-1}`.'
       - level: must-not
-        statement: 'Don''t build a tree row from `Box`/`Flex` with `onClick`, `role="button"` and `tabIndex`. Use `List.ButtonItem` with `as="a"` and `href` for a navigation row, or `PressArea` for a custom surface. Both render a real control with keyboard support already wired.'
+        statement: 'Don''t build a tree row from `Box`/`Flex` with `onClick`, `role="button"` and `tabIndex`. Use `List.ItemButton` with `as="a"` and `href` for a navigation row, or `PressArea` for a custom surface. Both render a real control with keyboard support already wired.'
 
   - kind: steps
     for: all
@@ -92,7 +92,7 @@ sections:
     items:
       - title: Navigation container uses `<Box as="nav" aria-label="...">`.
       - title: Each item is keyboard-reachable and activatable (`Enter`/`Space`).
-      - title: Active item is marked `selected` + `aria-current` (List.ButtonItem).
+      - title: Active item is marked with `current` on `List.ItemButton`, which sets `aria-current`.
       - title: Icon-only items have `aria-label` (not needed if a text label is present).
       - optional: true
         title: Navigation group uses `VStack gap={1}` or `gap={2}` for target spacing.
@@ -100,9 +100,9 @@ sections:
   - kind: section
     for: all
     freeform:
-      - title: 'List + List.ButtonItem'
+      - title: 'List + List.ItemButton'
         body: |-
-          Use `List` with `List.ButtonItem` for nav items. Pass `as="a"` and `href`: each row then renders a real link, and middle-click, "Open in new tab" and bookmarking work. `List.ButtonItem` also supports a `selected` state, which `Button` lacks.
+          Use `List` with a `List.Item` per row, and a `List.ItemButton` inside each one. Pass `as="a"` and `href`: each row then renders a real link, and middle-click, "Open in new tab" and bookmarking work.
 
           ```tsx
           import { Badge, Box, List, Text } from '@sanity/ui'
@@ -111,43 +111,43 @@ sections:
 
           <Box as="nav" aria-label="Main navigation" padding={3}>
             <List>
-              <List.ButtonItem
-                selected={activeSection === 'guides' || undefined}
-                aria-current={activeSection === 'guides' ? 'page' : undefined}
-                as="a"
-                href="/guides"
-                start={<Text size={1}><DocumentTextIcon /></Text>}
-                end={<Badge>{counts.guides}</Badge>}
-              >
-                <List.ItemText title="Guides" />
-              </List.ButtonItem>
-              <List.ButtonItem
-                selected={activeSection === 'api' || undefined}
-                aria-current={activeSection === 'api' ? 'page' : undefined}
-                as="a"
-                href="/api"
-                start={<Text size={1}><CodeIcon /></Text>}
-                end={<Badge>{counts.api}</Badge>}
-              >
-                <List.ItemText title="API References" />
-              </List.ButtonItem>
+              <List.Item>
+                <List.ItemButton
+                  as="a"
+                  href="/guides"
+                  current={activeSection === 'guides'}
+                  text="Guides"
+                  start={<Text size={1}><DocumentTextIcon /></Text>}
+                  end={<Badge>{counts.guides}</Badge>}
+                />
+              </List.Item>
+              <List.Item>
+                <List.ItemButton
+                  as="a"
+                  href="/api"
+                  current={activeSection === 'api'}
+                  text="API References"
+                  start={<Text size={1}><CodeIcon /></Text>}
+                  end={<Badge>{counts.api}</Badge>}
+                />
+              </List.Item>
             </List>
           </Box>
           ```
 
           **Notes on the List approach:**
-          - The whole row is one link — focusable via `Tab`, and it follows the link on `Enter`.
-          - Unlike `Button`, it holds icon + label + a badge/count at the end via the `start` and `end` slots.
-          - No arrow-key navigation between items — each row is a separate Tab stop.
-          - `selected` sets `data-selected` only (a styling hook). Pass it conditionally (`selected={isActive || undefined}`) and add `aria-current` yourself so assistive technology gets the signal.
+          - The whole row is one link: focusable via `Tab`, and it follows the link on `Enter`.
+          - `start` holds an icon, and `end` holds a non-interactive badge or count. Neither adds a second tab stop.
+          - No arrow-key navigation between items. Each row is a separate Tab stop.
+          - `current` sets `aria-current="true"` on the active row. That is valid ARIA, but it is not `aria-current="page"`. If your team requires `"page"` for navigation, this component does not produce it.
   - kind: section
     for: agent
     freeform:
       - title: Intent
-        body: Build sidebar navigation with List + List.ButtonItem, never with a hand-built button or Box as="button".
+        body: Build sidebar navigation with List + List.ItemButton, never with a hand-built button or Box as="button".
 uses:
   - to: list
     note: Optional part.
-  - to: list-button-item
+  - to: list-item-button
     note: Optional part.
   - to: badge

@@ -23,7 +23,7 @@ sections:
         statement: For full-width rows that stretch across their container. Use Flex instead.
         alternatives:
           - to: flex
-      - id: horizontal-layouts-need-custom-alignment
+      - id: hstack-custom-alignment
         level: should-not
         statement: For horizontal layouts that need custom alignment, or that must stay on one line. Use Flex instead.
         alternatives:

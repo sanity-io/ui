@@ -64,7 +64,7 @@ sections:
     items:
       - level: should
         statement: Divider renders as `<hr>`, which carries the implicit ARIA role `separator`. Screen readers announce it as a thematic break. Use it only when the content on either side is distinct — not for visual spacing alone.
-      - id: divider-focusable-keyboard-interaction-add
+      - id: divider-not-focusable
         level: should
         statement: Divider is not focusable and has no keyboard interaction. Do not add `onClick` or other event handlers to it.
       - level: should

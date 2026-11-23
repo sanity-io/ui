@@ -39,7 +39,7 @@ sections:
       - refs:
           - to: api-essentials#sizing-is-a-css-string
             rel: same-as
-      - id: grid-template-columns-uses-fr-or-minmax
+      - id: grid-columns-fluid-units
         level: should
         statement: 'Use gridTemplateColumns with repeat() and fr units, minmax(), auto, or responsive arrays to build layouts that adapt gracefully — avoid bare pixel values.'
         example:
@@ -57,14 +57,14 @@ sections:
           - to: shared-foundations#layout-primitive-no-text-styles
             rel: same-as
         tags: [content]
-      - id: no-visual-reorder-via-grid-placement
+      - id: grid-no-visual-reorder
         level: must-not
         statement: Don't use CSS order, gridColumn, or gridRow to visually reorder items away from their DOM order — screen readers follow DOM order, so the visual order of grid items should match their DOM source order.
         example:
           title: How to satisfy this
           description: Tab through the grid with keyboard-only navigation and confirm focus moves in the same sequence as the visual reading order. Inspect the rendered DOM in browser DevTools and confirm the sequence of child nodes matches the left-to-right, top-to-bottom visual order of the grid. Use a screen reader and verify the announced order of items matches what a sighted user would read.
         checkedBy: manual
-      - id: no-hardcoded-px-in-grid-template-columns
+      - id: grid-no-hardcoded-px
         level: must-not
         statement: Don't hardcode pixel values in gridTemplateColumns when a fluid unit like fr, minmax(), or auto would serve the same purpose more resiliently.
         example:
