@@ -1,11 +1,22 @@
 .sui-Icon {
   --icon-color: var(--foreground-high);
   color: var(--icon-color);
+  flex-shrink: 0;
+}
+
+.sui-Icon:where(span) {
+  width: fit-content;
+  height: fit-content;
 }
 
 .sui-Icon:where(.sui-text-muted) {
   --icon-color-muted: var(--foreground-low);
   color: var(--icon-color-muted);
+}
+
+.sui-Icon:where(.sui-icon-trim),
+.sui-Icon .sui-icon-trim {
+  margin: var(--trim);
 }
 
 @breakpoints {
@@ -14,4 +25,10 @@
   .sui-icon-body2 { font-size: 25px; }
   .sui-icon-body3 { font-size: 29px; }
   .sui-icon-body4 { font-size: 33px; }
+
+  .sui-icon-body0 { --trim: -5px; }
+  .sui-icon-body1 { --trim: -6px; }
+  .sui-icon-body2 { --trim: -7px; }
+  .sui-icon-body3 { --trim: -8px; }
+  .sui-icon-body4 { --trim: -9px; }
 }

@@ -34,7 +34,7 @@ const argTypes = {
 }
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon',
+  title: 'Typography/Icon',
   component: Icon,
   argTypes,
   args: {
@@ -99,6 +99,35 @@ export const Tones: Story = {
   play: async ({canvas}) => {
     await expect((await canvas.findByLabelText('Icon Tone Positive')).classList).toContain(
       'sui-tone-positive',
+    )
+  },
+}
+
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <>
+        <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+          {ICON_SIZE.map((size) => (
+            <Flex
+              key={size}
+              gap={2}
+              alignItems="center"
+              style={{border: '10px solid var(--gray-100)'}}
+            >
+              <Icon {...props} size={size} trim aria-label={`Icon Size ${size} Trimmed`} />
+              <Text size={size} trim>
+                Inline text trimmed
+              </Text>
+            </Flex>
+          ))}
+        </Flex>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon Size 3 Trimmed')).classList).toContain(
+      'sui-icon-trim',
     )
   },
 }
