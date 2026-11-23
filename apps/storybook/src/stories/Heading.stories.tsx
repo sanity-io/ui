@@ -95,7 +95,7 @@ export const Trim: Story = {
         {HEADING_SIZE.map((size) => (
           <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
             <Heading {...props} size={size} trim>
-              Heading Size {size} Trimmed
+              Heading Size {size} Trim
             </Heading>
           </Flex>
         ))}
@@ -103,7 +103,7 @@ export const Trim: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Heading Size 3 Trimmed')).classList).toContain(
+    await expect((await canvas.findByText('Heading Size 3 Trim')).classList).toContain(
       'sui-text-trim',
     )
   },

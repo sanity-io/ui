@@ -89,7 +89,7 @@ export const Trim: Story = {
         {TEXT_SIZE.map((size) => (
           <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
             <Text {...props} size={size} trim>
-              Text Size {size} Trimmed
+              Text Size {size} Trim
             </Text>
           </Flex>
         ))}
@@ -97,9 +97,7 @@ export const Trim: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Text Size 3 Trimmed')).classList).toContain(
-      'sui-text-trim',
-    )
+    await expect((await canvas.findByText('Text Size 3 Trim')).classList).toContain('sui-text-trim')
   },
 }
 

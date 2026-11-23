@@ -115,9 +115,9 @@ export const Trim: Story = {
               alignItems="center"
               style={{border: '10px solid var(--gray-100)'}}
             >
-              <Icon {...props} size={size} trim aria-label={`Icon Size ${size} Trimmed`} />
+              <Icon {...props} size={size} trim aria-label={`Icon Size ${size} Trim`} />
               <Text size={size} trim>
-                Inline text trimmed
+                Inline text trim
               </Text>
             </Flex>
           ))}
@@ -126,9 +126,37 @@ export const Trim: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Icon Size 3 Trimmed')).classList).toContain(
+    await expect((await canvas.findByLabelText('Icon Size 3 Trim')).classList).toContain(
       'sui-icon-trim',
     )
+  },
+}
+
+export const TrimMarginElement: Story = {
+  tags: ['!dev', '!autodocs'],
+  render: () => {
+    return (
+      <>
+        <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+          <Flex gap={2} alignItems="center" style={{border: '10px solid var(--gray-100)'}}>
+            <Icon
+              icon={<AddIcon className="sui-tone-positive" />}
+              size={2}
+              trim
+              margin={2}
+              aria-label="Element Icon with Trim and Margin"
+            />
+          </Flex>
+        </Flex>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    const icon = await canvas.findByLabelText('Element Icon with Trim and Margin')
+    await expect(icon.classList).toContain('sui-icon-trim')
+    await expect(icon.classList).toContain('sui-tone-positive')
+    await expect(icon.parentElement?.dataset.ui).toBe('Icon')
+    await expect(icon.parentElement?.classList).toContain('sui-m2')
   },
 }
 

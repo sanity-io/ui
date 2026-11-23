@@ -91,7 +91,7 @@ export const Trim: Story = {
         {EYEBROW_SIZE.map((size) => (
           <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
             <Eyebrow {...props} size={size} trim>
-              Eyebrow Size {size} Trimmed
+              Eyebrow Size {size} Trim
             </Eyebrow>
           </Flex>
         ))}
@@ -99,7 +99,7 @@ export const Trim: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Eyebrow Size 3 Trimmed')).classList).toContain(
+    await expect((await canvas.findByText('Eyebrow Size 3 Trim')).classList).toContain(
       'sui-text-trim',
     )
   },

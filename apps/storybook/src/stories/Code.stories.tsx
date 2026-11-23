@@ -113,7 +113,7 @@ export const Trim: Story = {
         {CODE_SIZE.map((size) => (
           <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
             <Code {...props} size={size} trim>
-              Code Size {size} Trimmed
+              Code Size {size} Trim
             </Code>
           </Flex>
         ))}
@@ -121,9 +121,9 @@ export const Trim: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('Code Size 3 Trimmed')).parentElement?.classList,
-    ).toContain('sui-text-trim')
+    await expect((await canvas.findByText('Code Size 3 Trim')).parentElement?.classList).toContain(
+      'sui-text-trim',
+    )
   },
 }
 
