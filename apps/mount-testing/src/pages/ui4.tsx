@@ -1,5 +1,6 @@
 import 'ui4/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
+import {SearchIcon} from '@sanity/icons/Search'
 import {Profiler} from 'react'
 import {
   Avatar,
@@ -222,6 +223,13 @@ export default function Ui4() {
       <Profiler id="TextInput" onRender={handleOnRender}>
         {iterator.map((i) => (
           <TextInput key={i} aria-label="Text input" />
+        ))}
+      </Profiler>
+
+      <h2>{count} SearchInputs</h2>
+      <Profiler id="SearchInput" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextInput key={i} aria-label="Search" icon={SearchIcon} clearButton />
         ))}
       </Profiler>
 

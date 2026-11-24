@@ -24,6 +24,6 @@ export const visuallyHiddenProps: Record<string, PropDef> = {
   },
   visibleOnFocus: {
     type: 'boolean',
-    className: 'sui-visually-hidden-visible',
+    className: 'visually-hidden-visible',
   },
 }

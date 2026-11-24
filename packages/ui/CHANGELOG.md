@@ -1,5 +1,25 @@
 # @sanity/ui
 
+## 5.0.0-alpha.27
+
+### Patch Changes
+
+- f6623c2: fixes black token value and updates tab contrast
+- fae486b: Stop forwarding undefined and null layout props to the DOM.
+
+## 5.0.0-alpha.26
+
+### Patch Changes
+
+- 978a60c: adds new SearchInput component
+- f0d8652: fixes for visually hidden visibleOnFocus prop styling, tone with default types, and generating classnames for responsive arrays that include null or undefined
+
+## 5.0.0-alpha.25
+
+### Patch Changes
+
+- 3e152aa: ensure polymorphic component prop type exports include default props
+
 ## 5.0.0-alpha.24
 
 ### Patch Changes

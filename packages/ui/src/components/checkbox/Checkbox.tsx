@@ -3,6 +3,7 @@ import {RemoveIcon} from '@sanity/icons/Remove'
 import clsx from 'clsx'
 import {useEffect, useRef} from 'react'
 
+import {composeRefs} from '../../utils/composeRefs'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
@@ -12,7 +13,7 @@ const checkboxClassName = suffixClassName('sui-Checkbox')
 const checkboxInputClassName = suffixClassName('sui-CheckboxInput')
 
 /** @beta */
-export function Checkbox(props: CheckboxProps) {
+export function Checkbox({ref, ...props}: CheckboxProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const {className, style, hasError, indeterminate, ...rest} = getProps(props, checkboxProps)
 
@@ -38,7 +39,7 @@ export function Checkbox(props: CheckboxProps) {
       <input
         type="checkbox"
         className={checkboxInputClassName}
-        ref={inputRef}
+        ref={composeRefs(inputRef, ref)}
         aria-invalid={hasError || undefined}
         {...rest}
       />

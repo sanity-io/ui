@@ -8,6 +8,7 @@ import {Icon} from '../icon/Icon'
 import {type SelectProps, selectProps} from './select.props'
 
 const selectClassName = suffixClassName('sui-Select')
+const selectIconClassName = suffixClassName('sui-Select-Icon')
 
 /** @public */
 export function Select({density = 'regular', hasError = false, ...props}: SelectProps) {
@@ -31,7 +32,11 @@ export function Select({density = 'regular', hasError = false, ...props}: Select
       >
         {children}
       </select>
-      <div className={iconClasses} data-ui="Select-icon" style={{positionAnchor: anchorName}}>
+      <div
+        className={clsx(selectIconClassName, iconClasses)}
+        data-ui="Select-Icon"
+        style={{positionAnchor: anchorName}}
+      >
         <Icon icon={SelectIcon} size={1} />
       </div>
     </>
