@@ -42,7 +42,7 @@ sections:
           - to: accessibility-guidelines#contrast-minimums
             rel: same-as
       - refs:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
             rel: same-as
       - level: should
         statement: The palette is as small as the job allows.
@@ -180,14 +180,14 @@ sections:
 
           **Hover:** Calculated as a brightness shift — darker in light mode, lighter in dark mode. These colors are dynamically calculated from the base color.
 
-          **The active family (`active-*`):** Three interaction states share a single token family. Active tokens are represented by blue. Active tokens have two parts: background and foreground.
+          **The active family (`active-*`):** Selected and checked states use gray, not a hue. Active tokens have two parts: background and foreground, and two emphasis levels.
 
-          - *Selected/Checked/On:* Selected menu items are given a blue background. For high-emphasis selections — such as menu items or checkboxes — the background is given a high-contrast blue with the foreground inverted to white. For lower-emphasis selections — such as Tabs — the background is given a low-contrast blue with foreground acting as the main contrast element.
-          - *Focused:* Focused elements are given a halo outline with a high-contrast blue color.
+          - *Emphasized* (`--active-background-emphasized` with `--active-foreground-emphasized`): marks an on state. Checked checkboxes, radios and switches use it, and so does the current row in a List. The background is high-contrast gray, and the foreground is white in light mode and gray-950 in dark mode.
+          - *Normal* (`--active-background-normal` with `--active-foreground-normal`): the lighter pair, for lower-emphasis selection.
 
-          **Note on naming:** The family is currently called `active` in design. Token names in code are TBD. If you're consuming the system through tokens alone — without seeing the rendered UI — know that the active family covers all three states above. The visual distinction is rendered, not tokenized. When the code names land, this section updates.
+          **Focus is not part of the active family.** A focused element gets a 2px halo outline from `--focus-outline`, offset by `--focus-offset`. The halo is blue: a darker blue in light mode and a lighter blue in dark mode.
 
-          **The inert family (`inert-*`):** represents elements that aren't interactive. Inert tokens have two parts: background and foreground.
+          **The inert family (`inert-*`):** represents elements that aren't interactive. Inert tokens have two parts: background and foreground. The inert background is 12.5% gray (`hsl(from var(--gray-500) h s l / 0.125)`), so it tints the surface behind it in both modes instead of setting a fixed colour. The inert foreground is gray-400 in light mode and gray-500 in dark mode.
 
           - *Read-only:* Read-only elements use an inert background only. The inert background signals the element can't be edited, but the text can still be read and selected.
           - *Disabled:* Disabled elements use inert background and foreground to represent that the entire element provides no interaction.

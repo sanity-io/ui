@@ -88,7 +88,7 @@ sections:
       - level: must
         statement: "Use tone='critical' for destructive actions, with an icon that signals the action, like TrashIcon."
         refines:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
       - level: should
         statement: IconButton defaults to level='primary', like Button. Set level='tertiary' on toolbar and list row actions. Leave `level` out only on the single most critical action in a group.
       - level: should

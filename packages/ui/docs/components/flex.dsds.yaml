@@ -88,7 +88,7 @@ sections:
         $extensions:
           io.jev:
             type: boolean
-      - id: flex-reverse-dom-order-matches-visual
+      - id: flex-reverse-order
         level: must-not
         statement: Don't use row-reverse or column-reverse to change sort order — these only change visual order, not tab order. When a reverse direction is used, the DOM order of child elements must still match the intended reading and tab order.
         example:

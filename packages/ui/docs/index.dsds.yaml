@@ -66,7 +66,7 @@ shared:
             checkedBy: assisted
             refines:
               - to: button#button-icon-only-accessible-name
-              - to: quick-start#add-aria-label-to-every-icon-only-button-a-tooltip-does-not-set-an-accessible-name
+              - to: quick-start#icon-only-aria-label
             $extensions:
               io.jev:
                 type: boolean
@@ -83,7 +83,7 @@ shared:
           - id: inner-spacing-smaller-than-outer
             level: must
             statement: Inner spacing within a group must be smaller than the space around it, by at least one step on the scale. Equal inner and outer spacing hides that the container is one group.
-          - id: destructive-actions-use-critical-tone
+          - id: destructive-critical-tone
             level: must
             statement: A destructive action should use `tone="critical"`. Destructive means the action removes data — delete, archive, revoke, terminate. All destructive actions should display an icon that reads as destructive and use a verb in the label naming what is lost.
             checks:
@@ -92,7 +92,7 @@ shared:
             checkedBy: assisted
             refines:
               - to: button#most-buttons-tertiary
-              - to: layouts#give-destructive-actions-tone-critical-and-an-erroroutlineicon-through-iconstart-iconstart-erroroutlineicon
+              - to: layouts#destructive-critical-icon
             $extensions:
               io.jev:
                 type: boolean
@@ -106,7 +106,7 @@ shared:
             refs:
               - to: shared-foundations#tone-paired-with-second-channel
                 rel: relates-to
-              - to: shared-foundations#destructive-actions-use-critical-tone
+              - to: shared-foundations#destructive-critical-tone
                 rel: relates-to
             $extensions:
               io.jev:
@@ -126,32 +126,32 @@ shared:
             $extensions:
               io.jev:
                 type: boolean
-          - id: form-control-visible-label-is-the-name
+          - id: form-visible-label-name
             level: should
             statement: Name a Checkbox, Radio or Switch through a linked label element (id and htmlFor), aria-label or aria-labelledby. These controls render no label of their own, so the name must come from one of these.
-          - id: form-control-repeated-rows-use-visuallyhidden
+          - id: form-rows-visually-hidden
             level: should
             statement: When the visible label would repeat across rows, wrap a fully descriptive label in `VisuallyHidden` rather than showing the repeated text. The linked label element is the accessible name, so hiding a more descriptive version of its text keeps a single accessible name in the DOM instead of introducing a second, separately maintained one.
-          - id: form-control-aria-label-is-the-fallback
+          - id: form-aria-label-fallback
             level: should
             statement: Use `aria-label` or `aria-labelledby` only when the label content can't be restructured that way — for example, when the descriptive text already exists elsewhere in the DOM. Both attributes forward straight to the underlying `<input>`, but they create a second source of the accessible name that can drift out of sync with the visible label.
             refines:
               - to: forms#aria-label-overrides-name
-          - id: form-control-aria-label-includes-visible-text
+          - id: form-aria-label-visible-text
             level: should
             statement: When setting `aria-label` on a Checkbox, Radio or Switch, include the visible `label` text inside it. This satisfies WCAG 2.5.3 (Label in Name). Voice-control users can then target the control by what they see on screen.
           - id: least-that-does-the-job
             level: should
             statement: "Use the least that does the job. Each foundation provides a constrained set: a spacing scale, a tone family, motion tokens, and elevation levels. The set exists so you don't invent. One emphasized element draws attention; three cancel each other out."
             refines:
-              - to: shared-foundations#use-the-constrained-token-set-spacing-scale-tone-family-motion-tokens-elevation-levels-do-not-invent-custom-values-outside-the-system
+              - to: shared-foundations#constrained-tokens
           - id: define-state-model-first
             level: should
             statement: Define the complete state model before any visual design. Name every state, every transition, and every copy slot. A spec is not done until all keyboard behaviors are defined, all states are verifiable, and all ARIA properties are assigned.
           - id: every-choice-has-a-job
             level: should
             statement: Every design choice should have a job. Color communicates status. Motion marks a state change. Icons support recognition. Elevation signals layering. If a choice has no named job, leave it out.
-          - id: prefer-component-over-native-element
+          - id: prefer-component-over-native
             level: should
             statement: 'Reach for the design-system component before a native element that has a direct equivalent: `Box` (or `VStack`/`HStack`/`Flex`/`Grid`) instead of `div`, `Text` instead of `p` or `span`, `Heading` instead of `h1`–`h6`, `Button` instead of `button`, `Link` instead of `a`, `List` instead of `ul`/`ol`, `Divider` instead of `hr`. A native element used where a component exists opts out of the theme, the spacing scale, and the accessibility behaviour the component already carries. Elements with no component equivalent stay native — `table` and its parts, `form`, `section`, `main`, `label`.'
             checks:
@@ -194,7 +194,7 @@ shared:
                 role: agent-test
             checkedBy: assisted
             refines:
-              - to: button#don-t-use-button-without-a-text-label-button-relies-on-the-text-label-to-describe-its-purpose-use-iconbutton-in-cases-where-the-icon-is-the-only-visual-indicator
+              - to: button#text-label-required
             $extensions:
               io.jev:
                 type: boolean
@@ -203,6 +203,7 @@ shared:
         framing: how-to-use
         items:
           - level: must
+            id: constrained-tokens
             statement: 'Use the constrained token set: spacing scale, tone family, motion tokens, elevation levels. Do not invent custom values outside the system.'
           - level: should
             statement: Design token values ship from `@sanity-labs/design-tokens` as DTCG tokens and CSS custom properties. Each token group has a file in the package's `docs/tokens/` folder, with its values in `docs/tokens/dtcg/json/`. The groups are `color`, `container-widths`, `font-family`, `font-weight`, `radius`, `semantic`, `shadow`, `space` and `typography`.
@@ -250,9 +251,9 @@ shared:
           - id: shell-min-height-not-height
             level: must
             statement: Use `minHeight="100vh"` on the outer container, not `height="100vh"`. `height` stops the layout from growing taller than the viewport.
-          - id: selected-is-attribute-presence
+          - id: current-marks-active-row
             level: must
-            statement: '`selected` works on attribute presence, not value: `selected={false}` looks the same as `selected={true}`. Pass `selected={isSelected || undefined}` so the prop is left out when the item is not selected.'
+            statement: 'Mark the active List.ItemButton with `current={isActive}`. It sets `aria-current="true"` and the active style. Only the value true is styled, so don''t pass a string such as "page" and expect the active look.'
           - id: navigating-row-is-a-link
             level: must
             statement: 'A row that navigates renders as a link: pass `as="a"` and `href`, not `onClick`. Middle-click and "Open in new tab" then work.'
@@ -268,7 +269,7 @@ shared:
                 type: boolean
           - id: card-has-no-onclick
             level: must-not
-            statement: Do not put `onClick` on Card; it has none. To make a card clickable, wrap its content in PressArea, which renders a real `<button>` or `<a>`, or use a List.ButtonItem row.
+            statement: Do not put `onClick` on Card; it has none. To make a card clickable, wrap its content in PressArea, which renders a real `<button>` or `<a>`, or use a List.ItemButton row.
           - id: table-not-simulated-with-flex
             level: must-not
             statement: Do not use Flex or Grid to simulate a table. It has no row or cell semantics, so screen readers cannot announce row counts or move by column.
@@ -348,15 +349,12 @@ refs:
   - href: ./components/link.dsds.yaml
     rel: file
     role: Link
-  - href: ./components/list-button-item.dsds.yaml
+  - href: ./components/list-item-button.dsds.yaml
     rel: file
-    role: List.ButtonItem
+    role: List.ItemButton
   - href: ./components/list-item-image.dsds.yaml
     rel: file
     role: List.ItemImage
-  - href: ./components/list-item-text.dsds.yaml
-    rel: file
-    role: List.ItemText
   - href: ./components/list-item.dsds.yaml
     rel: file
     role: List.Item
@@ -405,6 +403,9 @@ refs:
   - href: ./components/text-input.dsds.yaml
     rel: file
     role: TextInput
+  - href: ./components/search-input.dsds.yaml
+    rel: file
+    role: SearchInput
   - href: ./components/tooltip-group.dsds.yaml
     rel: file
     role: TooltipGroup

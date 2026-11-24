@@ -1,0 +1,150 @@
+kind: component
+id: list-item-button
+name: List.ItemButton
+description: The pressable row inside a List.
+metadata:
+  tags: [list, item, row, button, interactive, selectable, navigation, current]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: A row that navigates, selects or triggers an action. For example, a document in a browser list, a sidebar nav item, or a selectable row in a picker.
+      - level: should
+        statement: A navigation row. Pass `as="a"` and `href` so the row is a real link.
+      - level: should-not
+        statement: A row with no interaction. Use List.Item instead.
+        alternatives:
+          - to: list-item
+      - level: should-not
+        statement: A row containing more than one interactive control. Nested interactive elements inside a button or anchor break keyboard and screen-reader expectations. Use one press target per row.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: list-item-button-in-list-item
+        level: must
+        statement: Wrap every List.ItemButton in a List.Item. A List renders a <ul>, which accepts only <li> children, and List.ItemButton renders a button or anchor.
+      - level: should
+        statement: Pass the main label as `text` and the secondary line as `subtext`. They are clamped to one line each. Do not wrap them in Text.
+      - level: should
+        statement: Set `density` on each row to match the surrounding layout. Density sets the row's gap, horizontal padding and minimum height together.
+      - level: should
+        statement: Pass `current` to mark the active row, as `current={isActive}`. The component sets `aria-current="true"` for `true`, and styles the row only for that value.
+      - level: must-not
+        statement: Don't use `aria-current` with a string such as "page" and expect the active style. The style applies only when the attribute is "true". Use `current` and let the component set the attribute.
+      - level: must-not
+        statement: Don't place a button, link or other interactive element inside List.ItemButton, in `start`, `end` or children.
+      - level: must-not
+        statement: Don't use List.ItemButton outside of a List.Item inside a List.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - id: button-props-forward
+        level: must
+        statement: Props other than `as`, `current`, `density`, `start`, `end`, `text`, `subtext` and `children` pass to the inner button or anchor. Put `onClick`, `href` and `aria-*` on List.ItemButton.
+      - refs:
+          - to: list#subcomponents-not-named-exports
+            rel: same-as
+      - level: must-not
+        statement: Don't pass `selected` to List.ItemButton. It is not a prop. Use `current`.
+      - level: must-not
+        statement: Don't use onClick on a List.Item. List.Item is not interactive and has none of the keyboard handling List.ItemButton provides. Use List.ItemButton for any pressable row.
+  - kind: section
+    for: all
+    freeform:
+      - title: Slots and density
+        body: |-
+          Content renders in this order: `start`, then the text block made of `text`, `subtext` and children, then `end`. Use `start` for a thumbnail or icon. Use `end` for a non-interactive badge, icon or timestamp.
+
+          | Density | gap | paddingX | minHeight |
+          |---------|-----|----------|-----------|
+          | `compact` | 2 | 1 | 33px |
+          | `regular` | 2 | 2 | 37px |
+          | `loose` | 3 | 3 | 45px |
+
+          `regular` is the default. Density is a single prop. Set it, rather than padding or height, on the row.
+
+      - title: Examples
+        body: |-
+          A list of documents, where one is the current row:
+
+          ```tsx
+          import { Badge, List } from '@sanity/ui'
+
+          <List>
+            {documents.map((doc) => (
+              <List.Item key={doc.id}>
+                <List.ItemButton
+                  onClick={() => setActiveId(doc.id)}
+                  current={activeId === doc.id}
+                  text={doc.title}
+                  subtext={doc.updatedAt}
+                  start={<List.ItemImage src={doc.thumbnailUrl} alt="" />}
+                  end={<Badge>{doc.status}</Badge>}
+                />
+              </List.Item>
+            ))}
+          </List>
+          ```
+
+          A navigation row that renders as a link:
+
+          ```tsx
+          import { List } from '@sanity/ui'
+
+          <List>
+            <List.Item>
+              <List.ItemButton as="a" href="/guides" current text="Guides" />
+            </List.Item>
+          </List>
+          ```
+alternatives:
+  - to: list-item
+    note: The non-interactive row. See **List.Item**
+  - to: press-area
+    note: The lower-level interaction primitive List.ItemButton is built on
+refs:
+  - to: list
+    rel: relates-to
+    note: The parent component. See **List** for full compound component docs
+  - to: list-item
+    rel: relates-to
+    note: The wrapper every List.ItemButton sits inside
+  - to: list-item-image
+    rel: relates-to
+    note: Thumbnail for the start slot
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: current
+    description: Marks the row as the current item. Sets aria-current="true", which the component styles as the active row.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Composite prop setting horizontal padding, gap and minimum height together.
+    values:
+      - id: compact
+        description: Padding 1, gap 2, minimum height 33px.
+      - id: regular
+        description: Padding 2, gap 2, minimum height 37px (default).
+      - id: loose
+        description: Padding 3, gap 3, minimum height 45px.
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

@@ -153,7 +153,7 @@ sections:
           visible effect, check for a spread like this first.
       - level: must-not
         statement: Do not put `flexDirection`, `alignItems`, `justifyContent` or `flexWrap` on `Box`. They belong to `Flex`. On `Box` they are a TypeScript error, not a setting that quietly does nothing.
-      - id: no-layout-props-on-typography-or-actions
+      - id: no-layout-props-actions
         level: must-not
         statement: >-
           Button and IconButton accept no layout, spacing or sizing props —
@@ -186,7 +186,7 @@ sections:
       - level: must
         statement: Do not import an icon from the package root. The root ships a type-only stub. The import passes `tsc` and then fails in the browser.
       - level: must
-        statement: Import `List` alone and reach its parts through dot access, as in `<List.Item>` and `<List.ItemText>`. `ListItem` is not an export.
+        statement: Import `List` alone and reach its parts through dot access, as in `<List.Item>` and `<List.ItemButton>`. `ListItem` is not an export.
       - id: choose-icons-from-icons-entry
         level: should
         statement: >-

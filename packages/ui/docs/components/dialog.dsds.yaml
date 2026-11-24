@@ -61,7 +61,7 @@ sections:
       - level: must
         statement: Dialog must be cancelable or dismissible. Users should not be trapped into agreeing or initiating an action.
         tags: [interaction]
-      - id: destructive-dialog-title-names-target
+      - id: destructive-title-names-target
         level: must
         statement: 'Destructive-action Dialogs must name the action and its target in the title — for example, "Delete [PAGE NAME]?", not a vague title like "Delete?". The consequence goes in the body, not the title: what will be lost and whether it can be recovered.'
         checks:
@@ -77,7 +77,7 @@ sections:
         tags: [content]
       - tags: [content]
         refs:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
             rel: same-as
       - level: should
         statement: >-

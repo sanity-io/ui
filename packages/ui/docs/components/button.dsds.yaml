@@ -33,9 +33,9 @@ sections:
         alternatives:
           - to: link
       - level: should-not
-        statement: 'As nav items within a sidebar or menu. Use List.ButtonItem instead.'
+        statement: 'As nav items within a sidebar or menu. Use List.ItemButton instead.'
         alternatives:
-          - to: list-button-item
+          - to: list-item-button
       - level: should-not
         statement: To switch views on a screen. Use Tab instead. The Tab component has ARIA attributes that make keyboard navigation accessible.
         alternatives:
@@ -107,6 +107,7 @@ sections:
         refines:
           - to: accessibility-guidelines#disabled-control-no-tooltip
       - level: must-not
+        id: text-label-required
         statement: Don't use Button without a text label. Button relies on the text label to describe its purpose. Use IconButton in cases where the icon is the only visual indicator.
       - level: must
         statement: Button defaults to `type="button"`. To submit a form, set `type="submit"` explicitly.
@@ -186,7 +187,7 @@ uses:
 alternatives:
   - to: icon-button
   - to: link
-  - to: list-button-item
+  - to: list-item-button
   - to: switch
 refs:
   - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32075-2332

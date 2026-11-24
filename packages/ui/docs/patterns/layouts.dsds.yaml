@@ -35,7 +35,7 @@ sections:
         statement: Only use a Navigation sidebar when the application has multiple pages/views that require navigation.
         tags: [development]
       - level: must
-        statement: 'Use only Sanity UI''s `<List.ButtonItem />` for Navigation Content items and filters. A navigation item renders as a link: pass `as="a"` and `href`.'
+        statement: 'Use only Sanity UI''s `<List.ItemButton />` for Navigation Content items and filters. A navigation item renders as a link: pass `as="a"` and `href`.'
         tags: [development]
       - level: must
         statement: Show the application name as the Content Toolbar Title when there is no Navigation sidebar; otherwise show the current page or view name. The title anchors the collection of content being viewed and should be given priority in spacing to avoid truncation at all costs.
@@ -52,10 +52,11 @@ sections:
         statement: Place the primary action (`level="primary"`) first (inline-start) in a Content Toolbar action row, with only one primary action per action area.
         tags: [interaction]
       - level: must
+        id: destructive-critical-icon
         statement: 'Give destructive actions `tone="critical"` and an `ErrorOutlineIcon` through `iconStart` (`iconStart={ErrorOutlineIcon}`).'
         tags: [visual-design]
         refines:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
       - level: must
         statement: Show an empty state in Content display when no content exists, explaining why nothing is shown and offering an action to add content when one is available.
         tags: [content]
@@ -94,7 +95,7 @@ sections:
         statement: Place destructive items at the bottom of an overflow menu, separated by a divider, with `tone="critical"`.
         tags: [visual-design]
         refines:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
       - level: must
         statement: Keep primary actions (`level="primary"`) for critical workflows visible at all times — never hide them.
         tags: [interaction]
@@ -168,7 +169,7 @@ sections:
             role: WCAG 2.4.6 Headings and Labels
         tags: [accessibility]
       - refs:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
             rel: same-as
       - level: should
         statement: Keep the application's title fully displayed in the Navigation header; treat truncation as a last resort.
@@ -257,7 +258,7 @@ sections:
         statement: Do not place filtering, sorting, application/view search, or in-view content tabs inside the Navigation sidebar. Navigation is the act of moving between distinct views. Filtering and sorting belong in the Content toolbar or display; application-wide search belongs in the Navigation header; view-specific search belongs in the Content toolbar; in-view tabs belong in the Content display area.
         tags: [interaction]
       - level: must-not
-        statement: Do not use `<Button />` for navigation (use `<List.ButtonItem as="a" href=…>` instead) or to switch between views within a surface (use tabs instead), and do not use `<Button />` alone as a menu activator (wrap it in a `<Popover />`). Assistive technology users expect buttons to perform actions and links to navigate; `<Popover />` handles menu placement and display consistently.
+        statement: Do not use `<Button />` for navigation (use `<List.ItemButton as="a" href=…>` instead) or to switch between views within a surface (use tabs instead), and do not use `<Button />` alone as a menu activator (wrap it in a `<Popover />`). Assistive technology users expect buttons to perform actions and links to navigate; `<Popover />` handles menu placement and display consistently.
         tags: [development]
       - level: must-not
         statement: Do not exceed 8 items in an overflow menu; group items into labeled sections when more exist.
@@ -293,7 +294,7 @@ sections:
         usage: Optional.
       - id: navigation-content
         term: Navigation content
-        definition: Displays all navigation options or filters for content, using only Sanity UI's `<List.ButtonItem />` component. Scrolls independently to accommodate overflow.
+        definition: Displays all navigation options or filters for content, using only Sanity UI's `<List.ItemButton />` component. Scrolls independently to accommodate overflow.
         usage: Optional.
       - id: navigation-footer
         term: Navigation footer
@@ -360,7 +361,7 @@ traits:
           Use when the application has more than one page/view to navigate across.
 
           Do not use when the application has only one view and requires no navigation (use Shell, Shell with Toolbar, or Shell with Inspector instead), or when at least one page/view needs a dedicated area to view/edit metadata (use Shell with Navigation and Inspector instead).
-      - id: shell-with-navigation-and-inspector
+      - id: shell-nav-and-inspector
         name: Shell with Navigation and Inspector
         description: |-
           A multi-view application with persistent navigation, actions, and viewing/editing of content metadata (Navigation sidebar visible by default; Inspection sidebar visible by default). Ideal for more organized, fine-grained management of content and its metadata. It's recommended to hide the Inspection sidebar on pages/views where it's not used.

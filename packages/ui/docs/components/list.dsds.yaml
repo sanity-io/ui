@@ -21,10 +21,10 @@ sections:
         alternatives:
           - to: v-stack
       - level: should-not
-        statement: For action menus or dropdown options. Use List.ButtonItem inside a Popover instead.
+        statement: For action menus or dropdown options. Use List.ItemButton rows inside a Popover instead.
         alternatives:
           - to: popover
-          - to: list-button-item
+          - to: list-item-button
       - level: should-not
         statement: For table data with column headers. Use a table element directly.
   - kind: guidelines
@@ -32,16 +32,13 @@ sections:
     framing: how-to-use
     items:
       - level: should
-        statement: Use density='compact' on the List.Item or List.ButtonItem rows in sidebars and panels, and density='loose' for touch-first UIs.
+        statement: Set density on each List.ItemButton row. Use density='compact' in sidebars and panels, and density='loose' for touch-first UIs.
       - level: should
         statement: Use as='ol' when list order is meaningful (ranked results, step sequences).
       - level: should
-        statement: 'Keep each of the start and end slots compact — one element only: a thumbnail or icon for start; a button, badge, or timestamp for end.'
-      - id: don-list-itemtext-outside-list
-        level: must-not
-        statement: Don't use List.ItemText outside of List.Item. It relies on the flex layout of the parent row.
+        statement: Keep the start and end slots of List.ItemButton to one non-interactive element each, such as a thumbnail or icon for start, and a badge, icon or timestamp for end.
       - level: must-not
-        statement: "Don't place two or more buttons or other interactive elements in the end slot (or the start slot). It creates an unclear tab order."
+        statement: "Don't place a button, link or other interactive element in the start or end slot of List.ItemButton. The slots render inside the row's own button, so the element would be nested inside another control."
       - level: must-not
         statement: Don't override List.ItemImage dimensions with inline styles. The fixed size keeps rows visually even.
   - kind: guidelines
@@ -49,20 +46,19 @@ sections:
     framing: how-to-use
     items:
       - level: must
-        statement: List has subcomponents, List.Item, List.ItemText, List.ItemImage and List.ButtonItem. Each has its own entry, `list-item`, `list-item-text`, `list-item-image` and `list-button-item`. Read each one's entry in `docs/components/` before you write it. Its props are not listed here.
+        statement: List has three subcomponents, List.Item, List.ItemButton and List.ItemImage. Each has its own entry, `list-item`, `list-item-button` and `list-item-image`. Read each one's entry in `docs/components/` before you write it. Its props are not listed here.
       - id: subcomponents-not-named-exports
         level: must
-        statement: "Access subcomponents via dot notation: List.Item, List.ItemText, List.ItemImage, List.ButtonItem. They are not separate named exports, so don't import them that way."
+        statement: "Access subcomponents via dot notation: List.Item, List.ItemButton, List.ItemImage. They are not separate named exports, so don't import them that way."
       - level: must
-        statement: Provide alt on every List.ItemImage — it renders a native <img> with no implicit accessible name.
+        statement: Provide alt on every List.ItemImage. It renders a native <img> with no implicit accessible name.
       - id: no-density-on-list
         level: must-not
-        statement: Do not set `density` on List. It has no `density` prop, and `<List density="compact">` is a TypeScript error. Set it on each List.Item or List.ButtonItem.
+        statement: Do not set `density` on List. It has no `density` prop, and `<List density="compact">` is a TypeScript error. Set it on each List.ItemButton.
       - level: must-not
-        statement: List.Item does not support the `as` prop — it always renders as `<li>`. Passing `as` to List.Item causes a TypeScript error.
+        statement: List.Item does not support the `as` prop. It always renders as `<li>`. Passing `as` to List.Item causes a TypeScript error.
       - level: must-not
-        statement: There is no `trailing` prop on List.Item — it was replaced by `start` and `end` in a breaking change. `trailing={...}` is a TypeScript error (unknown prop); use `end` instead.
-
+        statement: There is no `trailing` prop. Use `end` on List.ItemButton.
   - kind: guidelines
     for: all
     title: Content
@@ -74,7 +70,7 @@ sections:
       - level: should
         statement: Keep titles short. Aim for one line at the target container width.
       - level: should
-        statement: Use `subtitle` for metadata, not for key actions or status.
+        statement: Use `subtext` for metadata, not for key actions or status.
       - refs:
           - to: content-guidelines#plain-language
             rel: same-as
@@ -85,9 +81,9 @@ sections:
     items:
       - id: list-item-image-alt-required
         level: must
-        statement: Always pass `alt` on `List.ItemImage`. Use `alt=""` only if the image is decorative and the title text already describes the item.
+        statement: Always pass `alt` on `List.ItemImage`. Use `alt=""` only if the image is decorative and the row's text already describes the item.
       - level: must
-        statement: Buttons in `start` or `end` must have an accessible name via `aria-label` or visible text.
+        statement: Every List.ItemButton needs a visible name from `text` or its children. An image with `alt=""` does not name the row.
       - level: should
         statement: '`List` renders as `<ul>` by default. Use `as="ol"` when order is meaningful.'
       - level: must-not
@@ -96,7 +92,7 @@ sections:
 alternatives:
   - to: v-stack
     note: Plain vertical stacking without list semantics
-  - to: list-button-item
+  - to: list-item-button
     note: Action rows inside a Popover
 refs:
   - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32244-2
@@ -104,18 +100,18 @@ refs:
     role: Figma component (v5)
   - to: space
     rel: relates-to
-  - to: list-button-item
+  - to: list-item
     rel: relates-to
-    note: Action rows inside a Popover
+    note: The non-interactive row
+  - to: list-item-button
+    rel: relates-to
+    note: The interactive row. Also the action row inside a Popover
   - to: badge
     rel: relates-to
     note: Good as an `end` element for status indicators
-  - to: list-button-item
-    rel: relates-to
-    note: The interactive/selectable variant of **List.Item**
   - to: avatar
     rel: relates-to
-    note: Good as a start element before `List.ItemText`
+    note: Good as a start element before the row text
 sourceFiles:
   - platform: react
     file: packages/ui/src/components/list/List.tsx
@@ -133,12 +129,12 @@ $extensions:
       guidance: |-
         List is new in v5, with no direct v3 match. v3 list patterns were built with `Stack` \+ `Card` or custom `<ul>/<li>` markup.
 
-        The new `List` formalizes that pattern. It adds built-in density, start/end slots, and an image slot.
+        The new `List` formalizes that pattern. It adds built-in density, start and end slots on the interactive row, and an image slot.
 
         ### **Key differences**
 
-        - `List.Item` handles its own layout. No need to wrap rows in `Card` or `Box` for spacing.
-        - `List.ItemText` has built-in sizing and truncation. No need to set `Text` props on each item.
+        - `List.Item` is a plain `<li>`. It handles no layout of its own beyond the text style. No need to wrap rows in `Card` or `Box` for spacing.
+        - `List.ItemButton` is the interactive row. It takes `text` and `subtext` for its labels, so there is no separate text component.
         - `List.ItemImage` provides a standard thumbnail slot with fixed sizing and rounded corners.
 
         ### **If you used Stack \+ Card rows**
@@ -153,10 +149,10 @@ $extensions:
           </Card>
         </Stack>
 
-        // v5 equivalent
+        // v5 equivalent: an interactive row
         <List>
           <List.Item>
-            <List.ItemText title={item.title} />
+            <List.ItemButton text={item.title} onClick={handleOpen} />
           </List.Item>
         </List>
         ```

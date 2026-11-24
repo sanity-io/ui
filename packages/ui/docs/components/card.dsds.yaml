@@ -18,7 +18,7 @@ sections:
         statement: To create visual separation between content regions.
       - level: should
         statement: To wrap content that needs consistent internal padding and rounded corners.
-      - id: layout-without-distinct-visual-surface
+      - id: no-surface-use-box
         level: should-not
         statement: For layout without a distinct visual surface — use Box or Flex.
         alternatives:

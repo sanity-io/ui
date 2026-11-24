@@ -26,11 +26,11 @@ sections:
     items:
       - level: must
         statement: Anchor the inline confirm popover to the triggering element, not the viewport center. That's what makes it read as "confirming this row," not "confirming something."
-      - id: default-destructive-confirms-both-popover
+      - id: confirm-destructive-critical
         level: must
         statement: Default destructive confirms to `tone="critical"` on both the popover's accent and the confirm button, and give the confirm button `level="primary"`. The confirm button is the most important action on a confirmation surface — that is what the surface exists for — so it carries the primary level alongside the critical tone. Cancel is the secondary or tertiary action.
         refines:
-          - to: shared-foundations#destructive-actions-use-critical-tone
+          - to: shared-foundations#destructive-critical-tone
       - level: must
         statement: 'Disable or hide the confirm action until an async impact check resolves — for example, counting how many other documents reference this one, or checking permissions. Once it resolves, name the consequence on the confirm button. A generic confirm gives a destructive action less friction than it needs, and lets someone confirm before they know what breaks.'
         example:
@@ -38,7 +38,7 @@ sections:
           ref:
             href: ../examples/confirmation-dialogs-3.tsx
             rel: source
-      - id: guarantee-every-confirmation-surface-way
+      - id: confirm-surface-escape
         level: must
         statement: Guarantee every confirmation surface a way out — Escape, click-outside, and an explicit Cancel/close control. A surface missing any of the three can trap whoever opened it.
       - level: must

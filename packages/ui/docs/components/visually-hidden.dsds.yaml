@@ -80,7 +80,7 @@ sections:
     items:
       - level: should
         statement: VisuallyHidden does not make its children non-focusable. If you put a `<button>` or `<a>` inside, it stays keyboard-reachable — and users get a focus ring on something they can't see. Avoid putting focusable elements inside VisuallyHidden. If you need a hidden control, use `tabIndex={-1}`.
-      - id: visuallyhidden-does-replace-prefer-short
+      - id: visuallyhidden-not-label
         level: should
         statement: VisuallyHidden does not replace `aria-label`. Prefer `aria-label` for short, fixed strings (`aria-label="Close"`). Prefer VisuallyHidden when the content includes dynamic data, formatting, or multiple elements (`<VisuallyHidden>Sort by date, descending</VisuallyHidden>`).
 

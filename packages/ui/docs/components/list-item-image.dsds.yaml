@@ -1,7 +1,7 @@
 kind: component
 id: list-item-image
 name: List.ItemImage
-description: A thumbnail image slot inside a List.Item.
+description: A thumbnail image for a List row.
 metadata:
   tags: [list, item, image, thumbnail, avatar]
   status:
@@ -52,15 +52,18 @@ sections:
           <List.ItemImage src="/thumb.jpg" alt="" style={{ width: 80, height: 80 }} />
           ```
 
-          Place List.ItemImage before `List.ItemText` inside `List.Item`.
+          On a pressable row, pass List.ItemImage as the `start` of List.ItemButton. On a non-interactive row, put it first among the children of List.Item.
 
 refs:
   - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32249-481
     rel: design
     role: Figma component (v5)
+  - to: list-item-button
+    rel: relates-to
+    note: The pressable row. Pass the image as its `start`
   - to: list-item
     rel: relates-to
-    note: The parent row
+    note: The non-interactive row
   - to: list
     rel: relates-to
     note: The root list component — see **List** for full compound component docs

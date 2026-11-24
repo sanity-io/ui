@@ -19,9 +19,9 @@ sections:
       - level: should-not
         statement: To display critical information the user needs for their workflow.
       - level: should-not
-        statement: To provide a standard list of options in a contextual menu. Use a List with List.ButtonItem inside this Popover instead.
+        statement: To provide a standard list of options in a contextual menu. Use a List with List.ItemButton inside this Popover instead.
         alternatives:
-          - to: list-button-item
+          - to: list-item-button
       - level: must-not
         statement: To display helper text via hover or focus. Use Tooltip instead.
         alternatives:
@@ -97,7 +97,7 @@ alternatives:
     note: Use when the content must block the rest of the page or gate a task
   - to: tooltip
     note: Use when the floating content is a short, non-interactive label. Share a trigger with a Popover via `anchorName`
-  - to: list-button-item
+  - to: list-item-button
 refs:
   - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=33949-674
     rel: design

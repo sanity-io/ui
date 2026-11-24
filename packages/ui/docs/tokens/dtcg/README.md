@@ -9,19 +9,19 @@ The files are a copy of `dist/json` and `dist/css` from [sanity-labs/design-toke
 | Field   | Value                            |
 | ------- | -------------------------------- |
 | Package | `@sanity-labs/design-tokens`     |
-| Version | `0.0.2-alpha.11`                 |
+| Version | `0.0.2-alpha.12`                 |
 | Commit  | Not recorded in the npm package  |
-| Copied  | 2026-11-13, from the npm package |
+| Copied  | 2026-11-23, from the npm package |
 
 This is the highest version published on npm, and the version `packages/ui/package.json` pins. Keep the copy on the version Sanity UI pins.
 
-`shadow.tokens.json` and `shadow.css` are not in `0.0.2-alpha.11`. They are still the copies from `0.0.2-alpha.6`, and they are kept because the shadow docs depend on them.
+`shadow.tokens.json` and `shadow.css` are not in `0.0.2-alpha.12`. They are still the copies from `0.0.2-alpha.6`, and they are kept because the shadow docs depend on them.
 
 ## The semantic file
 
 Two files do not come from the design-tokens repo. `json/semantic.tokens.json` and `css/semantic.css` hold the semantic layer: `--background-low`, `--separator-low` and the rest. Sanity UI 5 defines that layer in its CSS. The `build-semantic.mjs` script makes both files from that CSS.
 
-Each light value points at a palette token. The dark value and the tone value sit in `$extensions`. Rerun the script when Sanity UI changes version:
+Each light value points at a palette token. The dark value and the tone value sit in `$extensions`. The semantic files were last patched by hand, not by the script. The script is not in this repo, so the `active-*`, `focus-outline` and `inert-*` values were copied from `packages/ui/src/css/tokens/semantic.css` at 5.0.0-alpha.27. Those tokens are now gray, not blue. Rerun the script when Sanity UI changes version, and check that its output matches these values:
 
 ```sh
 node tokens/dtcg/build-semantic.mjs <path to sanity-io/ui/packages/ui>

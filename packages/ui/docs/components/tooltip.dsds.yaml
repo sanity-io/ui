@@ -27,7 +27,7 @@ sections:
       - refs:
           - to: tooltip#no-tooltip-on-disabled
             rel: same-as
-      - id: tooltip-only-on-interactive-elements
+      - id: tooltip-interactive-only
         level: must-not
         statement: Never use Tooltip on a non-interactive element — text, a Badge, an Indicator, an Avatar, a bare Icon, or a Box or Card. Its trigger must be a button, a link, or a PressArea. Either put the information in visible text or wrap the non-interactive element in a PressArea.
   - kind: guidelines

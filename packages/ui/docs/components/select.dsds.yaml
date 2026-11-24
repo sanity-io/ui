@@ -45,7 +45,7 @@ sections:
     for: all
     framing: how-to-use
     items:
-      - id: pass-options-children-select-renders
+      - id: select-options-as-children
         level: must
         statement: Pass the options as children. Select renders a native `select`. Each option is an `option` element, and `optgroup` groups them.
         checkedBy: manual

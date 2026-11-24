@@ -35,11 +35,11 @@ sections:
         statement: "Size the gap to the content: {space-1} between a label and its input, {space-3} between form fields, and {space-4} or more between sections. The full scale is in the Space scale entry's table (`space`)."
       - level: should
         statement: Wrap VStack with Box when padding or margin values are needed.
-      - id: don-vstack-need-alignitems-justifycontent
+      - id: vstack-no-flex-props
         level: must-not
         statement: "Don't use VStack when you need alignItems, justifyContent, flexWrap, or any other flex prop — use Flex with flexDirection='column'. VStack only accepts `as` and `gap`. Passing any other prop is a TypeScript error."
         refines:
-          - to: v-stack#do-not-use-vstack-for-centered-or-space-between-layouts-use-flex-flexdirection-column-justifycontent-center-instead-instead-use-flex-with-flexdirection-column-and-the-appropriate-alignitems-or-justifycontent
+          - to: v-stack#no-vstack-for-centering
       - level: must-not
         statement: Don't add margin to children for spacing — use gap.
   - kind: guidelines
@@ -49,6 +49,7 @@ sections:
       - level: must-not
         statement: "VStack accepts only as and gap. Don't pass any other prop directly as a JSX attribute (padding, tone, width/height, position, border, alignItems, justifyContent, flexGrow, overflowY)."
       - level: must-not
+        id: no-vstack-for-centering
         statement: 'Do not use VStack for centered or space-between layouts. Use `<Flex flexDirection="column" justifyContent="center">` instead. Instead: Use Flex with flexDirection=''column'' and the appropriate alignItems or justifyContent.'
 
   - kind: guidelines

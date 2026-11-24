@@ -40,6 +40,7 @@ sections:
     framing: how-to-use
     items:
       - level: must
+        id: label-when-only-signal
         statement: 'Provide a label when the indicator is the only signal for a status. Without it, the dot is invisible to screen readers. Omit label only when adjacent visible text conveys the same status.'
       - level: should
         statement: 'Pair the indicator with a visible text label. To show the status in a Tooltip instead, wrap Indicator in PressArea. The Tooltip needs it as a target.'
@@ -62,7 +63,7 @@ sections:
         level: should
         statement: Omit `label` only when adjacent visible text already conveys the status. The dot becomes `aria-hidden` in that case.
         refines:
-          - to: indicator#provide-a-label-when-the-indicator-is-the-only-signal-for-a-status-without-it-the-dot-is-invisible-to-screen-readers-omit-label-only-when-adjacent-visible-text-conveys-the-same-status
+          - to: indicator#label-when-only-signal
       - level: should
         statement: For document or item status (Published, Draft), pair the dot with a shape or icon difference in addition to tone. Put the status word in the row's accessible name or visible text — not only in the dot's color (WCAG 1.4.1).
         refines:

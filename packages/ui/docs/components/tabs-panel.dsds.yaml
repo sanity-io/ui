@@ -17,7 +17,7 @@ sections:
       - id: tabpanel-value-matches-tab
         level: must
         statement: Give Tabs.Panel the same value as its Tabs.Tab.
-      - id: don-conditionally-render-tabpanels-hidden
+      - id: panel-no-conditional-render
         level: must-not
         statement: "Don't render Tabs.Panel conditionally. Unselected panels stay mounted with display none. Their content keeps its state."
       - level: should
