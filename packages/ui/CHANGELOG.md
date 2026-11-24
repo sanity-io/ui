@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.28
+
+### Patch Changes
+
+- 967d824: Updates to docs to align with recent component changes
+
 ## 5.0.0-alpha.27
 
 ### Patch Changes
