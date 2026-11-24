@@ -18,10 +18,6 @@ sections:
         statement: For freeform text that is not used for search or filtering. Use TextInput instead.
         alternatives:
           - to: text-input
-      - level: should-not
-        statement: For choosing one value from a fixed set of options. Use Select instead.
-        alternatives:
-          - to: select
   - kind: guidelines
     for: all
     framing: how-to-use
