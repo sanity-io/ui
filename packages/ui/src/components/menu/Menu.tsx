@@ -146,7 +146,7 @@ const handleClickFocus = (e: MouseEvent<HTMLButtonElement>) => {
   items[0]?.focus()
 }
 
-function MenuRoot({menu, children, className, ...props}: MenuProps) {
+function MenuRoot({menu, children, className, onKeyDown, ...props}: MenuProps) {
   return (
     <Popover
       className={clsx(menuClassName, className)}
@@ -160,6 +160,7 @@ function MenuRoot({menu, children, className, ...props}: MenuProps) {
       onKeyDown={(e) => {
         handleKeyDownFocus(e, '[role="menuitem"]', 'vertical')
         handleKeyDownClose(e)
+        onKeyDown?.(e)
       }}
       {...props}
     >
@@ -183,15 +184,15 @@ function MenuContent(props: MenuContentProps) {
   )
 }
 
-function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>) {
+function MenuButton<T extends ElementType = 'button'>({...props}: MenuButtonProps<T>) {
   return (
     <List.ItemButton<T>
-      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', props['className'])}
+      density="loose"
+      {...props}
       data-ui="MenuButton"
       role="menuitem"
       tabIndex={-1}
-      density="loose"
-      {...props}
+      className={clsx(menuButtonClassName, 'sui-text-body1 sui-weight-medium', props['className'])}
       onPointerEnter={(e: PointerEvent<HTMLButtonElement>) => {
         handlePointerEnterClose(e)
         handlePointerEnterFocus(e)

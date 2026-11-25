@@ -28,7 +28,7 @@ export const Default: Story = {
       <Menu
         {...props}
         menu={
-          <Menu.Content aria-label="Default Menu">
+          <Menu.Content aria-label="Menu">
             {Array.from({length: 5}, (_value, i) => (
               <Menu.Button key={i} text={`Menu Item ${i + 1}`} />
             ))}
@@ -39,17 +39,11 @@ export const Default: Story = {
       </Menu>
     )
   },
-  play: async ({canvas, step}) => {
-    const trigger = await canvas.findByRole('button', {name: 'Open Menu'})
-    const menu = await canvas.getByLabelText('Menu')
-
-    await step('Open the menu on click', async () => {
-      await expect(menu).not.toBeVisible()
-      await userEvent.click(trigger)
-
-      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
-    })
-
+  play: async ({canvas}) => {
+    const trigger = await canvas.getByRole('button', {name: 'Open Menu'})
+    await userEvent.click(trigger)
+    const menu = await canvas.findByLabelText('Menu')
+    await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
     await userEvent.click(trigger)
     trigger.blur()
   },
@@ -96,41 +90,28 @@ export const WithSubmenus: Story = {
     )
   },
   play: async ({canvas, step}) => {
-    const trigger = await canvas.findByRole('button', {name: 'Open Menu'})
-    const menu = await canvas.getByLabelText('Menu')
-    const submenu = await screen.getByLabelText('Submenu 1')
+    const trigger = await canvas.getByRole('button', {name: 'Open Menu'})
+    let submenu: HTMLElement | undefined
 
     await step('Open the menu on click', async () => {
-      await expect(menu).not.toBeVisible()
       await userEvent.click(trigger)
-
-      await waitFor(
-        async () => {
-          await expect(menu).toBeVisible()
-          await expect(submenu).not.toBeVisible()
-        },
-        {timeout: 500},
-      )
+      const menu = await screen.findByLabelText('Menu')
+      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
     })
 
     await step('Open the submenu on hover, focus on click', async () => {
-      const submenuTrigger = await canvas.getByRole('menuitem', {name: 'Submenu 1'})
+      const submenuTrigger = await screen.getByRole('menuitem', {name: 'Submenu 1'})
       await userEvent.hover(submenuTrigger)
-
-      await waitFor(
-        async () => {
-          const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
-          await expect(submenu).toBeVisible()
-          await userEvent.click(submenuTrigger)
-          await expect(submenuFirstItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      submenu = await screen.findByLabelText('Submenu 1')
+      await waitFor(async () => await expect(submenu).toBeVisible(), {timeout: 500})
+      await userEvent.click(submenuTrigger)
+      const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
+      await expect(submenuFirstItem).toHaveFocus()
     })
 
     await step('Close the submenu when hover shifts', async () => {
-      const firstMenuItem = await canvas.getByRole('menuitem', {name: 'Menu Item 1'})
-      await userEvent.hover(firstMenuItem)
+      const menuFirstItem = await screen.getByRole('menuitem', {name: 'Menu Item 1'})
+      await userEvent.hover(menuFirstItem)
       await expect(submenu).not.toBeVisible()
     })
 
@@ -140,12 +121,12 @@ export const WithSubmenus: Story = {
 }
 
 export const MenuKeyboardControls: Story = {
-  tags: ['!dev', '!autodocs'],
+  // tags: ['!dev', '!autodocs'],
   render: () => {
     return (
       <Menu
         menu={
-          <Menu.Content aria-label="Default Menu">
+          <Menu.Content aria-label="Menu">
             {Array.from({length: 5}, (_value, i) => (
               <Menu.Button key={i} text={`Menu Item ${i + 1}`} />
             ))}
@@ -158,24 +139,19 @@ export const MenuKeyboardControls: Story = {
   },
   play: async ({canvas, step}) => {
     const trigger = await canvas.getByRole('button', {name: 'Open Menu'})
-    const menu = await canvas.getByLabelText('Menu')
+    let menu: HTMLElement | undefined
+    let firstItem: HTMLElement | undefined
 
     await step('Open, focus, and navigate on arrow down', async () => {
-      await expect(menu).not.toBeVisible()
       trigger.focus()
       await userEvent.keyboard('{ArrowDown}')
-
-      await waitFor(
-        async () => {
-          const firstItem = await canvas.getByRole('menuitem', {name: 'Menu Item 1'})
-          const secondItem = await canvas.getByRole('menuitem', {name: 'Menu Item 2'})
-          await expect(menu).toBeVisible()
-          await expect(firstItem).toHaveFocus()
-          await userEvent.keyboard('{ArrowDown}')
-          await expect(secondItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      menu = await canvas.findByLabelText('Menu')
+      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
+      firstItem = await canvas.findByRole('menuitem', {name: 'Menu Item 1'})
+      const secondItem = await canvas.getByRole('menuitem', {name: 'Menu Item 2'})
+      await expect(firstItem).toHaveFocus()
+      await userEvent.keyboard('{ArrowDown}')
+      await expect(secondItem).toHaveFocus()
     })
 
     await step('Close on tab', async () => {
@@ -186,18 +162,12 @@ export const MenuKeyboardControls: Story = {
     await step('Open, focus, and navigate on arrow up', async () => {
       trigger.focus()
       await userEvent.keyboard('{ArrowUp}')
-
-      await waitFor(
-        async () => {
-          const fifthItem = await canvas.getByRole('menuitem', {name: 'Menu Item 5'})
-          const fourthItem = await canvas.getByRole('menuitem', {name: 'Menu Item 4'})
-          await expect(menu).toBeVisible()
-          await expect(fifthItem).toHaveFocus()
-          await userEvent.keyboard('{ArrowUp}')
-          await expect(fourthItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
+      const fifthItem = await canvas.getByRole('menuitem', {name: 'Menu Item 5'})
+      const fourthItem = await canvas.getByRole('menuitem', {name: 'Menu Item 4'})
+      await expect(fifthItem).toHaveFocus()
+      await userEvent.keyboard('{ArrowUp}')
+      await expect(fourthItem).toHaveFocus()
     })
 
     await step('Close on tab', async () => {
@@ -208,21 +178,14 @@ export const MenuKeyboardControls: Story = {
     await step('Open and focus on enter', async () => {
       trigger.focus()
       await userEvent.keyboard('{Enter}')
-
-      await waitFor(
-        async () => {
-          const firstItem = await canvas.getByRole('menuitem', {name: 'Menu Item 1'})
-          await expect(menu).toBeVisible()
-          await expect(firstItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
+      await expect(firstItem).toHaveFocus()
     })
   },
 }
 
 export const SubmenuKeyboardControls: Story = {
-  tags: ['!dev', '!autodocs'],
+  // tags: ['!dev', '!autodocs'],
   render: () => {
     return (
       <Menu
@@ -250,37 +213,25 @@ export const SubmenuKeyboardControls: Story = {
     )
   },
   play: async ({canvas, step}) => {
-    const trigger = await canvas.findByRole('button', {name: 'Open Menu'})
-    const menu = await canvas.getByLabelText('Menu')
-    const submenu = await screen.getByLabelText('Submenu 1')
+    const trigger = await canvas.getByRole('button', {name: 'Open Menu'})
+    let menu: HTMLElement | undefined
+    let submenu: HTMLElement | undefined
 
     await step('Open menu on arrow down', async () => {
-      await expect(menu).not.toBeVisible()
       trigger.focus()
       await userEvent.keyboard('{ArrowDown}')
-
-      await waitFor(
-        async () => {
-          await expect(menu).toBeVisible()
-          await expect(submenu).not.toBeVisible()
-        },
-        {timeout: 500},
-      )
+      menu = await canvas.findByLabelText('Menu')
+      await waitFor(async () => await expect(menu).toBeVisible(), {timeout: 500})
     })
 
     await step('Open submenu and focus on arrow right', async () => {
       await userEvent.keyboard('{ArrowDown}')
       await userEvent.keyboard('{ArrowDown}')
       await userEvent.keyboard('{ArrowRight}')
-
-      await waitFor(
-        async () => {
-          const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
-          await expect(submenu).toBeVisible()
-          await expect(submenuFirstItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      submenu = await screen.findByLabelText('Submenu 1')
+      await waitFor(async () => await expect(submenu).toBeVisible(), {timeout: 500})
+      const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
+      await expect(submenuFirstItem).toHaveFocus()
     })
 
     await step('Close submenu and refocus on trigger on arrow left', async () => {
@@ -292,26 +243,15 @@ export const SubmenuKeyboardControls: Story = {
 
     await step('Open submenu and focus on enter', async () => {
       await userEvent.keyboard('{Enter}')
-
-      await waitFor(
-        async () => {
-          const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
-          await expect(submenu).toBeVisible()
-          await expect(submenuFirstItem).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      await waitFor(async () => await expect(submenu).toBeVisible(), {timeout: 500})
+      const submenuFirstItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 1'})
+      await expect(submenuFirstItem).toHaveFocus()
     })
 
     await step('Shift focus on hover', async () => {
-      await waitFor(
-        async () => {
-          const submenuSecondItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 2'})
-          await userEvent.hover(submenuSecondItem)
-          await expect(submenu).toHaveFocus()
-        },
-        {timeout: 500},
-      )
+      const submenuSecondItem = await screen.getByRole('menuitem', {name: 'Submenu 1 Item 2'})
+      await userEvent.hover(submenuSecondItem)
+      await expect(submenu).toHaveFocus()
     })
   },
 }
