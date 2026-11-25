@@ -23,7 +23,7 @@ import {
   Tooltip,
   VStack,
 } from '@sanity/ui'
-import {useRef, useState} from 'react'
+import {useState} from 'react'
 
 // Shared test sizes — keep in sync with ui3.tsx so the comparison stays fair.
 const ROW_COUNT = 200
