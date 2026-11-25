@@ -91,7 +91,7 @@ export const listButtonProps: Record<string, PropDef> = {
           loose: '33px',
         },
       },
-      paddingX: {
+      padding: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {
           regular: 2,
