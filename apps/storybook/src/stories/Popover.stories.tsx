@@ -180,34 +180,13 @@ export const WithTooltip: Story = {
   ),
   play: async ({canvas}) => {
     const trigger = await canvas.findByRole('button', {name: 'Open Tooltip or Popover'})
-    const tooltip = await canvas.findByText('Tooltip Content')
-    const popover = await canvas.findByText('Popover Content')
-
     await userEvent.tab()
-
-    await waitFor(
-      async () => {
-        await expect(tooltip).toBeVisible()
-      },
-      {timeout: 750},
-    )
-
+    const tooltip = await canvas.findByText('Tooltip Content')
+    await waitFor(async () => await expect(tooltip).toBeVisible(), {timeout: 750})
     await userEvent.click(trigger)
-
-    await waitFor(
-      async () => {
-        await expect(tooltip).not.toBeVisible()
-      },
-      {timeout: 250},
-    )
-
-    await waitFor(
-      async () => {
-        await expect(popover).toBeVisible()
-      },
-      {timeout: 500},
-    )
-
+    const popover = await canvas.findByText('Popover Content')
+    await waitFor(async () => await expect(tooltip).not.toBeVisible(), {timeout: 250})
+    await waitFor(async () => await expect(popover).toBeVisible(), {timeout: 500})
     await userEvent.click(trigger)
     trigger.blur()
   },
@@ -236,10 +215,9 @@ export const WithCustomContent: Story = {
   },
   play: async ({canvas}) => {
     const trigger = await canvas.findByRole('button', {name: 'Open Popover'})
+    await userEvent.click(trigger)
     const title = await canvas.findByText('Title')
     const subtitle = await canvas.findByText('Subtitle')
-
-    await userEvent.click(trigger)
 
     await waitFor(
       async () => {
