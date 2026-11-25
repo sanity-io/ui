@@ -3,7 +3,7 @@ import type {ComponentProps, ReactNode, ElementType} from 'react'
 import {type GapProps, gapProps} from '../../props/gap'
 import {heightProps} from '../../props/height'
 import {paddingProps} from '../../props/padding'
-import {DENSITY, type Density} from '../../types/Density'
+import {BUTTON_DENSITY, type ButtonDensity} from '../../types/Button'
 import type {InteractiveAs} from '../../types/Interactive'
 import type {ListTag} from '../../types/List'
 import type {Polymorphic} from '../../types/Polymorphic'
@@ -46,7 +46,7 @@ export type ListItemButtonProps<T extends ElementType = 'button'> = Polymorphic<
     /**
      * Sets horizontal padding, gap, and minimum row height together.
      */
-    density?: Responsive<Density>
+    density?: Responsive<ButtonDensity>
     /**
      * Slot at the left edge of the row.
      */
@@ -75,27 +75,27 @@ export const listButtonProps: Record<string, PropDef> = {
   },
   density: {
     type: 'composite',
-    values: DENSITY,
+    values: BUTTON_DENSITY,
     composition: {
       gap: {
         propDef: gapProps['gap'] as PropDef,
         mapping: {
-          compact: 2,
-          regular: 3,
+          regular: 2,
+          loose: 3,
         },
       },
       minHeight: {
         propDef: heightProps['minHeight'] as PropDef,
         mapping: {
-          compact: '25px',
-          regular: '33px',
+          regular: '25px',
+          loose: '33px',
         },
       },
       paddingX: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {
-          compact: 2,
-          regular: 3,
+          regular: 2,
+          loose: 3,
         },
       },
     },

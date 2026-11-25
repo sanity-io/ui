@@ -64,7 +64,6 @@ export const WithButtons: Story = {
       <List {...props}>
         <List.Item>
           <List.ItemButton
-            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="First item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="First Item Title"
@@ -74,7 +73,6 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
-            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Second item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Second Item Title"
@@ -84,7 +82,6 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
-            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Third item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Third Item Title"
@@ -95,7 +92,6 @@ export const WithButtons: Story = {
 
         <List.Item>
           <List.ItemButton
-            density="compact"
             start={<List.ItemImage src="https://placehold.co/600x400" alt="Fourth item image" />}
             end={<Icon size={1} icon={EditIcon} />}
             text="Fourth Item Title"
@@ -124,8 +120,8 @@ export const AsMenu: Story = {
       <List {...props} gap={2}>
         <List.Item>
           <List.ItemButton
-            density="compact"
-            start={<Icon size={1} icon={SparkleIcon} />}
+            density="loose"
+            start={<Icon size={1} icon={SparkleIcon} style={{margin: '-0.375rem'}} />}
             text="Content Agent"
             current
           />
@@ -133,16 +129,16 @@ export const AsMenu: Story = {
 
         <List.Item>
           <List.ItemButton
-            density="compact"
-            start={<Icon size={1} icon={ComposeIcon} />}
+            density="loose"
+            start={<Icon size={1} icon={ComposeIcon} style={{margin: '-0.375rem'}} />}
             text="Canvas"
           />
         </List.Item>
 
         <List.Item>
           <List.ItemButton
-            density="compact"
-            start={<Icon size={1} icon={ImageIcon} />}
+            density="loose"
+            start={<Icon size={1} icon={ImageIcon} style={{margin: '-0.375rem'}} />}
             text="Media Library"
           />
         </List.Item>

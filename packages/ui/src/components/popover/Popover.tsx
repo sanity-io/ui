@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import {cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {flushSync} from 'react-dom'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -25,6 +26,7 @@ function PopoverRoot({
     anchorName,
     content,
     portal,
+    onBeforeToggle: onBeforeToggleProp,
     onToggle: onToggleProp,
     triggerProps: forwardedTriggerProps,
     ...rest
@@ -32,7 +34,15 @@ function PopoverRoot({
   const reactId = useId()
   const id = idProp || reactId
   const [open, setOpen] = useState(false)
+  const [load, setLoad] = useState(false)
   const isClient = useIsClient()
+
+  const handleBeforeToggle = (e: ToggleEvent<HTMLDivElement>) => {
+    if (e.newState === 'open') {
+      flushSync(() => setLoad(true))
+    }
+    onBeforeToggleProp?.(e)
+  }
 
   const handleToggle = (e: ToggleEvent<HTMLDivElement>) => {
     const popover = e.currentTarget
@@ -69,9 +79,10 @@ function PopoverRoot({
           popover="auto"
           id={id}
           onToggle={handleToggle}
+          onBeforeToggle={handleBeforeToggle}
           {...rest}
         >
-          {content}
+          {load && content}
         </div>,
         isClient,
         portal,

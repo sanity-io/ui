@@ -60,6 +60,7 @@ export const WithSubmenus: Story = {
     return (
       <Menu
         {...props}
+        portal
         menu={
           <Menu.Content aria-label="Menu">
             {Array.from({length: 3}, (_value, i) => (
@@ -79,7 +80,7 @@ export const WithSubmenus: Story = {
             <Menu.Submenu
               menu={
                 <Menu.Content aria-label="Submenu 2">
-                  {Array.from({length: 10}, (_value, i) => (
+                  {Array.from({length: 20}, (_value, i) => (
                     <Menu.Button key={i} text={`Submenu 2 Item ${i + 1}`} />
                   ))}
                 </Menu.Content>

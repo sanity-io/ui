@@ -190,6 +190,7 @@ function MenuButton<T extends ElementType = 'button'>(props: MenuButtonProps<T>)
       data-ui="MenuButton"
       role="menuitem"
       tabIndex={-1}
+      density="loose"
       {...props}
       onPointerEnter={(e: PointerEvent<HTMLButtonElement>) => {
         handlePointerEnterClose(e)
@@ -224,7 +225,9 @@ function MenuSubmenu({
           handleKeyDownOpen(e, 'horizontal')
         },
         'onClick': handleClickFocus,
-        'end': <Icon icon={ChevronRightIcon} size={1} marginRight={-1} />,
+        'end': (
+          <Icon icon={ChevronRightIcon} size={1} marginRight={-1} style={{margin: '-0.375rem'}} />
+        ),
       }}
       onKeyDown={(e) => {
         e.stopPropagation()
