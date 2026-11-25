@@ -33,5 +33,6 @@
 @import './text/text.css';
 @import './text-area/text-area.css';
 @import './text-input/text-input.css';
+@import './toast/toast.css';
 @import './tooltip/tooltip.css';
 @import './visually-hidden/visually-hidden.css';
