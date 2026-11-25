@@ -5,7 +5,7 @@ import type {Tone} from '../../types/Tone'
 
 export const TOAST_TONE = ['neutral', 'positive', 'caution', 'critical'] as const satisfies Tone[]
 
-/** @public */
+/** @beta */
 export type ToastTone = (typeof TOAST_TONE)[number]
 
 /**
@@ -16,7 +16,7 @@ export function isPoliteTone(tone: ToastTone): boolean {
   return tone === 'neutral' || tone === 'positive'
 }
 
-/** @public */
+/** @beta */
 export interface ToastProps extends ComponentProps<'div'> {
   /** A short title to be shown on the Toast */
   title: string

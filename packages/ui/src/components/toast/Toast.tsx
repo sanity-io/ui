@@ -11,7 +11,6 @@ import {type ToastProps, toastProps} from './toast.props'
 
 const toastClassName = suffixClassName('sui-Toast')
 
-/** @public */
 export function Toast({
   tone = 'neutral',
   title,
