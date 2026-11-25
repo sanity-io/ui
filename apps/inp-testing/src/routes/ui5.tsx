@@ -12,6 +12,7 @@ import {
   Grid,
   Heading,
   HStack,
+  Menu,
   Popover,
   Radio,
   SearchInput,
@@ -22,7 +23,7 @@ import {
   Tooltip,
   VStack,
 } from '@sanity/ui'
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 
 // Shared test sizes — keep in sync with ui3.tsx so the comparison stays fair.
 const ROW_COUNT = 200
@@ -252,7 +253,7 @@ function PopoverMountSection() {
         <Text size={1} weight="semibold">
           5. Popover mount ({POPOVER_COUNT} popovers)
         </Text>
-        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
+        <Text size={1}>One click mounts or unmounts {POPOVER_COUNT} popover-wrapped buttons.</Text>
         <HStack gap={2}>
           <Button
             text={open ? 'Close panel' : 'Open panel'}
@@ -276,6 +277,40 @@ function PopoverMountSection() {
   )
 }
 
+function MenuInteractionSection() {
+  return (
+    <Card density="regular">
+      <Flex gap={3} flexDirection="column" alignItems="flex-start">
+        <Text size={1} weight="semibold">
+          7. Menu interaction
+        </Text>
+        <Text size={1}>Click to open menu.</Text>
+
+        <Menu
+          menu={
+            <Menu.Content aria-label="Menu">
+              <Menu.Button text="Item 1" />
+              <Menu.Divider />
+              <Menu.Submenu
+                menu={
+                  <Menu.Content aria-label="Submenu">
+                    <Menu.Button text="Submenu Item 1" />
+                  </Menu.Content>
+                }
+              >
+                <Menu.Button text="Open Submenu" />
+              </Menu.Submenu>
+            </Menu.Content>
+          }
+          placement="bottom-start"
+        >
+          <Button level="tertiary" text="Menu Popover" />
+        </Menu>
+      </Flex>
+    </Card>
+  )
+}
+
 function BadgeToneToggleSection() {
   const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
 
@@ -283,7 +318,7 @@ function BadgeToneToggleSection() {
     <Card density="regular">
       <VStack gap={3}>
         <Text size={1} weight="semibold">
-          6. Badge tone toggle ({BADGE_COUNT} badges)
+          8. Badge tone toggle ({BADGE_COUNT} badges)
         </Text>
         <Text size={1}>One click restyles all {BADGE_COUNT} badges.</Text>
         <div>
@@ -311,7 +346,7 @@ function AvatarShuffleSection() {
     <Card density="regular">
       <VStack gap={3}>
         <Text size={1} weight="semibold">
-          6. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
+          9. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
         </Text>
         <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
         <div>
@@ -344,7 +379,7 @@ function TabSwitchSection() {
     <Card density="regular">
       <VStack gap={3}>
         <Text size={1} weight="semibold">
-          7. Tab switch
+          10. Tab switch
         </Text>
         <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
         <Tabs value={selected} onValueChange={setSelected}>
@@ -372,7 +407,7 @@ function SearchInputSection() {
     <Card density="regular">
       <VStack gap={3}>
         <Text size={1} weight="semibold">
-          8. Search input
+          11. Search input
         </Text>
         <Text size={1}>Type to update the input. Click the clear button to empty it.</Text>
         <SearchInput
@@ -396,6 +431,7 @@ function Ui5() {
       <PanelSwapSection />
       <TooltipMountSection />
       <PopoverMountSection />
+      <MenuInteractionSection />
       <BadgeToneToggleSection />
       <AvatarShuffleSection />
       <TabSwitchSection />

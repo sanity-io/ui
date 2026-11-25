@@ -18,6 +18,12 @@ import {
   Inline,
   KBD,
   Label,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  Popover,
   Radio,
   Select,
   Spinner,
@@ -318,6 +324,35 @@ export default function Ui3() {
               </Box>
             </Flex>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Popover</h2>
+      <Profiler id="Popover" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Popover key={i} content="Popover Content">
+            <Button mode="bleed" text="Open Popover" />
+          </Popover>
+        ))}
+      </Profiler>
+
+      <h2>{count} Menu</h2>
+      <Profiler id="Menu" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <MenuButton
+            key={i}
+            id="menu"
+            button={<Button mode="bleed" text="Open Menu" />}
+            menu={
+              <Menu>
+                <MenuItem text="Item 1" />
+                <MenuDivider />
+                <MenuGroup text="Open Submenu">
+                  <MenuItem text="Submenu Item 1" />
+                </MenuGroup>
+              </Menu>
+            }
+          />
         ))}
       </Profiler>
     </ThemeProvider>

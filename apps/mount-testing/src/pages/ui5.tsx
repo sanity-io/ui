@@ -40,6 +40,8 @@ import {
   TooltipGroup,
   VisuallyHidden,
   VStack,
+  Popover,
+  Menu,
 } from '@sanity/ui'
 import {Profiler} from 'react'
 
@@ -72,7 +74,7 @@ export default function Ui5() {
       <h2>{count} Boxes</h2>
       <Profiler id="Box" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Box key={i} padding={3} marginBottom={2} testing="hey">
+          <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
           </Box>
         ))}
@@ -408,6 +410,41 @@ export default function Ui5() {
               </Box>
             </Flex>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Popover</h2>
+      <Profiler id="Popover" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Popover key={i} content="Popover Content">
+            <Button level="tertiary" text="Open Popover" />
+          </Popover>
+        ))}
+      </Profiler>
+
+      <h2>{count} Menu</h2>
+      <Profiler id="Menu" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Menu
+            key={i}
+            menu={
+              <Menu.Content aria-label="Menu">
+                <Menu.Button text="Item 1" />
+                <Menu.Divider />
+                <Menu.Submenu
+                  menu={
+                    <Menu.Content aria-label="Submenu">
+                      <Menu.Button text="Submenu Item 1" />
+                    </Menu.Content>
+                  }
+                >
+                  <Menu.Button text="Open Submenu" />
+                </Menu.Submenu>
+              </Menu.Content>
+            }
+          >
+            <Button level="tertiary" text="Open Menu" />
+          </Menu>
         ))}
       </Profiler>
     </div>

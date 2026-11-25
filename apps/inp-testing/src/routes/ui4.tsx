@@ -24,6 +24,7 @@ import {
   TextInput,
   ThemeProvider,
 } from 'ui4'
+import {MenuButton, Menu, MenuItem, MenuDivider, MenuGroup} from 'ui4/menu'
 import {Popover} from 'ui4/popover'
 import {buildTheme} from 'ui4/theme'
 import {Tooltip} from 'ui4/tooltip'
@@ -313,6 +314,32 @@ function PopoverMountSection() {
   )
 }
 
+function MenuInteractionSection() {
+  return (
+    <Card tone="neutral" padding={4}>
+      <Flex gap={3} direction="column" align="flex-start">
+        <Text size={1} weight="semibold">
+          6. Menu interaction
+        </Text>
+        <Text size={1}>Click to open menu.</Text>
+        <MenuButton
+          id="menu"
+          button={<Button mode="bleed" text="Open Menu" />}
+          menu={
+            <Menu>
+              <MenuItem text="Item 1" />
+              <MenuDivider />
+              <MenuGroup text="Open Submenu">
+                <MenuItem text="Submenu Item 1" />
+              </MenuGroup>
+            </Menu>
+          }
+        />
+      </Flex>
+    </Card>
+  )
+}
+
 function BadgeToneToggleSection() {
   const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
 
@@ -320,7 +347,7 @@ function BadgeToneToggleSection() {
     <Card tone="neutral" padding={4}>
       <Stack gap={3}>
         <Text size={1} weight="semibold">
-          6. Badge tone toggle ({BADGE_COUNT} badges)
+          7. Badge tone toggle ({BADGE_COUNT} badges)
         </Text>
         <Text size={1}>One click restyles all {BADGE_COUNT} badges.</Text>
         <Inline>
@@ -350,7 +377,7 @@ function AvatarShuffleSection() {
     <Card tone="neutral" padding={4}>
       <Stack gap={3}>
         <Text size={1} weight="semibold">
-          6. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
+          8. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
         </Text>
         <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
         <Inline>
@@ -383,7 +410,7 @@ function TabSwitchSection() {
     <Card tone="neutral" padding={4}>
       <Stack gap={3}>
         <Text size={1} weight="semibold">
-          7. Tab switch
+          9. Tab switch
         </Text>
         <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
         <div>
@@ -423,7 +450,7 @@ function SearchInputSection() {
     <Card tone="neutral" padding={4}>
       <Stack gap={3}>
         <Text size={1} weight="semibold">
-          8. Search input
+          10. Search input
         </Text>
         <Text size={1}>Type to update the input. Click the clear button to empty it.</Text>
         <TextInput
@@ -451,6 +478,7 @@ function Ui4() {
         <PanelSwapSection />
         <TooltipMountSection />
         <PopoverMountSection />
+        <MenuInteractionSection />
         <BadgeToneToggleSection />
         <AvatarShuffleSection />
         <TabSwitchSection />
