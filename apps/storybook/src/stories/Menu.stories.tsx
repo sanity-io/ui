@@ -121,7 +121,7 @@ export const WithSubmenus: Story = {
 }
 
 export const MenuKeyboardControls: Story = {
-  // tags: ['!dev', '!autodocs'],
+  tags: ['!dev', '!autodocs'],
   render: () => {
     return (
       <Menu
@@ -185,7 +185,7 @@ export const MenuKeyboardControls: Story = {
 }
 
 export const SubmenuKeyboardControls: Story = {
-  // tags: ['!dev', '!autodocs'],
+  tags: ['!dev', '!autodocs'],
   render: () => {
     return (
       <Menu
