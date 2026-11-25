@@ -203,7 +203,11 @@ sections:
             rel: relates-to
             role: beta
       - title: Messaging
-        body: Proactively communicates information. No components confirmed in the source taxonomy yet.
+        body: Proactively communicates information.
+        refs:
+          - to: indicator-stack
+            rel: relates-to
+            role: beta
       - title: See also
         body: Shared props (spacing, tone, sizing and positioning) are described in `docs/overview/api-essentials.dsds.yaml`.
   - kind: section

@@ -403,6 +403,9 @@ refs:
   - href: ./components/text-input.dsds.yaml
     rel: file
     role: TextInput
+  - href: ./components/toast.dsds.yaml
+    rel: file
+    role: Toast
   - href: ./components/search-input.dsds.yaml
     rel: file
     role: SearchInput
