@@ -26,6 +26,23 @@ sections:
       - level: must-not
         statement: Don't set id or aria-controls on Tabs.Tab. It builds both from value.
 
+  - kind: section
+    for: agent
+    freeform:
+      - title: Props
+        body: |-
+          `label` and `value` are required. Omitting either causes a TypeScript error.
+
+          ```tsx
+          <Tabs.Tab value="drafts" label="Drafts" />
+          ```
+
+          - `label` (string, required): the text shown in the tab.
+          - `value` (string, required): identifies the tab. It must match the `value` of its Tabs.Panel and the `value` on Tabs.
+          - `icon` (optional): an icon component or node, rendered before the label.
+          - `tone` (optional, default `neutral`): `neutral`, `positive`, `suggest`, `caution` or `critical`.
+          - Other button attributes, such as `onClick`, pass through to the button. `id`, `role`, `disabled` and `aria-disabled` are not accepted.
+
 refs:
   - to: tabs
     rel: relates-to

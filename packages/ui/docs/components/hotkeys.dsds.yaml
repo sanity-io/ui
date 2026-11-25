@@ -47,6 +47,9 @@ sections:
         statement: Detect the platform at runtime and pass the correct platform-specific key labels.
       - level: must-not
         statement: 'Using Hotkeys as the sole mechanism to discover a feature. Instead: Shortcuts should supplement visible UI — never gate functionality.'
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/hotkeys/Hotkeys.tsx
 alternatives:
   - to: kbd
 refs:

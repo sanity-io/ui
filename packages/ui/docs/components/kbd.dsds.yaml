@@ -45,6 +45,22 @@ sections:
     items:
       - level: must-not
         statement: "Putting a full shortcut string like 'Ctrl+Shift+S' in a single KBD. Instead: Use Hotkeys to render multi-key shortcuts."
+  - kind: section
+    for: agent
+    freeform:
+      - title: Props
+        body: |-
+          Pass the key label in `text`:
+
+          ```tsx
+          <KBD text="⌘" />
+          ```
+
+          The type marks `text` as optional, but a KBD without `text` renders an empty key, so always pass it. Don't pass children. The type rejects them.
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/kbd/KBD.tsx
 alternatives:
   - to: hotkeys
   - to: badge

@@ -89,7 +89,7 @@ Key props by component, as of alpha.20:
 - **Tabs:** `value` and `onValueChange` on `Tabs`. `value` on each `Tabs.Tab` and `Tabs.Panel`.
 - **Link:** `href`, `openInNewTab`, `underlined`.
 - **Avatar:** `name` (required), `src`, `size` (0 to 2), `color`.
-- **List.ButtonItem:** `selected`, `as`, `density`, `start`, `end`.
+- **List.ItemButton:** `as`, `current`, `density`, `start`, `end`, `text`, `subtext`. Use `current`, not `selected`.
 
 Read `docs/components/<id>.dsds.yaml` for the full list and the rules for each.
 
@@ -156,7 +156,7 @@ import {SearchIcon} from '@sanity/icons/Search'
 - Import each icon from its own path. The path drops the `Icon` suffix: `@sanity/icons/Search`.
 - Do not import an icon from `@sanity/icons`. The root ships a type-only stub. The import passes `tsc` and fails in the browser.
 - To choose an icon, search `docs/icons.dsds.yaml` by purpose. It lists every icon with its import path and other names.
-- Import `List` alone and use `List.Item`, `List.ItemText`, `List.ItemImage`, and `List.ButtonItem`. `ListItem` is not an export.
+- Import `List` alone and use `List.Item`, `List.ItemButton`, and `List.ItemImage`. `ListItem` is not an export.
 - Tabs works the same way: `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`.
 - v5 has no `ThemeProvider`, no `studioTheme`, and no runtime scheme toggle. Importing them is a type error.
 

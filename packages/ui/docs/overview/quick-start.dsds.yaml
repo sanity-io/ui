@@ -56,37 +56,7 @@ sections:
         description: |-
           The outer shell is a `Flex` that fills the viewport. The sidebar and main area sit side by side. This assumes the project is set up as the `installation` guide shows: its `package.json`, `tsconfig.json` and entry file.
 
-          ```tsx
-          // src/App.tsx
-          import { useState } from 'react'
-          import { Box, Button, Flex, Heading, IconButton, SkipToContent } from '@sanity/ui'
-          import { MenuIcon } from '@sanity/icons/Menu'
-
-          const App = () => {
-            const [sidebarOpen, setSidebarOpen] = useState(true)
-
-            return (
-              <Flex flexWrap="wrap" minHeight="100vh">
-                <SkipToContent href="#main-content" label="Skip to content" />
-                {sidebarOpen && (
-                  <Box as="nav" aria-label="Main navigation" borderRight={[false, false, false, true]} flexBasis={['100%', '100%', '100%', '260px']} flexShrink={0}>
-                    <Box padding={3}>
-                      <Heading as="h2" size={1}>Studio</Heading>
-                    </Box>
-                  </Box>
-                )}
-
-                <Flex as="main" id="main-content" tabIndex={-1} flexBasis={['100%', '100%', '100%', '0']} flexDirection="column" flexGrow={1} minWidth="0" overflow="hidden">
-                  <Box padding={3} borderBottom>
-                    <Heading as="h1">All Documents</Heading>
-                  </Box>
-                </Flex>
-              </Flex>
-            )
-          }
-
-          export default App
-          ```
+          The complete `src/App.tsx` after this step is in the example.
 
           **What to notice:**
 
@@ -96,36 +66,17 @@ sections:
           - `minWidth="0"` on the main area prevents content from pushing the layout wider than the viewport.
           - `as="h1"` on the page heading and `as="h2"` on the sidebar heading create a correct hierarchy.
           - `SkipToContent` is the first focusable element. A keyboard user's first Tab press reveals it; activating it jumps focus to `#main-content`.
+        examples:
+          - title: src/App.tsx after step 1
+            ref:
+              href: ./quick-start/step-1-app.tsx
+              rel: source
+              role: React
       - title: 'Step 2: Add a toolbar with reflow'
         description: |-
           The toolbar holds the page title and an action button. Both wrap to separate lines on mobile.
 
-          Replace the `<Box padding={3} borderBottom>` inside `main` with:
-
-          ```tsx
-          import { AddIcon } from '@sanity/icons/Add'
-          import { MenuIcon } from '@sanity/icons/Menu'
-          import { CloseIcon } from '@sanity/icons/Close'
-          ```
-
-          ```tsx
-          <Box padding={3} borderBottom>
-            <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-              <Flex alignItems="center" gap={3} minWidth="0">
-                {!sidebarOpen && (
-                  <IconButton
-                    level="tertiary"
-                    icon={MenuIcon}
-                    aria-label="Show navigation"
-                    onClick={() => setSidebarOpen(true)}
-                  />
-                )}
-                <Heading truncate={1} as="h1">All Documents</Heading>
-              </Flex>
-              <Button text="New document" iconStart={AddIcon} />
-            </Flex>
-          </Box>
-          ```
+          The complete `src/App.tsx` after this step replaces the main area's placeholder `Box` with the toolbar, and adds the state that shows the sidebar again.
 
           **What to notice:**
 
@@ -133,83 +84,33 @@ sections:
           - `truncate={1}` on the Heading truncates long titles with an ellipsis.
           - The `MenuIcon` button has `aria-label` because it has no visible text.
           - Button `level` controls visual weight: `"primary"` is the default (solid, full visual weight).
+        examples:
+          - title: src/App.tsx after step 2
+            ref:
+              href: ./quick-start/step-2-toolbar.tsx
+              rel: source
+              role: React
       - title: 'Step 3: Build the sidebar'
         description: |-
           Replace the sidebar placeholder with navigation links and a close button.
 
-          ```tsx
-          import { CloseIcon } from '@sanity/icons/Close'
-          import { Box, Flex, Heading, IconButton, Link, Text, VStack } from '@sanity/ui'
-          ```
-
-          ```tsx
-          <Box as="nav" aria-label="Main navigation" borderRight={[false, false, false, true]} flexBasis={['100%', '100%', '100%', '260px']} flexShrink={0} overflowY="auto">
-            <VStack>
-              <Box padding={3} borderBottom>
-                <Flex alignItems="center" justifyContent="space-between">
-                  <Heading as="h2" size={1}>Studio</Heading>
-                  <IconButton
-                    level="tertiary"
-                    icon={CloseIcon}
-                    aria-label="Close navigation"
-                    onClick={() => setSidebarOpen(false)}
-                  />
-                </Flex>
-              </Box>
-              <Box padding={3}>
-                <VStack gap={3}>
-                  <Link href="/documents">Documents</Link>
-                  <Link href="/authors">Authors</Link>
-                  <Link href="/settings">Settings</Link>
-                </VStack>
-              </Box>
-            </VStack>
-          </Box>
-          ```
+          The complete `src/App.tsx` after this step is in the example.
 
           **What to notice:**
 
           - `VStack` lays children out in a column with even `gap` spacing. It exposes only `as` and `gap`. For full flex control, use `Flex flexDirection="column"`.
           - `Link` renders a native `<a>` element and inherits color from the container. It adds an underline by default — use `underlined={false}` to remove it for nav links.
+        examples:
+          - title: src/App.tsx after step 3
+            ref:
+              href: ./quick-start/step-3-sidebar.tsx
+              rel: source
+              role: React
       - title: 'Step 4: Add document cards'
         description: |-
-          Create a scrollable list of cards below the toolbar.
+          Create a scrollable list of cards below the toolbar. The documents are a constant array. The list goes inside the main area, below the toolbar.
 
-          ```tsx
-          import { Badge, Card, Container } from '@sanity/ui'
-          ```
-
-          ```tsx
-          const DOCUMENTS = [
-            { title: 'Getting Started', status: 'Published' },
-            { title: 'API Reference', status: 'Draft' },
-            { title: 'Design Tokens', status: 'Published' },
-          ]
-          ```
-
-          Add this below the toolbar `Box`, still inside the `main` Flex:
-
-          ```tsx
-          <Box padding={4} flexGrow={1} overflowY="auto">
-            <Container>
-              <VStack gap={3}>
-                {DOCUMENTS.map((doc) => (
-                  <Card key={doc.title}>
-                    <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-                      <VStack gap={2}>
-                        <Heading as="h2">{doc.title}</Heading>
-                        <Text as="p" size={1} muted>Last edited 2 hours ago</Text>
-                      </VStack>
-                      <Badge tone={doc.status === 'Published' ? 'positive' : 'caution'}>
-                        {doc.status}
-                      </Badge>
-                    </Flex>
-                  </Card>
-                ))}
-              </VStack>
-            </Container>
-          </Box>
-          ```
+          The complete `src/App.tsx` after this step is in the example.
 
           **What to notice:**
 
@@ -219,15 +120,23 @@ sections:
           - `Card` is a content surface — it adds a background and border. Do not use it for structural regions like sidebars or toolbars.
           - Layout props like `flexGrow` go on `Box`, not on `Card`. Passing one to Card is a TypeScript error.
           - Each card heading is `as="h2"` because `as="h1"` is the page title above. Never skip heading levels.
+        examples:
+          - title: src/App.tsx after step 4
+            ref:
+              href: ./quick-start/step-4-document-cards.tsx
+              rel: source
+              role: React
       - title: 'Step 5: Set the page language'
         description: |-
-          In `index.html`, set `lang="en"` on the `<html>` element:
-
-          ```html
-          <html lang="en">
-          ```
+          In `index.html`, set `lang="en"` on the `<html>` element. The complete file is in the example.
 
           Without this, screen readers cannot detect the page language (WCAG 3.1.1 A).
+        examples:
+          - title: index.html after step 5
+            ref:
+              href: ./quick-start/step-5-index.html
+              rel: source
+              role: HTML
       - title: Run it
         description: |-
           ```shell

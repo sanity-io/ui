@@ -69,7 +69,7 @@ sections:
       - level: must
         statement: Tabs has three subcomponents, Tabs.List, Tabs.Tab and Tabs.Panel. Each has its own entry, `tabs-list`, `tab` and `tabs-panel`. Read each one's entry in `docs/components/` before you write it. Its props are not listed here.
       - level: must
-        statement: Don't write a subcomponent's props from memory or from this entry. This entry does not list them.
+        statement: Use the required props listed in the Props section of this entry. Read the subcomponent's own entry for its optional props.
   - kind: guidelines
     for: all
     title: Accessibility
@@ -77,6 +77,20 @@ sections:
     items:
       - level: should
         statement: Use Tabs.List, Tabs.Tab and Tabs.Panel together. They set the roles, ids and focus behavior that link each tab to its panel.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Props
+        body: |-
+          Required props for each part:
+
+          - **Tabs:** `value` (string) and `onValueChange` (function). `value` is the active Tabs.Tab's `value`.
+          - **Tabs.List:** `aria-label` or `aria-labelledby`. One is required.
+          - **Tabs.Tab:** `label` (string) and `value` (string).
+          - **Tabs.Panel:** `value` (string). It matches the `value` of one Tabs.Tab.
+
+          Optional props for each part are in that part's entry: `tabs-list`, `tab` and `tabs-panel`.
+
 alternatives:
   - to: link
 refs:

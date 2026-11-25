@@ -81,7 +81,7 @@ Each rule names the failure it prevents. Fuller tables are in the reference file
 ### Imports
 
 - Import each icon from its own path: `import {SearchIcon} from '@sanity/icons/Search'`. The root import passes `tsc` and then fails in the browser.
-- Import `List` alone and use `List.Item`, `List.ItemText`, and `List.ButtonItem`.
+- Import `List` alone and use `List.Item`, `List.ItemButton`, and `List.ItemImage`.
 - Do not import `ThemeProvider` or `studioTheme`. v5 has no theming API. Theming uses CSS custom properties.
 - Do not import `Label`, `Menu`, `Toast`, `Skeleton`, `Autocomplete`, `SegmentedControl`, or `Image`. They are not exported yet.
 

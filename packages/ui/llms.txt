@@ -42,9 +42,8 @@ Each document is a DSDS file, written as YAML. Its `guidelines` carry a level: `
 - [Inline](docs/components/inline.dsds.yaml): Deprecated. Use HStack instead. Previously laid out children in a wrapping inline row. Maintained for backward compatibility only.
 - [KBD](docs/components/kbd.dsds.yaml): Presents a single keyboard shortcut.
 - [Link](docs/components/link.dsds.yaml): Acts as a navigational element to move across pages.
-- [List.ButtonItem](docs/components/list-button-item.dsds.yaml): The interactive, selectable variant of List.Item.
 - [List.ItemImage](docs/components/list-item-image.dsds.yaml): A thumbnail image slot inside a List.Item.
-- [List.ItemText](docs/components/list-item-text.dsds.yaml): The text content slot inside a List.Item.
+- [List.ItemButton](docs/components/list-item-button.dsds.yaml): The interactive row inside a List.Item. Takes text, subtext, start, end, current and density.
 - [List.Item](docs/components/list-item.dsds.yaml): A single row inside a List.
 - [List](docs/components/list.dsds.yaml): A compound component for displaying structured rows.
 - [Popover](docs/components/popover.dsds.yaml): A floating layer to disclose secondary, contextually relevant content or actions.
@@ -74,7 +73,7 @@ Each document is a DSDS file, written as YAML. Its `guidelines` carry a level: `
 - [Layout guidelines](docs/patterns/layouts.dsds.yaml): The Sanity UI application layout system: a Navigation sidebar, a Content area (with its own toolbar and display), and an Inspection sidebar, composed into five shell layouts. Covers layout structure, navigation patterns, action placement, sidebar show/hide behavior, responsiveness, and the accessibility rules that hold the whole thing together.
 - [Loading states](docs/patterns/loading-states.dsds.yaml): Guidelines for handling the three distinct loading moments in Sanity UI: initial load, in-place refresh, and pending actions.
 - [Messaging](docs/patterns/messaging.dsds.yaml): Rules and guidance for writing tooltips, confirm dialogs, and status messages in Sanity UI.
-- [Sidebar navigation pattern](docs/patterns/navigation.dsds.yaml): Sanity UI has no built-in NavItem or SidebarLink component. This pattern shows the canonical way to build keyboard-accessible sidebar navigation by composing List + List.ButtonItem, instead of hand-building nav items from a native button or Box as="button". Use this pattern for persistent sidebar navigation, not for a popover menu.
+- [Sidebar navigation pattern](docs/patterns/navigation.dsds.yaml): Sanity UI has no built-in NavItem or SidebarLink component. This pattern shows the canonical way to build keyboard-accessible sidebar navigation by composing List + List.ItemButton, instead of hand-building nav items from a native button or Box as="button". Use this pattern for persistent sidebar navigation, not for a popover menu.
 - [Responsive](docs/patterns/responsive.dsds.yaml): A complete reference for building responsive Sanity UI layouts using spacing tokens, breakpoint arrays, reflow patterns, grid columns, sizing props, text overflow, and overflow portal rules.
 
 ## Foundations
@@ -88,20 +87,16 @@ Each document is a DSDS file, written as YAML. Its `guidelines` carry a level: `
 
 ## Tokens
 
-- [Sanity UI](docs/tokens/color.dsds.yaml): 
-- [Sanity UI](docs/tokens/container-widths.dsds.yaml): 
-- [Sanity UI](docs/tokens/content.dsds.yaml): 
-- [Sanity UI](docs/tokens/font-family.dsds.yaml): 
-- [Sanity UI](docs/tokens/font-weight.dsds.yaml): 
-- [Sanity UI](docs/tokens/radius.dsds.yaml): 
-- [Sanity UI](docs/tokens/semantic.dsds.yaml): 
-- [Sanity UI](docs/tokens/shadow.dsds.yaml): 
-- [Sanity UI](docs/tokens/space.dsds.yaml): 
-- [Sanity UI](docs/tokens/typography.dsds.yaml): 
-
-## Guides
-
-- [Sanity UI 5 FAQ](docs/guides/faq.dsds.yaml): Anticipated questions about Sanity UI 5, with honest answers, covering migration timing, scope, stability, and where to get help.
+- [Sanity UI](docs/tokens/color.dsds.yaml):
+- [Sanity UI](docs/tokens/container-widths.dsds.yaml):
+- [Sanity UI](docs/tokens/content.dsds.yaml):
+- [Sanity UI](docs/tokens/font-family.dsds.yaml):
+- [Sanity UI](docs/tokens/font-weight.dsds.yaml):
+- [Sanity UI](docs/tokens/radius.dsds.yaml):
+- [Sanity UI](docs/tokens/semantic.dsds.yaml):
+- [Sanity UI](docs/tokens/shadow.dsds.yaml):
+- [Sanity UI](docs/tokens/space.dsds.yaml):
+- [Sanity UI](docs/tokens/typography.dsds.yaml):
 
 ## Skills
 
