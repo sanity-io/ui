@@ -436,8 +436,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(playwright@1.65.0)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(vitest@5.1.0)
       chrome-devtools-mcp:
-        specifier: ^1.13.0
-        version: 1.13.0
+        specifier: ^1.14.0
+        version: 1.14.0
       oxc-transform-react:
         specifier: 'catalog:'
         version: 0.158.0
@@ -5655,8 +5655,8 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
-  chrome-devtools-mcp@1.13.0:
-    resolution: {integrity: sha512-Yf4qhS0+2oo7c+gOySMDHQt4ZL/yKXG2Mxxzjk0gcArINtcQ3tLiQVzAW6g2nsyQzAGhkcLwWWBAtlx3Bg+Spg==}
+  chrome-devtools-mcp@1.14.0:
+    resolution: {integrity: sha512-sO7GYmqnvmjQ0l9jiuvw2DyPxi3nBATFbxvNU8ArapYOUXE79z6fbigKuDbJ8/jsi/4OA3OvHlGq83mHLwemGA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=23}
     hasBin: true
     peerDependencies:
@@ -13842,7 +13842,7 @@ snapshots:
 
   chownr@3.0.0: {}
 
-  chrome-devtools-mcp@1.13.0: {}
+  chrome-devtools-mcp@1.14.0: {}
 
   citty@0.2.2: {}
 
