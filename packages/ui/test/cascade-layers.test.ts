@@ -18,6 +18,8 @@ const UI_DIR = path.resolve(import.meta.dirname, '..')
 
 test('@sanity/ui/styles.css has no cascade layers', {timeout: 60_000}, async () => {
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sanity-ui-styles-'))
+  const packageJsonPath = path.join(UI_DIR, 'package.json')
+  const packageJson = fs.readFileSync(packageJsonPath, 'utf8')
 
   try {
     await build({
@@ -25,7 +27,7 @@ test('@sanity/ui/styles.css has no cascade layers', {timeout: 60_000}, async () 
       cwd: UI_DIR,
       // The `build:done` hook rewrites `package.json#sideEffects` for this
       // temporary `outDir`, which must not touch the working tree.
-      hooks: {},
+      hooks: () => {},
       outDir,
       dts: false,
       exports: false,
@@ -37,6 +39,7 @@ test('@sanity/ui/styles.css has no cascade layers', {timeout: 60_000}, async () 
 
     expect(css).toMatch(/\.u-[\w-]+ \{/)
     expect(css).not.toMatch(/@layer\b/)
+    expect(fs.readFileSync(packageJsonPath, 'utf8')).toBe(packageJson)
   } finally {
     fs.rmSync(outDir, {recursive: true, force: true})
   }
