@@ -105,7 +105,6 @@ minimumReleaseAgeExclude:
   - oxfmt
   - oxlint
   - '@lezer/highlight@1.2.5'
-  - styled-components@6.6.0
 
 minimumReleaseAgeExcludePrune: true
 
@@ -129,3 +128,6 @@ overrides:
   '@types/react-dom': 'catalog:'
   react: 'catalog:'
   react-dom: 'catalog:'
+  # styled-components pins an exact csstype; keep a single copy so its
+  # CSSObject/Styles types match the csstype @sanity/ui itself uses.
+  csstype: ^3.2.4

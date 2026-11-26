@@ -265,6 +265,7 @@ overrides:
   '@types/react-dom': ^19.3.0
   react: ^19.3.1
   react-dom: ^19.3.1
+  csstype: ^3.2.4
 
 packageExtensionsChecksum: sha256-/YfwHsFiPIyrsa7w+LrMbcvcAF2Tq98gf6TNdIQqOm0=
 
@@ -575,8 +576,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       csstype:
-        specifier: ^3.2.3
-        version: 3.2.3
+        specifier: ^3.2.4
+        version: 3.2.4
       motion:
         specifier: 'catalog:'
         version: 14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -5914,8 +5915,8 @@ packages:
   css.escape@1.5.1:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
 
-  csstype@3.2.3:
-    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+  csstype@3.2.4:
+    resolution: {integrity: sha512-PoKaoPzQapnEoqUSnHx1u6W6ku8CVEgKsnpmmzU3m1nwkidpPBQ8V/Zq2+bWNrsOKoKLwTGdbx6xF7BXP1zLVQ==}
 
   custom-media-element@1.4.7:
     resolution: {integrity: sha512-rNBpnzkTAWPhE3cSajteAvg9qfFTsTd0b6dt33y9Q0Pq8afMvxL7SbvxzbUCqIRk/raIJHbJrHheCPADdK9+Ww==}
@@ -13433,7 +13434,7 @@ snapshots:
 
   '@types/react@19.3.0':
     dependencies:
-      csstype: 3.2.3
+      csstype: 3.2.4
 
   '@types/resolve@1.20.6': {}
 
@@ -14199,7 +14200,7 @@ snapshots:
 
   css.escape@1.5.1: {}
 
-  csstype@3.2.3: {}
+  csstype@3.2.4: {}
 
   custom-media-element@1.4.7: {}
 
@@ -16622,7 +16623,7 @@ snapshots:
       '@emotion/is-prop-valid': 1.4.0
       '@types/stylis': 4.2.7
       css-to-react-native: 3.2.0
-      csstype: 3.2.3
+      csstype: 3.2.4
       react: 19.3.1
       stylis: 4.3.6
     optionalDependencies:
