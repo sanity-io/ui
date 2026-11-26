@@ -1,12 +1,7 @@
 import type {ComponentProps} from 'react'
 
 import type {PropDef} from '../../types/PropDef'
-import type {Tone} from '../../types/Tone'
-
-export const TOAST_TONE = ['neutral', 'positive', 'caution', 'critical'] as const satisfies Tone[]
-
-/** @beta */
-export type ToastTone = (typeof TOAST_TONE)[number]
+import {TOAST_TONE, type ToastTone} from '../../types/Toast'
 
 /**
  * Tones whose announcements wait for the screen reader to finish its current speech

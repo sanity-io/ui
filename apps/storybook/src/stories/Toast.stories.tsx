@@ -2,8 +2,9 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Toast} from '../../../../packages/ui/src/components/toast/Toast'
-import {TOAST_TONE, toastProps} from '../../../../packages/ui/src/components/toast/toast.props'
+import {toastProps} from '../../../../packages/ui/src/components/toast/toast.props'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
+import {TOAST_TONE} from '../../../../packages/ui/src/types/Toast'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(toastProps)
