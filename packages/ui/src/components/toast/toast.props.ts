@@ -18,6 +18,15 @@ export interface ToastProps extends ComponentProps<'div'> {
 }
 
 export const toastProps: Record<string, PropDef> = {
+  title: {
+    type: 'string',
+  },
+  description: {
+    type: 'string',
+  },
+  closable: {
+    type: 'boolean',
+  },
   tone: {
     type: 'union',
     className: 'tone',
