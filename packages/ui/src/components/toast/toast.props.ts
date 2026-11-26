@@ -3,14 +3,6 @@ import type {ComponentProps} from 'react'
 import type {PropDef} from '../../types/PropDef'
 import {TOAST_TONE, type ToastTone} from '../../types/Toast'
 
-/**
- * Tones whose announcements wait for the screen reader to finish its current speech
- * (`role="status"`). The other tones are urgent and interrupt (`role="alert"`).
- */
-export function isPoliteTone(tone: ToastTone): boolean {
-  return tone === 'neutral' || tone === 'positive'
-}
-
 /** @beta */
 export interface ToastProps extends ComponentProps<'div'> {
   /** A short title to be shown on the Toast */
