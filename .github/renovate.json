@@ -98,6 +98,12 @@
       "allowedVersions": "<=8"
     },
     {
+      "description": "csstype must stay on the exact version styled-components pins (enforced by packages/ui/test/csstype.test.ts); raise this together with styled-components",
+      "matchPackageNames": ["csstype"],
+      "matchBaseBranches": ["main"],
+      "allowedVersions": "<=3.2.3"
+    },
+    {
       "description": "Every update waits for Dependency Dashboard approval, even where an earlier rule or an extended preset sets its own dependencyDashboardApproval",
       "matchUpdateTypes": [
         "major",
