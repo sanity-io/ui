@@ -1,0 +1,83 @@
+kind: component
+id: menu-button
+name: Menu.Button
+description: One action inside a contextual menu. It renders as a menu item with role="menuitem", and it sits inside Menu.Content.
+metadata:
+  tags: [menu, item, action, menu-item, menu-button, list-item]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For an action in a contextual menu, such as Edit, Duplicate or Delete.
+      - level: should-not
+        statement: For a standalone action outside a contextual menu. Use Button instead.
+        alternatives:
+          - to: button
+      - level: should-not
+        statement: For page or sidebar navigation links. Use List.ItemButton with `as="a"` and `href` instead.
+        alternatives:
+          - to: list-item-button
+          - to: link
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Place Menu.Button inside Menu.Content, so it has the menuitem role inside a menu.
+      - level: should
+        statement: Pass an icon as `start`, and a shortcut or status as `end`.
+      - level: should-not
+        statement: Don't use `subtext` unless the item needs extra context to be understood.
+      - level: should
+        statement: If some items in a group have icons, give every item in that group an icon, so the labels align.
+      - level: must-not
+        statement: Don't put a Button, Link or other interactive element inside Menu.Button. The item is already the press target.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't set `role` on Menu.Button. It sets role="menuitem" itself.
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - level: should
+        statement: Keep labels to 1 to 3 words, and make each label distinct within its menu.
+      - level: should
+        statement: Lead an action label with a verb, such as 'Delete item' or 'Add user'.
+alternatives:
+  - to: button
+  - to: list-item-button
+refs:
+  - to: menu-content
+    rel: relates-to
+    note: The list that holds this item.
+  - to: menu-submenu
+    rel: relates-to
+    note: Opens a nested list of Menu.Button items.
+  - to: list-item-button
+    rel: relates-to
+    note: Menu.Button is built on List.ItemButton and takes its props.
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/menu/Menu.tsx
+imports:
+  - platform: react
+    code: import { Menu } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

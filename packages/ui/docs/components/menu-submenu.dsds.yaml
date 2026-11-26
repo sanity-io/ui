@@ -1,0 +1,65 @@
+kind: component
+id: menu-submenu
+name: Menu.Submenu
+description: A menu item that opens a nested contextual menu on hover, click or Enter. Its items are Menu.Button and Menu.Divider parts inside Menu.Content.
+metadata:
+  tags: [menu, submenu, nested, group, menu-submenu, sub-actions]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To group related sub-actions behind one item, such as 'Add' with 'Image' and 'Document' inside it.
+      - level: should-not
+        statement: When the sub-actions fit as top-level items. Don't nest items only to group them.
+      - level: should-not
+        statement: For a single sub-action. Use Menu.Button instead.
+        alternatives:
+          - to: menu-button
+      - level: should-not
+        statement: When nesting would go more than two levels deep.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Give the submenu's trigger a label as children. It is the accessible name for the trigger.
+      - level: should
+        statement: Keep the trigger label short. It names the group of actions inside it.
+      - level: must-not
+        statement: Don't add an icon at the end of the trigger. Menu.Submenu renders a chevron on its own.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Pass a Menu.Content in the `menu` prop, with its own `aria-label` or `aria-labelledby`.
+alternatives:
+  - to: menu-button
+refs:
+  - to: menu
+    rel: relates-to
+    note: The parent component.
+  - to: menu-content
+    rel: relates-to
+    note: The nested list this item opens.
+  - to: menu-button
+    rel: relates-to
+    note: The items inside the nested list.
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/menu/Menu.tsx
+imports:
+  - platform: react
+    code: import { Menu } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

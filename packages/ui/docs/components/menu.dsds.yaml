@@ -1,0 +1,104 @@
+kind: component
+id: menu
+name: Menu
+description: 'A contextual menu. It opens a list of actions from a trigger the user just pressed. Menu has three parts, each with its own entry: Menu.Content, Menu.Button and Menu.Submenu.'
+metadata:
+  tags: [menu, contextual, dropdown, overflow, more options, actions, submenu]
+  status:
+    status: beta
+uses:
+  - to: menu-content
+  - to: menu-button
+  - to: menu-submenu
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For a contextual menu of actions that opens from a trigger next to the content it acts on, such as a 'more options' button on a row.
+      - level: should
+        statement: For secondary actions on one item, such as Edit, Duplicate and Delete.
+      - level: should-not
+        statement: Outside a contextual menu. For page or sidebar navigation, use List.ItemButton inside a List.
+        alternatives:
+          - to: list-item-button
+      - level: should-not
+        statement: To choose one value that sets a form or view value. Use Select instead.
+        alternatives:
+          - to: select
+      - level: should-not
+        statement: For floating content that isn't a list of actions. Use Popover instead.
+        alternatives:
+          - to: popover
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: must-not
+        statement: Don't use Menu outside a contextual menu. Its items are not a navigation pattern, and its trigger must be the control that opened it.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Pass the trigger as children, and pass the list of actions in the `menu` prop, as a Menu.Content.
+      - level: must
+        statement: Put only Menu.Button, Menu.Submenu and Menu.Divider inside Menu.Content. Any other element breaks the ARIA tree.
+      - level: must-not
+        statement: Don't put a Button, Link or Text directly in Menu or Menu.Content. Use Menu.Button for each action.
+      - level: should
+        statement: Use Menu.Divider to separate groups of actions, such as edit actions from destructive ones.
+      - level: must-not
+        statement: Don't nest Menu.Submenu more than two levels deep.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Child parts
+    items:
+      - level: must
+        statement: Menu has three subcomponents, Menu.Content, Menu.Button and Menu.Submenu. Each has its own entry, `menu-content`, `menu-button` and `menu-submenu`. Read each one's entry in `docs/components/` before you write it. Menu.Divider wraps Divider, so read the `divider` entry for its props.
+      - level: must-not
+        statement: Don't write a subcomponent's props from memory or from this entry. This entry does not list them.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: Use Menu.Content, Menu.Button and Menu.Submenu together. They set the menu and menuitem roles and the keyboard focus that the pattern needs.
+alternatives:
+  - to: popover
+  - to: select
+  - to: list-item-button
+refs:
+  - to: menu-content
+    rel: relates-to
+    note: The list that holds the menu's items.
+  - to: menu-button
+    rel: relates-to
+    note: One action in the menu.
+  - to: menu-submenu
+    rel: relates-to
+    note: A nested menu, opened from one item.
+  - to: popover
+    rel: relates-to
+    note: The floating surface Menu is built on.
+  - to: divider
+    rel: relates-to
+    note: The separator Menu.Divider renders.
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/menu/Menu.tsx
+imports:
+  - platform: react
+    code: import { Menu } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
