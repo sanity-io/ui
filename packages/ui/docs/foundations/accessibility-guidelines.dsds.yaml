@@ -132,6 +132,9 @@ sections:
             rel: same-as
       - level: must
         statement: Layouts must reflow at a 320px-equivalent viewport. Content must reflow without two-dimensional scrolling at a 320 CSS px viewport (WCAG 1.4.10 Reflow, AA). This matches 1280px at 400% zoom. Reflow must keep all information and function. Reduce large spacing values with responsive arrays. Content that needs two-dimensional layout, such as a large data table, is exempt.
+      - id: flex-wrap-for-reflow
+        level: must
+        statement: Set `flexWrap="wrap"` on every `Flex` with two or more children, so the children reflow at a 320px viewport instead of overflowing.
       - id: target-size-minimum
         level: must
         statement: "Tight spacing must not shrink hit targets. A dense layout may use the 2.5.8 spacing exception: a target under 24px passes when a 24px-diameter circle centered on it does not overlap a neighboring target's circle."
@@ -151,6 +154,20 @@ sections:
         statement: Text must resize and reflow. Text must resize to 200% without loss of content or function, and reflow at a 320px viewport with no horizontal scroll (WCAG 1.4.4, 1.4.10). Text sizes come from the type tokens in `px`, not from the document's base font size. The consuming app must not ship `user-scalable=no` or `maximum-scale=1`.
       - level: must
         statement: Layouts must survive text-spacing overrides. The layout must hold when users override line height to 1.5×, paragraph spacing to 2×, letter spacing to 0.12em, and word spacing to 0.16em (WCAG 1.4.12). The failure comes from wrapping components in fixed-height containers or applying `textOverflow="ellipsis"` where text needs to wrap.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Page structure
+    items:
+      - id: skip-link-first
+        level: must
+        statement: Place a skip link first in the layout, as the first focusable element, pointing at the main region's `id`. Use `SkipToContent` (WCAG 2.4.1 Bypass Blocks, A).
+      - id: heading-hierarchy
+        level: must
+        statement: Use one `<h1>` per page for its title, and never skip a heading level. Set the level with `as` on Heading, by the page outline, not by visual size (WCAG 1.3.1, A).
+      - id: page-language
+        level: must
+        statement: Set the page language with `lang` on `<html>`, such as `lang="en"` (WCAG 3.1.1 Language of Page, A).
   - kind: guidelines
     for: agent
     framing: how-to-use

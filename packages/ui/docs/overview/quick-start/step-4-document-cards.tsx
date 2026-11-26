@@ -11,6 +11,7 @@ import {
   Heading,
   IconButton,
   Link,
+  PressArea,
   SkipToContent,
   Text,
   VStack,
@@ -19,9 +20,9 @@ import {
 import {useState} from 'react'
 
 const DOCUMENTS = [
-  {title: 'Getting Started', status: 'Published'},
-  {title: 'API Reference', status: 'Draft'},
-  {title: 'Design Tokens', status: 'Published'},
+  {title: 'Getting Started', status: 'Published', href: '/documents/getting-started'},
+  {title: 'API Reference', status: 'Draft', href: '/documents/api-reference'},
+  {title: 'Design Tokens', status: 'Published', href: '/documents/design-tokens'},
 ]
 
 export default function App() {
@@ -103,20 +104,27 @@ export default function App() {
           <Container>
             <VStack gap={3}>
               {DOCUMENTS.map((doc) => (
-                <Card key={doc.title}>
-                  <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-                    <VStack gap={2}>
-                      <Heading as="h2">{doc.title}</Heading>
-                      <Text as="p" size={1} muted>
-                        Last edited 2 hours ago
-                      </Text>
-                    </VStack>
-                    <Badge
-                      tone={doc.status === 'Published' ? 'positive' : 'caution'}
-                      text={doc.status}
-                    />
-                  </Flex>
-                </Card>
+                <PressArea key={doc.title} as="a" href={doc.href}>
+                  <Card>
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      flexWrap="wrap"
+                      gap={2}
+                    >
+                      <VStack gap={2}>
+                        <Heading as="h2">{doc.title}</Heading>
+                        <Text as="p" size={1} muted>
+                          Last edited 2 hours ago
+                        </Text>
+                      </VStack>
+                      <Badge
+                        tone={doc.status === 'Published' ? 'positive' : 'caution'}
+                        text={doc.status}
+                      />
+                    </Flex>
+                  </Card>
+                </PressArea>
               ))}
             </VStack>
           </Container>

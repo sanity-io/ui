@@ -1,0 +1,129 @@
+kind: sanity.foundation
+id: elevation-guidelines
+name: Elevation guidelines
+description: How to use Sanity UI's six elevation levels. Covers why depth works, the rules, and tests to check your work.
+metadata:
+  tags:
+    - concept
+    - elevation
+    - shadow
+    - depth
+    - z-index
+    - tokens
+    - dark-mode
+    - accessibility
+    - motion
+    - foundations
+    - tonal elevation
+    - dark mode
+    - elevation tokens
+    - stacking order
+    - light source
+    - effect styles
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: use-shadow-tokens
+        level: must
+        statement: 'Use a shadow token, {shadow-0} to {shadow-5}, never an inline shadow. Pass `shadow={0}` to `shadow={5}` on Box, Flex, Grid or Container.'
+        uses:
+          - to: shadow
+      - id: choose-level-by-role
+        level: must
+        statement: "Pick the level for the element's role, not its look. {shadow-0} is a flat surface. {shadow-1} is a resting card. {shadow-2} is a hovered card or small raised element. {shadow-3} is a popover, dropdown or menu. {shadow-4} is a modal or overlay. {shadow-5} is a top-layer surface."
+      - id: one-light-source
+        level: must
+        statement: All shadows fall in the same direction, from one light source.
+      - id: shadow-grows-with-level
+        level: must
+        statement: Each level has a larger, softer shadow than the level below it.
+      - id: pair-shadow-with-tone-or-border
+        level: must
+        statement: Pair every shadow with a tone change or a border. Shadows fade in dark mode and fail low-vision users.
+      - id: z-index-follows-elevation
+        level: must
+        statement: z-index follows the elevation level. A higher level always stacks above a lower one.
+      - id: animate-with-motion-values
+        level: must
+        statement: Animate elevation changes with the shipped motion values, `--hover-transition` and the per-component durations.
+        refs:
+          - to: motion-guidelines#reuse-shipped-motion-values
+            rel: relates-to
+      - id: use-lowest-level
+        level: should
+        statement: Use the lowest level that separates the surfaces. If everything is raised, nothing is.
+      - id: reserve-high-levels-for-transient
+        level: should
+        statement: Reserve {shadow-3} and above for transient layers.
+      - id: back-raised-look-with-affordance
+        level: should
+        statement: Back a raised, clickable element with a label, shape or behavior. Shadow alone is a weak signal.
+      - id: no-raised-look-on-static
+        level: should-not
+        statement: Don't give a non-interactive element a raised look. People will try to click it.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          A screen is flat. Elevation fakes depth. It puts some things in front of others. Done well, it shows what is a surface, what floats, and what is on top. Done badly, it is a pile of shadows that flattens the hierarchy. Use a little, by a consistent rule.
+
+          *Sources: James Gurney, Color and Light. Material Design elevation ([M3](https://m3.material.io/styles/elevation/applying-elevation); [M2 light and shadows](https://m2.material.io/design/environment/light-shadows.html), which includes 36 interviews with low-vision users). NN/g, [Beyond Blue Links](https://www.nngroup.com/articles/clickable-elements/). Don Norman on signifiers.*
+  - kind: section
+    for: all
+    freeform:
+      - title: We read depth from light and shadow
+        body: |-
+          A shadow under an element says "this is in front of that." We assume light comes from above.
+
+          *Source: Gurney, Color and Light; Material (light and shadows).*
+      - title: Shadow size and softness show distance
+        body: |-
+          A higher element casts a larger, softer shadow. A lower one casts a smaller, crisper shadow.
+
+          *Source: Material (elevation; light and shadows).*
+      - title: Elevation shows order, not height
+        body: |-
+          What matters is which surface sits above which. Elevation is a layering order, not a measurement.
+
+          *Source: Material (M3 elevation).*
+      - title: Depth signals behavior
+        body: |-
+          Raised elements read as interactive, movable or temporary: buttons, menus, dialogs. Flat elements read as content. Remove the depth cue and you weaken a strong clickable signal.
+
+          *Source: NN/g, Beyond Blue Links; Norman, The Design of Everyday Things.*
+      - title: Shadow is not the only depth cue
+        body: |-
+          Tone, borders and backdrops also separate layers. You need them where shadow fails: on dark backgrounds, and for low-vision users.
+
+          *Source: Material (M3 tonal elevation and scrims; M2 low-vision research).*
+      - title: Depth is a small set of levels
+        body: |-
+          A few levels, applied by rule, make depth readable. This is the same logic as the spacing, type and motion scales. One-off shadows read as noise.
+
+          *Source: Material (consistent elevation).*
+  - kind: section
+    for: all
+    freeform:
+      - title: Tests
+        body: |-
+          **Grayscale and squint.** Desaturate and blur the screen. Can you still tell what is on top? If not, the levels are not distinct enough, or most surfaces are raised.
+
+          **Dark mode.** Switch to the dark theme. Do surfaces still separate once the shadows fade? If not, add a tone change or a border.
+
+          **Light source.** Scan every shadow in one view. They should all fall the same way.
+      - title: Audit effect styles
+        body: Shadow recipes live in Figma effect styles, not fills or strokes. Token audits that only check fills and strokes miss them. Audit effect styles on their own. Keep every recipe under `v4/elevation/*`. That keeps the set easy to list.
+      - title: Document the rule, not the pixels
+        body: Record each level's recipe, the light source, and why each role maps to its level. A `box-shadow` pasted into a component drifts. A documented level does not.
+      - title: Where elevation lives in DSDS
+        body: Elevation is a `style` entity, like color, typography, spacing, motion and content. Its tokens are the per-level shadow recipes, grouped in a `token-group`. Dark-mode behavior is a `theme` concern shared with color.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to pick, apply and check elevation levels in Sanity UI components.

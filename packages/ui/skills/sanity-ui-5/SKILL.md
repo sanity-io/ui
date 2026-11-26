@@ -155,4 +155,4 @@ Read a file when the task touches its topic.
 
 ## Keeping this skill honest
 
-The facts here were checked against `@sanity/ui` 5.0.0-alpha.20 and the documentation corpus. Both change. Run `npx sanity-ui doctor` and the export listing instead of trusting a component list from memory. If the docs and the installed package disagree, report the gap to the user.
+The facts here come from the documentation corpus, and both change. Run `npx sanity-ui doctor` and the export listing instead of trusting a component list from memory. If the docs and the installed package disagree, report the gap to the user.

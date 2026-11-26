@@ -11,7 +11,7 @@ entries:
         status: beta
       organization: Sanity
       url: https://www.sanity.io/ui
-      version: 5.x-alpha
+      version: 5.0.0-alpha.27
       platforms:
         - react
       sourceRoot: ../../..

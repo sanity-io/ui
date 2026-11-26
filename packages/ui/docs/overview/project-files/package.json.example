@@ -1,0 +1,23 @@
+{
+  "name": "my-app",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build"
+  },
+  "dependencies": {
+    "react": "^19.2",
+    "react-dom": "^19.2",
+    "@sanity/ui": "alpha",
+    "@sanity/icons": "^5.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vite": "^6",
+    "@vitejs/plugin-react": "^4",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
+  }
+}

@@ -54,25 +54,25 @@ v5 has no `ThemeProvider`, no `studioTheme`, and no runtime scheme switch. The c
 
 ## Component map
 
-| v3                                                                           | v5                                    | Note                                                   |
-| ---------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------ |
-| Box, Flex, Grid, Card, Container                                             | Same names                            | Many props changed. See the next section               |
-| Stack                                                                        | VStack                                | Accepts only `as` and `gap`                            |
-| Inline                                                                       | HStack                                | v5 also ships `Inline`, but it is deprecated           |
-| Text, Heading, Code                                                          | Same names                            | `textOverflow` and `accent` removed                    |
-| Label (small uppercase text)                                                 | Eyebrow                               | `accent` and `textOverflow` removed                    |
-| A separate label element for a form field                                    | `Text as="label"` with `htmlFor`      | v5 has no `Label` component                            |
-| Tab, TabList, TabPanel                                                       | Tabs, Tabs.List, Tabs.Tab, Tabs.Panel | The v3 names are not v5 exports                        |
-| Dialog                                                                       | Dialog                                | Different model. Migrate by hand                       |
-| Popover, Tooltip                                                             | Popover, Tooltip                      | Uncontrolled and CSS-positioned. Migrate by hand       |
-| TooltipDelayGroupProvider                                                    | TooltipGroup                          | A rendered element, not a context provider             |
-| Badge, Button, Checkbox, Radio, Select, Switch, Spinner, TextArea, TextInput | Same names                            | Props changed                                          |
-| Avatar, AvatarStack, KBD, Hotkeys                                            | Same names                            | Exported in alpha.20. KBD and Hotkeys are experimental |
-| Rendering an `@sanity/icons` component directly                              | `Icon` with `icon={SomeIcon}`         | New component                                          |
-| A hand-built skip link                                                       | SkipToContent                         | New                                                    |
-| A hand-built clickable surface                                               | PressArea                             | New                                                    |
-| A `Stack` of cards or a custom `ul`                                          | List                                  | New                                                    |
-| Styled dots built from Box                                                   | Indicator and IndicatorStack          | New                                                    |
+| v3                                                                           | v5                                    | Note                                             |
+| ---------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------ |
+| Box, Flex, Grid, Card, Container                                             | Same names                            | Many props changed. See the next section         |
+| Stack                                                                        | VStack                                | Accepts only `as` and `gap`                      |
+| Inline                                                                       | HStack                                | v5 also ships `Inline`, but it is deprecated     |
+| Text, Heading, Code                                                          | Same names                            | `textOverflow` and `accent` removed              |
+| Label (small uppercase text)                                                 | Eyebrow                               | `accent` and `textOverflow` removed              |
+| A separate label element for a form field                                    | `Text as="label"` with `htmlFor`      | v5 has no `Label` component                      |
+| Tab, TabList, TabPanel                                                       | Tabs, Tabs.List, Tabs.Tab, Tabs.Panel | The v3 names are not v5 exports                  |
+| Dialog                                                                       | Dialog                                | Different model. Migrate by hand                 |
+| Popover, Tooltip                                                             | Popover, Tooltip                      | Uncontrolled and CSS-positioned. Migrate by hand |
+| TooltipDelayGroupProvider                                                    | TooltipGroup                          | A rendered element, not a context provider       |
+| Badge, Button, Checkbox, Radio, Select, Switch, Spinner, TextArea, TextInput | Same names                            | Props changed                                    |
+| Avatar, AvatarStack, KBD, Hotkeys                                            | Same names                            | Exported. KBD and Hotkeys are experimental       |
+| Rendering an `@sanity/icons` component directly                              | `Icon` with `icon={SomeIcon}`         | New component                                    |
+| A hand-built skip link                                                       | SkipToContent                         | New                                              |
+| A hand-built clickable surface                                               | PressArea                             | New                                              |
+| A `Stack` of cards or a custom `ul`                                          | List                                  | New                                              |
+| Styled dots built from Box                                                   | Indicator and IndicatorStack          | New                                              |
 
 New in v5, with no v3 equivalent: Divider, HStack, IconButton, IndicatorStack, Indicator, Link, List, PressArea, SkipToContent, TooltipGroup, VisuallyHidden.
 

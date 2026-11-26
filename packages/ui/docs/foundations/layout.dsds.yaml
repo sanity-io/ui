@@ -1,0 +1,41 @@
+kind: sanity.foundation
+id: layout
+name: Layout
+description: Which layout component to reach for, Box, Flex, Card or Container, and which of them adds a visual surface.
+metadata:
+  tags:
+    - concept
+    - layout
+    - foundations
+    - box
+    - flex
+    - card
+    - container
+  status:
+    status: stable
+sections:
+  - kind: section
+    for: all
+    title: Layout components
+    freeform:
+      - title: Box, Flex, Card and Container
+        body: |-
+          | Component | Use for | Adds a visual surface? |
+          | :---- | :---- | :---- |
+          | `Box` | Padding, borders, scroll containers, landmarks | No |
+          | `Flex` | Row or column layout with alignment and gap | No |
+          | `Card` | Content that needs a background, border and tone | Yes |
+          | `Container` | Max-width constraint and horizontal centering for content areas | No |
+
+          Do not use `Card` for toolbars, sidebars or scroll wrappers. Use `Box` or `Flex`. Do not use `Container` for app chrome. Use `Box` or `Flex` directly.
+      - title: Icon-only buttons
+        body: |-
+          A tooltip does not set an accessible name. Add `aria-label`:
+
+          ```tsx
+          <IconButton icon={SearchIcon} level="tertiary" aria-label="Search" />
+          ```
+      - title: Next steps
+        body: |-
+          - Add a right-side inspector panel with `Box as="aside" aria-label="Inspector"`.
+          - Use `tone` on Card and Button for status. Card accepts `"neutral"`, `"positive"`, `"caution"`, `"critical"` and `"suggest"`. Button accepts only `"neutral"` and `"critical"`. Use `critical` only for a destructive action.

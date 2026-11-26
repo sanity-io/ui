@@ -1,0 +1,24 @@
+$schema: https://designsystemdocspec.org/v0.23.1/dsds.bundled.yaml
+schemaVersion: 0.23.1
+name: Sanity UI
+entries:
+  - kind: system
+    id: sanity-ui
+    name: Sanity UI
+    description: Sanity’s React component library and design system.
+    metadata:
+      status:
+        status: beta
+      organization: Sanity
+      url: https://www.sanity.io/docs/ui
+      version: 5.0.0-alpha.27
+      platforms:
+        - react
+      sourceRoot: ../../..
+    refs:
+      - href: https://www.sanity.io/docs/ui
+        rel: relates-to
+        role: Sanity UI homepage
+      - href: https://github.com/sanity-io/ui
+        rel: source
+        role: Source on GitHub

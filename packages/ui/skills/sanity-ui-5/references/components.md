@@ -5,7 +5,7 @@ Read this file when you choose a component, check whether it exists, or look for
 ## Contents
 
 - How to check a component before you use it
-- What exists in alpha.20
+- What exists
 - Not exported yet
 - Which component for which job
 - Constraints that bite
@@ -27,7 +27,7 @@ Status values:
 | deprecated   | Exported. Do not use it in new code                                        |
 | unavailable  | Not exported. Importing it is a build error                                |
 
-## What exists in alpha.20
+## What exists
 
 These 41 components are exported, plus the hook `useIsClient`.
 

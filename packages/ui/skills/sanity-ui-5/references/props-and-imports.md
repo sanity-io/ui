@@ -79,7 +79,7 @@ When a component rejects a prop, wrap it in a `Box` or `Flex` and put the prop t
 
 Do not wrap a component in a `Box` only to add spacing the component withholds. That repeats the override one level out. Pick the nearest value the component offers.
 
-Key props by component, as of alpha.20:
+Key props by component:
 
 - **Button:** `text`, `level` (`primary`, `secondary`, `tertiary`), `tone` (`neutral`, `critical`), `iconStart`, `iconEnd`, `loading`, `density` (`regular`, `loose`), `fullWidth`, `as`.
 - **IconButton:** `icon` and `aria-label`, both required, plus `level`, `tone`, `loading`, `density`.

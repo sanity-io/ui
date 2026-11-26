@@ -1,6 +1,6 @@
 # Tone and color: full reference
 
-Read this file when you choose a tone or set a color. The values below were checked against `@sanity/ui` 5.0.0-alpha.22.
+Read this file when you choose a tone or set a color.
 
 ## The five semantic tones
 
