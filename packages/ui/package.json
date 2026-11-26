@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.4.12",
+  "version": "4.4.13",
   "keywords": [
     "components",
     "design-system",
@@ -25,7 +25,7 @@
   ],
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "./dist/styles.css"
   ],
   "types": "./dist/index.d.ts",
   "imports": {

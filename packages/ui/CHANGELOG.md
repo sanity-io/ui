@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.4.13
+
+### Patch Changes
+
+- [#3404](https://github.com/sanity-io/ui/pull/3404) [`c657cfc`](https://github.com/sanity-io/ui/commit/c657cfca7eb48badfbfd1179c4508f43f0c620ac) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^14.14.0
+
+- [#3408](https://github.com/sanity-io/ui/pull/3408) [`2b9d8ba`](https://github.com/sanity-io/ui/commit/2b9d8ba77ed4c05251892f8afa0d3ad495ea377a) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update vitest monorepo to ^5.1.2
+
 ## 4.4.12
 
 ### Patch Changes
