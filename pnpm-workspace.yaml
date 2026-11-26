@@ -129,5 +129,6 @@ overrides:
   react: 'catalog:'
   react-dom: 'catalog:'
   # styled-components pins an exact csstype; keep a single copy so its
-  # CSSObject/Styles types match the csstype @sanity/ui itself uses.
-  csstype: ^3.2.4
+  # CSSObject/Styles types match the csstype @sanity/ui itself uses. Keep in
+  # sync with the csstype dependency in packages/ui/package.json.
+  csstype: 3.2.3
