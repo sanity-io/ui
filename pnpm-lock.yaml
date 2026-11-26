@@ -257,7 +257,7 @@ catalogs:
       specifier: ^8.3.8
       version: 8.3.8
     vitest:
-      specifier: ^5.1.1
+      specifier: ^5.1.2
       version: 5.1.2
 
 overrides:
@@ -434,7 +434,7 @@ importers:
         specifier: 'catalog:'
         version: 6.3.0(@rolldown/plugin-babel@0.3.1(@babel/core@7.29.13(supports-color@8.1.1))(@babel/runtime@7.29.14)(rolldown@1.3.3)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(oxc-transform-react@0.158.0)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@vitest/browser-playwright':
-        specifier: ^5.1.1
+        specifier: ^5.1.2
         version: 5.1.2(playwright@1.65.1)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(vitest@5.1.2)
       chrome-devtools-mcp:
         specifier: ^1.14.0
@@ -634,7 +634,7 @@ importers:
         specifier: 'catalog:'
         version: 6.3.0(@rolldown/plugin-babel@0.3.1(@babel/core@7.29.13(supports-color@8.1.1))(@babel/runtime@7.29.14)(rolldown@1.3.3)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(oxc-transform-react@0.158.0)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@vitest/coverage-v8':
-        specifier: ^5.1.1
+        specifier: ^5.1.2
         version: 5.1.2(@vitest/browser@5.1.2)(vitest@5.1.2)
       jsdom:
         specifier: ^31.0.1
