@@ -24,7 +24,7 @@ catalog:
   '@pandacss/transformer': ^2.5.0
   '@pandacss/vite': ^2.5.0
   '@sanity/color': ^3.0.9
-  '@sanity/icons': ^5.3.0
+  '@sanity/icons': ^5.4.0
   '@sanity/logos': ^2.2.6
   '@sanity/pandacss-tsdown-plugin': ^0.3.3
   '@sanity/tsdown-config': ^0.31.4
