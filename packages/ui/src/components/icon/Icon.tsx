@@ -14,22 +14,48 @@ export function Icon({icon, size = 2, ...props}: IconProps) {
   const ariaLabel =
     props['aria-label'] || (iconElement ? iconElement.props['aria-label'] : undefined)
 
-  const svgProps = {
-    'className': clsx(
-      iconClassName,
-      'sui-display-block',
-      className,
-      iconElement ? iconElement.props.className : undefined,
-    ),
-    'style': iconElement ? {...iconElement.props.style, ...style} : style,
+  const containerProps = {
     'data-ui': 'Icon',
+    'className': clsx(iconClassName, className, 'sui-display-block'),
+  }
+
+  const svgProps = {
+    'style': iconElement ? {...iconElement.props.style, ...style} : style,
     'aria-hidden': ariaLabel ? undefined : true,
+    'className': clsx('sui-display-block', iconElement?.props.className),
     ...rest,
   }
 
+  if (props.trim) {
+    const hasMargin = Object.keys(props).findIndex((prop) => prop.startsWith('margin')) > -1
+    const elementProps = {
+      ...svgProps,
+      className: clsx(svgProps.className, 'sui-icon-trim'),
+    }
+
+    if (hasMargin) {
+      return (
+        <span
+          {...containerProps}
+          className={clsx(containerProps.className.replace('sui-icon-trim', ''))}
+        >
+          {iconElement
+            ? cloneElement(iconElement, elementProps)
+            : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, elementProps)}
+        </span>
+      )
+    }
+  }
+
+  const elementProps = {
+    ...containerProps,
+    ...svgProps,
+    className: clsx(containerProps.className, svgProps.className),
+  }
+
   return iconElement
-    ? cloneElement(iconElement, svgProps)
-    : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, svgProps)
+    ? cloneElement(iconElement, elementProps)
+    : createElement(icon as ComponentType<SVGProps<SVGSVGElement>>, elementProps)
 }
 
 export type {IconProps}

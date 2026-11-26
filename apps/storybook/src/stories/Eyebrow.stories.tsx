@@ -4,6 +4,7 @@ import {Label as EyebrowV3} from 'ui3'
 
 import {Eyebrow} from '../../../../packages/ui/src/components/eyebrow/Eyebrow'
 import {eyebrowProps} from '../../../../packages/ui/src/components/eyebrow/eyebrow.props'
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {EYEBROW_SIZE} from '../../../../packages/ui/src/types/Eyebrow'
 import {TONE} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
@@ -79,6 +80,27 @@ export const Tones: Story = {
   play: async ({canvas}) => {
     await expect((await canvas.findByText('Eyebrow Tone Positive')).classList).toContain(
       'sui-tone-positive',
+    )
+  },
+}
+
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+        {EYEBROW_SIZE.map((size) => (
+          <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
+            <Eyebrow {...props} size={size} trim>
+              Eyebrow Size {size} Trim
+            </Eyebrow>
+          </Flex>
+        ))}
+      </Flex>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Eyebrow Size 3 Trim')).classList).toContain(
+      'sui-text-trim',
     )
   },
 }

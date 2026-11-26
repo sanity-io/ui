@@ -34,7 +34,7 @@ const argTypes = {
 }
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon',
+  title: 'Typography/Icon',
   component: Icon,
   argTypes,
   args: {
@@ -100,6 +100,63 @@ export const Tones: Story = {
     await expect((await canvas.findByLabelText('Icon Tone Positive')).classList).toContain(
       'sui-tone-positive',
     )
+  },
+}
+
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <>
+        <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+          {ICON_SIZE.map((size) => (
+            <Flex
+              key={size}
+              gap={2}
+              alignItems="center"
+              style={{border: '10px solid var(--gray-100)'}}
+            >
+              <Icon {...props} size={size} trim aria-label={`Icon Size ${size} Trim`} />
+              <Text size={size} trim>
+                Inline text trim
+              </Text>
+            </Flex>
+          ))}
+        </Flex>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon Size 3 Trim')).classList).toContain(
+      'sui-icon-trim',
+    )
+  },
+}
+
+export const TrimMarginElement: Story = {
+  tags: ['!dev', '!autodocs'],
+  render: () => {
+    return (
+      <>
+        <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+          <Flex gap={2} alignItems="center" style={{border: '10px solid var(--gray-100)'}}>
+            <Icon
+              icon={<AddIcon className="sui-tone-positive" />}
+              size={2}
+              trim
+              margin={2}
+              aria-label="Element Icon with Trim and Margin"
+            />
+          </Flex>
+        </Flex>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    const icon = await canvas.findByLabelText('Element Icon with Trim and Margin')
+    await expect(icon.classList).toContain('sui-icon-trim')
+    await expect(icon.classList).toContain('sui-tone-positive')
+    await expect(icon.parentElement?.dataset.ui).toBe('Icon')
+    await expect(icon.parentElement?.classList).toContain('sui-m2')
   },
 }
 

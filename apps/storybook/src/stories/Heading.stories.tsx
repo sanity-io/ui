@@ -2,6 +2,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 import {Heading as HeadingV3} from 'ui3'
 
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Heading} from '../../../../packages/ui/src/components/heading/Heading'
 import {headingProps} from '../../../../packages/ui/src/components/heading/heading.props'
 import {HEADING_SIZE} from '../../../../packages/ui/src/types/Heading'
@@ -83,6 +84,27 @@ export const Tones: Story = {
   play: async ({canvas}) => {
     await expect((await canvas.findByText('Heading Tone Positive')).classList).toContain(
       'sui-tone-positive',
+    )
+  },
+}
+
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+        {HEADING_SIZE.map((size) => (
+          <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
+            <Heading {...props} size={size} trim>
+              Heading Size {size} Trim
+            </Heading>
+          </Flex>
+        ))}
+      </Flex>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Heading Size 3 Trim')).classList).toContain(
+      'sui-text-trim',
     )
   },
 }

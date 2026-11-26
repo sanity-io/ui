@@ -4,6 +4,7 @@ import {Code as CodeV3} from 'ui3'
 
 import {Code} from '../../../../packages/ui/src/components/code/Code'
 import {codeProps} from '../../../../packages/ui/src/components/code/code.props'
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {CODE_SIZE} from '../../../../packages/ui/src/types/Code'
@@ -102,6 +103,27 @@ export const Sizes: Story = {
       (await canvas.findByText('Code Size 3 (19px)')).parentElement?.closest('[data-ui="Code"]')
         ?.classList,
     ).toContain('sui-text-code3')
+  },
+}
+
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <Flex flexDirection="column" alignItems="flex-start" gap={2}>
+        {CODE_SIZE.map((size) => (
+          <Flex key={size} style={{border: '10px solid var(--gray-100)'}}>
+            <Code {...props} size={size} trim>
+              Code Size {size} Trim
+            </Code>
+          </Flex>
+        ))}
+      </Flex>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Code Size 3 Trim')).parentElement?.classList).toContain(
+      'sui-text-trim',
+    )
   },
 }
 
