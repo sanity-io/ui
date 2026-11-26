@@ -77,6 +77,9 @@
     "typescript/no-unnecessary-type-assertion": "error",
     "typescript/no-unnecessary-type-arguments": "error",
     "typescript/prefer-ts-expect-error": "error",
+    // oxlint 1.95 enables this type-aware rule. The tsrs backend oxlint
+    // prefers over oxlint-tsgolint does not implement it yet.
+    "typescript/no-unsafe-class-instance-assignment": "off",
     "import/no-commonjs": "error",
     "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
     // Ban `export *` barrel files that pull in large module graphs; import
