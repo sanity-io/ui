@@ -1,0 +1,150 @@
+kind: component
+id: toast
+name: Toast
+description: Used to show brief status messages about completed actions, warnings, or errors.
+metadata:
+  tags:
+    - toast
+    - notification
+    - message
+    - feedback
+    - snackbar
+    - published
+    - error
+    - warning
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "To confirm an action that completed in the background, for example 'Document published'."
+      - level: should
+        statement: To warn about a non-blocking issue. Use `tone="caution"`.
+      - level: should
+        statement: To report a non-critical error from an async task. Use `tone="critical"`.
+      - level: should-not
+        statement: For content or actions that require a user response. Use Dialog instead.
+        alternatives:
+          - to: dialog
+      - level: should-not
+        statement: For inline form errors. Show the error next to the input instead.
+      - level: should-not
+        statement: For successful actions that have perceptible feedback with less than a 3 second delay. Let the UI update provide the implicit feedback.
+      - level: should-not
+        statement: For persistent information. Use a Card with a tone instead.
+        alternatives:
+          - to: card
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Content
+    items:
+      - level: must
+        statement: >-
+          Use `title` as the primary method of communication. Add a `description` when additional context or supporting text is required.
+      - refs:
+          - to: messaging#status-message-specificity
+            rel: same-as
+      - refs:
+          - to: messaging#status-message-past-tense
+            rel: same-as
+      - level: should
+        statement: Keep the message to one sentence.
+      - level: must
+        statement: >-
+          Put the state in the `title` in words. Toast has no icon. A Toast that relies on `tone` gives the state through color alone. Write "Upload failed. The file exceeds the size limit." Don't write "Error" or "Timed out" on its own.
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+  - kind: guidelines
+    for: agents
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't use `tone="suggest"` on a Toast. Toast accepts `neutral`, `positive`, `caution` and `critical`. For guidance, use `neutral`.
+      - level: must-not
+        statement: >-
+          Don't put a button, link or other control in a Toast. The component renders the title, the description and the close button. It has no slot for an action.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Dismissal and timing
+    items:
+      - level: must
+        statement: >-
+          Set `closable` on every Toast that the user should be able to dismiss. Toast does not remove itself. Use the `onClose` handler must remove it from the page.
+      - level: must
+        statement: >-
+          Don't remove an error Toast on a timer. Keep it until the user closes it, with `closable` set. Toast has no `duration` prop. The timer belongs to your app.
+      - level: should
+        statement: >-
+          If your app removes a Toast on a timer, set the timer from the message length: 500 ms per word of the title and description, at least 5000 ms, and at most 10000 ms. A 12-word message stays for 6000 ms. A message that needs more than 10 seconds, about 20 words, is longer than a Toast can hold.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: >-
+          Give every Toast a close control with `closable`. A user should not have to wait for a timer to dismiss a Toast.
+      - level: should
+        statement: >-
+          If your app removes a Toast on a timer, let the user extend or turn off the timer (WCAG 2.2.1). At minimum, pause the timer while the user hovers or focuses the Toast. Don't ship a fixed timeout with no way to interact with it.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Agent checks
+    items:
+      - level: should
+        statement: Use specific past-tense titles, such as '3 items deleted', instead of generic ones, such as 'Success'.
+      - level: must-not
+        statement: "Using vague titles like 'Success' or 'Error'. Instead: write the action and its result, such as 'Document published' or 'Upload failed. The file exceeds the size limit.'"
+      - level: must-not
+        statement: 'Rendering several Toasts at once. Instead: show one Toast at a time and queue the rest in your app.'
+      - level: must-not
+        statement: 'Passing `tone="suggest"`. Toast does not accept it. Instead: use `neutral`.'
+alternatives:
+  - to: dialog
+  - to: popover
+  - to: card
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/toast/Toast.tsx
+imports:
+  - platform: react
+    code: import { Toast } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic color of the Toast. Set it to signal a real state.
+    values:
+      - id: neutral
+        description: Default. For a neutral message, such as prompting a person to perform an optional update.
+      - id: positive
+        description: For an successful operation or action that has no noticeable UI update or takes longer than 3 seconds to complete.
+      - id: caution
+        description: For a warning about a non-blocking issue.
+      - id: critical
+        description: For an error or a failed action.
+  - traitType: variant
+    kind: boolean
+    id: closable
+    description: 'Adds a close button that calls `onClose`. The close button is labelled `Dismiss: {title}`.'
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=19563-3838
+    rel: design
+    role: Figma component
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
