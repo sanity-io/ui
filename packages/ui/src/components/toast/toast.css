@@ -1,0 +1,12 @@
+.sui-Toast {
+  --background-color: var(--background-low);
+  background-color: var(--background-color);
+}
+
+.sui-Toast .sui-IconButton {
+  --background-color: transparent;
+}
+
+.sui-Toast .sui-Text {
+  --color: inherit;
+}
