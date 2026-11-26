@@ -94,6 +94,7 @@ minimumReleaseAgeExclude:
   - motion-utils
   - motion
   - use-effect-event@2.0.4
+  - '@types/node@26.6.11'
   - '@types/react-dom@19.3.0'
   - '@types/react-is@19.3.0'
   - '@types/react@19.3.0'
