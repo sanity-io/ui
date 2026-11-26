@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import {createContext, isValidElement, useContext, useId} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {handleKeyDownFocus} from '../../utils/handleKeyDownFocus'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {HStack} from '../h-stack/HStack'
@@ -55,37 +56,6 @@ function TabsRoot({value, onValueChange, ...props}: TabsProps) {
   )
 }
 
-function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
-  // Ignore keydowns if made with alt, ctrl, or meta
-  if (event.altKey || event.ctrlKey || event.metaKey) {
-    return
-  }
-
-  const tabsList = event.currentTarget
-  const focusedTab = event.target
-  const tabs = Array.from(tabsList.querySelectorAll<HTMLElement>('[role="tab"]'))
-  const focusedTabIndex = tabs.indexOf(focusedTab as HTMLElement)
-
-  if (event.key === 'ArrowLeft') {
-    event.preventDefault()
-    const previousTab = tabs[(focusedTabIndex - 1 + tabs.length) % tabs.length]
-    previousTab?.focus()
-  }
-  if (event.key === 'ArrowRight') {
-    event.preventDefault()
-    const nextTab = tabs[(focusedTabIndex + 1) % tabs.length]
-    nextTab?.focus()
-  }
-  if (event.key === 'Home') {
-    event.preventDefault()
-    tabs[0]?.focus()
-  }
-  if (event.key === 'End') {
-    event.preventDefault()
-    tabs[tabs.length - 1]?.focus()
-  }
-}
-
 function TabsList(props: TabsListProps) {
   const {children, className, style, ...rest} = getProps(props, tabsListProps)
 
@@ -97,7 +67,7 @@ function TabsList(props: TabsListProps) {
       style={style}
       data-ui="Tabs.List"
       gap={1}
-      onKeyDown={handleKeyDown}
+      onKeyDown={(e) => handleKeyDownFocus(e, '[role="tab"]', 'horizontal')}
     >
       {children}
     </HStack>

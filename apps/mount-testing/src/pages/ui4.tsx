@@ -32,6 +32,8 @@ import {
   ThemeProvider,
 } from 'ui4'
 import {Code} from 'ui4/code'
+import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from 'ui4/menu'
+import {Popover} from 'ui4/popover'
 import {buildTheme} from 'ui4/theme'
 import {Tooltip} from 'ui4/tooltip'
 
@@ -319,6 +321,35 @@ export default function Ui4() {
               </Box>
             </Flex>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Popover</h2>
+      <Profiler id="Popover" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Popover key={i} content="Popover Content">
+            <Button mode="bleed" text="Open Popover" />
+          </Popover>
+        ))}
+      </Profiler>
+
+      <h2>{count} Menu</h2>
+      <Profiler id="Menu" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <MenuButton
+            key={i}
+            id="menu"
+            button={<Button mode="bleed" text="Open Menu" />}
+            menu={
+              <Menu>
+                <MenuItem text="Item 1" />
+                <MenuDivider />
+                <MenuGroup text="Open Submenu">
+                  <MenuItem text="Submenu Item 1" />
+                </MenuGroup>
+              </Menu>
+            }
+          />
         ))}
       </Profiler>
     </ThemeProvider>

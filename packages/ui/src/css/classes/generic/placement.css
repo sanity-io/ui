@@ -1,30 +1,25 @@
 [class*="placement-"] {
   inset: auto;
   margin: 0;
+  overflow-y: auto;
+  max-height: calc(100dvh - 2 * var(--space-1));
 }
 
-@position-try --top-start {
+@position-try --left-center {
   inset: auto;
-  bottom: anchor(top);
-  left: anchor(left);
+  top: anchor(center);
+  right: anchor(left);
+  translate: 0 -50%;
 }
 
-@position-try --top-end {
-  inset: auto;
-  bottom: anchor(top);
-  right: anchor(right);
-}
-
-@position-try --bottom-start {
-  inset: auto;
-  top: anchor(bottom);
-  left: anchor(left);
-}
-
-@position-try --bottom-end {
-  inset: auto;
-  top: anchor(bottom);
-  right: anchor(right);
+@supports (align-self: anchor-center) {
+  @position-try --left-center {
+    top: auto;
+    right: anchor(left);
+    translate: none;
+    align-self: anchor-center;
+    margin: var(--space-1);
+  }
 }
 
 @position-try --left-start {
@@ -39,6 +34,30 @@
   right: anchor(left);
 }
 
+@position-try --left-fill {
+  inset: auto;
+  top: var(--space-1);
+  bottom: var(--space-1);
+  right: anchor(left);
+}
+
+@position-try --right-center {
+  inset: auto;
+  top: anchor(center);
+  left: anchor(right);
+  translate: 0 -50%;
+}
+
+@supports (align-self: anchor-center) {
+  @position-try --right-center {
+    top: auto;
+    left: anchor(right);
+    translate: none;
+    align-self: anchor-center;
+    margin: var(--space-1);
+  }
+}
+
 @position-try --right-start {
   inset: auto;
   top: anchor(top);
@@ -51,11 +70,18 @@
   left: anchor(right);
 }
 
+@position-try --right-fill {
+  inset: auto;
+  top: var(--space-1);
+  bottom: var(--space-1);
+  left: anchor(right);
+}
+
 .sui-placement-top {
   bottom: anchor(top);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: flip-block;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 @supports (justify-self: anchor-center) {
@@ -70,20 +96,20 @@
 .sui-placement-top-start {
   bottom: anchor(top);
   left: anchor(left);
-  position-try-fallbacks: --bottom-start;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 .sui-placement-top-end {
   bottom: anchor(top);
   right: anchor(right);
-  position-try-fallbacks: --bottom-end;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 .sui-placement-bottom {
   top: anchor(bottom);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: flip-block;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 @supports (justify-self: anchor-center) {
@@ -98,20 +124,20 @@
 .sui-placement-bottom-start {
   top: anchor(bottom);
   left: anchor(left);
-  position-try-fallbacks: --top-start;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 .sui-placement-bottom-end {
   top: anchor(bottom);
   right: anchor(right);
-  position-try-fallbacks: --top-end;
+  position-try-fallbacks: flip-block, --right-center, --right-fill, --left-center, --left-fill;
 }
 
 .sui-placement-left {
   top: anchor(center);
   right: anchor(left);
   translate: 0 -50%;
-  position-try-fallbacks: flip-inline;
+  position-try-fallbacks: --left-start, --left-end, --left-fill, --right-center, --right-fill;
 }
 
 @supports (align-self: anchor-center) {
@@ -119,27 +145,28 @@
     top: auto;
     translate: none;
     align-self: anchor-center;
-    margin-block: var(--space-2);
+    margin-block: var(--space-1);
   }
 }
 
 .sui-placement-left-start {
   top: anchor(top);
   right: anchor(left);
-  position-try-fallbacks: --right-start;
+  /* position-try-fallbacks is capped at 5 fallbacks so this list (and those below) only include the most likely options */
+  position-try-fallbacks: --left-center, --left-end, --left-fill, --right-start, --right-fill;
 }
 
 .sui-placement-left-end {
   bottom: anchor(bottom);
   right: anchor(left);
-  position-try-fallbacks: --right-end;
+  position-try-fallbacks: --left-center, --left-start, --left-fill, --right-end, --right-fill;
 }
 
 .sui-placement-right {
   top: anchor(center);
   left: anchor(right);
   translate: 0 -50%;
-  position-try-fallbacks: flip-inline;
+  position-try-fallbacks: --right-start, --right-end, --right-fill, --left-center, --left-fill;
 }
 
 @supports (align-self: anchor-center) {
@@ -147,20 +174,20 @@
     top: auto;
     translate: none;
     align-self: anchor-center;
-    margin-block: var(--space-2);
+    margin-block: var(--space-1);
   }
 }
 
 .sui-placement-right-start {
   top: anchor(top);
   left: anchor(right);
-  position-try-fallbacks: --left-start;
+  position-try-fallbacks: --right-center, --right-end, --right-fill, --left-start, --left-fill;
 }
 
 .sui-placement-right-end {
   bottom: anchor(bottom);
   left: anchor(right);
-  position-try-fallbacks: --left-end;
+  position-try-fallbacks: --right-center, --right-start, --right-fill, --left-end, --left-fill;
 }
 
 [class*="placement-bottom"],

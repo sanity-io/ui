@@ -28,7 +28,7 @@ export type ButtonProps<T extends ElementType = 'button'> = Polymorphic<
     /**
      * Sets padding and gap together to specify size.
      */
-    density?: ButtonDensity
+    density?: Responsive<ButtonDensity>
     /**
      * Sets Button to fill the width of its container.
      */

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {flushSync} from 'react-dom'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -25,21 +26,34 @@ function PopoverRoot({
     anchorName,
     content,
     portal,
+    onBeforeToggle: onBeforeToggleProp,
+    onToggle: onToggleProp,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, fullBleed, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
   const [open, setOpen] = useState(false)
+  const [load, setLoad] = useState(false)
   const isClient = useIsClient()
 
-  const handleToggle = (e: ToggleEvent) => {
-    setOpen(e.newState === 'open')
+  const handleBeforeToggle = (e: ToggleEvent<HTMLDivElement>) => {
+    if (e.newState === 'open') {
+      flushSync(() => setLoad(true))
+    }
+    onBeforeToggleProp?.(e)
+  }
+
+  const handleToggle = (e: ToggleEvent<HTMLDivElement>) => {
+    const popover = e.currentTarget
+    setOpen(popover.matches(':popover-open'))
+    onToggleProp?.(e)
   }
 
   const triggerProps = {
-    popoverTarget: id,
-    style: {anchorName: `--anchor-${anchorName || id}`},
+    'popoverTarget': id,
+    'style': {anchorName: `--anchor-${anchorName || id}`},
+    'aria-expanded': open,
   }
 
   const trigger = children.type.forwardsTriggerProps
@@ -51,26 +65,25 @@ function PopoverRoot({
       {trigger}
 
       {renderPortal(
-        <Activity mode={open ? 'visible' : 'hidden'}>
-          <div
-            className={clsx(
-              popoverClassName,
-              'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
-              className,
-            )}
-            style={{
-              ...style,
-              positionAnchor: `--anchor-${anchorName || id}`,
-            }}
-            data-ui="Popover"
-            popover="auto"
-            id={id}
-            onToggle={handleToggle}
-            {...rest}
-          >
-            {content}
-          </div>
-        </Activity>,
+        <div
+          className={clsx(
+            popoverClassName,
+            'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
+            className,
+          )}
+          style={{
+            ...style,
+            positionAnchor: `--anchor-${anchorName || id}`,
+          }}
+          data-ui="Popover"
+          popover="auto"
+          id={id}
+          onToggle={handleToggle}
+          onBeforeToggle={handleBeforeToggle}
+          {...rest}
+        >
+          {load && content}
+        </div>,
         isClient,
         portal,
       )}
