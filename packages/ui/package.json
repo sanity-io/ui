@@ -107,7 +107,7 @@
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
     "@vitejs/plugin-react": "catalog:",
-    "@vitest/coverage-v8": "^5.1.1",
+    "@vitest/coverage-v8": "^5.1.2",
     "jsdom": "^31.0.1",
     "oxc-transform-react": "catalog:",
     "react": "catalog:",
