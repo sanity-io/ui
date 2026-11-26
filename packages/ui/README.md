@@ -12,6 +12,16 @@ The documentation ships in this package:
 
 Read them from `node_modules/@sanity/ui/`.
 
+### Generated prop docs
+
+Prop docs are generated from the source when the package is built, and ship in `dist/props-docs/`:
+
+- `dist/props-docs/<id>.md` has one table per component, such as `dist/props-docs/popover.md`. Each lists the props with their types or values, whether they are required, and their descriptions. It also covers composite props, which set several other props, and the native events the component accepts. Read the table for the component you are using.
+- `dist/props-docs/components.json` holds the same data as structured JSON.
+- `dist/index.d.ts` holds the TypeScript types. It is the final authority on what a prop accepts.
+
+The component documents in `docs/components/` name the interface to read, such as `interface PopoverProps` in `dist/index.d.ts`. Do not edit the generated files. Change the source and rebuild.
+
 ## What's different from v3
 
 - **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.
