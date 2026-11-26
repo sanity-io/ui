@@ -541,33 +541,6 @@ sections:
           Don't override a component's color, spacing or radius through CSS custom properties. Use custom
           properties only in custom markup, to match the system.
 
-  # ------------------------------------------------------- Build an interface
-  - kind: guidelines
-    for: all
-    framing: how-to-use
-    title: Key accessibility concepts
-    items:
-      - refs:
-          - to: accessibility-guidelines#skip-link-first
-            rel: same-as
-      - refs:
-          - to: accessibility-guidelines#heading-hierarchy
-            rel: same-as
-      - refs:
-          - to: accessibility-guidelines#page-language
-            rel: same-as
-      - refs:
-          - to: accessibility-guidelines#flex-wrap-for-reflow
-            rel: same-as
-      - refs:
-          - to: shared-foundations#icon-only-control-needs-name
-            rel: same-as
-      - refs:
-          - to: shared-foundations#container-inside-scroll-box
-            rel: same-as
-      - refs:
-          - to: shared-foundations#card-not-for-structural-regions
-            rel: same-as
   - kind: section
     for: all
     title: Next steps
