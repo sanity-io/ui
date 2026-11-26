@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.4.14
+
+### Patch Changes
+
+- [#3412](https://github.com/sanity-io/ui/pull/3412) [`8082249`](https://github.com/sanity-io/ui/commit/8082249846fd86885c7b4db34394af248d42ab41) Thanks [@stipsan](https://github.com/stipsan)! - Pin `csstype` to the exact version `styled-components` depends on, so the exported `CSSObject` stays assignable to styled-components' own types
+
 ## 4.4.13
 
 ### Patch Changes
