@@ -23,6 +23,9 @@ test('@sanity/ui/styles.css has no cascade layers', {timeout: 60_000}, async () 
     await build({
       config: path.join(UI_DIR, 'tsdown.config.mts'),
       cwd: UI_DIR,
+      // The `build:done` hook rewrites `package.json#sideEffects` for this
+      // temporary `outDir`, which must not touch the working tree.
+      hooks: {},
       outDir,
       dts: false,
       exports: false,

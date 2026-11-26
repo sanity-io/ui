@@ -64,6 +64,8 @@ jobs:
           sed -i '/^minimumReleaseAgeExclude:/a\  - styled-components' pnpm-workspace.yaml
           pnpm install --no-frozen-lockfile
       - run: pnpm test
+        env:
+          CHECK_CSSTYPE_MATCH: ${{ matrix.styled-components == 'devDependencies' }}
 
   # Aggregates the matrix under the name the branch protection rule requires.
   # Experimental legs can't fail it: `continue-on-error` legs that fail still
