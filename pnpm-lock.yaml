@@ -181,8 +181,8 @@ catalogs:
       specifier: ^3.0.9
       version: 3.0.9
     '@sanity/icons':
-      specifier: ^5.3.0
-      version: 5.3.0
+      specifier: ^5.4.0
+      version: 5.4.0
     '@sanity/logos':
       specifier: ^2.2.6
       version: 2.2.6
@@ -294,7 +294,7 @@ importers:
         version: 1.2.5
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 5.3.0(react@19.3.1)
+        version: 5.4.0(react@19.3.1)
       '@sanity/logos':
         specifier: 'catalog:'
         version: 2.2.6(react@19.3.1)
@@ -376,7 +376,7 @@ importers:
         version: 2.5.0(@emnapi/core@2.0.0-beta.2)(@emnapi/runtime@2.0.0-beta.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 5.3.0(react@19.3.1)
+        version: 5.4.0(react@19.3.1)
       '@sanity/pandacss-tsdown-plugin':
         specifier: 'catalog:'
         version: 0.3.3(@emnapi/core@2.0.0-beta.2)(@emnapi/runtime@2.0.0-beta.2)(@pandacss/dev@2.5.0(@emnapi/core@2.0.0-beta.2)(@emnapi/runtime@2.0.0-beta.2)(postcss@8.5.32))(tsdown@0.23.7(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -469,7 +469,7 @@ importers:
         version: 7.3.16(283391a79d90f5fadd0344790927253c)
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 5.3.0(react@19.3.1)
+        version: 5.4.0(react@19.3.1)
       '@sanity/logos':
         specifier: 'catalog:'
         version: 2.2.6(react@19.3.1)
@@ -551,7 +551,7 @@ importers:
         version: 3.0.9
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 5.3.0(react@19.3.1)
+        version: 5.4.0(react@19.3.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -4276,8 +4276,8 @@ packages:
     resolution: {integrity: sha512-HbP+UytB9gbScX5JuCM5mJNIZ093p3eeuDojqbf5KIunBaAqi0AuamsU5bjfNa/roE92xAJ9HDLbS5Vc93aPWA==}
     engines: {node: '>=20'}
 
-  '@sanity/icons@5.3.0':
-    resolution: {integrity: sha512-8zPOrlK1TgCEj4c60jJ/Lljlro6S8DRfotiPaW1uTXwOjLWk2TSyqBdUaWCVDgWuHgw4jhijg2pBf7o23KFNMA==}
+  '@sanity/icons@5.4.0':
+    resolution: {integrity: sha512-yoLkmg+VT3ZLByf2mMYo8itpSKvmlGyBbViaXKa1HtrA2ebFHJkAKur1I16TYm5mY0glya0BxI+Ndc+gEjYtvg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       react: ^19.3.1
@@ -8573,10 +8573,12 @@ packages:
   yuku-core@0.19.0:
     resolution: {integrity: sha512-kYK9e1XdfirNhkipzW0wmMcSWcVF/CWnuugodfVYRCUwvoBefweL9HzB96OiKEhsx78V5WbUxbJqlizMX869Qg==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-parser@0.19.0:
     resolution: {integrity: sha512-XrBh9ZiQK5mJVRxZBAvD6LwRyAYrK3MFtH3+onyuxFL5hFD44EC3QOmIC1FjTj6H2MMwq46/NAI+NZxLZPZgxg==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku@0.28.0:
     resolution: {integrity: sha512-vzuml0lBwq8gYUujhLZn9AZwgPG1yPF1081ceOkTnEIM9bwgRnFUGAW5x2hTLC+qGI/iqu9PLs5Jko6rUn7YDA==}
@@ -11814,7 +11816,7 @@ snapshots:
   '@sanity/access-ui@6.23.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0)':
     dependencies:
       '@sanity/client': 8.15.1(vitest@5.1.0)
-      '@sanity/icons': 5.3.0(react@19.3.1)
+      '@sanity/icons': 5.4.0(react@19.3.1)
       '@sanity/ui': link:packages/ui
       react: 19.3.1
       react-rx: 7.1.0(react@19.3.1)(rxjs@7.8.2)
@@ -12078,7 +12080,7 @@ snapshots:
       '@codemirror/state': 6.7.6
       '@codemirror/view': 6.43.15
       '@lezer/highlight': 1.2.5
-      '@sanity/icons': 5.3.0(react@19.3.1)
+      '@sanity/icons': 5.4.0(react@19.3.1)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
       '@uiw/codemirror-themes': 4.25.12(@codemirror/language@6.13.1)(@codemirror/state@6.7.6)(@codemirror/view@6.43.15)
@@ -12171,7 +12173,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/icons@5.3.0(react@19.3.1)':
+  '@sanity/icons@5.4.0(react@19.3.1)':
     dependencies:
       react: 19.3.1
 
@@ -12530,7 +12532,7 @@ snapshots:
   '@sanity/ui@5.0.0-alpha.22(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@sanity-labs/design-tokens': 0.0.2-alpha.10
-      '@sanity/icons': 5.3.0(react@19.3.1)
+      '@sanity/icons': 5.4.0(react@19.3.1)
       clsx: 2.1.1
       comment-json: 5.0.0
       dialog-closedby-polyfill: 1.4.0
@@ -12616,7 +12618,7 @@ snapshots:
       '@sanity-labs/groq-wasm': 1.2.0
       '@sanity/client': 8.15.1(vitest@5.1.0)
       '@sanity/color': 3.0.9
-      '@sanity/icons': 5.3.0(react@19.3.1)
+      '@sanity/icons': 5.4.0(react@19.3.1)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/schema': 6.23.0(@types/react@19.3.0)(vitest@5.1.0)
       '@sanity/ui': link:packages/ui
@@ -15999,7 +16001,7 @@ snapshots:
       '@sanity/diff-patch': 7.0.0
       '@sanity/eventsource': 5.0.4
       '@sanity/generate-help-url': 4.0.0
-      '@sanity/icons': 5.3.0(react@19.3.1)
+      '@sanity/icons': 5.4.0(react@19.3.1)
       '@sanity/id-utils': 1.1.0
       '@sanity/image-url': 2.1.1
       '@sanity/logos': 2.2.6(react@19.3.1)
