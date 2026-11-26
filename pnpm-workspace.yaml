@@ -27,7 +27,7 @@ catalog:
   '@sanity/icons': ^5.4.0
   '@sanity/logos': ^2.2.6
   '@sanity/pandacss-tsdown-plugin': ^0.3.4
-  '@sanity/tsdown-config': ^0.31.4
+  '@sanity/tsdown-config': ^0.32.0
   '@types/node': ^26.6.6
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
