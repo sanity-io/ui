@@ -25,7 +25,7 @@
   ],
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "./dist/styles.css"
   ],
   "types": "./dist/index.d.ts",
   "imports": {
