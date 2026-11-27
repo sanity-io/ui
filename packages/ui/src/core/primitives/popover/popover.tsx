@@ -51,7 +51,7 @@ import {
   DEFAULT_POPOVER_MARGINS,
   DEFAULT_POPOVER_PADDING,
 } from './constants'
-import {size} from './floating-ui/size'
+import {naturalHeight, size} from './floating-ui/size'
 import {calcCurrentWidth, calcMaxWidth} from './helpers'
 import {PopoverCard} from './popoverCard'
 import {PopoverUpdateCallback, PopoverWidth} from './types'
@@ -582,6 +582,11 @@ function useMiddleware({
 }) {
   return useMemo(() => {
     const ret: Middleware[] = []
+
+    // Measured at the max height of the side it is on, the popover would fit there and never flip back
+    if (constrainSize) {
+      ret.push(naturalHeight())
+    }
 
     // Flip the floating element when leaving the boundary box
     if (constrainSize || preventOverflow) {

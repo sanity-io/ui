@@ -679,3 +679,62 @@ export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'placement', 'portal']}},
   render: (props) => <ViewTransitionStory {...props} />,
 }
+
+const CONTENT_GROUPS = [
+  {name: 'All', itemCount: 8},
+  {name: 'Intro', itemCount: 1},
+]
+
+function ContentChangeStory(props: PopoverProps) {
+  const [groupName, setGroupName] = useState(CONTENT_GROUPS[0].name)
+  const itemCount = CONTENT_GROUPS.find((group) => group.name === groupName)?.itemCount ?? 0
+
+  const content = (
+    <Flex direction="column" height="fill">
+      <Flex gap={1} padding={1}>
+        {CONTENT_GROUPS.map((group) => (
+          <Button
+            key={group.name}
+            mode={group.name === groupName ? 'default' : 'bleed'}
+            onClick={() => setGroupName(group.name)}
+            text={group.name}
+          />
+        ))}
+      </Flex>
+      <Box data-testid="popover-items" flex={1} overflow="auto">
+        <Stack gap={1} padding={1}>
+          {[...Array(itemCount).keys()].map((itemIndex) => (
+            <Card key={itemIndex} padding={3} radius={2} tone="neutral">
+              <Text size={1}>Item {itemIndex + 1}</Text>
+            </Card>
+          ))}
+        </Stack>
+      </Box>
+    </Flex>
+  )
+
+  return (
+    <div style={{position: 'fixed', left: 40, bottom: 160}}>
+      <Popover {...props} content={content} />
+    </div>
+  )
+}
+
+/**
+ * A popover near the bottom of the viewport whose content changes height. Switching to the short
+ * group moves it below its reference, and switching back to the long group moves it above again
+ * instead of keeping the short group's max height.
+ */
+export const ContentChange: Story = {
+  args: {
+    children: <Button text="Reference" />,
+    constrainSize: true,
+    fallbackPlacements: ['top'],
+    open: true,
+    padding: undefined,
+    placement: 'bottom',
+    portal: true,
+  },
+  parameters: {controls: {include: ['placement']}, padding: 0},
+  render: (props) => <ContentChangeStory {...props} />,
+}
